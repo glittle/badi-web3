@@ -4,7 +4,9 @@ var
   merge = require('webpack-merge'),
   cssUtils = require('./css-utils'),
   baseWebpackConfig = require('./webpack.base.conf'),
-  HtmlWebpackPlugin = require('html-webpack-plugin')
+  HtmlWebpackPlugin = require('html-webpack-plugin'),
+  serviceWorkerPlugin = require('serviceworker-webpack-plugin'),
+  path = require('path')
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
@@ -31,6 +33,9 @@ module.exports = merge(baseWebpackConfig, {
       filename: 'index.html',
       template: 'src/index.html',
       inject: true
+    }),
+    new serviceWorkerPlugin({
+      entry: path.join(__dirname, 'special/sw-badi-web3.js')
     })
   ],
   performance: {

@@ -13,7 +13,7 @@ const names = [
   'Index',
   'Listing',
   'UserSetup',
-  'Error404'
+  'Error404', // must be last!
 ]
 
 const routes = names.map(function (n) {
@@ -26,6 +26,7 @@ const routes = names.map(function (n) {
 export default {
   raw: routes.map(function (m) {
     let data = m.component.options.data()
+      console.log(data.path);
     return {
       component: m.component,
       path: '/' + data.path

@@ -34,7 +34,13 @@ module.exports = {
     // Proxy your API if using any.
     // Also see /build/script.dev.js and search for "proxy api requests"
     // https://github.com/chimurai/http-proxy-middleware
-    proxyTable: {}
+    proxyTable: {
+      // '/sw-badi-web3.js':{
+      //   target: 'webpack:///./src/scrcccipts/sw-badi-web3.js',
+      //   changeOrigin: true,
+      //   protocolRewrite: 'https'
+      // }
+    }
   }
 }
 

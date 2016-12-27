@@ -34,6 +34,7 @@ module.exports = {
     //glen
     'semi': 0,
     'brace-style': 0,
+    'indent': 0,
     'no-unused-vars': 1,
     'comma-dangle': 0,
     'space-before-function-paren': 0,

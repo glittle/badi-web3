@@ -20,6 +20,7 @@
     "roboto-fontface": "^0.6.0",
     "velocity-animate": "^1.2.3",
     "vue": "2.1.6",
+    "vue-head": "^2.0.10",
     "vue-router": "^2.0.0"
   },
   "devDependencies": {
@@ -52,6 +53,7 @@
     "opn": "^4.0.2",
     "postcss-loader": "^1.0.0",
     "progress-bar-webpack-plugin": "^1.9.0",
+    "serviceworker-webpack-plugin": "^0.1.7",
     "shelljs": "^0.7.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.1.1",

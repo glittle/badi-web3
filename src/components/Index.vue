@@ -2,22 +2,19 @@
   <q-layout>
     <div slot="header" class="toolbar">
       <q-toolbar-title :padding="1">
-        Quasar Framework v{{quasarVersion}}
+        Index
       </q-toolbar-title>
     </div>
-
   </q-layout>
 </template>
 
 <script>
-import Quasar, { Utils } from 'quasar'
 
 export default {
   data () {
     return {
       path: '/',
       title: 'Home Test',
-      quasarVersion: Quasar.version
     }
   },
   computed: {

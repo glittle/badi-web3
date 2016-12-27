@@ -9,7 +9,17 @@ require(`quasar/dist/quasar.${__THEME}.css`)
 import Vue from 'vue'
 import Quasar from 'quasar'
 import router from './router'
+import VueHead from 'vue-head'
 
+import './scripts/swHandler';
+
+import runtime from 'serviceworker-webpack-plugin/lib/runtime';
+if ('serviceWorker' in navigator) {
+  const registration = runtime.register();
+  console.log(registration)
+}
+
+Vue.use(VueHead)
 Vue.use(Quasar) // Install Quasar Framework
 
 Quasar.start(() => {
