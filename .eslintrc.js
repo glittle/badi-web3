@@ -26,6 +26,20 @@ module.exports = {
     'one-var': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    'brace-style': [2, 'stroustrup', { 'allowSingleLine': true }]
+    'brace-style': [2, 'stroustrup', {
+      'allowSingleLine': true
+    }],
+    // allow async-await
+    'generator-star-spacing': 0,
+    //glen
+    'semi': 0,
+    'brace-style': 0,
+    'no-unused-vars': 1,
+    'comma-dangle': 0,
+    'space-before-function-paren': 0,
+    'quotes': 0,
+    'no-multiple-empty-lines': 0,
+    'spaced-comment': 0,
+
   }
 }

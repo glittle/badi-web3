@@ -3,9 +3,7 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-function load (component) {
-  return () => System.import(`components/${component}.vue`)
-}
+import routeList from './routes'
 
 export default new VueRouter({
   /*
@@ -20,8 +18,5 @@ export default new VueRouter({
    * build publicPath back to '' so Cordova builds work again.
    */
 
-  routes: [
-    { path: '/', component: load('Index') }, // Default
-    { path: '*', component: load('Error404') } // Not found
-  ]
+  routes: routeList.raw
 })

@@ -4,7 +4,7 @@
 // require(`./themes/app.${__THEME}.styl`)
 // 2. or, use next line to activate DEFAULT QUASAR STYLE
 require(`quasar/dist/quasar.${__THEME}.css`)
-// ==============================
+  // ==============================
 
 import Vue from 'vue'
 import Quasar from 'quasar'
