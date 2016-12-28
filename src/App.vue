@@ -4,13 +4,9 @@
       <button class="hide-on-drawer-visible" @click="$refs.leftDrawer.open()">
         <i>menu</i>
       </button>
-      <q-toolbar-title :padding="1">
-        Wondrous-Badí' Calendar Tools
-      </q-toolbar-title>
-    </div>
-    <div slot="header" class="toolbar">
-      <q-toolbar-title slot="header" :padding="1">
-        17 Questions 173
+      <q-toolbar-title>
+        <h1>Wondrous-Badí' Calendar Tools</h1>
+        <h2>{{topDate}}</h2> 
       </q-toolbar-title>
     </div>
     <q-drawer ref="leftDrawer">
@@ -47,14 +43,13 @@
     data() {
       return {
         pages: routeList.menuPages,
-        search: ''
+        topDate: '18 Questions 173'
       }
     },
     head: {
-      // To use "this" in the component, it is necessary to return the object through a function
       title: function () {
         return {
-          inner: 'Hello?' //this.title
+          inner: this.title
         }
       },
       meta: [{
@@ -69,4 +64,4 @@
   }
 
 </script>
-<style></style>
+<style src="App.vue.css"></style>

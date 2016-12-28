@@ -28,7 +28,6 @@
 export default {
   data () {
     return {
-      path: '*',
       name: 'Not found',
       hideFromMenu: true,
       canGoBack: window.history.length > 1

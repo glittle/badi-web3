@@ -1,10 +1,11 @@
 <template>
-  <div class="Setup">
+  <article class="Setup">
     <h2>Notifications</h2>
+    <button v-on:click="testNotification">Test Notify</button>
     <h2>Location</h2>
     <div class="section">
       <div>
-        Where are you now? 
+        Where are you now?
         <button v-on:click="getLocation" class="btn btn--raised btn--small primary">Learn</button>
         <button v-on:click="openMap" class="btn btn--raised btn--small">Show on a Map</button>
       </div>
@@ -15,19 +16,20 @@
       </p>
     </div>
     <h2>Language</h2>
-  </div>
+  </article>
 </template>
+<style src="./UserSetup.vue.css"></style>
 <script>
   import axios from 'axios'
   import * as shared from '../scripts/shared'
   import * as storage from '../scripts/storage'
+  import * as notify from '../scripts/notification'
 
   export default {
     name: 'Setup',
     created() {},
     data() {
       return {
-        path: 'setup',
         title: 'How should it work?',
         coords: shared.coords
       }
@@ -80,25 +82,11 @@
           .catch(function (error) {
             console.log(error);
           });
+      },
+      testNotification() {
+        notify.showNow();
       }
     }
   }
 
 </script>
-<style lang="less">
-  .Setup {
-    .section {
-      margin: 15px 20px;
-    }
-    p {
-      margin: 6px 0 3px 20px;
-      span {
-        margin-right: 10px;
-      }
-    }
-    button {
-      margin: 5px 0 0 0;
-    }
-  }
-
-</style>

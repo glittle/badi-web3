@@ -13,7 +13,6 @@
 export default {
   data () {
     return {
-      path: '/',
       title: 'Home Test',
     }
   },

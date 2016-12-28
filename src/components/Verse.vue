@@ -17,7 +17,6 @@
     },
     data() {
       return {
-        path: 'verse',
         title: 'Verses of God',
         verse: '',
         suffix: ''

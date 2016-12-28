@@ -4,12 +4,13 @@ var
   config = require('../config'),
   cssUtils = require('./css-utils'),
   env = require('./env-utils'),
+  CopyWebpackPlugin = require('copy-webpack-plugin'), //glen
   merge = require('webpack-merge'),
   projectRoot = path.resolve(__dirname, '../'),
   ProgressBarPlugin = require('progress-bar-webpack-plugin'),
   useCssSourceMap =
-    (env.dev && config.dev.cssSourceMap) ||
-    (env.prod && config.build.productionSourceMap)
+  (env.dev && config.dev.cssSourceMap) ||
+  (env.prod && config.build.productionSourceMap)
 
 module.exports = {
   entry: {
@@ -30,52 +31,47 @@ module.exports = {
     alias: config.aliases
   },
   module: {
-    rules: [
-      { // eslint
-        enforce: 'pre',
-        test: /\.(vue|js)$/,
-        loader: 'eslint-loader',
-        include: projectRoot,
-        exclude: /node_modules/
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        include: projectRoot,
-        exclude: /node_modules/
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          postcss: cssUtils.postcss,
-          loaders: merge({js: 'babel-loader'}, cssUtils.styleLoaders({
-            sourceMap: useCssSourceMap,
-            extract: env.prod
-          }))
-        }
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: 'img/[name].[hash:7].[ext]'
-        }
-      },
-      {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: 'fonts/[name].[hash:7].[ext]'
-        }
+    rules: [{ // eslint
+      enforce: 'pre',
+      test: /\.(vue|js)$/,
+      loader: 'eslint-loader',
+      include: projectRoot,
+      exclude: /node_modules/
+    }, {
+      test: /\.js$/,
+      loader: 'babel-loader',
+      include: projectRoot,
+      exclude: /node_modules/
+    }, {
+      test: /\.vue$/,
+      loader: 'vue-loader',
+      options: {
+        postcss: cssUtils.postcss,
+        loaders: merge({
+          js: 'babel-loader'
+        }, cssUtils.styleLoaders({
+          sourceMap: useCssSourceMap,
+          extract: env.prod
+        }))
       }
-    ]
+    }, {
+      test: /\.json$/,
+      loader: 'json-loader'
+    }, {
+      test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+      loader: 'url-loader',
+      options: {
+        limit: 10000,
+        name: 'img/[name].[hash:7].[ext]'
+      }
+    }, {
+      test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+      loader: 'url-loader',
+      options: {
+        limit: 10000,
+        name: 'fonts/[name].[hash:7].[ext]'
+      }
+    }]
   },
   plugins: [
     /* Uncomment if you wish to load only one Moment locale: */
@@ -99,7 +95,12 @@ module.exports = {
     }),
     new ProgressBarPlugin({
       format: config.progressFormat
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: 'root/'
+      },
+    ])
   ],
   performance: {
     hints: false

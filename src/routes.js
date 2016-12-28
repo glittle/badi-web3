@@ -9,38 +9,42 @@ var folder = './components/'
 
 const names = [
   // this is their order in the menus
-  'Verse',
+  // 'NameOfVueFile[-urlPath]'
   'Index',
+  'Verse',
   'Listing',
-  'UserSetup',
-  'Error404', // must be last!
+  'UserSetup-setup',
+  'Error404-*', // must be last!
 ]
 
-const routes = names.map(function (n) {
+const routeInfoList = names.map(function (n) {
+  var parts = n.split('-');
+  var vueName = parts[0];
+  var path = parts.length > 1 ? parts[1] : vueName.toLowerCase();
+
   return {
-    component: Vue.component(n, require(`${folder}${n}.vue`)),
-    name: n
+    component: Vue.component(vueName, require(`${folder}${vueName}.vue`)),
+    name: vueName,
+    path: path
   }
 })
 
 export default {
-  raw: routes.map(function (m) {
-    let data = m.component.options.data()
-      console.log(data.path);
+  raw: routeInfoList.map(function (ri) {
     return {
-      component: m.component,
-      path: '/' + data.path
+      component: ri.component,
+      path: '/' + ri.path
     }
   }),
-  menuPages: routes
-    .filter(function (m) {
-      let data = m.component.options.data()
+  menuPages: routeInfoList
+    .filter(function (ri) {
+      let data = ri.component.options.data()
       return !data.hideFromMenu
     })
-    .map(function (m, i) {
-      let data = m.component.options.data()
+    .map(function (ri, i) {
+      let data = ri.component.options.data()
       return {
-        to: data.path,
+        to: ri.path,
         text: data.title,
         index: '' + i
       }
