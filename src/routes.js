@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-var folder = './components/'
+var folder = './pages/'
 
 // import Home from './pages/Home'
 // import Listing from './pages/Listing'
@@ -10,10 +10,12 @@ var folder = './components/'
 const names = [
   // this is their order in the menus
   // 'NameOfVueFile[-urlPath]'
-  'Index',
+  'Home-index',
   'Verse',
   'Listing',
-  'UserSetup-setup',
+  'Notifications',
+  'LocationSetup',
+  'About',
   'Error404-*', // must be last!
 ]
 

@@ -16,6 +16,7 @@ Coming Soon
 - List Bahá'í Feast and Holy Day dates
 - Add today's date to the Android system status bar
 - Show today's date as an Android notification
+- Work off-line for Chrome on desktops and Android
 
 Future
 - Showcase the monthly calendars produced by Joe Paczkowski

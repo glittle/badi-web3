@@ -1,39 +1,44 @@
 <template>
-  <article class="Setup">
-    <h2>Notifications</h2>
-    <button v-on:click="testNotification">Test Notify</button>
+  <article class="LocationSetup layout-padding">
     <h2>Location</h2>
     <div class="section">
       <div>
         Where are you now?
-        <button v-on:click="getLocation" class="btn btn--raised btn--small primary">Learn</button>
-        <button v-on:click="openMap" class="btn btn--raised btn--small">Show on a Map</button>
+        <button v-on:click="getLocation" class="small primary">Learn</button>
       </div>
-      <p><span>Latitude</span><input type="number" min="-80" max="80" step="any" v-model="coords.lat"></p>
+      <p><span>Latitude</span><input type="number" min="-80" max="80" step="any" v-model="coords.lat">
+        <button v-on:click="openMap" class="small light">Show on a Map</button>
+      </p>
       <p><span>Longitude</span><input type="number" min="-180" max="180" step="any" v-model="coords.long"></p>
       <p><span>Name</span><input type="text" v-model="coords.name">
-        <button v-on:click="getLocationName" class="btn btn--raised btn--small">Lookup</button>
+        <button v-on:click="getLocationName" class="small secondary">Lookup</button>
       </p>
     </div>
     <h2>Language</h2>
+    <div class="section">
+       <label>
+        <q-radio disable v-model="languageCode" val="en"></q-radio>
+        English
+      </label>
+    </div>
   </article>
 </template>
-<style src="./UserSetup.vue.css"></style>
+<style src="./LocationSetup.vue.css"></style>
 <script>
   import axios from 'axios'
   import * as shared from '../scripts/shared'
   import * as storage from '../scripts/storage'
-  import * as notify from '../scripts/notification'
 
   export default {
     name: 'Setup',
-    created() {},
     data() {
       return {
-        title: 'How should it work?',
-        coords: shared.coords
+        title: 'Setup Location',
+        coords: shared.coords,
+        languageCode: 'en'
       }
     },
+    created() {},
     methods: {
       getLocation() {
         try {
@@ -83,9 +88,6 @@
             console.log(error);
           });
       },
-      testNotification() {
-        notify.showNow();
-      }
     }
   }
 

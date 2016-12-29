@@ -1,6 +1,6 @@
 <template>
-  <article class="Page1">
-    <p>List of Holy Days, Feasts and other events</p>
+  <article class="layout-padding">
+    <h3>{{this.title}}</h3>
     <select size=2 multiple v-model="listFilter">
       <option value="HS">Holy Days</option>
       <option value="M">Months</option>
@@ -14,10 +14,30 @@
   import * as badi from '../scripts/badiCalc'
   export default {
     name: 'listing', // for Vue debugger
+    data() {
+      return {
+        title: "Bahá'í Holy Days and Feasts",
+        listFilter: ['HS'],
+        num: 0,
+        list: []
+      }
+    },
     created: function () {
       this.getDateInfos(173);
     },
-    head: {
+    computed: {
+      filteredList: function () {
+        return this.list.filter(item => this.listFilter.includes(item.Type));
+      }
+    },
+    methods: {
+      getDateInfos: function (year) {
+        var info = badi.prepareDateInfos(year);
+        this.num = info.length;
+        this.list = info;
+      }
+    },
+        head: {
       title: function () {
         return {
           inner: this.title
@@ -32,26 +52,7 @@
         content: 'Content Title'
       }]
     },
-    data() {
-      return {
-        title: 'The Listing',
-        listFilter: ['HS'],
-        num: 0,
-        list: []
-      }
-    },
-    computed: {
-      filteredList: function () {
-        return this.list.filter(item => this.listFilter.includes(item.Type));
-      }
-    },
-    methods: {
-      getDateInfos: function (year) {
-        var info = badi.prepareDateInfos(year);
-        this.num = info.length;
-        this.list = info;
-      }
-    }
+
   }
 
 </script>

@@ -6,34 +6,20 @@
       </button>
       <q-toolbar-title>
         <h1>Wondrous-Badí' Calendar Tools</h1>
-        <h2>{{topDate}}</h2> 
+        <h2>{{topDate}}</h2>
       </q-toolbar-title>
     </div>
     <q-drawer ref="leftDrawer">
       <div class="toolbar light">
-        <q-toolbar-title :padding="1">
+        <q-toolbar-title>
           Pages
         </q-toolbar-title>
       </div>
       <div class="list no-border platform-delimiter">
-        <q-drawer-link v-for="page in pages" :to="page.to">{{page.text}}
-        </q-drawer-link>
+        <q-drawer-link v-for="page in pages" :to="page.to">{{page.text}}</q-drawer-link>
       </div>
     </q-drawer>
     <router-view class="layout-view"></router-view>
-    <div slot="footer" class="toolbar">
-      <div class="auto flex justify-center within-iframe-hide">
-        <button v-go-back="'/'">
-          <i class="on-left animate-blink">
-            replay
-          </i>
-          Home
-        </button>
-      </div>
-      <q-toolbar-title :padding="0" class="within-iframe-only">
-        Footer
-      </q-toolbar-title>
-    </div>
   </q-layout>
 </template>
 <script>
@@ -49,7 +35,8 @@
     head: {
       title: function () {
         return {
-          inner: 'Home'
+          inner: 'Home',
+          separator: '-'
         }
       },
       meta: [{

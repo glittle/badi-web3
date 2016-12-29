@@ -1,8 +1,34 @@
+body {
+  color: #212121;
+  font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.02em;
+}
 h1 {
-  font-size: 2rem;
+  margin: 0;
+  font-size: 1.8rem;
 }
 h2 {
-  font-size: 1.75rem;
+  margin: 0;
+  font-size: 1.6rem;
+}
+h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+h4 {
+  margin: 1em;
+  font-size: 1.4rem;
+}
+.section {
+  margin: 5px 20px 30px;
+}
+p {
+  margin: 5px 5px 2px 0;
+}
+p span {
+  margin-right: 10px;
 }
 .toolbar-title h1 {
   font-size: 1rem;
@@ -14,4 +40,11 @@ h2 {
   font-size: 0.75rem;
   letter-spacing: normal;
   margin: 0;
+}
+.layout-padding {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+.drawer-content {
+  background-color: #fafafa;
 }

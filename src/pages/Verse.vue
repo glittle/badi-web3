@@ -1,5 +1,5 @@
 <template>
-  <article>
+  <article class="layout-padding">
     <p class="verse">
       <span class="verseText">{{verse}}</span>
       <span class="suffix">{{suffix}}</span>
@@ -9,22 +9,24 @@
       <br> by Shahin Vafai & Dwight W. Allen.
     </p>
     <div class="reciting">
-      <div>
+      <div></div>
+    </div>
   </article>
 </template>
 <script>
   import verses from '../assets/verses.json'
   import moment from 'moment'
   export default {
-    created() {
-      this.showToday()
-    },
+    name: 'verse', // for Vue debugger
     data() {
       return {
-        title: 'Verse for Today',
+        title: "Bahá'í Verse for Today",
         verse: '',
         suffix: ''
       }
+    },
+    created() {
+      this.showToday()
     },
     methods: {
       showToday() {
@@ -56,8 +58,7 @@
 <style scoped>
   .verse {
     font-size: 1.7rem;
-    padding: .5em;
-    font-family: 'Gentium Book Basic', serif;
+    /*font-family: 'Gentium Book Basic', serif;*/
     line-height: 1.3;
   }
   
@@ -67,6 +68,8 @@
   }
   
   .source {
+    margin-top: 4em;
+    margin-bottom: 0;
     font-size: 0.75rem;
     line-height: normal;
     color: grey;
@@ -74,13 +77,16 @@
   }
   
   .reciting {
-    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .reciting div {
     background-image: url('~assets/reciting.jpg');
-    box-shadow: 3px 3px #fcfcfc;
     width: 200px;
     height: 150px;
-    /* you need to match the shadow color to your background or image border for the desired effect*/
     box-shadow: 0 0 8px 8px white inset;
+    margin-left: 1px;
   }
 
 </style>
