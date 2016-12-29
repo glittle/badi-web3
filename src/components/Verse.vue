@@ -1,12 +1,16 @@
 <template>
-  <div>
-    <h1>A Verse for Today</h1>
+  <article>
     <p class="verse">
       <span class="verseText">{{verse}}</span>
       <span class="suffix">{{suffix}}</span>
     </p>
-    <button v-on:click="showToday">Refresh</button>
-  </div>
+    <p class="source">
+      A verse for this date from <cite>Reciting the Verses of God</cite>
+      <br> by Shahin Vafai & Dwight W. Allen.
+    </p>
+    <div class="reciting">
+      <div>
+  </article>
 </template>
 <script>
   import verses from '../assets/verses.json'
@@ -43,15 +47,31 @@
 </script>
 <style scoped>
   .verse {
-    font-size: 2em;
+    font-size: 1.7rem;
     padding: .5em;
     font-family: 'Gentium Book Basic', serif;
-    line-height: 1.2;
+    line-height: 1.3;
   }
   
   .suffix {
-    font-size: .5em;
+    font-size: .85rem;
     white-space: nowrap;
+  }
+  
+  .source {
+    font-size: 0.75rem;
+    color: grey;
+    text-align: center;
+  }
+  
+  .reciting {
+    margin: 0 auto;
+    background-image: url('~assets/reciting.jpg');
+    box-shadow: 3px 3px #fcfcfc;
+    width: 200px;
+    height: 150px;
+    /* you need to match the shadow color to your background or image border for the desired effect*/
+    box-shadow: 0 0 8px 8px white inset;
   }
 
 </style>
