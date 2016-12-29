@@ -12,7 +12,7 @@
             <i class="on-left">keyboard_arrow_left</i>
             Go back
           </button>
-          <router-link to="/index">
+          <router-link to="/">
             <button class="grey push small">
               Go home
               <i class="on-right">home</i>

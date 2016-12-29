@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-var folder = './pages/'
+var folder = './'
 
 // import Home from './pages/Home'
 // import Listing from './pages/Listing'
@@ -10,11 +10,12 @@ var folder = './pages/'
 const names = [
   // this is their order in the menus
   // 'NameOfVueFile[-urlPath]'
-  'Home-index',
+  'Home-/',
   'Verse',
   'Listing',
   'Notifications',
   'LocationSetup',
+  'OtherSetup',
   'About',
   'Error404-*', // must be last!
 ]
@@ -31,6 +32,28 @@ const routeInfoList = names.map(function (n) {
   }
 })
 
+const menuItems = routeInfoList
+  .filter(function (ri) {
+    let data = ri.component.options.data()
+    return !data.hideFromMenu
+  })
+
+const menuPages = menuItems
+  .map(function (ri, i) {
+    let data = ri.component.options.data()
+    return {
+      to: ri.path,
+      text: data.title,
+      index: '' + i,
+      name: ri.name
+    }
+  });
+
+var namedPages = {}
+menuPages.filter(function (mp) {
+  namedPages[mp.name] = mp
+})
+
 export default {
   raw: routeInfoList.map(function (ri) {
     return {
@@ -38,19 +61,8 @@ export default {
       path: '/' + ri.path
     }
   }),
-  menuPages: routeInfoList
-    .filter(function (ri) {
-      let data = ri.component.options.data()
-      return !data.hideFromMenu
-    })
-    .map(function (ri, i) {
-      let data = ri.component.options.data()
-      return {
-        to: ri.path,
-        text: data.title,
-        index: '' + i
-      }
-    })
+  menuPages: menuPages,
+  named: namedPages
 }
 
 // function load (component) {

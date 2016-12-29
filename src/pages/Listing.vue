@@ -1,6 +1,6 @@
 <template>
   <article class="layout-padding">
-    <h3>{{this.title}}</h3>
+    <h1>{{this.title}}</h1>
     <select size=2 multiple v-model="listFilter">
       <option value="HS">Holy Days</option>
       <option value="M">Months</option>

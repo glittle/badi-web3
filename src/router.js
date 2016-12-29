@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-import routeList from './routes'
+import routeList from './pages/routes'
 
 export default new VueRouter({
   /*

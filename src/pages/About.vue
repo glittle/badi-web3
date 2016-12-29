@@ -1,6 +1,6 @@
 <template>
   <article class="layout-padding">
-    <h3>{{this.title}}</h3>
+    <h1>{{this.title}}</h1>
     <p>This web app is all about the Wondrous calendar!</p>
     <p>It is developed and maintained by Glen Little (<a href="mailto:glen.little@gmail.com">email</a>). Please share suggestions
       and comments with him!</p>

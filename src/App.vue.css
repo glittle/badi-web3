@@ -5,20 +5,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: 0.02em;
 }
-h1 {
-  margin: 0;
+article h1 {
+  margin: 15px 0 0 0;
   font-size: 1.8rem;
 }
-h2 {
+article h1:first-child {
   margin: 0;
+}
+article h2 {
+  margin: 15px 0 0 0;
   font-size: 1.6rem;
 }
-h3 {
+article h2:first-child {
   margin: 0;
+}
+article h3 {
+  margin: 15px 0 0 0;
   font-size: 1.5rem;
 }
-h4 {
-  margin: 1em;
+article h4 {
+  margin: 15px 0 0 0;
   font-size: 1.4rem;
 }
 .section {
@@ -26,9 +32,6 @@ h4 {
 }
 p {
   margin: 5px 5px 2px 0;
-}
-p span {
-  margin-right: 10px;
 }
 .toolbar-title h1 {
   font-size: 1rem;

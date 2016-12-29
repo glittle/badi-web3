@@ -8,6 +8,11 @@
         <h1>Wondrous-Badí' Calendar Tools</h1>
         <h2>{{topDate}}</h2>
       </q-toolbar-title>
+      <router-link to="/">
+        <button class="push small">
+                        <i class="on-right">home</i>
+            </button>
+      </router-link>
     </div>
     <q-drawer ref="leftDrawer">
       <div class="toolbar light">
@@ -23,7 +28,7 @@
   </q-layout>
 </template>
 <script>
-  import routeList from './routes'
+  import routeList from './pages/routes'
 
   export default {
     data() {

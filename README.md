@@ -8,24 +8,14 @@ Developed by Glen Little. Many features are modelled after the ["Badí' Calendar
 
 ## Features
 
-Working - as of December 2016
-- Show today's verse from "Reciting the Verses of God"
-
-Coming Soon
-- Show today's date in the Wondrous calenar
-- List Bahá'í Feast and Holy Day dates
-- Add today's date to the Android system status bar
-- Show today's date as an Android notification
-- Work off-line for Chrome on desktops and Android
-
-Future
-- Showcase the monthly calendars produced by Joe Paczkowski
+(See About.vue for current features)
 
 ## Techology Used
 
 - Vue.js
 - Quasar-Framework
 - copy-webpack-plugin - to locate files to the root to support service workers
+- simple-vue-validator - for input validation
 - vue-head - to adjust headers per page
 - axios - to retrieve google map api data
 - OneSignal - to enable external push for notifications
