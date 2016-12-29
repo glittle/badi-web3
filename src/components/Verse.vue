@@ -21,7 +21,7 @@
     },
     data() {
       return {
-        title: 'Verses of God',
+        title: 'Verse for Today',
         verse: '',
         suffix: ''
       }
@@ -29,16 +29,24 @@
     methods: {
       showToday() {
         var now = moment();
-        var hour = now.hour(); // server time
-        var isAm = hour < 12;
         var key = now.format('M.D');
         var dayVerses = verses[key];
         if (dayVerses) {
+          var hour = now.hour(); // server time
+          var isAm = hour < 12;
           var verseInfo = dayVerses[isAm ? 'am' : 'pm'];
+          // TODO: use sunset information for today
           if (verseInfo) {
             this.suffix = `(Bahá'u'lláh, ${verseInfo.r})`;
             this.verse = verseInfo.q;
           }
+        }
+      }
+    },
+    head: {
+      title: function () {
+        return {
+          inner: this.title
         }
       }
     }
@@ -54,7 +62,7 @@
   }
   
   .suffix {
-    font-size: .85rem;
+    font-size: 1rem;
     white-space: nowrap;
   }
   

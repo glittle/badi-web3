@@ -1,19 +1,19 @@
-# Quasar App
+# Wondrous-Badí' Calendar Tools
 
-> A Quasar project
+> A web site with multiple tools for the Wondrous Calendar.
 
-## Build Setup
+Developed by Glen Little. Many features are modelled after the ["Badí' Calendar"](https://chrome.google.com/webstore/detail/bad%C3%AD-calendar/egekinjjpolponbbfjimifpgfdmphomp) Chrome Extension.
 
-``` bash
-# install dependencies
-$ npm install
+## Status
 
-# serve with hot reload at localhost:8080
-$ quasar dev
+Dec 2016 - Alpha - initial development
 
-# build for production with minification
-$ quasar build
+## Techology Used
 
-# lint code
-$ quasar lint
-```
+- Vue.js
+- Quasar-Framework
+- copy-webpack-plugin - to locate files to the root to support service workers
+- vue-head - to adjust headers per page
+- axios - to retrieve google map api data
+- OneSignal - to enable external push for notifications
+- service worker - to enable local notifictions

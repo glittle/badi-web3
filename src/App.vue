@@ -49,7 +49,7 @@
     head: {
       title: function () {
         return {
-          inner: this.title
+          inner: 'Home'
         }
       },
       meta: [{
