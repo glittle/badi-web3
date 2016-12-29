@@ -68,6 +68,7 @@
   
   .source {
     font-size: 0.75rem;
+    line-height: normal;
     color: grey;
     text-align: center;
   }
