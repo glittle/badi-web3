@@ -121,7 +121,7 @@
     "message": "{bDay} {bMonthNamePri} {bYear}",
     "description": "top right corner"
   },
-  "bWeekDayMeaning": {
+  "bWeekdayMeaning": {
     "message": ",Heerlijkheid,Schoonheid,Volmaaktheid,Genade,Gerechtigheid,Majesteit,Onafhankelijkheid",
     "description": "start with Saturday"
   },

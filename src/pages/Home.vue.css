@@ -5,3 +5,18 @@ button.item-link {
   padding: 0px 10px;
   margin: 3px 8px 0 0;
 }
+div.line {
+  margin: 3px 0;
+  overflow: auto;
+}
+div.line label {
+  display: inline;
+  margin: 0;
+  font-size: 90%;
+}
+div.line span {
+  float: right;
+}
+div.line.now {
+  color: #aaa;
+}

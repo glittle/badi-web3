@@ -75,7 +75,7 @@
     "message": "{bDay} {bMonthNamePri} {bYear}",
     "description": "top right corner"
   },
-  "bWeekDayMeaning": {
+  "bWeekdayMeaning": {
     "message": ",Glória,Beleza,Perfeição,Graça,Justiça,Majestade,Independência",
     "description": "start with Saturday"
   },

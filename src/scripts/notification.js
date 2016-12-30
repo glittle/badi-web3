@@ -1,8 +1,10 @@
+import dateInfo from './dateInfo'
 import storage from './storage'
+require('../scripts/stringExt')
 const moment = require('moment-timezone');
 
 export function showNow() {
-  show('Questions 9 ⇨ 4:30pm', 'Today!!! at ' + moment().format('hh:mm:ss'), 'Questions', 9, false)
+  show('{bMonthNamePri} {bDay} ⇨ {endingSunsetDesc}'.filledWith(dateInfo.di), 'It is now ' + moment().format('hh:mm:ss'), dateInfo.bMonthNamePri, dateInfo.bDay, false)
 }
 
 export function show(note1, note2, icon1, icon2, makeSound) {

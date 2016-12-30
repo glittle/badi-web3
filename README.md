@@ -17,6 +17,7 @@ Developed by Glen Little. Many features are modelled after the ["Badí' Calendar
 - copy-webpack-plugin - to locate files to the root to support service workers
 - simple-vue-validator - for input validation
 - vue-head - to adjust headers per page
+- vue-highcharts (with highcharts 5) - for some charting
 - axios - to retrieve google map api data
 - OneSignal - to enable external push for notifications
 - service worker - to enable local notifictions

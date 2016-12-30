@@ -10,6 +10,7 @@ import Vue from 'vue'
 import router from './router'
 import VueHead from 'vue-head'
 import Quasar from 'quasar'
+import VueHighcharts from 'vue-highcharts';
 
 import './scripts/swHandler';
 import './scripts/messages';
@@ -17,6 +18,7 @@ import './components/msg-directive';
 
 Vue.use(VueHead)
 Vue.use(Quasar) // Install Quasar Framework
+Vue.use(VueHighcharts);
 
 Quasar.start(() => {
   /* eslint-disable no-new */

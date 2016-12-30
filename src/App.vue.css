@@ -34,15 +34,19 @@ p {
   margin: 5px 5px 2px 0;
 }
 .toolbar-title h1 {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: normal;
   letter-spacing: normal;
   margin: 0 0 3px 0;
 }
 .toolbar-title h2 {
-  font-size: 0.75rem;
+  font-size: 1rem;
   letter-spacing: normal;
   margin: 0;
+}
+.toolbar-title h2 span {
+  margin-left: 1em;
+  font-size: .85em;
 }
 .layout-padding {
   margin-top: 0 !important;

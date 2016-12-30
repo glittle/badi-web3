@@ -5,13 +5,13 @@
         <i>menu</i>
       </button>
       <q-toolbar-title>
-        <h1>Wondrous-Badí' Calendar Tools</h1>
-        <h2>{{topDate}}</h2>
+        <h1>Wondrous-Badí' Calendar</h1>
+        <h2 v-html="topDate"></h2>
       </q-toolbar-title>
       <router-link to="/">
         <button class="push small">
-                        <i class="on-right">home</i>
-            </button>
+          <i class="on-right">home</i>
+        </button>
       </router-link>
     </div>
     <q-drawer ref="leftDrawer">
@@ -29,12 +29,14 @@
 </template>
 <script>
   import routeList from './pages/routes'
+  import dateInfo from './scripts/dateInfo'
+  require('./scripts/stringExt')
 
   export default {
     data() {
       return {
         pages: routeList.menuPages,
-        topDate: '18 Questions 173'
+        topDate: '{bDay} {bMonthNamePri} {bYear} <span>({nearestSunset})</span>'.filledWith(dateInfo.di)
       }
     },
     head: {

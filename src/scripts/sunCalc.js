@@ -2,6 +2,9 @@
 /* eslint padded-blocks: 0 */
 /* eslint spaced-comment: 0 */
 /* eslint no-trailing-spaces: 0 */
+import {
+  coords
+} from './shared'
 
 /*
  (c) 2011-2014, Vladimir Agafonkin
@@ -111,7 +114,9 @@ function getSetJ(h, lw, phi, dec, n, M, L) {
 
 // calculates sun times for a given date and latitude/longitude
 module.exports = {
-  getTimes: function (date, lat, lng) {
+  getTimes: function (date) {
+    var lat = coords.lat;
+    var lng = coords.lng;
 
     var lw = rad * -lng,
       phi = rad * lat,

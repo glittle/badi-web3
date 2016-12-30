@@ -47,7 +47,7 @@
     "message": "{bDay} {bMonthNamePri} {bYear}",
     "description": "top right corner"
   },
-  "bWeekDayMeaning": {
+  "bWeekdayMeaning": {
     "message": ",புகழ்,அழகு,நிறைவு,கிருபை,நீதி,மாட்சிமை,சுதந்திரம்",
     "description": "start with Saturday"
   },

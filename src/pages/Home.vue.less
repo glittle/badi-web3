@@ -1,7 +1,24 @@
-button.item-link{
-    background: rgba(0,0,0,0.1);
+button.item-link {
+    background: rgba(0, 0, 0, 0.1);
     height: auto;
     line-height: normal;
     padding: 0px 10px;
     margin: 3px 8px 0 0;
+}
+
+div.line {
+    margin: 3px 0;
+    overflow: auto;
+    label {
+        display: inline;
+        //float: left;
+        margin: 0;
+        font-size: 90%;
+    }
+    span {
+        float: right;
+    }
+    &.now {
+        color: #aaa;
+    }
 }

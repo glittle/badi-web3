@@ -3,6 +3,8 @@ import messages from './messages'
 import badi from './badiCalc'
 import sunCalc from './sunCalc'
 
+var cloneDeep = require('lodash/cloneDeep');
+
 const moment = require('moment-timezone');
 
 /* eslint-disable operator-linebreak */
@@ -24,8 +26,6 @@ var knownDateInfos = {};
 var _di = {};
 // var _initialDiStamp;
 var _focusTime;
-var _locationLat = 0;
-var _locationLong = 0;
 
 var lists = {};
 
@@ -45,7 +45,6 @@ function onLocaleLoaded() {
 
   lists.bWeekdayNameAr = messages.get("bWeekdayNameAr").split(splitSeparator); // from Saturday
   lists.bWeekdayMeaning = messages.get("bWeekdayMeaning").split(splitSeparator);
-
   lists.bYearInVahidNameAr = messages.get("bYearInVahidNameAr").split(splitSeparator);
   lists.bYearInVahidMeaning = messages.get("bYearInVahidMeaning").split(splitSeparator);
 
@@ -117,8 +116,8 @@ function getDateInfo(currentTime, onlyStamp) {
   var frag2Noon = new Date(frag1Noon.getTime());
   frag2Noon.setDate(frag2Noon.getDate() + 1);
 
-  var frag1SunTimes = sunCalc.getTimes(frag1Noon, _locationLat, _locationLong);
-  var frag2SunTimes = sunCalc.getTimes(frag2Noon, _locationLat, _locationLong);
+  var frag1SunTimes = sunCalc.getTimes(frag1Noon);
+  var frag2SunTimes = sunCalc.getTimes(frag2Noon);
 
   var di = { // date info
     frag1: frag1Noon,
@@ -266,11 +265,14 @@ function getDateInfo(currentTime, onlyStamp) {
 
   di.stampDay = '{y}.{m}.{d}'.filledWith(di.bNow); // ignore eve/day
 
-//   if (!skipUpcoming) {
-//     getUpcoming(di);
-//   }
+  //   if (!skipUpcoming) {
+  //     getUpcoming(di);
+  //   }
 
   knownDateInfos[currentTime] = di;
+
+  // for development
+  window.di = cloneDeep(di);
 
   return di;
 }

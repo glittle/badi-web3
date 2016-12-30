@@ -50,7 +50,7 @@
     "message": "{bDay} {bMonthNamePri} {bYear}",
     "description": "top right corner"
   },
-  "bWeekDayMeaning": {
+  "bWeekdayMeaning": {
     "message": ",Gloire,Beauté,Perfection,Grâce,Justice,Majesté,Indépendance",
     "description": "start with Saturday"
   },
