@@ -1,3 +1,6 @@
 .LocationSetup p span {
   margin-right: 10px;
 }
+.LocationSetup .status {
+  transition: height 0.5s;
+}

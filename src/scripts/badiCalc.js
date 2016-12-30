@@ -571,7 +571,7 @@ var getBDate = function (gSourceDate) {
   var sourceDate = new Date(gSourceDate);
   var pmSunset = new Date(sourceDate);
   pmSunset.setHours(12);
-  pmSunset = sunCalculator.getTimes(pmSunset, coords.lat, coords.long).sunset;
+  pmSunset = sunCalculator.getTimes(pmSunset, coords.lat, coords.lng).sunset;
   //    else {
   //      log('unknown sunset - ' + sunCalcReady + ' ' + latReady);
   //      pmSunset.setHours(18,30,0,0);
@@ -2327,7 +2327,7 @@ function getNawRuz(gYear, frag2DateOnly) {
 
   var eveSunset = new Date(nawRuz);
   if (typeof sunCalculator !== 'undefined') {
-    nawRuz = sunCalculator.getTimes(eveSunset, coords.lat, coords.long).sunset;
+    nawRuz = sunCalculator.getTimes(eveSunset, coords.lat, coords.lng).sunset;
   } else {
     // default to 6:30pm
     eveSunset.setHours(18, 30, 0, 0);

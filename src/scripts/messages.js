@@ -49,7 +49,7 @@ function getRawMessage(key) {
       answer = file[key].message;
     }
   }
-  console.log(`raw for "${key}": "${answer}"`);
+  // console.log(`raw for "${key}": "${answer}"`);
   return answer;
 }
 

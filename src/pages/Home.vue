@@ -4,7 +4,8 @@
       <div class="card-content">
         Information about today...
         <p>{{di.bDay}} {{di.bMonthNamePri}} {{di.bYear}}</p>
-        <p>{{di.nearestSunset}}</p>
+        <!--
+          -->
       </div>
     </div>
     <div class="card">
