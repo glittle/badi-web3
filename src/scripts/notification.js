@@ -4,7 +4,12 @@ require('../scripts/stringExt')
 const moment = require('moment-timezone');
 
 export function showNow() {
-  show('{bMonthNamePri} {bDay} ⇨ {endingSunsetDesc}'.filledWith(dateInfo.di), 'It is now ' + moment().format('hh:mm:ss'), dateInfo.bMonthNamePri, dateInfo.bDay, false)
+  show('{bMonthNamePri} {bDay} ⇨ {endingSunsetDesc}'
+    .filledWith(dateInfo.di),
+    'It is now ' + moment().format('hh:mm:ss'),
+    dateInfo.di.bMonthNamePri,
+    dateInfo.di.bDay,
+    false)
 }
 
 export function show(note1, note2, icon1, icon2, makeSound) {
