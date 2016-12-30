@@ -19,7 +19,7 @@ var _msInDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
 
 fillDatePresets();
 
-export function prepareDateInfos(bYear) {
+function prepareDateInfos(bYear) {
   _dateInfos = dateInfosRaw();
   _dateInfosForYear = bYear;
 
@@ -2340,7 +2340,7 @@ function isAfterNawRuz(d) {
 };
 
 // make these available to the browser
-module.export = {
+export default {
   getNawRuz: getNawRuz,
   getUpcoming: getUpcoming,
   getGDate: getGregorianDate,

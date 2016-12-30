@@ -2,11 +2,13 @@ import {
   LocalStorage
 } from 'quasar'
 
-export function set(key, value) {
-  LocalStorage.set(key, value)
-}
-export function get(key, defaultValue) {
-  return LocalStorage.has(key) ? LocalStorage.get.item(key) : defaultValue
+export default {
+  set: function (key, value) {
+    LocalStorage.set(key, value)
+  },
+  get: function (key, defaultValue) {
+    return LocalStorage.has(key) ? LocalStorage.get.item(key) : defaultValue
+  }
 }
 
 

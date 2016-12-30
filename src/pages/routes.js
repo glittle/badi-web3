@@ -1,5 +1,4 @@
 import Vue from 'vue'
-
 var folder = './'
 
 // import Home from './pages/Home'

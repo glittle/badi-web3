@@ -21,7 +21,7 @@
 <script>
   import axios from 'axios'
   import * as shared from '../scripts/shared'
-  import * as storage from '../scripts/storage'
+  import storage from '../scripts/storage'
   var Vue = require('vue');
   var SimpleVueValidation = require('simple-vue-validator');
   var Validator = SimpleVueValidation.Validator;

@@ -1,4 +1,4 @@
-import * as storage from './storage'
+import storage from './storage'
 
 var coords = {
   lat: storage.get('coord.lat', 42.0744279), // House of Worship  :)

@@ -1,4 +1,4 @@
-import * as storage from './storage'
+import storage from './storage'
 const moment = require('moment-timezone');
 
 export function showNow() {

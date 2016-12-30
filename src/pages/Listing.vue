@@ -11,7 +11,7 @@
   </article>
 </template>
 <script>
-  import * as badi from '../scripts/badiCalc'
+  import badi from '../scripts/badiCalc'
   export default {
     name: 'listing', // for Vue debugger
     data() {
