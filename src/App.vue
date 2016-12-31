@@ -28,9 +28,14 @@
   </q-layout>
 </template>
 <script>
+  import {
+    Toast
+  } from 'quasar'
+
   import routeList from './pages/routes'
   import dateInfo from './scripts/dateInfo'
   import * as notify from './scripts/notification'
+  import * as shared from './scripts/shared'
 
   require('./scripts/stringExt')
 
@@ -67,6 +72,9 @@
         }
       }
     },
+    mounted() {
+      checkLocation(this)
+    },
     head: {
       title: function () {
         return {
@@ -94,6 +102,28 @@
       console.log('do notify')
       notify.showNow();
       lastNotificationKey = key;
+    }
+  }
+
+  function checkLocation(vue) {
+    var src = shared.coords.source;
+    var c = +shared.coords.lat + +shared.coords.lng;
+    var okay = c !== 0 && src !== 'default';
+
+    if (!okay) {
+      Toast.create.negative({
+        html: 'Location must be set for dates to be correct.',
+        timeout: 1e11, // very long
+        button: {
+          label: 'Fix Now',
+          handler() {
+            vue.$router.push('locationsetup')
+          },
+          onDismiss() {
+            vue.$router.push('locationsetup')
+          }
+        }
+      })
     }
   }
 

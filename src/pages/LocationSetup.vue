@@ -3,20 +3,23 @@
     <h1>Location</h1>
     <div class="section">
       <div>
-        Where are you now?
-        <button @click="getLocation" class="small primary">Learn</button>
+        <p>The location of your device is required to determine when sunset will be for you. Enter the location below or click
+          the "Get Location" button.
+        </p>
+        <button @click="getLocation" class="small primary">Get Location</button>
+        <button @click="openMap" class="small light">Show on a Map</button>
       </div>
       <p><span>Latitude</span>
-        <input type="number" min="-85" max="85" step="any" v-model="lat" :class="{'has-error': validation.hasError('lat')}">
+        <input type="number" min="-85" max="85" step="any" v-model.number="lat" :class="{'has-error': validation.hasError('lat')}">
       </p>
-      <p><span>Longitude</span><input type="number" min="-180" max="180" step="any" v-model="lng" :class="{'has-error': validation.hasError('lng')}"></p>
-      <p><span>Name</span><input type="text" v-model="name">
-        <!--<button @click="getLocationName" class="small secondary">Lookup</button>-->
+      <p><span>Longitude</span>
+        <input type="number" min="-180" max="180" step="any" v-model.number="lng" :class="{'has-error': validation.hasError('lng')}">
       </p>
       <p>
-        <button @click="openMap" class="small light">Show on a Map</button>
+        <span>Name</span><input type="text" v-model="name">
       </p>
-      <p v-show="statusLines.length"><span>Status</span>
+      <p v-show="statusLines.length">
+        <b>Status</b>
         <div class='status' v-html="statusLines.join('<br>')"></div>
       </p>
     </div>
@@ -51,21 +54,26 @@
     },
     validators: {
       lat: function (value) {
+        console.log('validate lat')
         return Validator.value(value).required().float().between(-85, 85);
       },
       lng: function (value) {
+        console.log('validate lng')
         return Validator.value(value).required().float().between(-180, 180);
       },
     },
     created() {},
     watch: {
       lat: function (n, o) {
-        this.checkValidation()
-        console.log(n, o)
+        this.checkValidation('lat', n)
+          // console.log(n, o)
       },
       lng: function (n, o) {
-        this.checkValidation()
-        console.log(n, o)
+        this.checkValidation('lng', n)
+          // console.log(n, o)
+      },
+      name: function (n, o) {
+        storage.set('coord.name', n);
       },
       statusLines: function (n, o) {
         // clearTimeout(timeout);
@@ -75,18 +83,22 @@
         var a = this.statusLines;
         setTimeout(function () {
           if (a.length > 0) {
-            a.shift();
+            a.shift(); // may get out of sync if rapid changes
           }
-        }, 1200);
+        }, 1500);
       }
     },
     methods: {
-      checkValidation() {
+      checkValidation(which, n) {
         this.$validate()
           .then(function (success) {
             if (success) {
               // alert('Validation succeeded!');
+
+              storage.set('coord.' + which, n);
+
               this.getLocationName();
+              storage.set('coord.source', 'user');
             } else {
               console.log(success)
             }
@@ -95,35 +107,35 @@
       getLocation() {
         clearLog = true;
         try {
-          var thisVue = this;
-          thisVue.statusLines.push('Determining location')
+          var vue = this;
+          vue.statusLines.push('Determining location')
           navigator.geolocation.getCurrentPosition(function (loc) {
-            thisVue.lat = loc.coords.latitude;
-            thisVue.lng = loc.coords.longitude;
+            vue.lat = loc.coords.latitude;
+            vue.lng = loc.coords.longitude;
             storage.set('coord.lat', loc.coords.latitude);
             storage.set('coord.lng', loc.coords.longitude);
-            storage.set('coord.source', 'geo');
+            storage.set('coord.source', 'user');
 
-            thisVue.statusLines.push('Learned coordinates')
+            vue.statusLines.push('Learned coordinates')
 
             // OneSignal.sendTag("latitude", settings.locationLat);
             // OneSignal.sendTag("longitude", settings.locationlng);
-            thisVue.getLocationName();
+            vue.getLocationName();
           })
         } catch (e) {
-          thisVue.statusLines.push(e.message);
+          vue.statusLines.push(e.message);
           clearLog = false;
         }
       },
       openMap() {
-        var url = `https://www.google.ca/maps/place/${this.thisVue.name}/@${this.lat},${this.thisVue.lng},10z`;
+        var url = `https://www.google.ca/maps/place/${this.name}/@${this.lat},${this.lng},10z`;
         window.open(url, 'map');
       },
       getLocationName() {
         clearLog = true;
-        var thisVue = this;
-        var url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${thisVue.lat},${thisVue.lng}`;
-        thisVue.statusLines.push('Determining name')
+        var vue = this;
+        var url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${vue.lat},${vue.lng}`;
+        vue.statusLines.push('Determining name')
 
         axios.get(url)
           .then(function (response) {
@@ -135,7 +147,7 @@
               for (var i = 0; i < components.length; i++) {
                 var component = components[i];
                 if (component.types.includes('locality')) { //$.inArray('political', component.types)!=-1 &&
-                  // thisVue.statusLines.push('--> ' + component.long_name)
+                  // vue.statusLines.push('--> ' + component.long_name)
                   // console.log(component)
                   if (component.short_name.length > location.length) {
                     location = component.short_name;
@@ -145,15 +157,15 @@
             }
 
             if (location) {
-              thisVue.statusLines.push('==> ' + location)
+              vue.statusLines.push('==> ' + location)
             } else {
               clearLog = false;
-              thisVue.statusLines.push('No location!')
+              vue.statusLines.push('No location!')
             }
             //OneSignal.sendTag("location", location);
             //OneSignal.sendTag("zoneName", moment.tz.guess());
             storage.set('coord.name', location);
-            thisVue.name = location;
+            vue.name = location;
           })
           .catch(function (error) {
             console.log(error);
