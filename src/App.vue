@@ -65,7 +65,12 @@
           default:
             return;
         }
-        // this.$router.push('/')
+
+        if (Math.abs(obj.distance.x) < 0.5 * screen.width) {
+          // ignore if not a wide swipe!
+          return;
+        }
+
         var goto = routeList.getNext(delta, this.$router.currentRoute);
         if (goto) {
           this.$router.push(goto);

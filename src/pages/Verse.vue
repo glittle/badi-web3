@@ -1,9 +1,7 @@
 <template>
   <article class="layout-padding">
-    <p class="verse">
-      <span class="verseText">{{verse}}</span>
-      <span class="suffix">{{suffix}}</span>
-    </p>
+    <div class="verseText">{{verse}}</div>
+    <div class="suffix">{{suffix}}</div>
     <div class="speakButtons">
       <button id="btnRead" class="push small" v-if="online" @click="speak">
           <i>record_voice_over</i>
@@ -32,7 +30,7 @@
         icon: 'import_contacts',
         verse: '',
         suffix: '',
-        online: false// tts not working...  navigator.onLine
+        online: false // tts not working...  navigator.onLine
       }
     },
     created() {
@@ -85,15 +83,15 @@
 
 </script>
 <style scoped>
-  .verse {
-    font-size: 1.7rem;
+  .verseText {
+    font-size: 1.3rem;
     /*font-family: 'Gentium Book Basic', serif;*/
-    line-height: 1.3;
   }
   
   .suffix {
+    text-align: right;
     font-size: 1rem;
-    white-space: nowrap;
+    margin-top: 1em;
   }
   
   .source {

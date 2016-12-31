@@ -34,6 +34,10 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
   else if (Notification.permission === 'granted') {
     console.log('showing notification', note1)
 
+    var html = document.createElement('div')
+    html.innerHTML = note1;
+    note1 = html.innerText;
+
     prepareImage(function () {
       navigator.serviceWorker.ready.then(function (registration) {
         var n = registration.showNotification(note1, {

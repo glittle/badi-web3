@@ -8,10 +8,10 @@ var coords = {
 }
 
 var formats = {
-  noticationMain: '{bDay} {bMonthNamePri}-{bMonthNameSec} {bYear)',
-  noticationSub: '{nearestSunset}',
+  topTitle: '{bDay} {bMonthNamePri}-{bMonthNameSec} {bYear} <span></span>',
   statusIconText: '{bMonthNamePri}',
-  topTitle: '{bDay} {bMonthNamePri} {bYear} <span>({nearestSunset})</span>'
+  noticationMain: '{bDay} {bMonthNamePri}-{bMonthNameSec} {bYear}',
+  noticationSub: '{nearestSunset}',
 }
 
 export {
