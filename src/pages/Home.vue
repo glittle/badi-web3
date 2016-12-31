@@ -24,6 +24,7 @@ import sunCalc from './sunCalc'
 <script>
   import messages from '../scripts/messages'
   import dateInfo from '../scripts/dateInfo'
+  // import pulse from '../scripts/pulse'
   import sunCalc from '../scripts/sunCalc'
   require('../scripts/stringExt')
   const moment = require('moment-timezone');
@@ -37,20 +38,37 @@ import sunCalc from './sunCalc'
         title: messages.get('HomePage', null, 'Home'),
         // pages: {}, // error if directly assign imported item
         pages2: [], // error if directly assign imported item
-        di: dateInfo.di,
-        dayDisplay: '',
-        sunDisplay: ''
-          // dayTitle: '{bDay} {bMonthNamePri} {bYear}'.filledWith(dateInfo.di)
+        now: new Date(),
+        // pulseNum: this.$store.state.pulseNum
+        // dayTitle: '{bDay} {bMonthNamePri} {bYear}'.filledWith(dateInfo.di)
       }
     },
     computed: {
       position() {
         return null;
+      },
+      // pulseNum() {
+      //   return this.$store.state.pulseNum
+      // },
+      di() {
+        this.$store.state.pulseNum;
+        return dateInfo.di;
+      },
+      dayDisplay() {
+        return fillDayDisplay(this.di)
+      },
+      sunDisplay() {
+        return fillSunDisplay(this.di) //, this.pulseNum)
       }
     },
-    methods: {
-      move(event) {}
-    },
+    methods: {},
+    // watch: {
+    //   di: function () {
+    //     console.log('di changed')
+    //     // fillDayDisplay(this)
+    //     // fillSunDisplay(this)
+    //   }
+    // },
     beforeMount() {
       // console.log('before mount', routeList)
       // this.pages = routeList.default.named;
@@ -61,8 +79,10 @@ import sunCalc from './sunCalc'
       // console.log('mounted', routeList)
       // this.$nextTick(() => {
       // })
-      fillDayDisplay(this)
-      fillSunDisplay(this)
+      // debugger;
+      // this.pulseNumber = pulse.pulseNumber
+      // fillDayDisplay(this)
+      // fillSunDisplay(this)
     },
     beforeUpdate() {
       // console.log('update', routeList)
@@ -70,41 +90,44 @@ import sunCalc from './sunCalc'
     beforeDestroy() {},
   }
 
-  function fillDayDisplay(vue) {
+  function fillDayDisplay(di) {
     var answers = [];
+    // var di = dateInfo.di;
 
     answers.push({
       t: 'Day of Month',
-      v: '{bDayNamePri} / {bDayNameSec} / <b>{bDay}</b>'.filledWith(vue.di)
+      v: '{bDayNamePri} / {bDayNameSec} / <b>{bDay}</b>'.filledWith(di)
     });
     answers.push({
       t: 'Day of Week',
-      v: '{bWeekdayNamePri} / {bWeekdayNameSec} / {bWeekday}'.filledWith(vue.di)
+      v: '{bWeekdayNamePri} / {bWeekdayNameSec} / {bWeekday}'.filledWith(di)
     });
     answers.push({
       t: 'Month',
-      v: '<b>{bMonthNamePri}</b> / {bMonthNameSec} / {bMonth}'.filledWith(vue.di)
+      v: '<b>{bMonthNamePri}</b> / {bMonthNameSec} / {bMonth}'.filledWith(di)
     });
     answers.push({
       t: 'Section of Year',
-      v: '{element}'.filledWith(vue.di)
+      v: '{element}'.filledWith(di)
     });
     answers.push({
       t: 'Year',
-      v: 'Year {bYearInVahid} of Vahid {bVahid} / <b>{bYear}</b>'.filledWith(vue.di)
+      v: 'Year {bYearInVahid} of Vahid {bVahid} / <b>{bYear}</b>'.filledWith(di)
     });
 
-    vue.dayDisplay = answers.map(function (ans) {
+    return answers.map(function (ans) {
       return `<div class="line ${ans.c || ''}"><label>${ans.t}</label> <span>${ans.v}</span></div>`;
     }).join('');
   }
 
-  function fillSunDisplay(vue) {
+  function fillSunDisplay(di) {
     var answers = [];
+    // var di = dateInfo.di;
 
     const readableFormat = 'ddd, MMM D [at] HH:mm';
+    const nowFormat = 'ddd, MMM D [at] HH:mm:ss';
 
-    const now = moment(vue.di.currentTime);
+    const now = moment(di.currentTime);
     const noon = moment(now).hour(12).minute(0).second(0);
     const tomorrowNoon = moment(noon).add(24, 'hours');
 
@@ -137,7 +160,7 @@ import sunCalc from './sunCalc'
       if (now.isBefore(sunrise2)) {
         answers.push({
           t: `Now:`,
-          v: now.format(readableFormat),
+          v: now.format(nowFormat),
           c: 'now'
         });
         answers.push({
@@ -151,7 +174,7 @@ import sunCalc from './sunCalc'
         });
         answers.push({
           t: `Now:`,
-          v: now.format(readableFormat),
+          v: now.format(nowFormat),
           c: 'now'
         });
       }
@@ -177,7 +200,7 @@ import sunCalc from './sunCalc'
       if (now.isBefore(sunrise1)) {
         answers.push({
           t: `Now:`,
-          v: now.format(readableFormat),
+          v: now.format(nowFormat),
           c: 'now'
         });
         answers.push({
@@ -191,7 +214,7 @@ import sunCalc from './sunCalc'
         });
         answers.push({
           t: `Now:`,
-          v: now.format(readableFormat),
+          v: now.format(nowFormat),
           c: 'now'
         });
       }
@@ -205,7 +228,7 @@ import sunCalc from './sunCalc'
 
     drawChart(sun)
 
-    vue.sunDisplay = answers.map(function (ans) {
+    return answers.map(function (ans) {
       return `<div class="line ${ans.c || ''}"><label>${ans.t}</label> <span>${ans.v}</span></div>`;
     }).join('');
   }

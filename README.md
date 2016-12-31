@@ -14,6 +14,7 @@ Developed by Glen Little. Many features are modelled after the ["Badí' Calendar
 
 - Vue.js
 - Quasar-Framework
+- vuex - for state
 - copy-webpack-plugin - to locate files to the root to support service workers
 - simple-vue-validator - for input validation
 - vue-head - to adjust headers per page

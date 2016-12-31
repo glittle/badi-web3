@@ -8,9 +8,13 @@ require(`quasar/dist/quasar.${__THEME}.css`)
 
 import Vue from 'vue'
 import router from './router'
+import store from './scripts/store'
 import VueHead from 'vue-head'
 import Quasar from 'quasar'
 import VueHighcharts from 'vue-highcharts';
+
+// import pulse from './scripts/pulse'
+import dateInfo from './scripts/dateInfo'
 
 import './scripts/swHandler';
 import './scripts/messages';
@@ -20,11 +24,13 @@ Vue.use(VueHead)
 Vue.use(Quasar) // Install Quasar Framework
 Vue.use(VueHighcharts);
 
+
 Quasar.start(() => {
   /* eslint-disable no-new */
   new Vue({
     el: '#q-app',
     router,
+    store,
     render: h => h(require('./App'))
   })
 })
@@ -34,6 +40,14 @@ Quasar.start(() => {
 // custom
 import * as notify from './scripts/notification'
 notify.showNow();
+
+// pulse.startPulse();
+
+var html = document.getElementsByTagName('html')[0];
+html.setAttribute('dir', dateInfo.languageDir)
+html.setAttribute('lang', dateInfo.languageCode)
+var body = document.getElementsByTagName('body')[0];
+body.classList.add(dateInfo.languageDir, dateInfo.languageCode, dateInfo.languageCode.slice(0, 2))
 
 // onesignal
 var OneSignal = window.OneSignal || [];

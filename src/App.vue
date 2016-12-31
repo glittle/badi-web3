@@ -30,13 +30,27 @@
 <script>
   import routeList from './pages/routes'
   import dateInfo from './scripts/dateInfo'
+  // import pulse from './scripts/pulse'
   require('./scripts/stringExt')
 
   export default {
     data() {
       return {
         pages: routeList.menuPages,
-        topDate: '{bDay} {bMonthNamePri} {bYear} <span>({nearestSunset})</span>'.filledWith(dateInfo.di)
+      }
+    },
+    // watch: {
+    //   num: function (a, b) {
+    //     console.log('num ' + a + ' - - ' + b)
+    //   }
+    // },
+    computed: {
+      // num() {
+      //   return this.$store.state.pulseNum
+      // },
+      topDate: function () {
+        this.$store.state.pulseNum // force this compute to update on every pulse
+        return '{bDay} {bMonthNamePri} {bYear} <span>({currentTime})</span>'.filledWith(dateInfo.di)
       }
     },
     head: {

@@ -22,7 +22,7 @@ var settings = {
 var _languageCode = '';
 var _languageDir = '';
 
-var knownDateInfos = {};
+// var knownDateInfos = {};
 var _di = {};
 // var _initialDiStamp;
 var _focusTime;
@@ -76,11 +76,10 @@ function setupLanguageChoice() {
 }
 
 function refreshDateInfo() {
-  _di = getDateInfo(getFocusTime());
-  return _di;
+  updateDateInfo(_di, new Date());
 }
 
-function getDateInfo(currentTime, onlyStamp) {
+function updateDateInfo(di, currentTime, onlyStamp) {
   // hard code limits
   var minDate = new Date(1844, 2, 21, 0, 0, 0, 0);
   if (currentTime < minDate) {
@@ -92,10 +91,11 @@ function getDateInfo(currentTime, onlyStamp) {
     }
   }
 
-  var known = knownDateInfos[currentTime];
-  if (known) {
-    return known;
-  }
+  // console.log('calc di for ' + currentTime)
+  //   var known = knownDateInfos[currentTime];
+  //   if (known) {
+  //     return known;
+  //   }
 
   var bNow = badi.getBDate(currentTime);
   if (onlyStamp) {
@@ -119,56 +119,55 @@ function getDateInfo(currentTime, onlyStamp) {
   var frag1SunTimes = sunCalc.getTimes(frag1Noon);
   var frag2SunTimes = sunCalc.getTimes(frag2Noon);
 
-  var di = { // date info
-    frag1: frag1Noon,
-    frag1Year: frag1Noon.getFullYear(),
-    frag1Month: frag1Noon.getMonth(),
-    frag1Day: frag1Noon.getDate(),
-    frag1Weekday: frag1Noon.getDay(),
+  // date info
+  di.frag1 = frag1Noon;
+  di.frag1Year = frag1Noon.getFullYear();
+  di.frag1Month = frag1Noon.getMonth();
+  di.frag1Day = frag1Noon.getDate();
+  di.frag1Weekday = frag1Noon.getDay();
 
-    frag2: frag2Noon,
-    frag2Year: frag2Noon.getFullYear(),
-    frag2Month: frag2Noon.getMonth(), // 0 based
-    frag2Day: frag2Noon.getDate(),
-    frag2Weekday: frag2Noon.getDay(),
+  di.frag2 = frag2Noon;
+  di.frag2Year = frag2Noon.getFullYear();
+  di.frag2Month = frag2Noon.getMonth(); // 0 base
+  di.frag2Day = frag2Noon.getDate();
+  di.frag2Weekday = frag2Noon.getDay();
 
-    currentYear: currentTime.getFullYear(),
-    currentMonth: currentTime.getMonth(), // 0 based
-    currentMonth1: 1 + currentTime.getMonth(),
-    currentDay: currentTime.getDate(),
-    currentDay00: digitPad2(currentTime.getDate()),
-    currentWeekday: currentTime.getDay(),
-    currentTime: currentTime,
+  di.currentYear = currentTime.getFullYear();
+  di.currentMonth = currentTime.getMonth(); // 0 base;
+  di.currentMonth1 = 1 + currentTime.getMonth();
+  di.currentDay = currentTime.getDate();
+  di.currentDay00 = digitPad2(currentTime.getDate());
+  di.currentWeekday = currentTime.getDay();
+  di.currentTime = currentTime;
 
-    startingSunsetDesc12: showTime(frag1SunTimes.sunset),
-    startingSunsetDesc24: showTime(frag1SunTimes.sunset, 24),
-    endingSunsetDesc12: showTime(frag2SunTimes.sunset),
-    endingSunsetDesc24: showTime(frag2SunTimes.sunset, 24),
-    frag1SunTimes: frag1SunTimes,
-    frag2SunTimes: frag2SunTimes,
+  di.startingSunsetDesc12 = showTime(frag1SunTimes.sunset);
+  di.startingSunsetDesc24 = showTime(frag1SunTimes.sunset, 24);
+  di.endingSunsetDesc12 = showTime(frag2SunTimes.sunset);
+  di.endingSunsetDesc24 = showTime(frag2SunTimes.sunset, 24);
+  di.frag1SunTimes = frag1SunTimes;
+  di.frag2SunTimes = frag2SunTimes;
 
-    sunriseDesc12: showTime(frag2SunTimes.sunrise),
-    sunriseDesc24: showTime(frag2SunTimes.sunrise, 24),
+  di.sunriseDesc12 = showTime(frag2SunTimes.sunrise);
+  di.sunriseDesc24 = showTime(frag2SunTimes.sunrise, 24);
 
-    bNow: bNow,
-    bDay: bNow.d,
-    bWeekday: 1 + (frag2Noon.getDay() + 1) % 7,
-    bMonth: bNow.m,
-    bYear: bNow.y,
-    bVahid: Math.floor(1 + (bNow.y - 1) / 19),
-    bDateCode: bNow.m + '.' + bNow.d,
+  di.bNow = bNow;
+  di.bDay = bNow.d;
+  di.bWeekday = 1 + (frag2Noon.getDay() + 1) % 7;
+  di.bMonth = bNow.m;
+  di.bYear = bNow.y;
+  di.bVahid = Math.floor(1 + (bNow.y - 1) / 19);
+  di.bDateCode = bNow.m + '.' + bNow.d;
 
-    bDayNameAr: lists.bMonthNameAr[bNow.d],
-    bDayMeaning: lists.bMonthMeaning[bNow.d],
-    bMonthNameAr: lists.bMonthNameAr[bNow.m],
-    bMonthMeaning: lists.bMonthMeaning[bNow.m],
+  di.bDayNameAr = lists.bMonthNameAr[bNow.d];
+  di.bDayMeaning = lists.bMonthMeaning[bNow.d];
+  di.bMonthNameAr = lists.bMonthNameAr[bNow.m];
+  di.bMonthMeaning = lists.bMonthMeaning[bNow.m];
 
-    bEraLong: messages.get('eraLong'),
-    bEraAbbrev: messages.get('eraAbbrev'),
-    bEraShort: messages.get('eraShort'),
+  di.bEraLong = messages.get('eraLong');
+  di.bEraAbbrev = messages.get('eraAbbrev');
+  di.bEraShort = messages.get('eraShort');
 
-    stamp: JSON.stringify(bNow) // used to compare to other dates and for developer reference
-  };
+  di.stamp = JSON.stringify(bNow); // used to compare to other dates and for developer reference
 
   di.bDayNamePri = settings.useArNames ? di.bDayNameAr : di.bDayMeaning;
   di.bDayNameSec = !settings.useArNames ? di.bDayNameAr : di.bDayMeaning;
@@ -243,7 +242,7 @@ function getDateInfo(currentTime, onlyStamp) {
   di.dayStartedLower = di.dayStarted.toLocaleLowerCase();
   di.dayEndedLower = di.dayEnded.toLocaleLowerCase();
 
-  // di.bMonthDayYear = messages.get('gMonthDayYear', di);
+  // _di.bMonthDayYear = messages.get('gMonthDayYear', _di);
 
   if (di.frag1Year !== di.frag2Year) {
     // Dec 31/Jan 1
@@ -266,15 +265,13 @@ function getDateInfo(currentTime, onlyStamp) {
   di.stampDay = '{y}.{m}.{d}'.filledWith(di.bNow); // ignore eve/day
 
   //   if (!skipUpcoming) {
-  //     getUpcoming(di);
+  //     getUpcoming(_di);
   //   }
 
-  knownDateInfos[currentTime] = di;
+  //   knownDateInfos[currentTime] = _di;
 
   // for development
   window.di = cloneDeep(di);
-
-  return di;
 }
 
 function getElementNum(num) {
@@ -298,18 +295,18 @@ function getElementNum(num) {
 }
 
 
-function getFocusTime() {
-  if (!_focusTime) {
-    return new Date();
-  }
+// function getFocusTime() {
+//   if (!_focusTime) {
+//     return new Date();
+//   }
 
-  if (isNaN(_focusTime)) {
-    log('unexpected 1: ', _focusTime);
-    return new Date();
-  }
+//   if (isNaN(_focusTime)) {
+//     log('unexpected 1: ', _focusTime);
+//     return new Date();
+//   }
 
-  return _focusTime;
-}
+//   return _focusTime;
+// }
 
 function setFocusTime(t) {
   _focusTime = t || (t = new Date());
@@ -392,18 +389,19 @@ function getOrdinalName(num) {
 }
 
 
-function getUpcoming(di) {
-  if (di.upcomingHtml) {
+function getUpcoming(_di) {
+  if (_di.upcomingHtml) {
     return; // already done
   }
-  var dayInfos = badi.getUpcoming(di, 3);
-  var today = moment(di.frag2);
+  var dayInfos = badi.getUpcoming(_di, 3);
+  var today = moment(_di.frag2);
   today.hour(0);
-  di.special1 = null;
-  di.special2 = null;
+  _di.special1 = null;
+  _di.special2 = null;
 
   dayInfos.forEach(function (dayInfo, i) {
-    var targetDi = getDateInfo(dayInfo.GDate);
+    var targetDi = {};
+    updateDateInfo(targetDi, dayInfo.GDate);
     if (dayInfo.Type === 'M') {
       dayInfo.A = messages.get('FeastOf').filledWith(targetDi.bMonthNameSec);
     } else if (dayInfo.Type.slice(0, 1) === 'H') {
@@ -414,25 +412,25 @@ function getUpcoming(di) {
     }
     dayInfo.date = messages.get('upcomingDateFormat', targetDi);
 
-    var sameDay = di.stampDay === targetDi.stampDay;
+    var sameDay = _di.stampDay === targetDi.stampDay;
     var targetMoment = moment(dayInfo.GDate);
-    dayInfo.away = determineDaysAway(di, today, targetMoment, sameDay);
+    dayInfo.away = determineDaysAway(_di, today, targetMoment, sameDay);
 
     if (sameDay) {
-      if (!di.special1) {
-        di.special1 = dayInfo.A;
+      if (!_di.special1) {
+        _di.special1 = dayInfo.A;
       } else {
-        di.special2 = dayInfo.A;
+        _di.special2 = dayInfo.A;
       }
     }
   });
 
-  di.upcomingHtml = '<tr class={Type}><td>{away}</td><td>{^A}</td><td>{^date}</td></tr>'.filledWithEach(dayInfos);
+  _di.upcomingHtml = '<tr class={Type}><td>{away}</td><td>{^A}</td><td>{^date}</td></tr>'.filledWithEach(dayInfos);
 }
 
-function determineDaysAway(di, moment1, moment2, sameDay) {
+function determineDaysAway(_di, moment1, moment2, sameDay) {
   var days = moment2.diff(moment1, 'days');
-  if (days === 1 && !di.bNow.eve) {
+  if (days === 1 && !_di.bNow.eve) {
     return messages.get('Tonight');
   }
   if (days === -1) {
@@ -480,4 +478,5 @@ export default {
   setFocusTime: setFocusTime,
   languageCode: _languageCode,
   languageDir: _languageDir,
+  refreshDateInfo: refreshDateInfo
 }

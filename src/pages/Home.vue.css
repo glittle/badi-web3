@@ -20,3 +20,9 @@ div.line span {
 div.line.now {
   color: #aaa;
 }
+div.line b {
+  border: 1px solid #027be3;
+  background-color: rgba(2, 123, 227, 0.06);
+  border-radius: 2px;
+  padding: 0 2px;
+}
