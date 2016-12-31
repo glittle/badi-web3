@@ -54,6 +54,28 @@ menuPages.filter(function (mp) {
   namedPages[mp.name] = mp
 })
 
+function getNext(delta, currentRoute) {
+  if (!currentRoute.matched.length) {
+    return null;
+  }
+
+  var path = currentRoute.matched[0].path.substring(1) || '/';
+  // console.log(`current: "${path}"`)
+  var desired = -1;
+
+  for (var i = 0; i < menuPages.length; i++) {
+    // console.log('check: ' + menuPages[i].to)
+    if (path === menuPages[i].to) {
+      desired = i + delta;
+      break;
+    }
+  }
+  if (desired >= 0 && desired < menuPages.length) {
+    return menuPages[desired].to
+  }
+  return null;
+}
+
 export default {
   raw: routeInfoList.map(function (ri) {
     return {
@@ -62,7 +84,8 @@ export default {
     }
   }),
   menuPages: menuPages,
-  named: namedPages
+  named: namedPages,
+  getNext: getNext
 }
 
 // function load (component) {

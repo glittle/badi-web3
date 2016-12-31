@@ -24,7 +24,7 @@
         <q-drawer-link v-for="page in pages" :icon="page.icon" :to="page.to">{{page.text}}</q-drawer-link>
       </div>
     </q-drawer>
-    <router-view class="layout-view"></router-view>
+    <router-view v-touch-swipe="swipePage" class="layout-view"></router-view>
   </q-layout>
 </template>
 <script>
@@ -45,6 +45,26 @@
         this.$store.state.pulseNum // force this compute to update on every pulse
         doWorkOnPulse();
         return '{bDay} {bMonthNamePri} {bYear} <span>({nearestSunset})</span>'.filledWith(dateInfo.di)
+      }
+    },
+    methods: {
+      swipePage(obj) {
+        var delta;
+        switch (obj.direction) {
+          case 'right':
+            delta = -1;
+            break;
+          case 'left':
+            delta = 1;
+            break;
+          default:
+            return;
+        }
+        // this.$router.push('/')
+        var goto = routeList.getNext(delta, this.$router.currentRoute);
+        if (goto) {
+          this.$router.push(goto);
+        }
       }
     },
     head: {
