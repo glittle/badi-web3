@@ -8,9 +8,9 @@
         <h1>Wondrous-Badí' Calendar</h1>
         <h2 v-html="topDate"></h2>
       </q-toolbar-title>
-      <router-link to="/">
+      <router-link to="/" v-show="$route.path!=='/'">
         <button class="push small">
-          <i class="on-right">home</i>
+          <i>home</i>
         </button>
       </router-link>
     </div>
@@ -21,7 +21,7 @@
         </q-toolbar-title>
       </div>
       <div class="list no-border platform-delimiter">
-        <q-drawer-link v-for="page in pages" :to="page.to">{{page.text}}</q-drawer-link>
+        <q-drawer-link v-for="page in pages" :icon="page.icon" :to="page.to">{{page.text}}</q-drawer-link>
       </div>
     </q-drawer>
     <router-view class="layout-view"></router-view>
@@ -30,7 +30,8 @@
 <script>
   import routeList from './pages/routes'
   import dateInfo from './scripts/dateInfo'
-  // import pulse from './scripts/pulse'
+  import * as notify from './scripts/notification'
+
   require('./scripts/stringExt')
 
   export default {
@@ -39,18 +40,11 @@
         pages: routeList.menuPages,
       }
     },
-    // watch: {
-    //   num: function (a, b) {
-    //     console.log('num ' + a + ' - - ' + b)
-    //   }
-    // },
     computed: {
-      // num() {
-      //   return this.$store.state.pulseNum
-      // },
       topDate: function () {
         this.$store.state.pulseNum // force this compute to update on every pulse
-        return '{bDay} {bMonthNamePri} {bYear} <span>({currentTime})</span>'.filledWith(dateInfo.di)
+        doWorkOnPulse();
+        return '{bDay} {bMonthNamePri} {bYear} <span>({nearestSunset})</span>'.filledWith(dateInfo.di)
       }
     },
     head: {
@@ -63,11 +57,23 @@
       meta: [{
         name: 'description2',
         content: 'My description',
-        //id: 'desc'
       }, {
         itemprop: 'name',
         content: 'Content Title'
       }]
+    }
+  }
+
+  var lastNotificationKey = null;
+
+  function doWorkOnPulse() {
+    console.log('app pulse')
+      // notification icon
+    var key = dateInfo.di.stamp;
+    if (key !== lastNotificationKey) {
+      console.log('do notify')
+      notify.showNow();
+      lastNotificationKey = key;
     }
   }
 

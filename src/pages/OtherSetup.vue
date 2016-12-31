@@ -19,6 +19,7 @@
     data() {
       return {
         title: 'Setup Other',
+        icon: 'language',
         languageCode: 'en'
       }
     },

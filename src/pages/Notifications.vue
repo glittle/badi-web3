@@ -18,6 +18,7 @@
     data() {
       return {
         title: 'Setup Notifications',
+        icon: 'message'
       }
     },
     methods: {

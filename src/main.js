@@ -8,12 +8,11 @@ require(`quasar/dist/quasar.${__THEME}.css`)
 
 import Vue from 'vue'
 import router from './router'
-import store from './scripts/store'
 import VueHead from 'vue-head'
 import Quasar from 'quasar'
 import VueHighcharts from 'vue-highcharts';
 
-// import pulse from './scripts/pulse'
+import store from './scripts/store'
 import dateInfo from './scripts/dateInfo'
 
 import './scripts/swHandler';
@@ -23,7 +22,6 @@ import './components/msg-directive';
 Vue.use(VueHead)
 Vue.use(Quasar) // Install Quasar Framework
 Vue.use(VueHighcharts);
-
 
 Quasar.start(() => {
   /* eslint-disable no-new */
@@ -35,13 +33,8 @@ Quasar.start(() => {
   })
 })
 
-// Loading.show()
 
 // custom
-import * as notify from './scripts/notification'
-notify.showNow();
-
-// pulse.startPulse();
 
 var html = document.getElementsByTagName('html')[0];
 html.setAttribute('dir', dateInfo.languageDir)

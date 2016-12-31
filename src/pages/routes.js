@@ -43,6 +43,7 @@ const menuPages = menuItems
     return {
       to: ri.path,
       text: data.title,
+      icon: data.icon,
       index: '' + i,
       name: ri.name
     }

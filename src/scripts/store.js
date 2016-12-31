@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
 import dateInfo from './dateInfo'
-// const moment = require('moment-timezone');
 
 Vue.use(Vuex)
 
@@ -11,30 +9,32 @@ const store = new Vuex.Store({
     pulseNum: 1
   },
   mutations: {
-    pulse(state) {
+    pulsed(state) {
       state.pulseNum++
     }
   }
 })
 
-startPulse()
+
 
 // ----------------------------
 
-const pulseTime = 1000 * 5; // normally 1 minute
-const delayPulseStart = false; // normally true
+const pulseTime = 1000 * 60; // normally 1 minute
+const delayPulseStart = true; // normally true
 
 function startPulse() {
   // start the timer just after the minute
   var nextMinute = new Date();
+//   console.log('start called at ' + nextMinute)
+
   nextMinute.setHours(nextMinute.getHours(), nextMinute.getMinutes() + 1, 0, 1)
-  var delay = delayPulseStart ? nextMinute.getTime() - new Date().getTime() : 0;
-  //   console.log('will start pulse in ' + delay)
+  var delay = delayPulseStart ? (nextMinute.getTime() - new Date().getTime()) : 0;
+
+//   console.log('start pulse in ' + delay);
+
   setTimeout(function () {
     // just after the top of the minute
-    // console.log('timeout done')
     setInterval(function () {
-      //   console.log('interval')
       doPulse()
     }, pulseTime)
 
@@ -44,13 +44,11 @@ function startPulse() {
 
 function doPulse() {
   dateInfo.refreshDateInfo();
-
-  store.commit('pulse')
-
-  //   console.log('pulsed ' + store.state.pulseNum + ' at ' + moment().format())
-
-  //   console.log(dateInfo.di.currentTime)
+  store.commit('pulsed')
+  console.log('pulsed');
 }
 
+
+startPulse()
 
 export default store

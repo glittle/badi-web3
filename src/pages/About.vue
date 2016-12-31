@@ -34,6 +34,7 @@
     data() {
       return {
         title: 'About',
+        icon: 'info'
       }
     }
   }

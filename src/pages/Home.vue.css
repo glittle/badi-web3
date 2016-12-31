@@ -1,7 +1,8 @@
 button.item-link {
-  background: rgba(0, 0, 0, 0.1);
-  height: auto;
+  display: inline-block;
   line-height: normal;
+  background: rgba(0, 0, 0, 0.07);
+  height: auto;
   padding: 0px 10px;
   margin: 3px 8px 0 0;
 }

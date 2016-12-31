@@ -1,4 +1,3 @@
-import sunCalc from './sunCalc'
 <template>
   <article class="layout-padding">
     <div class="card">
@@ -12,8 +11,8 @@ import sunCalc from './sunCalc'
       <div class="card-content">
         <p>Temporary page list...</p>
         <div class="list no-border">
-          <router-link tag="button" class="item item-link" v-for="page in pages2" :to="page.to">
-            {{page.text}}
+          <router-link tag="button" class="item item-link" v-for="page in pageList.filter(p=>p.to!=='Home')" :to="page.to">
+            <i :title="page.text">{{page.icon}}</i>
           </router-link>
         </div>
       </div>
@@ -24,32 +23,23 @@ import sunCalc from './sunCalc'
 <script>
   import messages from '../scripts/messages'
   import dateInfo from '../scripts/dateInfo'
-  // import pulse from '../scripts/pulse'
   import sunCalc from '../scripts/sunCalc'
   require('../scripts/stringExt')
   const moment = require('moment-timezone');
 
-  // import routeList from './routes'import messages from '../scripts/messages'
   var routeList = require('./routes');
 
   export default {
     data() {
       return {
         title: messages.get('HomePage', null, 'Home'),
-        // pages: {}, // error if directly assign imported item
-        pages2: [], // error if directly assign imported item
-        now: new Date(),
-        // pulseNum: this.$store.state.pulseNum
-        // dayTitle: '{bDay} {bMonthNamePri} {bYear}'.filledWith(dateInfo.di)
+        icon: 'home'
       }
     },
     computed: {
       position() {
         return null;
       },
-      // pulseNum() {
-      //   return this.$store.state.pulseNum
-      // },
       di() {
         this.$store.state.pulseNum;
         return dateInfo.di;
@@ -58,7 +48,12 @@ import sunCalc from './sunCalc'
         return fillDayDisplay(this.di)
       },
       sunDisplay() {
-        return fillSunDisplay(this.di) //, this.pulseNum)
+        return fillSunDisplay(this.di)
+      },
+      pageList() {
+        return routeList.default.menuPages.filter(function (p) {
+          return p.to !== '/'
+        });
       }
     },
     methods: {},
@@ -72,7 +67,7 @@ import sunCalc from './sunCalc'
     beforeMount() {
       // console.log('before mount', routeList)
       // this.pages = routeList.default.named;
-      this.pages2 = routeList.default.menuPages;
+      // this.pageList = routeList.default.menuPages;
       // debugger;
     },
     mounted() {
@@ -125,7 +120,7 @@ import sunCalc from './sunCalc'
     // var di = dateInfo.di;
 
     const readableFormat = 'ddd, MMM D [at] HH:mm';
-    const nowFormat = 'ddd, MMM D [at] HH:mm:ss';
+    const nowFormat = readableFormat;// 'ddd, MMM D [at] HH:mm:ss';
 
     const now = moment(di.currentTime);
     const noon = moment(now).hour(12).minute(0).second(0);

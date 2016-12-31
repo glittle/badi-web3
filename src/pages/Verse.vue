@@ -4,6 +4,11 @@
       <span class="verseText">{{verse}}</span>
       <span class="suffix">{{suffix}}</span>
     </p>
+    <div class="speakButtons">
+      <button id="btnRead" class="push small" v-if="online" @click="speak">
+          <i>record_voice_over</i>
+        </button>
+    </div>
     <p class="source">
       A verse for this date from <cite>Reciting the Verses of God</cite>
       <br> by Shahin Vafai & Dwight W. Allen.
@@ -16,13 +21,18 @@
 <script>
   import verses from '../assets/verses.json'
   import moment from 'moment'
+  // import talk from '../scripts/talkify'
+  // require('../scripts/talkify')
+
   export default {
     name: 'verse', // for Vue debugger
     data() {
       return {
         title: "Bahá'í Verse for Today",
+        icon: 'import_contacts',
         verse: '',
-        suffix: ''
+        suffix: '',
+        online: false// tts not working...  navigator.onLine
       }
     },
     created() {
@@ -43,6 +53,25 @@
             this.verse = verseInfo.q;
           }
         }
+      },
+      speak() {
+        // var P = talk.Player;
+        // var x = new P()
+        //   .forceVoice('Microsoft Hazel Desktop');
+
+        // x.playText('Hello world')
+
+        // var player = new TtsPlayer()
+        //   // .withTextHighlighting()
+        //   .forceVoice('Microsoft Hazel Desktop');
+
+        // var talkify = new talkifyPlaylist()
+        //   .begin()
+        //   .usingPlayer(player)
+        //   // .withTextInteraction()
+        //   .withElements($('.verseText'))
+        //   .build()
+        //   .play();
       }
     },
     head: {

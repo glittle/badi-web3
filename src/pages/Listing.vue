@@ -17,6 +17,7 @@
     data() {
       return {
         title: "Bahá'í Holy Days and Feasts",
+        icon: 'people',
         listFilter: ['HS'],
         num: 0,
         list: []

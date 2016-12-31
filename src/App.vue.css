@@ -47,6 +47,7 @@ p {
 .toolbar-title h2 span {
   margin-left: 1em;
   font-size: .85em;
+  color: rgba(255, 255, 255, 0.5);
 }
 .layout-padding {
   margin-top: 0 !important;
@@ -54,4 +55,7 @@ p {
 }
 .drawer-content {
   background-color: #fafafa;
+}
+.item > .item-primary ~ .item-content {
+  margin-left: 52px;
 }

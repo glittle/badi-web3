@@ -42,6 +42,7 @@
     data() {
       return {
         title: 'Setup Location',
+        icon: 'place',
         lat: shared.coords.lat,
         lng: shared.coords.lng,
         name: shared.coords.name,
