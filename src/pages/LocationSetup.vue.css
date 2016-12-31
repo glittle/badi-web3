@@ -1,5 +1,17 @@
+.LocationSetup p {
+  margin: 1em 0;
+}
 .LocationSetup p span {
   margin-right: 10px;
+}
+.LocationSetup p input {
+  padding: 2px 0;
+}
+.LocationSetup p input[type=number] {
+  width: 6em;
+}
+.LocationSetup p.buttons {
+  margin-top: 1em;
 }
 .LocationSetup .status {
   transition: height 0.5s;

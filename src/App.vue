@@ -49,7 +49,7 @@
       topDate: function () {
         this.$store.state.pulseNum // force this compute to update on every pulse
         doWorkOnPulse();
-        return '{bDay} {bMonthNamePri} {bYear} <span>({nearestSunset})</span>'.filledWith(dateInfo.di)
+        return shared.formats.topTitle.filledWith(dateInfo.di)
       }
     },
     methods: {

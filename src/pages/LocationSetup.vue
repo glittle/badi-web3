@@ -2,13 +2,8 @@
   <article class="LocationSetup layout-padding">
     <h1>Location</h1>
     <div class="section">
-      <div>
-        <p>The location of your device is required to determine when sunset will be for you. Enter the location below or click
-          the "Get Location" button.
-        </p>
-        <button @click="getLocation" class="small primary">Get Location</button>
-        <button @click="openMap" class="small light">Show on a Map</button>
-      </div>
+      <p>Enter the location below or click the "Get Location" button.
+      </p>
       <p><span>Latitude</span>
         <input type="number" min="-85" max="85" step="any" v-model.number="lat" :class="{'has-error': validation.hasError('lat')}">
       </p>
@@ -18,6 +13,15 @@
       <p>
         <span>Name</span><input type="text" v-model="name">
       </p>
+      <p class=buttons>
+        <button @click="getLocation" class="small primary">Get Location</button>
+        <button @click="openMap" class="small light">Show on a Map</button>
+      </p>
+      <div class="card bg-warning">
+        <div class="card-content">
+          The approximate location of this device/computer is required. This must match the timezone of the device!
+        </div>
+      </div>
       <p v-show="statusLines.length">
         <b>Status</b>
         <div class='status' v-html="statusLines.join('<br>')"></div>

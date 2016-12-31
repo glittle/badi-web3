@@ -1,18 +1,15 @@
 import dateInfo from './dateInfo'
 import storage from './storage'
+import * as shared from './shared'
 require('../scripts/stringExt')
-const moment = require('moment-timezone');
+  // const moment = require('moment-timezone');
 
 var image = null;
 
 export function showNow() {
-  var template = dateInfo.di.bNow.eve ?
-    '{bMonthNamePri} {bDay} (sunset was at {startingSunsetDesc})' :
-    '{bMonthNamePri} {bDay} (sunset at {endingSunsetDesc})'
-
-  show(template.filledWith(dateInfo.di),
-    'It is now ' + moment().format('hh:mm:ss'),
-    dateInfo.di.bMonthNamePri,
+  show(shared.formats.noticationMain.filledWith(dateInfo.di),
+    shared.formats.noticationSub.filledWith(dateInfo.di),
+    shared.formats.statusIconText.filledWith(dateInfo.di),
     dateInfo.di.bDay,
     false)
 }

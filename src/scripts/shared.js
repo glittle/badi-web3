@@ -7,7 +7,14 @@ var coords = {
   source: storage.get('coord.source', 'default')
 }
 
+var formats = {
+  noticationMain: '{bDay} {bMonthNamePri}-{bMonthNameSec} {bYear)',
+  noticationSub: '{nearestSunset}',
+  statusIconText: '{bMonthNamePri}',
+  topTitle: '{bDay} {bMonthNamePri} {bYear} <span>({nearestSunset})</span>'
+}
 
 export {
-  coords
+  coords,
+  formats
 }
