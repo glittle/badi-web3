@@ -29,7 +29,6 @@ export default {
   data () {
     return {
       name: 'Not found',
-      hideFromMenu: true,
       canGoBack: window.history.length > 1
     }
   },

@@ -1,4 +1,4 @@
-import dateInfo from './dateInfo'
+import badiCalc from './badiCalc'
 import storage from './storage'
 import * as shared from './shared'
 require('../scripts/stringExt')
@@ -7,10 +7,10 @@ require('../scripts/stringExt')
 var image = null;
 
 export function showNow() {
-  show(shared.formats.noticationMain.filledWith(dateInfo.di),
-    shared.formats.noticationSub.filledWith(dateInfo.di),
-    shared.formats.statusIconText.filledWith(dateInfo.di),
-    dateInfo.di.bDay,
+  show(shared.formats.noticationMain.filledWith(badiCalc.di),
+    shared.formats.noticationSub.filledWith(badiCalc.di),
+    shared.formats.statusIconText.filledWith(badiCalc.di),
+    badiCalc.di.bDay,
     false)
 }
 

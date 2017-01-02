@@ -1,13 +1,30 @@
 import Vue from 'vue'
 import messages from '../scripts/messages'
-import dateInfo from '../scripts/dateInfo'
+import badiCalc from '../scripts/badiCalc'
 
 const splitSeparator = /[,،]+/;
 
 Vue.directive('msg', {
   bind: function (el, binding, vnode) {
+    // console.log('bind ' + binding.expression)
     localize(el, binding);
-  }
+  },
+  inserted: function (el, binding, vnode) {
+    // console.log('inserted ' + binding.expression)
+    var forElement = document.getElementById(el.dataset.keyfor);
+    if (forElement) {
+      forElement.accessKey = el.dataset.key;
+    }
+  },
+  // update: function (el, binding, vnode) {
+  //   console.log('update ' + binding.expression)
+  // },
+  // componentUpdated: function (el, binding, vnode) {
+  //   console.log('componentUpdated ' + binding.expression)
+  // },
+  // unbind: function (el, binding, vnode) {
+  //   console.log('unbind ' + binding.expression)
+  // },
 });
 
 function localize(el, binding, fnOnEach) {
@@ -19,7 +36,7 @@ function localize(el, binding, fnOnEach) {
   // if the target element has child elements, they will be deleted.
   //   However, if a child has data-child='x' and resource text has {x}, {y}, etc. the children will be inserted in those spaces.
 
-  var info = binding.expression;
+  var info = binding.expression.replace(/'/g, '');
   var useDateInfo = binding.modifiers.di;
   var children = el.children;
   var accessKeyFor = null;
@@ -33,7 +50,7 @@ function localize(el, binding, fnOnEach) {
       var key = detail[0];
       var key2 = key === '_id_' ? el.getAttribute('id') : key;
       target = 'html';
-      value = messages.get(key2, useDateInfo ? dateInfo.di : null);
+      value = messages.get(key2, useDateInfo ? badiCalc.di : null);
     }
     if (detail.length === 2) {
       if (detail[0] === 'extractAccessKeyFor') {
@@ -47,12 +64,14 @@ function localize(el, binding, fnOnEach) {
       value = fnOnEach(value);
     }
     if (target === 'html') {
-      children.filter(function (c) {
+      Array.from(children).filter(function (c) {
         var name = c.dataset.child;
         value = value.replace('{' + name + '}', c.outerHTML);
       });
       el.innerHTML = value;
-      localize(el); // nested?
+      // if (el.innerHTML !== value) {
+      //   // localize(el, binding, fnOnEach); // nested?
+      // }
       text = value;
     } else if (target === 'text') {
       el.innerText = value;
@@ -62,12 +81,16 @@ function localize(el, binding, fnOnEach) {
     }
   }
   if (accessKeyFor) {
-    //   var accessKey = $('<div/>').html(text).find('u').text().substring(0, 1);
     var html = document.createElement('div')
     html.innerHTML = text;
     var uList = html.getElementsByTagName('u')
     if (uList.length > 0) {
-      el.accessKey = uList[0].innerText;
+      el.dataset.key = uList[0].innerText;
+      el.dataset.keyfor = accessKeyFor;
+      //   forElement.accessKey = ;
+      //   console.log('--> set')
+      // } else {
+      //   console.log('--> not found!')
     }
   }
 }

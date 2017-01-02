@@ -11,9 +11,14 @@ import router from './router'
 import VueHead from 'vue-head'
 import Quasar from 'quasar'
 import VueHighcharts from 'vue-highcharts';
+// import VueTouch from 'VueTouch'
+
+// VueTouch.config.swipe = {
+//   direction: 'horizontal'
+// }
 
 import store from './scripts/store'
-import dateInfo from './scripts/dateInfo'
+import badiCalc from './scripts/badiCalc'
 
 import './scripts/swHandler';
 import './scripts/messages';
@@ -37,10 +42,10 @@ Quasar.start(() => {
 // custom
 
 var html = document.getElementsByTagName('html')[0];
-html.setAttribute('dir', dateInfo.languageDir)
-html.setAttribute('lang', dateInfo.languageCode)
+html.setAttribute('dir', badiCalc.languageDir)
+html.setAttribute('lang', badiCalc.languageCode)
 var body = document.getElementsByTagName('body')[0];
-body.classList.add(dateInfo.languageDir, dateInfo.languageCode, dateInfo.languageCode.slice(0, 2))
+body.classList.add(badiCalc.languageDir, badiCalc.languageCode, badiCalc.languageCode.slice(0, 2))
 
 // onesignal
 var OneSignal = window.OneSignal || [];

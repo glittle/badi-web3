@@ -17,7 +17,7 @@
     created() {},
     data() {
       return {
-        title: 'Setup Notifications',
+        title: 'Notifications',
         icon: 'message'
       }
     },

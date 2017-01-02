@@ -8,36 +8,53 @@ var folder = './'
 
 const names = [
   // this is their order in the menus
-  // 'NameOfVueFile[-urlPath]'
-  'Home-/',
-  'Verse',
-  'Listing',
-  'Notifications',
-  'LocationSetup',
-  'OtherSetup',
-  'About',
-  'Error404-*', // must be last!
+  // name, path [=name], group [='main']
+  {
+    name: 'Home',
+    path: '/',
+    group: ['main', 'setup']
+  }, {
+    name: 'Listing',
+    group: 'main'
+  }, {
+    name: 'Verse',
+    group: 'main'
+  }, {
+    name: 'Notifications',
+    group: 'setup'
+  }, {
+    name: 'LocationSetup',
+    group: 'setup'
+  }, {
+    name: 'OtherSetup',
+    group: 'setup'
+  }, {
+    name: 'About',
+    group: 'setup'
+  }, {
+    name: 'Error404', // must be last!
+    path: '*',
+    group: 'hidden'
+  },
 ]
 
 const routeInfoList = names.map(function (n) {
-  var parts = n.split('-');
-  var vueName = parts[0];
-  var path = parts.length > 1 ? parts[1] : vueName.toLowerCase();
+  var vueName = n.name || n;
+  var path = n.path || vueName.toLowerCase();
+  var group = n.group || '';
 
   return {
     component: Vue.component(vueName, require(`${folder}${vueName}.vue`)),
     name: vueName,
-    path: path
+    path: path,
+    group: group
   }
 })
 
-const menuItems = routeInfoList
+const menuPages = routeInfoList
   .filter(function (ri) {
-    let data = ri.component.options.data()
-    return !data.hideFromMenu
+    return !ri.group.includes('hidden');
   })
-
-const menuPages = menuItems
   .map(function (ri, i) {
     let data = ri.component.options.data()
     return {
@@ -45,14 +62,10 @@ const menuPages = menuItems
       text: data.title,
       icon: data.icon,
       index: '' + i,
-      name: ri.name
+      name: ri.name,
+      group: ri.group
     }
   });
-
-var namedPages = {}
-menuPages.filter(function (mp) {
-  namedPages[mp.name] = mp
-})
 
 function getNext(delta, currentRoute) {
   if (!currentRoute.matched.length) {
@@ -84,7 +97,6 @@ export default {
     }
   }),
   menuPages: menuPages,
-  named: namedPages,
   getNext: getNext
 }
 

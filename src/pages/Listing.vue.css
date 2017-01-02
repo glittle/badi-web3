@@ -1,0 +1,3 @@
+.q-data-table table tbody tr:nth-child(odd) {
+  background: #fff;
+}

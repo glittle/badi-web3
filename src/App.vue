@@ -8,11 +8,15 @@
         <h1>Wondrous-Badí' Calendar</h1>
         <h2 v-html="topDate"></h2>
       </q-toolbar-title>
-      <router-link to="/" v-show="$route.path!=='/'">
-        <button class="push small">
-          <i>home</i>
-        </button>
+      <button ref="target" class="primary">
+        <i>more_vert</i>
+        <q-popover ref="popover">
+      <div class="list no-border platform-delimiter">
+        <q-drawer-link v-for="page in pages.filter(p=>p.group.includes('setup'))" :icon="page.icon" :to="page.to">{{page.text}}</q-drawer-link>
+      </div>
       </router-link>
+      </q-popover>
+      </button>
     </div>
     <q-drawer ref="leftDrawer">
       <div class="toolbar light">
@@ -21,10 +25,10 @@
         </q-toolbar-title>
       </div>
       <div class="list no-border platform-delimiter">
-        <q-drawer-link v-for="page in pages" :icon="page.icon" :to="page.to">{{page.text}}</q-drawer-link>
+        <q-drawer-link v-for="page in pages.filter(p=>p.group.includes('main'))" :icon="page.icon" :to="page.to">{{page.text}}</q-drawer-link>
       </div>
     </q-drawer>
-    <router-view v-touch-swipe="swipePage" class="layout-view"></router-view>
+    <router-view v-touch-swipe.horizontal.scroll="swipePage" class="layout-view q-touch-x"></router-view>
   </q-layout>
 </template>
 <script>
@@ -33,7 +37,7 @@
   } from 'quasar'
 
   import routeList from './pages/routes'
-  import dateInfo from './scripts/dateInfo'
+  import badiCalc from './scripts/badiCalc'
   import * as notify from './scripts/notification'
   import * as shared from './scripts/shared'
 
@@ -49,12 +53,14 @@
       topDate: function () {
         this.$store.state.pulseNum // force this compute to update on every pulse
         doWorkOnPulse();
-        return shared.formats.topTitle.filledWith(dateInfo.di)
+        return shared.formats.topTitle.filledWith(badiCalc.di)
       }
     },
     methods: {
       swipePage(obj) {
+        // console.log(obj)
         var delta;
+        var doNormalAction = false;
         switch (obj.direction) {
           case 'right':
             delta = -1;
@@ -63,18 +69,20 @@
             delta = 1;
             break;
           default:
-            return;
+            return doNormalAction;
         }
 
         if (Math.abs(obj.distance.x) < 0.5 * screen.width) {
           // ignore if not a wide swipe!
-          return;
+          return doNormalAction;
         }
 
         var goto = routeList.getNext(delta, this.$router.currentRoute);
         if (goto) {
           this.$router.push(goto);
+          return;
         }
+        return doNormalAction;
       }
     },
     mounted() {
@@ -100,9 +108,9 @@
   var lastNotificationKey = null;
 
   function doWorkOnPulse() {
-    console.log('app pulse')
-      // notification icon
-    var key = dateInfo.di.stamp;
+    // console.log('app pulse')
+    // notification icon
+    var key = badiCalc.di.stamp;
     if (key !== lastNotificationKey) {
       console.log('do notify')
       notify.showNow();

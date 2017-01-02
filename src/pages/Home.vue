@@ -11,7 +11,7 @@
       <div class="card-content">
         <p>Temporary page list...</p>
         <div class="list no-border">
-          <router-link tag="button" class="item item-link" v-for="page in pageList.filter(p=>p.to!=='Home')" :to="page.to">
+          <router-link tag="button" class="item item-link" :class="'icon_' + page.group" v-for="page in pageList.filter(p=>p.to!=='Home')" :to="page.to">
             <i :title="page.text">{{page.icon}}</i>
           </router-link>
         </div>
@@ -22,7 +22,7 @@
 <style src="./Home.vue.css"></style>
 <script>
   import messages from '../scripts/messages'
-  import dateInfo from '../scripts/dateInfo'
+  import badiCalc from '../scripts/badiCalc'
   import sunCalc from '../scripts/sunCalc'
   require('../scripts/stringExt')
   const moment = require('moment-timezone');
@@ -42,7 +42,7 @@
       },
       di() {
         this.$store.state.pulseNum;
-        return dateInfo.di;
+        return badiCalc.di;
       },
       dayDisplay() {
         return fillDayDisplay(this.di)
@@ -87,7 +87,7 @@
 
   function fillDayDisplay(di) {
     var answers = [];
-    // var di = dateInfo.di;
+    // var di = badiCalc.di;
 
     answers.push({
       t: 'Day of Month',
@@ -117,7 +117,7 @@
 
   function fillSunDisplay(di) {
     var answers = [];
-    // var di = dateInfo.di;
+    // var di = badiCalc.di;
 
     const readableFormat = 'ddd, MMM D [at] HH:mm';
     const nowFormat = readableFormat;// 'ddd, MMM D [at] HH:mm:ss';

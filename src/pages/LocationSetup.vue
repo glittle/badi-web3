@@ -2,7 +2,7 @@
   <article class="LocationSetup layout-padding">
     <h1>Location</h1>
     <div class="section">
-      <p>Enter the location below or click the "Get Location" button.
+      <p>Enter the location manually below, or click the "Get Location" button.
       </p>
       <p><span>Latitude</span>
         <input type="number" min="-85" max="85" step="any" v-model.number="lat" :class="{'has-error': validation.hasError('lat')}">
@@ -13,13 +13,16 @@
       <p>
         <span>Name</span><input type="text" v-model="name">
       </p>
+      <p>
+        <span>Time zone</span><span v-text="timezone"></span>
+      </p>
       <p class=buttons>
         <button @click="getLocation" class="small primary">Get Location</button>
         <button @click="openMap" class="small light">Show on a Map</button>
       </p>
-      <div class="card bg-warning">
+      <div class="card">
         <div class="card-content">
-          The approximate location of this device/computer is required. This must match the timezone of the device!
+          The approximate location of this device/computer is required and must match its timezone!
         </div>
       </div>
       <p v-show="statusLines.length">
@@ -34,6 +37,7 @@
   import axios from 'axios'
   import * as shared from '../scripts/shared'
   import storage from '../scripts/storage'
+  import moment from 'moment'
 
   var Vue = require('vue');
   var SimpleVueValidation = require('simple-vue-validator');
@@ -48,23 +52,30 @@
     name: 'Setup',
     data() {
       return {
-        title: 'Setup Location',
+        title: 'Location',
         icon: 'place',
         lat: shared.coords.lat,
         lng: shared.coords.lng,
         name: shared.coords.name,
+        timezone: moment.tz.guess().replace(/_/g, ' '),
         statusLines: []
       }
     },
     validators: {
       lat: function (value) {
-        console.log('validate lat')
+        // console.log('validate lat')
         return Validator.value(value).required().float().between(-85, 85);
       },
       lng: function (value) {
-        console.log('validate lng')
+        // console.log('validate lng')
         return Validator.value(value).required().float().between(-180, 180);
       },
+    },
+    computed: {
+      timezone() {
+        var tz = moment.tz.guess();
+        return `${tz.replace(/_/g, ' ')} (${moment.tz(tz).format("Z z")})`
+      }
     },
     created() {},
     watch: {
@@ -104,7 +115,7 @@
               this.getLocationName();
               storage.set('coord.source', 'user');
             } else {
-              console.log(success)
+              // console.log(success)
             }
           });
       },
@@ -146,6 +157,7 @@
             var results = response.data.results;
             var location = '';
             // get longest locality
+            console.log(results)
             for (var r = 0; r < results.length; r++) {
               var components = results[r].address_components;
               for (var i = 0; i < components.length; i++) {

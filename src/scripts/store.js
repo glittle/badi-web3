@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import dateInfo from './dateInfo'
+import badiCalc from './badiCalc'
 
 Vue.use(Vuex)
 
@@ -43,9 +43,9 @@ function startPulse() {
 }
 
 function doPulse() {
-  dateInfo.refreshDateInfo();
+  badiCalc.refreshDateInfo();
   store.commit('pulsed')
-  console.log('pulsed');
+  // console.log('pulsed');
 }
 
 

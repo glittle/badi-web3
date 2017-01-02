@@ -34,14 +34,14 @@
 </style>
 <script>
   import * as shared from '../scripts/shared'
-  import dateInfo from '../scripts/dateInfo'
+  import badiCalc from '../scripts/badiCalc'
   // import * as storage from '../scripts/storage'
 
   export default {
     name: 'OtherSetup',
     data() {
       return {
-        title: 'Setup Other',
+        title: 'Other Settings',
         icon: 'language',
         languageCode: 'en'
       }
@@ -50,7 +50,7 @@
     watch: {},
     methods: {
       get(key) {
-        return shared.formats[key].filledWith(dateInfo.di)
+        return shared.formats[key].filledWith(badiCalc.di)
       }
     }
   }

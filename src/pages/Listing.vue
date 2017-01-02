@@ -1,14 +1,18 @@
 <template>
   <article class="layout-padding">
     <h1>{{this.title}}</h1>
-    <select size=2 multiple v-model="listFilter">
-      <option value="HS">Holy Days</option>
-      <option value="M">Months</option>
-    </select>
-    <!--<div v-for="item in filteredList">
-      {{item.Type}} {{item.NameEn}} <span v-html="item.NameAr"></span> {{item.BMonthDay.d}}
-    </div>-->
+    <div>
+      <label><q-toggle v-model="includeHolyDays" class="teal" id="includeHolyDays"></q-toggle>
+          <span v-msg="'includeHolyDays,extractAccessKeyFor:includeHolyDays'"></span>
+        </label>
+      <label><q-toggle v-model="includeFeasts" class="teal" id="includeFeasts"></q-toggle>
+          <span v-msg="'includeFeasts,extractAccessKeyFor:includeFeasts'"></span>
+        </label>
+    </div>
     <q-data-table :data="filteredList" :config="config" :columns="columns">
+      <template slot="col-Type" scope="cell">
+        <span class="light-paragraph" v-html="test(cell)"></span>
+      </template>
     </q-data-table>
   </article>
 </template>
@@ -22,12 +26,13 @@
       return {
         title: "Bahá'í Holy Days and Feasts",
         icon: 'people',
-        listFilter: ['HS'],
+        includeHolyDays: true,
+        includeFeasts: true,
         num: 0,
         list: [],
         config: {
           // [REQUIRED] Set the row height
-          rowHeight: '50px',
+          //          rowHeight: '50px',
           // (optional) Title to display
           // title: this.title,
           // (optional) Display refresh button
@@ -44,7 +49,7 @@
           // Styling the body of the data table;
           // "minHeight", "maxHeight" or "height" are important
           bodyStyle: {
-            maxHeight: '500px'
+            // maxHeight: '500px'
           },
           // (optional) By default, Data Table is responsive,
           // but you can disable this by setting the property to "false"
@@ -63,70 +68,46 @@
           selection: false, //'multiple',
           // (optional) Override default messages when no data is available
           // or the user filtering returned no results.
-          messages: {
-            noData: '<i>warning</i> No data available to show.',
-            noDataAfterFiltering: '<i>warning</i> No results. Please refine your search terms.'
+          message: {
+            noData: '<i>warning</i> Please choose what to show!',
+            noDataAfterFiltering: '<i>warning</i> Please choose what to show!'
           }
         },
         columns: [{
+          label: 'What',
+          field: 'Type',
+          width: '80px'
+        }, {
+          label: 'Year',
+          field: 'di',
+          width: '',
+          classes: '',
+          format(di) {
+            return '{bYear} ({currentYear})'.filledWith(di)
+          }
+        }, {
           label: 'Day',
-          field: '',
+          field: 'D',
           width: '',
           classes: ''
         }, {
-          label: 'Name',
-          field: 'NameEn',
-          format(value) {
-            switch (value) {
-              case 'M':
-                return "Feast"
-              case 'HS':
-              case 'HD':
-                return "Holy Day"
-              default:
-                return value;
-            }
-          },
-          width: '80px'
-        }, {
           label: 'Suspend Work',
-          field: '',
+          field: 'NoWork',
           width: '',
           classes: ''
         }, {
           label: 'Meeting/Special Time',
-          field: '',
+          field: 'TimeReason',
           width: '',
           classes: ''
         }, {
           label: 'Start of Day',
-          field: '',
+          field: 'Sunset',
           width: '',
           classes: ''
         }, {
-          label: 'Type',
-          field: 'Type',
-          width: '20px',
-          filter: true,
-          sort: true,
-          format(value) {
-            switch (value) {
-              case 'M':
-                return "Feast"
-              case 'HS':
-              case 'HD':
-                return "Holy Day"
-              default:
-                return value;
-            }
-          }
-        }, {
-          label: 'What',
-          field: 'BMonthDay',
-          format(value) {
-            return value.d
-          },
-          width: '80px'
+          label: '',
+          field: '',
         }]
       }
     },
@@ -135,15 +116,34 @@
     },
     computed: {
       filteredList: function () {
-        return this.list.filter(item => this.listFilter.includes(item.Type));
+        var filter = [];
+        if (this.includeHolyDays) {
+          filter.push('HS');
+          filter.push('HO');
+        }
+        if (this.includeFeasts) {
+          filter.push('M');
+        }
+        return this.list.filter(item => filter.includes(item.Type));
       }
     },
     methods: {
       getDateInfos: function (year) {
-        var info = badi.prepareDateInfos(year);
+        var info = badi.buildSpecialDaysTable(year);
         window.dis = cloneDeep(info);
         this.num = info.length;
         this.list = info;
+      },
+      test: function (cell) {
+        switch (cell.data) {
+          case 'M':
+            return "Feast"
+          case 'HS':
+          case 'HD':
+            return "Holy Day"
+          default:
+            return cell;
+        }
       }
     },
     head: {
@@ -165,7 +165,4 @@
   }
 
 </script>
-<style scoped>
-
-
-</style>
+<style src="./Listing.vue.css"></style>
