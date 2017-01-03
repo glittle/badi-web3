@@ -40,7 +40,7 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
 
     prepareImage(function () {
       navigator.serviceWorker.ready.then(function (registration) {
-        var n = registration.showNotification(note1, {
+        var options = {
           body: note2,
           icon: generateOnImage(iconDayNum),
           //icon: '/statics/images/badiIcon192.png',
@@ -48,10 +48,18 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
           //badge: '/images/19.png',
           badge: generateStatusIcon(iconText, iconDayNum, 'center', 128),
           tag: 'badi',
+          data: {
+            url: location.origin
+          },
+          //vibrate: makeSound ? [200, 100, 200, 100, 200, 100, 400] : null,
           silent: !makeSound,
-          renotify: true,
+          renotify: !makeSound,
           requireInteraction: true
-        });
+        };
+        if (makeSound) {
+          options.vibrate = [200, 100, 200, 100, 200, 100, 400]
+        }
+        var n = registration.showNotification(note1, options);
         // Remove the notification from Notification Center when clicked.
         n.onclick = function () {
           console.log('Notification clicked');

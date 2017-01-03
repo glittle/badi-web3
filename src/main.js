@@ -7,15 +7,10 @@ require(`quasar/dist/quasar.${__THEME}.css`)
   // ==============================
 
 import Vue from 'vue'
-import router from './router'
+import router from 'router'
 import VueHead from 'vue-head'
 import Quasar from 'quasar'
 import VueHighcharts from 'vue-highcharts';
-// import VueTouch from 'VueTouch'
-
-// VueTouch.config.swipe = {
-//   direction: 'horizontal'
-// }
 
 import store from './scripts/store'
 import badiCalc from './scripts/badiCalc'

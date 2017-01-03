@@ -4,7 +4,8 @@ var
   config = require('../config'),
   cssUtils = require('./css-utils'),
   env = require('./env-utils'),
-  CopyWebpackPlugin = require('copy-webpack-plugin'), //glen
+  VersionFile = require('webpack-version-file-plugin'), // glen 
+  CopyWebpackPlugin = require('copy-webpack-plugin'), // glen
   merge = require('webpack-merge'),
   projectRoot = path.resolve(__dirname, '../'),
   ProgressBarPlugin = require('progress-bar-webpack-plugin'),
@@ -96,11 +97,18 @@ module.exports = {
     new ProgressBarPlugin({
       format: config.progressFormat
     }),
-    new CopyWebpackPlugin([
-      {
-        from: 'root/'
-      },
-    ])
+    new VersionFile({
+      packageFile: path.join(__dirname, '../package.json'),
+      templateString: `{
+  "name":      "<%= package.name %>",
+  "buildDate": "<%= currentTime %>",
+	"version":   "<%= package.version %>"
+}`,
+      outputFile: path.join(__dirname, '../version.json')
+    }),
+    new CopyWebpackPlugin([{
+      from: 'root/'
+    }, ])
   ],
   performance: {
     hints: false

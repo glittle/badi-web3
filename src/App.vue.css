@@ -6,14 +6,14 @@ body {
   letter-spacing: 0.02em;
 }
 article h1 {
-  margin: 15px 0 0 0;
+  margin: 15px 0 5px 0;
   font-size: 1.8rem;
 }
-article h1:first-child {
+article h1:first-of-type {
   margin: 0;
 }
 article h2 {
-  margin: 15px 0 0 0;
+  margin: 15px 0 5px 0;
   font-size: 1.6rem;
 }
 article h2:first-child {

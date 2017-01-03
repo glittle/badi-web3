@@ -11,10 +11,13 @@
       <button ref="target" class="primary">
         <i>more_vert</i>
         <q-popover ref="popover">
-      <div class="list no-border platform-delimiter">
-        <q-drawer-link v-for="page in pages.filter(p=>p.group.includes('setup'))" :icon="page.icon" :to="page.to">{{page.text}}</q-drawer-link>
-      </div>
-      </router-link>
+        <!--<div class="list no-border platform-delimiter">
+          <q-drawer-link v-for="page in pages.filter(p=>p.group.includes('setup'))" :icon="page.icon" :to="page.to" @click="$refs.popover.close()">{{page.text}}</q-drawer-link>-->
+           <div class="list">
+            <div class="item item-link" v-for="page in pages.filter(p=>p.group.includes('setup'))" @click="$refs.popover.close()">
+              <q-drawer-link :icon="page.icon" :to="page.to" >{{page.text}}</q-drawer-link>
+            </div>
+          </div>
       </q-popover>
       </button>
     </div>
@@ -28,7 +31,9 @@
         <q-drawer-link v-for="page in pages.filter(p=>p.group.includes('main'))" :icon="page.icon" :to="page.to">{{page.text}}</q-drawer-link>
       </div>
     </q-drawer>
-    <router-view v-touch-swipe.horizontal.scroll="swipePage" class="layout-view q-touch-x"></router-view>
+    <transition>
+      <router-view v-touch-swipe.horizontal.scroll="swipePage" class="layout-view q-touch-x"></router-view>
+    </transition>
   </q-layout>
 </template>
 <script>

@@ -8,9 +8,9 @@ var coords = {
 }
 
 var formats = {
-  topTitle: '{bDay} {bMonthNamePri}-{bMonthNameSec} {bYear} <span></span>',
+  topTitle: '{bDay} {bMonthNamePri}/{bMonthNameSec} {bYear} <span>{nearestSunsetDesc}</span>',
   statusIconText: '{bMonthNamePri}',
-  noticationMain: '{bDay} {bMonthNamePri}-{bMonthNameSec} {bYear}',
+  noticationMain: '{bDay} {bMonthNamePri}/{bMonthNameSec} {bYear}',
   noticationSub: '{nearestSunset}',
 }
 

@@ -1,7 +1,6 @@
 <template>
   <article class="layout-padding">
-    <h1>{{this.title}}</h1>
-    <div>
+    <div class="switches">
       <label><q-toggle v-model="includeHolyDays" class="teal" id="includeHolyDays"></q-toggle>
           <span v-msg="'includeHolyDays,extractAccessKeyFor:includeHolyDays'"></span>
         </label>
@@ -9,6 +8,7 @@
           <span v-msg="'includeFeasts,extractAccessKeyFor:includeFeasts'"></span>
         </label>
     </div>
+    <h1>{{this.title}}</h1>
     <q-data-table :data="filteredList" :config="config" :columns="columns">
       <template slot="col-Type" scope="cell">
         <span class="light-paragraph" v-html="test(cell)"></span>
@@ -69,8 +69,8 @@
           // (optional) Override default messages when no data is available
           // or the user filtering returned no results.
           message: {
-            noData: '<i>warning</i> Please choose what to show!',
-            noDataAfterFiltering: '<i>warning</i> Please choose what to show!'
+            noData: 'Please choose what to show!',
+            noDataAfterFiltering: 'Please choose what to show!'
           }
         },
         columns: [{
@@ -112,7 +112,7 @@
       }
     },
     created: function () {
-      this.getDateInfos(173);
+      this.loadDates();
     },
     computed: {
       filteredList: function () {
@@ -128,7 +128,8 @@
       }
     },
     methods: {
-      getDateInfos: function (year) {
+      loadDates: function (year) {
+        year = year || badi.di.bYear;
         var info = badi.buildSpecialDaysTable(year);
         window.dis = cloneDeep(info);
         this.num = info.length;

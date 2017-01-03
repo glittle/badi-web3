@@ -11,10 +11,12 @@
       <div class="card-content">
         <p>Temporary page list...</p>
         <div class="list no-border">
-          <router-link tag="button" class="item item-link" :class="'icon_' + page.group" v-for="page in pageList.filter(p=>p.to!=='Home')" :to="page.to">
+          <router-link tag="button" class="item item-link" :class="'icon_' + page.group" v-for="page in pageList.filter(p=>p.to!=='Home')"
+            :to="page.to">
             <i :title="page.text">{{page.icon}}</i>
           </router-link>
         </div>
+        <p>{{version}}</p>
       </div>
     </div>
   </article>
@@ -26,6 +28,7 @@
   import sunCalc from '../scripts/sunCalc'
   require('../scripts/stringExt')
   const moment = require('moment-timezone');
+  var versionInfo = require('../../version.json')
 
   var routeList = require('./routes');
 
@@ -33,7 +36,7 @@
     data() {
       return {
         title: messages.get('HomePage', null, 'Home'),
-        icon: 'home'
+        icon: 'home',
       }
     },
     computed: {
@@ -54,6 +57,16 @@
         return routeList.default.menuPages.filter(function (p) {
           return p.to !== '/'
         });
+      },
+      version() {
+        var buildDate = moment(versionInfo.buildDate);
+        var buildDi = {}
+        badiCalc.generateDateInfo(buildDi, buildDate.toDate());
+
+        return '{0} ({1} / {2})'.filledWith(
+          versionInfo.version,
+          '{bYear}-{bMonth00}-{bDay00}'.filledWith(buildDi),
+          buildDate.format('YYYY-MM-DD @HH:MM:SS'))
       }
     },
     methods: {},
@@ -120,7 +133,7 @@
     // var di = badiCalc.di;
 
     const readableFormat = 'ddd, MMM D [at] HH:mm';
-    const nowFormat = readableFormat;// 'ddd, MMM D [at] HH:mm:ss';
+    const nowFormat = readableFormat; // 'ddd, MMM D [at] HH:mm:ss';
 
     const now = moment(di.currentTime);
     const noon = moment(now).hour(12).minute(0).second(0);

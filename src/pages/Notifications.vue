@@ -2,7 +2,7 @@
   <article class="Notifications layout-padding">
     <h2>Notifications</h2>
     <div class="section">
-      <button class="small primary" v-on:click="testNotification">Test Notification</button>
+      <button class="small primary" v-on:click="testNotification">Show Now</button>
     </div>
   </article>
 </template>

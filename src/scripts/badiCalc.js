@@ -235,7 +235,7 @@ function buildSpecialDaysTable(year, defaultEventStart) {
   dayInfos.forEach(function (dayInfo, i) {
     var targetDi = {}
     var tempDate = null;
-    updateDateInfo(targetDi, dayInfo.GDate);
+    generateDateInfo(targetDi, dayInfo.GDate);
     dayInfo.di = targetDi;
     dayInfo.D = targetDi.bMonthNamePri + ' ' + targetDi.bDay;
     dayInfo.G = messages.get('evePartOfDay', targetDi);
@@ -2639,10 +2639,10 @@ function setupLanguageChoice() {
 }
 
 function refreshDateInfo() {
-  updateDateInfo(_di, new Date());
+  generateDateInfo(_di, new Date());
 }
 
-function updateDateInfo(di, currentTime, onlyStamp) {
+function generateDateInfo(di, currentTime, onlyStamp) {
   // hard code limits
   var minDate = new Date(1844, 2, 21, 0, 0, 0, 0);
   if (currentTime < minDate) {
@@ -2824,6 +2824,7 @@ function updateDateInfo(di, currentTime, onlyStamp) {
     di.gCombinedY = messages.get('gCombinedY_1', di);
   }
   di.nearestSunset = messages.get(bNow.eve ? "nearestSunsetEve" : "nearestSunsetDay", di);
+  di.nearestSunsetDesc = bNow.eve ? di.startingSunsetDesc : di.endingSunsetDesc;
 
   di.stampDay = '{y}.{m}.{d}'.filledWith(di.bNow); // ignore eve/day
 
@@ -2964,7 +2965,7 @@ function getUpcoming(di) {
 
   dayInfos.forEach(function (dayInfo, i) {
     var targetDi = {};
-    updateDateInfo(targetDi, dayInfo.GDate);
+    generateDateInfo(targetDi, dayInfo.GDate);
     if (dayInfo.Type === 'M') {
       dayInfo.A = messages.get('FeastOf').filledWith(targetDi.bMonthNameSec);
     } else if (dayInfo.Type.slice(0, 1) === 'H') {
@@ -3012,6 +3013,7 @@ export default {
   languageCode: _languageCode,
   languageDir: _languageDir,
   refreshDateInfo: refreshDateInfo,
+  generateDateInfo: generateDateInfo,
   getNawRuz: getNawRuz,
   getUpcomingRaw: getUpcomingRaw,
   getGDate: getGregorianDate,
