@@ -11,24 +11,14 @@
       <li>Add today's date to the Android system status bar </li>
       <li>Show today's date as an Android notification</li>
     </ul>
-    <h4>Coming Soon</h4>
-    <ul>
-      <li>List Bahá'í Feast and Holy Day dates </li>
-      <li>Work off-line for Chrome on desktops and Android</li>
-      <li>Showcase the monthly calendars produced by Joe Paczkowski</li>
-      <li>Multi-lingual</li>
-    </ul>
-    <h4>Recent Changes</h4>
-    <dl>
-      <dt>19 Questions 173 - 28 December 2016</dt>
-      <dd>
-        <ul>
-          <li>First version that works! :)</li>
-        </ul>
-      </dd>
-    </dl>
+    <iframe class="statusDoc" src="https://docs.google.com/document/d/1Q1RtnOocBjW917CHceBbJPSljlDSN5GaZLBp5pu2inA/pub?embedded=false"></iframe>
   </article>
 </template>
+<style>
+.statusDoc{
+  width: 100%;
+}
+</style>
 <script>
   export default {
     data() {
