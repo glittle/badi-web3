@@ -59,14 +59,12 @@
         });
       },
       version() {
-        var buildDate = moment(versionInfo.buildDate);
-        var buildDi = {}
-        badiCalc.generateDateInfo(buildDi, buildDate.toDate());
+        var age = moment(versionInfo.buildDate).fromNow();
 
-        return '{0} ({1} / {2})'.filledWith(
-          versionInfo.version,
-          '{bYear}-{bMonth00}-{bDay00}'.filledWith(buildDi),
-          buildDate.format('YYYY-MM-DD @HH:MM:SS'))
+        // var buildDi = {}
+        // badiCalc.generateDateInfo(buildDi, buildDate.toDate());
+
+        return '{0} ({1})'.filledWith(versionInfo.version, age)
       }
     },
     methods: {},

@@ -28,7 +28,7 @@
         </q-toolbar-title>
       </div>
       <div class="list no-border platform-delimiter">
-        <q-drawer-link v-for="page in pages.filter(p=>p.group.includes('main'))" :icon="page.icon" :to="page.to">{{page.text}}</q-drawer-link>
+        <q-drawer-link v-for="page in pages" :class="'menu-' + page.group.toString().replace(/,/g,'_')" :icon="page.icon" :to="page.to">{{page.text}}</q-drawer-link>
       </div>
     </q-drawer>
     <transition>
