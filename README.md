@@ -8,7 +8,7 @@ Developed by Glen Little. Many features are modelled after the ["Badí' Calendar
 
 ## Features
 
-(See About.vue for current features)
+See ["Status"](https://docs.google.com/document/d/1Q1RtnOocBjW917CHceBbJPSljlDSN5GaZLBp5pu2inA/pub) for current details.
 
 ## Techology Used
 
@@ -18,7 +18,8 @@ Developed by Glen Little. Many features are modelled after the ["Badí' Calendar
 - copy-webpack-plugin - to locate files to the root to support service workers
 - simple-vue-validator - for input validation
 - vue-head - to adjust headers per page
-- vue-highcharts (with highcharts 5) - for some charting
+- vue-highcharts (with highcharts 5) - for some charting on home page
+- talkify - to read the verse aloud
 - axios - to retrieve google map api data
-- OneSignal - to enable external push for notifications
 - service worker - to enable local notifictions
+- OneSignal - to enable external push for notifications
