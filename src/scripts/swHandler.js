@@ -1,5 +1,5 @@
 if ('serviceWorker' in navigator) {
-  console.log('service workers supported')
+  // console.log('service workers supported')
 
   navigator.serviceWorker.register('sw-badi-web3.js', {
       scope: '/'

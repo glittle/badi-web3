@@ -821,9 +821,9 @@ function TtsPlayer() {
       audioElement.controls = true;
       audioElement.autoplay = true;
 
-    //   $('#btnRead').after(audioElement);
+      //   $('#btnRead').after(audioElement);
       document.getElementById('btnRead').after(audioElement);
-    
+
     }
 
     var clonedAudio = audioElement.cloneNode(true);
@@ -1319,8 +1319,6 @@ function talkifyPlaylist() {
 // 
 // talkify-textextractor.js
 
-
-﻿
 var TalkifyTextextractor = function () {
   var validElements = [];
 
@@ -1541,7 +1539,7 @@ function Timer() {
 // talkify-word-highlighter.js
 
 
-﻿
+
 var TalkifyWordHighlighter = function () {
   var textHighlightTimer = new Timer();
   var currentItem = null;
@@ -1622,6 +1620,13 @@ var TalkifyWordHighlighter = function () {
   };
 };
 
+var exportedPlayer;
+
 export default {
-  Player: TtsPlayer
+  getPlayer: function () {
+    if (!exportedPlayer) {
+      exportedPlayer = new TtsPlayer();
+    }
+    return exportedPlayer;
+  }
 }

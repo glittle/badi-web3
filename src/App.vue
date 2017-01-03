@@ -117,7 +117,7 @@
     // notification icon
     var key = badiCalc.di.stamp;
     if (key !== lastNotificationKey) {
-      console.log('do notify')
+      // console.log('do notify')
       notify.showNow();
       lastNotificationKey = key;
     }

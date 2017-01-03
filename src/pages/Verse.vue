@@ -3,12 +3,12 @@
     <div class="verseText">{{verse}}</div>
     <div class="suffix">{{suffix}}</div>
     <div class="speakButtons">
-      <button id="btnRead" class="push small" v-if="online" @click="speak">
+      <button id="btnRead" class="push small" v-if="offerVoice" @click="speak">
           <i>record_voice_over</i>
         </button>
     </div>
     <p class="source">
-      A verse for this date from <cite>Reciting the Verses of God</cite>
+      A verse for {{timeOfDay}} from <cite>Reciting the Verses of God</cite>
       <br> by Shahin Vafai & Dwight W. Allen.
     </p>
     <div class="reciting">
@@ -20,7 +20,7 @@
   import verses from '../assets/verses.json'
   import moment from 'moment'
   // import talk from '../scripts/talkify'
-  // require('../scripts/talkify')
+  import badiCalc from '../scripts/badiCalc'
 
   export default {
     name: 'verse', // for Vue debugger
@@ -30,7 +30,8 @@
         icon: 'import_contacts',
         verse: '',
         suffix: '',
-        online: false // tts not working...  navigator.onLine
+        timeOfDay: '',
+        offerVoice: false // tts not working...  // navigator.onLine
       }
     },
     created() {
@@ -42,9 +43,12 @@
         var key = now.format('M.D');
         var dayVerses = verses[key];
         if (dayVerses) {
-          var hour = now.hour(); // server time
-          var isAm = hour < 12;
-          var verseInfo = dayVerses[isAm ? 'am' : 'pm'];
+          // var hour = now.hour();
+          // var isAm = hour < 12;
+          var isEve = badiCalc.di.bNow.eve;
+          this.timeOfDay = (isEve ? 'the evening' : 'the morning') + ' of ' + now.format("MMM D")
+
+          var verseInfo = dayVerses[isEve ? 'pm' : 'am'];
           // TODO: use sunset information for today
           if (verseInfo) {
             this.suffix = `(Bahá'u'lláh, ${verseInfo.r})`;
@@ -53,11 +57,14 @@
         }
       },
       speak() {
+        // console.log(badiCalc.di.bMonth)
+        // var p = talk.getPlayer();
+        // p.playText('Hello world')
+
         // var P = talk.Player;
         // var x = new P()
         //   .forceVoice('Microsoft Hazel Desktop');
 
-        // x.playText('Hello world')
 
         // var player = new TtsPlayer()
         //   // .withTextHighlighting()
@@ -97,7 +104,7 @@
   .source {
     margin-top: 4em;
     margin-bottom: 0;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     line-height: normal;
     color: grey;
     text-align: center;

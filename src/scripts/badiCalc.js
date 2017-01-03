@@ -23,10 +23,10 @@ function prepareDateInfos(bYear) {
   var cached = _cachedDateInfos[bYear];
   if (cached) {
     _dateInfos = cached;
-    console.log('reused for ' + bYear)
+    // console.log('reused for ' + bYear)
     return _dateInfos;
   }
-  console.log('prepare ' + bYear);
+  // console.log('prepare ' + bYear);
 
   // add fast times
   for (var d = 1; d <= 19; d++) {

@@ -157,7 +157,6 @@
             var results = response.data.results;
             var location = '';
             // get longest locality
-            console.log(results)
             for (var r = 0; r < results.length; r++) {
               var components = results[r].address_components;
               for (var i = 0; i < components.length; i++) {
