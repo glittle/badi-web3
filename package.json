@@ -1,8 +1,8 @@
 {
   "name": "badi-web3",
-  "version": "0.2.0",
-  "description": "A Quasar App",
-  "author": "Glen Little <glen.little@outlook.com>",
+  "version": "1.0.0",
+  "description": "Tools for the Wondrous-Badí' Calendar",
+  "author": "Glen Little <glen.little@gmail.com>",
   "scripts": {
     "clean": "node build/script.clean.js",
     "dev": "node build/script.dev.js",
