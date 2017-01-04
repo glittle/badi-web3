@@ -59,7 +59,7 @@
         });
       },
       version() {
-        var age = moment(versionInfo.buildDate).fromNow();
+        var age = moment(versionInfo.buildDate, "_ MMM D YYYY HH:mm:ss _Z").fromNow();
 
         // var buildDi = {}
         // badiCalc.generateDateInfo(buildDi, buildDate.toDate());
