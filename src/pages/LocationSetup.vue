@@ -36,7 +36,6 @@
 <script>
   import axios from 'axios'
   import * as shared from '../scripts/shared'
-  import storage from '../scripts/storage'
   import moment from 'moment'
 
   var Vue = require('vue');
@@ -88,7 +87,7 @@
           // console.log(n, o)
       },
       name: function (n, o) {
-        storage.set('coord.name', n);
+        shared.coords.name = n;
       },
       statusLines: function (n, o) {
         // clearTimeout(timeout);
@@ -110,10 +109,12 @@
             if (success) {
               // alert('Validation succeeded!');
 
-              storage.set('coord.' + which, n);
+
+
+              shared.coords[which] = n;
 
               this.getLocationName();
-              storage.set('coord.source', 'user');
+              shared.coords.source = 'user';
             } else {
               // console.log(success)
             }
@@ -127,9 +128,9 @@
           navigator.geolocation.getCurrentPosition(function (loc) {
             vue.lat = loc.coords.latitude;
             vue.lng = loc.coords.longitude;
-            storage.set('coord.lat', loc.coords.latitude);
-            storage.set('coord.lng', loc.coords.longitude);
-            storage.set('coord.source', 'user');
+            // shared.coords.lat = loc.coords.latitude;
+            // shared.coords.lng = loc.coords.longitude;
+            shared.coords.source = 'user';
 
             vue.statusLines.push('Learned coordinates')
 
@@ -179,7 +180,7 @@
             }
             //OneSignal.sendTag("location", location);
             //OneSignal.sendTag("zoneName", moment.tz.guess());
-            storage.set('coord.name', location);
+            shared.coords.name = location;
             vue.name = location;
           })
           .catch(function (error) {

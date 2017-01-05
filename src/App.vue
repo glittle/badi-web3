@@ -31,9 +31,9 @@
         <q-drawer-link v-for="page in pages" :class="'menu-' + page.group.toString().replace(/,/g,'_')" :icon="page.icon" :to="page.to">{{page.text}}</q-drawer-link>
       </div>
     </q-drawer>
-    <transition>
+    <keep-alive>
       <router-view v-touch-swipe.horizontal.scroll="swipePage" class="layout-view q-touch-x"></router-view>
-    </transition>
+    </keep-alive>
   </q-layout>
 </template>
 <script>

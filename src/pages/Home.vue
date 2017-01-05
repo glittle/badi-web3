@@ -45,6 +45,7 @@
       },
       di() {
         this.$store.state.pulseNum;
+        this.$store.commit('newDate', badiCalc.di);
         return badiCalc.di;
       },
       dayDisplay() {

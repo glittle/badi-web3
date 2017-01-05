@@ -1,6 +1,7 @@
 /* eslint-disable operator-linebreak */
 
 import storage from './storage'
+// import store from './store'
 import messages from './messages'
 import sunCalc from './sunCalc'
 const moment = require('moment-timezone');
