@@ -9,6 +9,12 @@ button.item-link {
 button.item-link.icon_setup {
   background: rgba(0, 0, 255, 0.06);
 }
+#sunChart {
+  width: 100%;
+  max-width: 800px;
+  height: 250px;
+  margin: 0 auto;
+}
 div.line {
   margin: 3px 0;
   overflow: auto;

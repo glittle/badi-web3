@@ -98,7 +98,10 @@ import {
 
   // calculates sun position for a given date and latitude/longitude
 
-  SunCalc.getPosition = function (date, lat, lng) {
+  SunCalc.getPosition = function (date) { //, lat, lng) {
+    var lat = coords.lat; //glen
+    var lng = coords.lng;
+
     var lw = rad * -lng,
       phi = rad * lat,
       d = toDays(date),
@@ -111,7 +114,6 @@ import {
       altitude: altitude(H, phi, c.dec)
     };
   };
-
 
   // sun times configuration (angle, morning name, evening name)
 
