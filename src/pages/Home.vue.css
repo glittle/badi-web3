@@ -9,11 +9,24 @@ button.item-link {
 button.item-link.icon_setup {
   background: rgba(0, 0, 255, 0.06);
 }
+.sunDisplay {
+  display: none;
+}
 #sunChart {
   width: 100%;
   max-width: 800px;
-  height: 250px;
+  height: 200px;
   margin: 0 auto;
+}
+#sunChart .highcharts-data-label {
+  text-align: center;
+}
+#sunChart .highcharts-xaxis-labels div {
+  display: inline-block;
+  margin: 0 5px;
+}
+#sunChart .highcharts-xaxis-labels div.left {
+  text-align: right;
 }
 div.line {
   margin: 3px 0;

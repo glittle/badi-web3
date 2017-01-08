@@ -4,8 +4,11 @@
       <div class="card-content" v-html="dayDisplay"></div>
     </div>
     <div class="card">
+      <div class="card-content sunDisplay" v-html="sunDisplay"></div>
+      <div class="card-content">
+        <div>Sun times for {{shortDay}}</div>
+      </div>
       <div id="sunChart"></div>
-      <div class="card-content" v-html="sunDisplay"></div>
     </div>
     <div class="card">
       <div class="card-content">
@@ -16,7 +19,7 @@
             <i :title="page.text">{{page.icon}}</i>
           </router-link>
         </div>
-        <p>{{version}}</p>
+        <p>Version {{version}}</p>
       </div>
     </div>
   </article>

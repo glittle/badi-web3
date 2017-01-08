@@ -1,6 +1,7 @@
 import messages from '../scripts/messages'
 import badiCalc from '../scripts/badiCalc'
 import sunCalc from '../scripts/sunCalc'
+import * as shared from '../scripts/shared'
 require('../scripts/stringExt')
 const moment = require('moment-timezone');
 const Highcharts = require('highcharts');
@@ -35,6 +36,9 @@ export default {
         return p.to !== '/'
       });
     },
+    shortDay() {
+      return shared.formats.shortDay.filledWith(this.di)
+    },
     version() {
       var age = moment(versionInfo.buildDate, "_ MMM D YYYY HH:mm:ss _Z").fromNow();
 
@@ -59,6 +63,9 @@ export default {
     // debugger;
   },
   mounted() {
+    drawChart(local.sun)
+  },
+  updated() {
     // console.log('mounted', routeList)
     // this.$nextTick(() => {
     // })
@@ -75,7 +82,8 @@ export default {
 }
 
 var local = {
-  sun: null
+  sun: null,
+  chart: null
 };
 
 function fillDayDisplay(di) {
@@ -131,10 +139,10 @@ function fillSunDisplay(di) {
 
   if (now.isAfter(sunset1)) {
     // eve of day1 into day2
-    answers.push({
-      t: `Starting Sunset:`,
-      v: sunset1.format(readableFormat)
-    });
+    // answers.push({
+    //   t: `Starting Sunset:`,
+    //   v: sunset1.format(readableFormat)
+    // });
 
     var sun2 = sunCalc.getTimes(tomorrowNoon);
     var sunrise2 = moment(sun2.sunrise);
@@ -144,31 +152,31 @@ function fillSunDisplay(di) {
     sun.rise = sunrise2;
     sun.setEnd = sunset2;
 
-    if (now.isBefore(sunrise2)) {
-      answers.push({
-        t: `Now:`,
-        v: now.format(nowFormat),
-        c: 'now'
-      });
-      answers.push({
-        t: `Sunrise:`,
-        v: sunrise2.format(readableFormat)
-      });
-    } else {
-      answers.push({
-        t: `Sunrise:`,
-        v: sunrise2.format(readableFormat)
-      });
-      answers.push({
-        t: `Now:`,
-        v: now.format(nowFormat),
-        c: 'now'
-      });
-    }
-    answers.push({
-      t: `Ending Sunset:`,
-      v: sunset2.format(readableFormat)
-    });
+    // if (now.isBefore(sunrise2)) {
+    //   answers.push({
+    //     t: `Now:`,
+    //     v: now.format(nowFormat),
+    //     c: 'now'
+    //   });
+    //   answers.push({
+    //     t: `Sunrise:`,
+    //     v: sunrise2.format(readableFormat)
+    //   });
+    // } else {
+    //   answers.push({
+    //     t: `Sunrise:`,
+    //     v: sunrise2.format(readableFormat)
+    //   });
+    //   answers.push({
+    //     t: `Now:`,
+    //     v: now.format(nowFormat),
+    //     c: 'now'
+    //   });
+    // }
+    // answers.push({
+    //   t: `Ending Sunset:`,
+    //   v: sunset2.format(readableFormat)
+    // });
 
     setNextRefreshAt(sunset2);
   } else {
@@ -180,44 +188,45 @@ function fillSunDisplay(di) {
     sun.rise = sunrise1;
     sun.setEnd = sunset1;
 
-    answers.push({
-      t: `Starting Sunset:`,
-      v: sunset0.format(readableFormat)
-    });
-    if (now.isBefore(sunrise1)) {
-      answers.push({
-        t: `Now:`,
-        v: now.format(nowFormat),
-        c: 'now'
-      });
-      answers.push({
-        t: `Sunrise:`,
-        v: sunrise1.format(readableFormat)
-      });
-    } else {
-      answers.push({
-        t: `Sunrise:`,
-        v: sunrise1.format(readableFormat)
-      });
-      answers.push({
-        t: `Now:`,
-        v: now.format(nowFormat),
-        c: 'now'
-      });
-    }
-    answers.push({
-      t: `Ending Sunset:`,
-      v: sunset1.format(readableFormat)
-    });
+    // answers.push({
+    //   t: `Starting Sunset:`,
+    //   v: sunset0.format(readableFormat)
+    // });
+    // if (now.isBefore(sunrise1)) {
+    //   answers.push({
+    //     t: `Now:`,
+    //     v: now.format(nowFormat),
+    //     c: 'now'
+    //   });
+    //   answers.push({
+    //     t: `Sunrise:`,
+    //     v: sunrise1.format(readableFormat)
+    //   });
+    // } else {
+    //   answers.push({
+    //     t: `Sunrise:`,
+    //     v: sunrise1.format(readableFormat)
+    //   });
+    //   answers.push({
+    //     t: `Now:`,
+    //     v: now.format(nowFormat),
+    //     c: 'now'
+    //   });
+    // }
+    // answers.push({
+    //   t: `Ending Sunset:`,
+    //   v: sunset1.format(readableFormat)
+    // });
 
     setNextRefreshAt(sunset1);
   }
 
   local.sun = sun;
 
-  return answers.map(function (ans) {
-    return `<div class="line ${ans.c || ''}"><label>${ans.t}</label> <span>${ans.v}</span></div>`;
-  }).join('');
+  return '';
+  //   return answers.map(function (ans) {
+  //     return `<div class="line ${ans.c || ''}"><label>${ans.t}</label> <span>${ans.v}</span></div>`;
+  //   }).join('');
 }
 
 function setNextRefreshAt(refreshTime, midnightUpdate) {
@@ -263,41 +272,65 @@ function setNextRefreshAt(refreshTime, midnightUpdate) {
   //    }, ms);
 }
 
+
+var _chart = null;
+var _lastChartDay = null;
+
 function drawChart(sun) {
+  //   console.log('drawing chart')
   //   setStart: null,
   //   rise: null,
   //   setEnd: null,
   //   now: now
 
-  var yFactor = 10;
-  var v = [];
-
-  function addPoint(m, n) {
-    var t = m.toDate();
-    v.push({
-      x: t,
-      y: sunCalc.getPosition(t).altitude * yFactor,
-      name: n
-    });
+  var key = sun.now.format('MMdd');
+  if (_lastChartDay === key) {
+    showNowLine(_chart, sun.now);
+    return;
+  } else {
+    _lastChartDay = key;
   }
 
-  addPoint(sun.setStart, 'Sunset');
-  addPoint(sun.setEnd, 'Sunset');
-  addPoint(sun.rise, 'Sunrise');
-  addPoint(sun.now, 'Now');
-  addPoint(moment(sun.rise).set({
-    hour: 12,
-    minute: 0,
-    second: 0
-  }), 'Noon');
-  addPoint(moment(sun.rise).set({
+  var yFactor = 10;
+  var twilight = 4;
+  var colorFullSun = 'yellow';
+  var colorFullDark = 'black';
+  var nowLabel = 'Now'; //<br>' + sun.now.format('HH:mm');
+  var v = [];
+  var chartMin = sun.setStart.valueOf();
+  var chartMax = sun.setEnd.valueOf();
+  var chartRange = chartMax - chartMin;
+
+  function addPoint(m, name, color) {
+    var t = m.toDate();
+    var o = {
+      x: t,
+      y: sunCalc.getPosition(t).altitude * yFactor,
+      name: name,
+      time: m.format('H:mm'),
+      color: color,
+      pct: (t.getTime() - chartMin) / chartRange
+    };
+    if (o.y > twilight) {
+      o.color = colorFullSun;
+    }
+    if (o.y < -1 * twilight) {
+      o.color = colorFullDark;
+    }
+    v.push(o);
+  }
+
+  addPoint(sun.setStart, 'Sunset', 'lightgrey');
+  addPoint(sun.setEnd, 'Sunset', 'lightgrey');
+  addPoint(sun.rise, 'Sunrise', 'lightgrey');
+  var midnight = moment(sun.rise).set({
     hour: 0,
     minute: 0,
     second: 0
-  }), 'Midnight');
+  });
 
   // fill in the rest
-  var minutesBetweenPoints = 20;
+  var minutesBetweenPoints = 60;
   var firstPlot = moment(sun.setStart).add(minutesBetweenPoints, 'm'); // don't go past the end!
   var lastPlot = moment(sun.setEnd).subtract(minutesBetweenPoints, 'm'); // don't go past the end!
   /* eslint-disable no-unmodified-loop-condition */
@@ -306,14 +339,35 @@ function drawChart(sun) {
     addPoint(time, null) // nameless points
     time.add(minutesBetweenPoints, 'm')
   }
+
+  var minSun = 99;
+  var maxSun = -99;
+  for (var i = 0; i < v.length; i++) {
+    var y = v[i].y;
+    if (y < minSun) {
+      minSun = y;
+    }
+    if (y > maxSun) {
+      maxSun = y;
+    }
+  }
+
   v.sort(function (a, b) {
     return a.x < b.x ? -1 : 1
   })
-//   console.table(v);
 
-  Highcharts.chart('sunChart', {
+  //   console.table(v);
+
+  Highcharts.setOptions({
+    global: {
+      useUTC: false
+    }
+  });
+
+  _chart = Highcharts.chart('sunChart', {
     chart: {
-      type: 'area'
+      type: 'areaspline',
+      //spacingBottom: 50
     },
     title: {
       text: null
@@ -324,39 +378,33 @@ function drawChart(sun) {
     legend: {
       enabled: false
     },
+    tooltip: {
+      enabled: false
+    },
+    enableMouseTracking: false,
     xAxis: {
       type: 'datetime',
-      dateTimeLableFormats: {
-        hour: '%H:%M',
-        day: '%H:%M',
+      tickLength: 35,
+      tickPositions: [midnight.toDate().getTime()],
+      labels: {
+        align: 'center',
+        useHTML: true,
+        y: 12,
+        formatter: function () {
+          // only one tick, at midnight
+          var yesterday = moment(midnight).subtract(1, 's');
+          var html = '<div class=left>{0}<br>{1}</div>'.filledWith(yesterday.format('MMM D'), yesterday.format('ddd')) +
+            '<div>{0}<br>{1}</div>'.filledWith(midnight.format('MMM D'), midnight.format('ddd'));
+          return html;
+        }
       },
-      plotLines: v
-        .filter(function (p) {
-          return p.name
-        }).map(function (p) {
-          return {
-            value: p.x,
-            width: 1,
-            zIndex: 1,
-            color: 'red',
-            label: {
-              rotation: 0,
-              text: p.name,
-              align: 'center',
-              style: {
-                "color": "contrast",
-                "fontSize": "11px",
-                "fontWeight": "normal",
-                "textOutline": "1px 1px contrast"
-              }
-            }
-          }
-        })
     },
     yAxis: {
       visible: false,
-      maxPadding: 0,
-      minPadding: 0,
+      max: maxSun + 2.6, // leave room for 'now'
+      min: minSun - 0.5, // small gap under plot
+      startOnTick: false,
+      endOnTick: false
     },
     plotOptions: {
       area: {
@@ -365,16 +413,19 @@ function drawChart(sun) {
         }
       }
     },
-
     series: [{
       data: v,
+      tooltip: {
+        enabled: false
+      },
       dataLabels: {
         enabled: true,
-        format: '{point.name}',
-        //rotation: -45,
+        useHTML: true,
+        formatter: function () {
+          var point = this.point;
+          return point.name ? (point.name + '<br>' + point.time) : null;
+        },
         align: 'center',
-        // x: 2,
-        // y: -10,
         style: {
           "color": "contrast",
           "fontSize": "11px",
@@ -382,9 +433,50 @@ function drawChart(sun) {
           "textOutline": "1px 1px contrast"
         }
       },
-      color: 'yellow',
-      negativeColor: 'black'
+      fillColor: {
+        linearGradient: {
+          x1: 0,
+          y1: 0,
+          x2: 1,
+          y2: 0
+        },
+        stops: v
+          .filter(function (p) {
+            return p.color
+          }).map(function (p) {
+            return [
+              p.pct,
+              p.color,
+            ]
+          }),
+      },
+      lineWidth: 0
     }]
+  }, function (chart) {
+    showNowLine(chart, sun.now);
   });
+}
 
+function showNowLine(chart, time) {
+  chart.xAxis[0].removePlotLine('now');
+  chart.xAxis[0].addPlotLine({
+    value: time.toDate(),
+    color: '#027be3',
+    width: 1,
+    id: 'now',
+    zIndex: 10,
+    label: {
+      rotation: 0,
+      text: 'Now ' + time.format('H:mm'),
+      useHTML: true,
+      align: 'center',
+      style: {
+        "color": "contrast",
+        "fontSize": "11px",
+        "fontWeight": "normal",
+        "textOutline": "1px 1px contrast",
+        backgroundColor: 'white'
+      }
+    }
+  });
 }

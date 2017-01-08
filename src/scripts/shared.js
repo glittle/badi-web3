@@ -44,6 +44,7 @@ var formats = {
   statusIconText: '{bMonthNamePri}',
   noticationMain: '{bDay} {bMonthNamePri}/{bMonthNameSec} {bYear}',
   noticationSub: '{nearestSunset}',
+  shortDay: '{bMonthNamePri} {bDay}',
 }
 
 export {

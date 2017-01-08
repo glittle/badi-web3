@@ -10,11 +10,27 @@ button.item-link {
     }
 }
 
+.sunDisplay {
+    display: none; // using sunChart
+}
+
 #sunChart {
     width: 100%;
     max-width: 800px;
-    height: 250px;
-    margin: 0 auto
+    height: 200px;
+    margin: 0 auto;
+    .highcharts-data-label {
+        text-align: center;
+    }
+    .highcharts-xaxis-labels {
+        div {
+            display: inline-block;
+            margin: 0 5px;
+            &.left {
+                text-align: right;
+            }
+        }
+    }
 }
 
 div.line {
