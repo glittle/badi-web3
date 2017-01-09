@@ -26,7 +26,7 @@
     name: 'verse', // for Vue debugger
     data() {
       return {
-        title: "Bahá'í Verse for Today",
+        title: "Bahá'í Quote",
         icon: 'import_contacts',
         verse: '',
         suffix: '',

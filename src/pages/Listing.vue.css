@@ -1,11 +1,11 @@
-#Listing .q-data-table table tbody tr:nth-child(odd) {
-  background: #fff;
+#Listing .location {
+  color: #2980b9;
+  margin: 4px 0 8px 0;
 }
-#Listing h1 {
-  float: left;
+#Listing .btnPrev {
+  float: right;
 }
 #Listing .switches {
-  float: right;
   margin: 3px 0 3px 0;
 }
 #Listing .dayList {
@@ -16,18 +16,24 @@
   height: auto;
 }
 #Listing .dayContent {
-  padding: 16px 0;
+  padding: 8px 0;
   box-sizing: border-box;
   margin: 0;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
+#Listing .dayContent:hover {
+  background-color: #eaf5dd;
+}
 #Listing .dayContent.HolyDay {
-  padding-left: 30px;
+  padding-left: 25px;
 }
 #Listing .dayContent.oddYear {
   background-color: #eaf5ff;
+}
+#Listing .dayContent.oddYear:hover {
+  background-color: #eaf5dd;
 }
 #Listing .dayContent .col1 {
   width: 40px;
@@ -44,17 +50,24 @@
   font-variant: small-caps;
   font-weight: bolder;
 }
+#Listing .dayContent .col2 div {
+  margin-bottom: 4px;
+}
 #Listing .dayContent .col3 {
   padding: 0 10px;
   text-align: right;
 }
 #Listing .dayContent .col3 .sunsetStart {
-  font-size: .75em;
-  color: #444;
+  font-size: .8em;
+  color: #d35400;
 }
 #Listing .dayContent .col3 .sunsetStart img {
   width: 24px;
   vertical-align: middle;
+}
+#Listing .dayContent .col3 .gDate {
+  font-size: .7em;
+  color: #7f8c8d;
 }
 #Listing .HolyDay .col1 i {
   color: #aaaa00;

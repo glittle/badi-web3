@@ -6,6 +6,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: 0.02em;
 }
+div.toolbar {
+  background-color: #2980b9;
+}
+body.desktop button.primary:not(.disabled):hover:not(.clear) {
+  background: #2980b9;
+}
+button.primary {
+  background: #2980b9;
+}
 .layout {
   width: auto;
 }
@@ -20,12 +29,15 @@ article h2 {
   margin: 15px 0 5px 0;
   font-size: 1.6rem;
 }
-article h2:first-child {
+article h2:first-of-type {
   margin: 0;
 }
 article h3 {
   margin: 15px 0 0 0;
   font-size: 1.5rem;
+}
+article h3:first-of-type {
+  margin: 0;
 }
 article h4 {
   margin: 15px 0 0 0;
@@ -38,10 +50,10 @@ p {
   margin: 5px 5px 2px 0;
 }
 .card {
-  max-width: 360px;
+  max-width: 480px;
   width: 100%;
   box-sizing: border-box;
-  box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.24);
 }
 .toolbar-title h1 {
   font-size: 1.2rem;

@@ -1,27 +1,33 @@
 import badi from '../scripts/badiCalc'
+import * as shared from '../scripts/shared'
 var cloneDeep = require('lodash/cloneDeep');
-
-var _extraYearToggle = false;
 
 export default {
   name: 'listing', // for Vue debugger
   data() {
     return {
-      title: "Bahá'í Holy Days and Feasts",
+      title: "Bahá'í Dates",
       icon: 'people',
       includeHolyDays: true,
       includeFeasts: true,
-      currentYear: 0,
+      originalYear: 0,
+      firstYear: 9999,
+      lastYear: -1,
       num: 0,
       list: [],
+      location: shared.coords.name
     }
   },
   created: function () {
-    this.loadDates();
+    this.originalYear = badi.di.bYear;
+    this.loadDates(this.originalYear);
   },
   computed: {
     nextYear: function () {
-      return this.currentYear + 1;
+      return this.lastYear + 1;
+    },
+    prevYear: function () {
+      return this.firstYear - 1;
     },
     filteredList: function () {
       var filter = ['Today'];
@@ -37,15 +43,21 @@ export default {
   },
   methods: {
     loadDates: function (year) {
-      this.currentYear = year || badi.di.bYear;
-      console.log('loading', this.currentYear)
-      var info = badi.buildSpecialDaysTable(this.currentYear);
+      var vue = this;
+      if (year < vue.firstYear) {
+        vue.firstYear = year
+      }
+      if (year > vue.lastYear) {
+        vue.lastYear = year
+      }
+      console.log('loading', year)
+      var info = badi.buildSpecialDaysTable(year);
       window.dis = cloneDeep(info);
-      this.list = this.list.concat(info.map(function (d) {
-        return extendDayInfo(d, _extraYearToggle)
+      vue.list = vue.list.concat(info.map(function (d) {
+        return extendDayInfo(d, year - vue.originalYear)
       }));
-      this.num = this.list.length;
-      _extraYearToggle = !_extraYearToggle;
+      vue.list.sort(sortDates)
+      vue.num = vue.list.length;
     },
     test: function (cell) {
       switch (cell.data) {
@@ -77,10 +89,20 @@ export default {
 
 }
 
-function extendDayInfo(d, isOddExtraYear) {
+function extendDayInfo(d, diff) {
   d.Month = '{bMonthNamePri} {bYear}'.filledWith(d.di)
-  if (isOddExtraYear) {
+  if (Math.abs(diff) % 2 === 1) {
     d.RowClass.push('oddYear')
   }
   return d;
+}
+
+function sortDates(a, b) {
+  return a.GDate < b.GDate ? -1 :
+    a.GDate > b.GDate ? 1 :
+    a.Type === 'M' ? -1 : 
+    a.Type === 'HS' ? -1 :
+    a.Type === 'HO' ? -1 :
+    a.Type === 'Fast' ? -1 : 
+    1;
 }
