@@ -38,17 +38,17 @@ function prepareDateInfos(bYear) {
     });
   }
 
-  //    // add today
-  //    var bNow = getBDate(_now);
-  //    if (bNow.y == bYear) {
-  //      _dateInfos.push(
-  //        {
-  //          Type: 'Today', BMonthDay: bNow, NameEn: 'Today',
-  //          Time: ('0' + _now.getHours()).slice(-2) + ('0' + _now.getMinutes()).slice(-2)
-  //        }
-  //      );
-  //      //log(_dateInfos[_dateInfos.length-1]);
-  //    }
+  // add today
+  var today = new Date();
+  var bNow = getBDate(today);
+  if (bNow.y === bYear) {
+    _dateInfos.push({
+      Type: 'Today',
+      BMonthDay: bNow,
+      NameEn: 'Today',
+      Time: ('0' + today.getHours()).slice(-2) + ('0' + today.getMinutes()).slice(-2)
+    });
+  }
 
   for (var i = 0; i < _dateInfos.length; i++) {
     var dateInfo = _dateInfos[i];
@@ -248,7 +248,7 @@ function buildSpecialDaysTable(year, defaultEventStart) {
     dayInfo.NoWork = null;
     dayInfo.TypeShort = null;
     dayInfo.DefaultTimeClass = null;
-    dayInfo.RowClass = null;
+    dayInfo.RowClass = [];
     var targetTime = dayInfo.Time || defaultEventStart;
 
     if (dayInfo.Type === 'M') {
@@ -270,7 +270,7 @@ function buildSpecialDaysTable(year, defaultEventStart) {
       dayInfo.FastSunset = sunrise ? showTime(targetDi.frag2SunTimes.sunset) : '?';
       dayInfo.FastDay = messages.get('mainPartOfDay', targetDi);
       if (targetDi.frag2Weekday === 6) {
-        dayInfo.RowClass = 'FastSat';
+        dayInfo.RowClass.push('FastSat');
       }
     }
 

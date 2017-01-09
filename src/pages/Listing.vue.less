@@ -9,26 +9,32 @@
         float: right;
         margin: 3px 0 3px 0;
     }
-    .list {
+    .dayList {
         clear: both;
+        margin-top: 1em;
+    }
+    .item {
+        height: auto;
     }
     .dayContent {
-        padding: 8px 0;
-        margin: 4px 0;
+        padding: 16px 0;
+        box-sizing: border-box;
+        margin: 0;
         display: flex;
         justify-content: space-between;
+        align-items: flex-start;
         // &.Feast {
         //     // background-color: lightgreen;
         //     // .col1 {
         //     //     text-align: right;
         //     // }
         // }
-        // &.HolyDay {
-        //     // background-color: lightpink;
-        //     // .col1 {
-        //     //     text-align: left;
-        //     // }
-        // }
+        &.HolyDay {
+            padding-left: 30px;
+        }
+        &.oddYear {
+            background-color: #eaf5ff;
+        }
         .col1 {
             width: 40px;
             text-align: center;
@@ -50,6 +56,10 @@
             .sunsetStart {
                 font-size: .75em;
                 color: #444;
+                img {
+                    width: 24px;
+                    vertical-align: middle;
+                }
             }
         }
     }
@@ -58,6 +68,13 @@
             i {
                 color: #aaaa00;
             }
+        }
+    }
+    .Today {
+        background-color: #eafff5;
+        padding: 4px 0;
+        .col2 {
+            padding-top: 4px;
         }
     }
 }

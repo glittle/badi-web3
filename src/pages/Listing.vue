@@ -9,40 +9,51 @@
           <span v-msg="'includeFeasts,extractAccessKeyFor:includeFeasts'"></span>
         </label>
       </div>
-      <div class="list">
+      <div class="dayList">
         <div class="item" v-for="day in filteredList">
-          <div class="item-content dayContent Feast" v-if="day.Type==='M'">
+          <div class="item-content dayContent Feast" :class="day.RowClass" v-if="day.Type==='M'">
             <div class="col1">
               <!--<span class=dayType><i>date_range</i></span>-->
               <img src="../statics/calendar.png">
             </div>
             <div class="col2">
-              <div class=dayName v-html="day.A"></div>
-              <div>{{day.Month}}</div>
+              <div class=dayName v-html="day.Month"></div>
+              <div v-html="day.A"></div>
             </div>
             <div class="col3">
               <div class=sunsetStart>
-                <i>wb_sunny</i> {{day.Sunset}}
+                <img src="../statics/sunset.png"> {{day.Sunset}}
               </div>
             </div>
           </div>
-          <div class="item-content dayContent HolyDay" v-if="day.Type[0]==='H'">
+          <div class="item-content dayContent HolyDay" :class="day.RowClass" v-if="day.Type[0]==='H'">
             <div class="col1">
               <!--<span class=dayType><i>star</i></span>-->
               <img src="../statics/star.png">
-              </div>
+            </div>
             <div class="col2">
               <div class=dayName v-html="day.A"></div>
               <div>{{day.D}}</div>
             </div>
             <div class="col3">
               <div class=sunsetStart>
-                <i>wb_sunny</i> {{day.Sunset}}
+                <img src="../statics/sunset.png"> {{day.Sunset}}
+              </div>
+            </div>
+          </div>
+          <div class="item-content dayContent Today" :class="day.RowClass" v-if="day.Type==='Today'">
+            <div class="col1"> </div>
+            <div class="col2">
+              Today: {{day.D}}</div>
+            <div class="col3">
+              <div class=sunsetStart>
+                <img src="../statics/sunset.png"> {{day.Sunset}}
               </div>
             </div>
           </div>
         </div>
       </div>
+      <button v-on:click="loadDates(nextYear)" class="primary full-width">View for next year ({{nextYear}} BE)</button>
       <!--<q-list-item v-for="item in filteredList" :item="item" link :active="itemIsSelected" @click.native="clickedOnItem()"></q-list-item>-->
       <!--<q-data-table :data="filteredList" :config="config" :columns="columns">
       <template slot="col-Type" scope="cell">

@@ -8,14 +8,26 @@
   float: right;
   margin: 3px 0 3px 0;
 }
-#Listing .list {
+#Listing .dayList {
   clear: both;
+  margin-top: 1em;
+}
+#Listing .item {
+  height: auto;
 }
 #Listing .dayContent {
-  padding: 8px 0;
-  margin: 4px 0;
+  padding: 16px 0;
+  box-sizing: border-box;
+  margin: 0;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+}
+#Listing .dayContent.HolyDay {
+  padding-left: 30px;
+}
+#Listing .dayContent.oddYear {
+  background-color: #eaf5ff;
 }
 #Listing .dayContent .col1 {
   width: 40px;
@@ -40,6 +52,17 @@
   font-size: .75em;
   color: #444;
 }
+#Listing .dayContent .col3 .sunsetStart img {
+  width: 24px;
+  vertical-align: middle;
+}
 #Listing .HolyDay .col1 i {
   color: #aaaa00;
+}
+#Listing .Today {
+  background-color: #eafff5;
+  padding: 4px 0;
+}
+#Listing .Today .col2 {
+  padding-top: 4px;
 }
