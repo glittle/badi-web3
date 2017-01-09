@@ -33,7 +33,7 @@
   font-weight: bolder;
 }
 #Listing .dayContent .col3 {
-  padding-left: 10px;
+  padding: 0 10px;
   text-align: right;
 }
 #Listing .dayContent .col3 .sunsetStart {

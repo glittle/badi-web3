@@ -4,7 +4,7 @@ import * as shared from './shared'
 require('../scripts/stringExt')
   // const moment = require('moment-timezone');
 
-var image = null;
+// var image = null;
 
 export function showNow() {
   show(shared.formats.noticationMain.filledWith(badiCalc.di),
@@ -45,7 +45,7 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
       var options = {
         body: note2,
         // icon: icon,
-        icon: '/statics/images/b{0}.png'.filledWith(iconDayNum),
+        icon: '/statics/images/d{0}.png'.filledWith(iconDayNum),
         //image: '/images/badiIcon32.png',
         //badge: '/images/19.png',
         badge: generateStatusIcon(iconText, iconDayNum, 'center', 128),
@@ -83,38 +83,38 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
   }
 };
 
-function prepareImage(cb) {
-  image = new Image();
-  image.onload = cb;
-  image.src = '/statics/images/badiIconBlank.png'; // 192x192
-}
+// function prepareImage(cb) {
+//   image = new Image();
+//   image.onload = cb;
+//   image.src = '/statics/images/badiIconBlank.png'; // 192x192
+// }
 
-function generateOnImage(num) {
-  var canvas = document.createElement('canvas');
-  var size = 192;
-  canvas.height = size;
-  canvas.width = size;
-  var context = canvas.getContext('2d');
-  context.drawImage(image, 0, 0);
+// function generateOnImage(num) {
+//   var canvas = document.createElement('canvas');
+//   var size = 192;
+//   canvas.height = size;
+//   canvas.width = size;
+//   var context = canvas.getContext('2d');
+//   context.drawImage(image, 0, 0);
 
-  var fontName = 'Roboto, sans-serif';
+//   var fontName = 'Roboto, sans-serif';
 
-  context.fillStyle = 'rgba(0,0,0,0.5)'
+//   context.fillStyle = 'rgba(0,0,0,0.5)'
 
-  var fontBasis = size * 0.6;
-  var fontSize = fontBasis / 1.9;
+//   var fontBasis = size * 0.6;
+//   var fontSize = fontBasis / 1.9;
 
-  fontSize = fontBasis / 1.2;
-  context.font = `${fontSize}px ${fontName}`;
-  context.textAlign = 'center';
-  context.textBaseline = 'alphabetic';
-  var x = size / 2;
-  var y = size / 2 + fontSize / 2.75; // magic numbers that work
+//   fontSize = fontBasis / 1.2;
+//   context.font = `${fontSize}px ${fontName}`;
+//   context.textAlign = 'center';
+//   context.textBaseline = 'alphabetic';
+//   var x = size / 2;
+//   var y = size / 2 + fontSize / 2.75; // magic numbers that work
 
-  context.fillText(num, x, y, size * 0.5);
+//   context.fillText(num, x, y, size * 0.5);
 
-  return canvas.toDataURL();
-}
+//   return canvas.toDataURL();
+// }
 
 function generateStatusIcon(iconText, iconDayNum, line2Alignment, size) {
   var canvas = document.createElement('canvas');
