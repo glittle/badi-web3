@@ -23,26 +23,21 @@ const store = new Vuex.Store({
 
 // ----------------------------
 
-const pulseTime = 1000 * 60; // normally 1 minute
-const delayPulseStart = true; // normally true
+// const pulseTime = 1000 * 60; // normally 1 minute
 
-function startPulse() {
+function scheduleNextPulse() {
   // start the timer just after the minute
   var nextMinute = new Date();
   //   console.log('start called at ' + nextMinute)
 
   nextMinute.setHours(nextMinute.getHours(), nextMinute.getMinutes() + 1, 0, 1)
-  var delay = delayPulseStart ? (nextMinute.getTime() - new Date().getTime()) : 0;
+  var delay = nextMinute.getTime() - new Date().getTime();
 
   //   console.log('start pulse in ' + delay);
 
   setTimeout(function () {
     // just after the top of the minute
-    setInterval(function () {
-      doPulse()
-    }, pulseTime)
-
-    doPulse()
+    doPulse();
   }, delay);
 }
 
@@ -50,9 +45,12 @@ function doPulse() {
   badiCalc.refreshDateInfo();
   store.commit('pulsed')
     // console.log('pulsed');
+  scheduleNextPulse();
 }
 
-
-startPulse()
+scheduleNextPulse();
 
 export default store
+
+// for development
+window.doPulse = doPulse

@@ -39,10 +39,12 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
     note1 = html.innerText;
 
     prepareImage(function () {
+      var icon = generateOnImage(iconDayNum);
+
       navigator.serviceWorker.ready.then(function (registration) {
         var options = {
           body: note2,
-          icon: generateOnImage(iconDayNum),
+          icon: icon,
           //icon: '/statics/images/badiIcon192.png',
           //image: '/images/badiIcon32.png',
           //badge: '/images/19.png',
@@ -152,7 +154,3 @@ function generateStatusIcon(iconText, iconDayNum, line2Alignment, size) {
   // return context.getImageData(0, 0, size, size);
   return canvas.toDataURL();
 }
-
-// function drawLargeIcon(number) {
-
-// }

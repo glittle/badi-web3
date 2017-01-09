@@ -285,7 +285,7 @@ function drawChart(sun) {
 
   var key = sun.now.format('MMdd');
   if (_lastChartDay === key) {
-    showNowLine(_chart, sun.now);
+    showNowLine(_chart, sun);
     return;
   } else {
     _lastChartDay = key;
@@ -293,9 +293,9 @@ function drawChart(sun) {
 
   var yFactor = 10;
   var twilight = 4;
-  var colorFullSun = 'yellow';
-  var colorFullDark = 'black';
-  var nowLabel = 'Now'; //<br>' + sun.now.format('HH:mm');
+  var colorFullSun = '#ffff00';
+  var colorFullDark = '#000000';
+  // var nowLabel = 'Now'; //<br>' + sun.now.format('HH:mm');
   var v = [];
   var chartMin = sun.setStart.valueOf();
   var chartMax = sun.setEnd.valueOf();
@@ -393,15 +393,15 @@ function drawChart(sun) {
         formatter: function () {
           // only one tick, at midnight
           var yesterday = moment(midnight).subtract(1, 's');
-          var html = '<div class=left>{0}<br>{1}</div>'.filledWith(yesterday.format('MMM D'), yesterday.format('ddd')) +
-            '<div>{0}<br>{1}</div>'.filledWith(midnight.format('MMM D'), midnight.format('ddd'));
+          var html = '<div class=left>{0}<br>{1}</div>'.filledWith(yesterday.format('MMM D'), yesterday.format('dddd')) +
+            '<div>{0}<br>{1}</div>'.filledWith(midnight.format('MMM D'), midnight.format('dddd'));
           return html;
         }
       },
     },
     yAxis: {
       visible: false,
-      max: maxSun + 2.6, // leave room for 'now'
+      max: maxSun + 5, // leave room for 'now'
       min: minSun - 0.5, // small gap under plot
       startOnTick: false,
       endOnTick: false
@@ -426,11 +426,13 @@ function drawChart(sun) {
           return point.name ? (point.name + '<br>' + point.time) : null;
         },
         align: 'center',
+        zIndex: 4,
         style: {
-          "color": "contrast",
-          "fontSize": "11px",
-          "fontWeight": "normal",
-          "textOutline": "1px 1px contrast"
+          color: _fontColor,
+          fontSize: _fontSize,
+          fontWeight: "normal",
+          textOutline: "1px 1px contrast",
+          backgroundColor: '#ffffff'
         }
       },
       fillColor: {
@@ -453,30 +455,38 @@ function drawChart(sun) {
       lineWidth: 0
     }]
   }, function (chart) {
-    showNowLine(chart, sun.now);
+    showNowLine(chart, sun);
   });
 }
 
-function showNowLine(chart, time) {
+function showNowLine(chart, sun) {
+  var now = sun.now;
   chart.xAxis[0].removePlotLine('now');
+
+  var timeFromSunset = sun.now.diff(sun.setStart, 'h', true);
+  var align = timeFromSunset < 3 ? 'left' :
+    timeFromSunset > 21 ? 'right' :
+    'center';
+
   chart.xAxis[0].addPlotLine({
-    value: time.toDate(),
+    value: now.toDate(),
     color: '#027be3',
     width: 1,
     id: 'now',
-    zIndex: 10,
+    zIndex: 5, //    zIndex: 0,
     label: {
       rotation: 0,
-      text: 'Now ' + time.format('H:mm'),
-      useHTML: true,
-      align: 'center',
+      text: 'Now ' + now.format('H:mm'),
+      align: align,
       style: {
-        "color": "contrast",
-        "fontSize": "11px",
-        "fontWeight": "normal",
-        "textOutline": "1px 1px contrast",
-        backgroundColor: 'white'
+        color: _fontColor,
+        fontSize: _fontSize,
+        fontWeight: "normal",
+        textOutline: "1px 1px contrast",
+        backgroundColor: '#ffffff'
       }
     }
   });
 }
+var _fontSize = '12px';
+var _fontColor = '#212121';

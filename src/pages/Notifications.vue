@@ -24,7 +24,12 @@
     methods: {
       testNotification() {
         notify.showNow();
-      }
+      },
+    },
+    mounted() {
+      // var host = document.getElementById('images');
+      // notify.makeImage(host, 1);
+      // notify.makeImage(host, 2);
     }
   }
 

@@ -2640,7 +2640,11 @@ function setupLanguageChoice() {
 }
 
 function refreshDateInfo() {
-  generateDateInfo(_di, new Date());
+  if (window.testTime) {
+    generateDateInfo(_di, window.testTime);
+  } else {
+    generateDateInfo(_di, new Date());
+  }
 }
 
 function generateDateInfo(di, currentTime, onlyStamp) {
