@@ -1,7 +1,45 @@
-.q-data-table table tbody tr:nth-child(odd) {
+#Listing .q-data-table table tbody tr:nth-child(odd) {
   background: #fff;
 }
-.switches {
+#Listing h1 {
+  float: left;
+}
+#Listing .switches {
   float: right;
   margin: 3px 0 3px 0;
+}
+#Listing .list {
+  clear: both;
+}
+#Listing .dayContent {
+  padding: 8px 0;
+  margin: 4px 0;
+  display: flex;
+  justify-content: space-between;
+}
+#Listing .dayContent .col1 {
+  width: 40px;
+  text-align: center;
+}
+#Listing .dayContent .col1 img {
+  width: 24px;
+}
+#Listing .dayContent .col2 {
+  text-align: left;
+  flex-grow: 1;
+}
+#Listing .dayContent .col2 .dayName {
+  font-variant: small-caps;
+  font-weight: bolder;
+}
+#Listing .dayContent .col3 {
+  padding-left: 10px;
+  text-align: right;
+}
+#Listing .dayContent .col3 .sunsetStart {
+  font-size: .75em;
+  color: #444;
+}
+#Listing .HolyDay .col1 i {
+  color: #aaaa00;
 }

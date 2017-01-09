@@ -238,7 +238,7 @@ function buildSpecialDaysTable(year, defaultEventStart) {
     var tempDate = null;
     generateDateInfo(targetDi, dayInfo.GDate);
     dayInfo.di = targetDi;
-    dayInfo.D = targetDi.bMonthNamePri + ' ' + targetDi.bDay;
+    dayInfo.D = '{bDay} {bMonthNamePri} {bYear}'.filledWith(targetDi);
     dayInfo.G = messages.get('evePartOfDay', targetDi);
     dayInfo.Sunset = targetDi.startingSunsetDesc;
     dayInfo.StartTime = null;

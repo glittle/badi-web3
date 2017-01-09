@@ -1,169 +1,55 @@
 <template>
-  <article class="layout-padding">
-    <div class="switches">
-      <label><q-toggle v-model="includeHolyDays" class="teal" id="includeHolyDays"></q-toggle>
+  <article class="layout-padding" id="Listing">
+    <h3>{{this.title}}</h1>
+      <div class="switches">
+        <label><q-toggle v-model="includeHolyDays" class="teal" id="includeHolyDays"></q-toggle>
           <span v-msg="'includeHolyDays,extractAccessKeyFor:includeHolyDays'"></span>
         </label>
-      <label><q-toggle v-model="includeFeasts" class="teal" id="includeFeasts"></q-toggle>
+        <label><q-toggle v-model="includeFeasts" class="teal" id="includeFeasts"></q-toggle>
           <span v-msg="'includeFeasts,extractAccessKeyFor:includeFeasts'"></span>
         </label>
-    </div>
-    <h1>{{this.title}}</h1>
-    <q-data-table :data="filteredList" :config="config" :columns="columns">
+      </div>
+      <div class="list">
+        <div class="item" v-for="day in filteredList">
+          <div class="item-content dayContent Feast" v-if="day.Type==='M'">
+            <div class="col1">
+              <!--<span class=dayType><i>date_range</i></span>-->
+              <img src="../statics/calendar.png">
+            </div>
+            <div class="col2">
+              <div class=dayName v-html="day.A"></div>
+              <div>{{day.Month}}</div>
+            </div>
+            <div class="col3">
+              <div class=sunsetStart>
+                <i>wb_sunny</i> {{day.Sunset}}
+              </div>
+            </div>
+          </div>
+          <div class="item-content dayContent HolyDay" v-if="day.Type[0]==='H'">
+            <div class="col1">
+              <!--<span class=dayType><i>star</i></span>-->
+              <img src="../statics/star.png">
+              </div>
+            <div class="col2">
+              <div class=dayName v-html="day.A"></div>
+              <div>{{day.D}}</div>
+            </div>
+            <div class="col3">
+              <div class=sunsetStart>
+                <i>wb_sunny</i> {{day.Sunset}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--<q-list-item v-for="item in filteredList" :item="item" link :active="itemIsSelected" @click.native="clickedOnItem()"></q-list-item>-->
+      <!--<q-data-table :data="filteredList" :config="config" :columns="columns">
       <template slot="col-Type" scope="cell">
         <span class="light-paragraph" v-html="test(cell)"></span>
       </template>
-    </q-data-table>
+    </q-data-table>-->
   </article>
 </template>
-<script>
-  import badi from '../scripts/badiCalc'
-  var cloneDeep = require('lodash/cloneDeep');
-
-  export default {
-    name: 'listing', // for Vue debugger
-    data() {
-      return {
-        title: "Bahá'í Holy Days and Feasts",
-        icon: 'people',
-        includeHolyDays: true,
-        includeFeasts: true,
-        num: 0,
-        list: [],
-        config: {
-          // [REQUIRED] Set the row height
-          //          rowHeight: '50px',
-          // (optional) Title to display
-          // title: this.title,
-          // (optional) Display refresh button
-          // refresh: true,
-          // (optional)
-          // User will be able to choose which columns
-          // should be displayed
-          // columnPicker: true,
-          // (optional) How many columns from the left are sticky
-          // leftStickyColumns: 0,
-          // (optional) How many columns from the right are sticky
-          // rightStickyColumns: 2,
-          // (optional)
-          // Styling the body of the data table;
-          // "minHeight", "maxHeight" or "height" are important
-          bodyStyle: {
-            // maxHeight: '500px'
-          },
-          // (optional) By default, Data Table is responsive,
-          // but you can disable this by setting the property to "false"
-          //responsive: true,
-          // (optional) Use pagination. Set how many rows per page
-          // and also specify an additional optional parameter ("options")
-          // which forces user to make a selection of how many rows per
-          // page he wants from a specific list
-          // pagination: {
-          //   rowsPerPage: 15,
-          //   options: [5, 10, 15, 30, 50, 500]
-          // },
-          // (optional) User can make selections. When "single" is specified
-          // then user will be able to select only one row at a time.
-          // Otherwise use "multiple".
-          selection: false, //'multiple',
-          // (optional) Override default messages when no data is available
-          // or the user filtering returned no results.
-          message: {
-            noData: 'Please choose what to show!',
-            noDataAfterFiltering: 'Please choose what to show!'
-          }
-        },
-        columns: [{
-          label: 'What',
-          field: 'Type',
-          width: '80px'
-        }, {
-          label: 'Year',
-          field: 'di',
-          width: '',
-          classes: '',
-          format(di) {
-            return '{bYear} ({currentYear})'.filledWith(di)
-          }
-        }, {
-          label: 'Day',
-          field: 'D',
-          width: '',
-          classes: ''
-        }, {
-          label: 'Suspend Work',
-          field: 'NoWork',
-          width: '',
-          classes: ''
-        }, {
-          label: 'Meeting/Special Time',
-          field: 'TimeReason',
-          width: '',
-          classes: ''
-        }, {
-          label: 'Start of Day',
-          field: 'Sunset',
-          width: '',
-          classes: ''
-        }, {
-          label: '',
-          field: '',
-        }]
-      }
-    },
-    created: function () {
-      this.loadDates();
-    },
-    computed: {
-      filteredList: function () {
-        var filter = [];
-        if (this.includeHolyDays) {
-          filter.push('HS');
-          filter.push('HO');
-        }
-        if (this.includeFeasts) {
-          filter.push('M');
-        }
-        return this.list.filter(item => filter.includes(item.Type));
-      }
-    },
-    methods: {
-      loadDates: function (year) {
-        year = year || badi.di.bYear;
-        var info = badi.buildSpecialDaysTable(year);
-        window.dis = cloneDeep(info);
-        this.num = info.length;
-        this.list = info;
-      },
-      test: function (cell) {
-        switch (cell.data) {
-          case 'M':
-            return "Feast"
-          case 'HS':
-          case 'HD':
-            return "Holy Day"
-          default:
-            return cell;
-        }
-      }
-    },
-    head: {
-      title: function () {
-        return {
-          inner: this.title
-        }
-      },
-      meta: [{
-        name: 'description2',
-        content: 'My description',
-        //id: 'desc'
-      }, {
-        itemprop: 'name',
-        content: 'Content Title'
-      }]
-    },
-
-  }
-
-</script>
+<script src="./Listing.vue.js"></script>
 <style src="./Listing.vue.css"></style>

@@ -1,8 +1,63 @@
-.q-data-table table tbody tr:nth-child(odd) {
-    background: #fff;
-}
-
-.switches {
-    float: right;
-    margin: 3px 0 3px 0;
+#Listing {
+    .q-data-table table tbody tr:nth-child(odd) {
+        background: #fff;
+    }
+    h1 {
+        float: left;
+    }
+    .switches {
+        float: right;
+        margin: 3px 0 3px 0;
+    }
+    .list {
+        clear: both;
+    }
+    .dayContent {
+        padding: 8px 0;
+        margin: 4px 0;
+        display: flex;
+        justify-content: space-between;
+        // &.Feast {
+        //     // background-color: lightgreen;
+        //     // .col1 {
+        //     //     text-align: right;
+        //     // }
+        // }
+        // &.HolyDay {
+        //     // background-color: lightpink;
+        //     // .col1 {
+        //     //     text-align: left;
+        //     // }
+        // }
+        .col1 {
+            width: 40px;
+            text-align: center;
+            img {
+                width: 24px;
+            }
+        }
+        .col2 {
+            text-align: left;
+            flex-grow: 1;
+            .dayName {
+                font-variant: small-caps;
+                font-weight: bolder;
+            }
+        }
+        .col3 {
+            padding-left: 10px;
+            text-align: right;
+            .sunsetStart {
+                font-size: .75em;
+                color: #444;
+            }
+        }
+    }
+    .HolyDay {
+        .col1 {
+            i {
+                color: #aaaa00;
+            }
+        }
+    }
 }
