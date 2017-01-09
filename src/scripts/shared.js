@@ -42,7 +42,7 @@ function updatedCoords() {
 var formats = {
   topTitle: '{bDay} {bMonthNamePri}/{bMonthNameSec} {bYear} <span>{endingSunsetDesc}</span>',
   statusIconText: '{bMonthNamePri}',
-  noticationMain: '{bDay} {bMonthNamePri}/{bMonthNameSec} {bYear}',
+  noticationMain: 'Today is {bDay} {bMonthNamePri}/{bMonthNameSec} {bYear}',
   noticationSub: '{nearestSunset}',
   shortDay: 'the {bDayOrdinal} day of {bMonthNamePri}:',
 }
