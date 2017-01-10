@@ -41,7 +41,7 @@ function scheduleNextPulse() {
   }, delay);
 }
 
-function doPulse() {
+export function doPulse() {
   badiCalc.refreshDateInfo();
   store.commit('pulsed')
     // console.log('pulsed');

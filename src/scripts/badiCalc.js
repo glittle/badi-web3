@@ -2597,10 +2597,6 @@ var splitSeparator = /[,?]+/;
 
 var settings = {
   useArNames: false,
-  rememberFocusTimeMinutes: 5, // show on settings page?
-  optedOutOfGoogleAnalytics: storage.get('optOutGa', -1),
-  //  integrateIntoGoogleCalendar: storage.get('enableGCal', true),
-  iconTextColor: storage.get('iconTextColor', 'black')
 };
 
 var _languageCode = '';

@@ -14,6 +14,7 @@ export default {
     return {
       title: messages.get('HomePage', null, 'Home'),
       icon: 'home',
+      location: shared.coords.name,
     }
   },
   computed: {

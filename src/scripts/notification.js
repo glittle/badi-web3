@@ -38,6 +38,9 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
     html.innerHTML = note1;
     note1 = html.innerText;
 
+    html.innerHTML = note2;
+    note2 = html.innerText;
+
     // prepareImage(function () {
     // var icon = generateOnImage(iconDayNum);
 

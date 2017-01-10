@@ -130,7 +130,7 @@
 
     if (!okay) {
       Toast.create.negative({
-        html: 'Location must be set for dates to be correct.',
+        html: 'Location must be set for dates and times to be correct!',
         timeout: 1e11, // very long
         button: {
           label: 'Fix Now',
