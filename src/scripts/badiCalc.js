@@ -86,6 +86,7 @@ function prepareDateInfos(bYear) {
       var specialPartB = specialParts[1];
       switch (specialParts[0]) {
         case 'THB':
+          dateInfo.A2 = 'Twin Holy Birthday';
           var firstDayCode = _twinHolyBirthdays[bYear];
           if (firstDayCode) {
             dateInfo.BMonthDay = splitToBMonthDay(firstDayCode);
@@ -210,15 +211,17 @@ function prepareDateInfos(bYear) {
   return _dateInfos;
 }
 
-var _lastSpecialDaysYear = 0;
-var _lastSpecialDays = [];
+var _cachedSpecialDays = {};
 
 function buildSpecialDaysTable(year, defaultEventStart) {
-  if (_lastSpecialDaysYear === year) {
-    return _lastSpecialDays;
+  var cacheKey = year + '_' + defaultEventStart;
+  var cached = _cachedSpecialDays[cacheKey]
+  if (cached) {
+    // console.log('used cached for', cacheKey);
+    return cached;
   }
+  // console.log('building for', cacheKey);
 
-  _lastSpecialDaysYear = year;
   var dayInfos = prepareDateInfos(year);
 
   // SetFiltersForSpecialDaysTable();
@@ -281,6 +284,15 @@ function buildSpecialDaysTable(year, defaultEventStart) {
       var minutes = tempDate.getMinutes();
       minutes = minutes > 30 ? 30 : 0; // start 1/2 hour before
       tempDate.setMinutes(minutes);
+      dayInfo.Event = {
+        time: tempDate
+      };
+
+      dayInfo.StartTime = showTime(dayInfo.Event.time);
+      addEventTime(dayInfo.Event);
+      dayInfo.EventTime = messages.get('eventTime', dayInfo.Event);
+    } else if (targetTime === 'SS1') {
+      tempDate = new Date(dayInfo.di.frag1SunTimes.sunset.getTime());
       dayInfo.Event = {
         time: tempDate
       };
@@ -361,7 +373,7 @@ function buildSpecialDaysTable(year, defaultEventStart) {
 
   // $('#fastDaysTitle').html(messages.get('fastDaysTitle', di));
 
-  _lastSpecialDays = dayInfos;
+  _cachedSpecialDays[cacheKey] = dayInfos;
   return dayInfos;
 }
 
@@ -441,7 +453,8 @@ function dateInfosRaw() {
       Type: 'M',
       NameEn: 'Splendor',
       NameAr: 'Bah&aacute;',
-      MonthNum: 1
+      MonthNum: 1,
+      Time: 'SS1',
     }, {
       Type: 'M',
       NameEn: 'Glory',
@@ -543,7 +556,8 @@ function dateInfosRaw() {
       BDateCode: '2.13',
       NameEn: 'HolyDay_Ridvan1',
       Time: '1500S',
-      TimeReason: '3 pm Standard time'
+      TimeReason: '3 pm Standard time',
+      EventType: 'Celebrate'
     }, {
       Type: 'HS',
       BDateCode: '3.2',
@@ -557,7 +571,8 @@ function dateInfosRaw() {
       BDateCode: '4.13',
       NameEn: "HolyDay_AscBaha",
       Time: '0300S',
-      TimeReason: '3 am Standard time'
+      TimeReason: '3 am Standard time',
+      EventType: 'Tablet'
     },
 
     {
@@ -566,14 +581,16 @@ function dateInfosRaw() {
       BDateCode: '4.7',
       NameEn: 'HolyDay_DeclBab',
       Time: 'SS2',
-      TimeReason: 'about 2 hours after sunset'
+      TimeReason: 'about 2 hours after sunset',
+      EventType: 'Celebrate'
     }, {
       Type: 'HS',
       FromYear: 172,
       BDateCode: '4.8',
       NameEn: 'HolyDay_DeclBab',
       Time: 'SS2',
-      TimeReason: 'about 2 hours after sunset'
+      TimeReason: 'about 2 hours after sunset',
+      EventType: 'Celebrate'
     },
 
     {
@@ -582,14 +599,16 @@ function dateInfosRaw() {
       BDateCode: '6.16',
       NameEn: 'HolyDay_Martyrdom',
       Time: '1200S',
-      TimeReason: 'Noon Standard time'
+      TimeReason: 'Noon Standard time',
+      EventType: 'Tablet'
     }, {
       Type: 'HS',
       FromYear: 172,
       BDateCode: '6.17',
       NameEn: 'HolyDay_Martyrdom',
       Time: '1200S',
-      TimeReason: 'Noon Standard time'
+      TimeReason: 'Noon Standard time',
+      EventType: 'Tablet'
     },
 
     {
@@ -623,14 +642,15 @@ function dateInfosRaw() {
       BDateCode: '14.6',
       NameEn: "HolyDay_AscAbdul",
       Time: '0100S',
-      TimeReason: '1 am Standard time'
-    }
+      TimeReason: '1 am Standard time',
+      EventType: 'Tablet'
+    },
 
     // { Type: 'OtherRange', BDateCode: '2.13', BDateCodeTo: '3.5', NameEn: 'FestivalRidvan' },
-    // { Type: 'OtherRange', Special: 'AYYAM.Intercalary', NameAr: 'Ayyám-i-Há', NameEn: 'Intercalary' },
+    { Type: 'OtherRange', Special: 'AYYAM.Intercalary', NameAr: 'Ayyám-i-Há', NameEn: 'Intercalary' },
 
-    // { Type: 'OtherDay', BDateCode: '2.13', NameEn: 'Annual Meeting and Election' },
-    // { Type: 'OtherDay', Special: 'JAN1', NameEn: 'Start of Gregorian Year ' }
+    { Type: 'OtherDay', BDateCode: '2.13', NameEn: 'Annual Meeting and Election' },
+    { Type: 'OtherDay', Special: 'JAN1', NameEn: 'Start of Gregorian Year ' }
   ];
 };
 

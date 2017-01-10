@@ -44,7 +44,7 @@ function getRawMessage(key) {
   // caller will cache the result
   var answer = '';
   for (var i = 0; i < messageFiles.length; i++) {
-    const file = messageFiles[0];
+    const file = messageFiles[i];
     if (has(file, key)) {
       answer = file[key].message;
     }

@@ -7,7 +7,19 @@
         float: right;
     }
     .switches {
-        margin: 3px 0 3px 0;
+        margin: 16px 0 24px 0;
+        label {
+            margin-right: 4px;
+        }
+    }
+    .suggestedStart {
+        float: right;
+        color: #7f8c8d;
+        font-size: .8em;
+        text-align: center;
+        span {
+            display: block;
+        }
     }
     .dayList {
         clear: both;
@@ -45,6 +57,7 @@
             width: 40px;
             text-align: center;
             img {
+                margin-top: 2px;
                 width: 24px;
             }
         }
@@ -58,6 +71,20 @@
             div {
                 margin-bottom: 4px;
             }
+            .NoWork {
+                color: #7f8c8d;
+                font-size: .8em;
+                &.Workday {
+                    color: darkred;
+                }
+            }
+            .SpecialTime {
+                color: #7f8c8d;
+                font-size: .8em;
+                &.setTime {
+                    color: #d35400;
+                }
+            }
         }
         .col3 {
             padding: 0 10px;
@@ -68,6 +95,10 @@
                 img {
                     width: 24px;
                     vertical-align: middle;
+                }
+                span {
+                    color: #7f8c8d;
+                    margin: 0 3px;
                 }
             }
             .gDate {

@@ -6,7 +6,19 @@
   float: right;
 }
 #Listing .switches {
-  margin: 3px 0 3px 0;
+  margin: 16px 0 24px 0;
+}
+#Listing .switches label {
+  margin-right: 4px;
+}
+#Listing .suggestedStart {
+  float: right;
+  color: #7f8c8d;
+  font-size: .8em;
+  text-align: center;
+}
+#Listing .suggestedStart span {
+  display: block;
 }
 #Listing .dayList {
   clear: both;
@@ -40,6 +52,7 @@
   text-align: center;
 }
 #Listing .dayContent .col1 img {
+  margin-top: 2px;
   width: 24px;
 }
 #Listing .dayContent .col2 {
@@ -53,6 +66,20 @@
 #Listing .dayContent .col2 div {
   margin-bottom: 4px;
 }
+#Listing .dayContent .col2 .NoWork {
+  color: #7f8c8d;
+  font-size: .8em;
+}
+#Listing .dayContent .col2 .NoWork.Workday {
+  color: darkred;
+}
+#Listing .dayContent .col2 .SpecialTime {
+  color: #7f8c8d;
+  font-size: .8em;
+}
+#Listing .dayContent .col2 .SpecialTime.setTime {
+  color: #d35400;
+}
 #Listing .dayContent .col3 {
   padding: 0 10px;
   text-align: right;
@@ -64,6 +91,10 @@
 #Listing .dayContent .col3 .sunsetStart img {
   width: 24px;
   vertical-align: middle;
+}
+#Listing .dayContent .col3 .sunsetStart span {
+  color: #7f8c8d;
+  margin: 0 3px;
 }
 #Listing .dayContent .col3 .gDate {
   font-size: .7em;

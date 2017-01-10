@@ -1,5 +1,13 @@
 {
   "test1": {
     "message": "from en web3 messages"
+  },
+  "includeOther": {
+    "message": "<u>O</u>ther",
+    "description": "choosing what to include in the listing"
+  },
+  "includeFast": {
+    "message": "F<u>a</u>st",
+    "description": "choosing what to include in the listing"
   }
 }

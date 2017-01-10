@@ -6,6 +6,7 @@
   "icons": [
     {
       "src": "/statics/icons/android-chrome-192x192.png?v=v1",
+      // "src": "/statics/images/d13.png",
       "sizes": "192x192",
       "type": "image/png"
     }

@@ -10,12 +10,14 @@ export default {
       icon: 'people',
       includeHolyDays: true,
       includeFeasts: true,
+      includeOther: false,
+      includeFast: false,
       originalYear: 0,
       firstYear: 9999,
       lastYear: -1,
-      num: 0,
       list: [],
-      location: shared.coords.name
+      location: shared.coords.name,
+      suggestedStart: '1930'
     }
   },
   created: function () {
@@ -38,10 +40,62 @@ export default {
       if (this.includeFeasts) {
         filter.push('M');
       }
+      if (this.includeOther) {
+        filter.push('OtherRange');
+        filter.push('OtherDay');
+      }
+      if (this.includeFast) {
+        filter.push('Fast');
+      }
       return this.list.filter(item => filter.includes(item.Type));
     }
   },
+  watch: {
+    suggestedStart: function () {
+      var vue = this;
+      vue.list = [];
+      // TODO: does not redisplay if reusing previous year
+      for (var i = vue.firstYear; i <= vue.lastYear; i++) {
+        vue.loadDates(i);
+      }
+    }
+  },
   methods: {
+    getSpecialTime: function (day) {
+      var prefix = 'Suggested start at';
+      var list = ['SpecialTime'];
+
+      switch (day.EventType) {
+        case 'Tablet':
+          prefix = 'Recite tablet at';
+          list.push('setTime')
+          break;
+
+        case 'Celebrate':
+          prefix = 'Celebrate at';
+          list.push('setTime')
+          break;
+      }
+
+      return {
+        // TODO: must be a better way to bind to two values...
+        classes: list,
+        html: prefix + ' ' + day.EventTime
+      }
+    },
+    getNoWork: function (v) {
+      if (v) {
+        return 'Suspend work on ' + v
+      }
+    },
+    getNoWorkClass: function (weekday) {
+      var list = ['NoWork'];
+      if (weekday > 0 && weekday < 6) {
+        // very simple M - F. Should be settable by user!
+        list.push('Workday')
+      }
+      return list;
+    },
     loadDates: function (year) {
       var vue = this;
       if (year < vue.firstYear) {
@@ -51,13 +105,12 @@ export default {
         vue.lastYear = year
       }
       console.log('loading', year)
-      var info = badi.buildSpecialDaysTable(year);
-      window.dis = cloneDeep(info);
+      var info = badi.buildSpecialDaysTable(year, this.suggestedStart);
+      window.dis = cloneDeep(info); // for developer access in console
       vue.list = vue.list.concat(info.map(function (d) {
         return extendDayInfo(d, year - vue.originalYear)
       }));
       vue.list.sort(sortDates)
-      vue.num = vue.list.length;
     },
     test: function (cell) {
       switch (cell.data) {
@@ -100,9 +153,9 @@ function extendDayInfo(d, diff) {
 function sortDates(a, b) {
   return a.GDate < b.GDate ? -1 :
     a.GDate > b.GDate ? 1 :
-    a.Type === 'M' ? -1 : 
+    a.Type === 'M' ? -1 :
     a.Type === 'HS' ? -1 :
     a.Type === 'HO' ? -1 :
-    a.Type === 'Fast' ? -1 : 
+    a.Type === 'Fast' ? -1 :
     1;
 }
