@@ -35,7 +35,6 @@
 <style src="./OtherSetup.vue.css"></style>
 <script>
   import * as shared from '../scripts/shared'
-  import * as store from '../scripts/store'
   import badiCalc from '../scripts/badiCalc'
   import storage from '../scripts/storage'
 
