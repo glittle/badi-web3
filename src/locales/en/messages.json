@@ -1207,7 +1207,7 @@
     "description": "heading in Events listing"
   },
   "timeFormat12": {
-    "message": "{time} {ampm}",
+    "message": "{time}&#160;{ampm}",
     "description": "used when use24HourClock is set to false"
   },
   "tips": {

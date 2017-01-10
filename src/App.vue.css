@@ -15,6 +15,16 @@ body.desktop button.primary:not(.disabled):hover:not(.clear) {
 button.primary {
   background: #2980b9;
 }
+.drawer-content {
+  width: 180px;
+}
+@media screen and (min-width: 601px) {
+  .drawer:not(.swipe-only) {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 180px;
+    flex: 0 0 180px;
+  }
+}
 .layout {
   width: auto;
 }

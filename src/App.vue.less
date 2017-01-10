@@ -1,8 +1,6 @@
 // overrides to base theme
-
 // TODO... reduce font on tiny screens
 // TODO... update base files with new colors, etc.
-
 body {
     color: #212121;
     font-family: Roboto, "Helvetica Neue", "Calibri Light", sans-serif;
@@ -19,8 +17,21 @@ div.toolbar {
 body.desktop button.primary:not(.disabled):hover:not(.clear) {
     background: #2980b9;
 }
+
 button.primary {
     background: #2980b9;
+}
+
+.drawer-content {
+    width: 180px;
+}
+
+@media screen and (min-width: 601px) {
+    .drawer:not(.swipe-only) {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 180px;
+        flex: 0 0 180px;
+    }
 }
 
 .layout {
@@ -107,5 +118,4 @@ p {
     .menu-main {
         background-color: #fff;
     }
-    .menu-setup {}
 }

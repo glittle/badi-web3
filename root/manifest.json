@@ -1,19 +1,18 @@
 {
   "name": "Wondrous-Bad\u00ed Calendar",
   "short_name": "Wondrous-Bad\u00ed",
-  "description": "Tools and services for the Wondrous-Badi Calendar.",
+  "description": "Tools for the Wondrous-Badi calendar, the official calendar of the Baha'i Faith.",
   "start_url": "/",
   "icons": [
     {
       "src": "/statics/icons/android-chrome-192x192.png?v=v1",
-      // "src": "/statics/images/d13.png",
       "sizes": "192x192",
       "type": "image/png"
     }
   ],
-	"theme_color": "#ffffff",
-  "background_color": "#fffff",
+	"theme_color": "#FA9330",
+  "background_color": "#FA9330",
   "gcm_sender_id": "482941778795",
-  "display": "standalone",
+  "display": "fullscreen",
   "orientation": "any"
 }

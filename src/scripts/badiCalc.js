@@ -34,7 +34,7 @@ function prepareDateInfos(bYear) {
     _dateInfos.push({
       Type: 'Fast',
       BDateCode: '19.' + d,
-      NameEn: 'Fast - day ' + d
+      NameEn: 'Day {0} of Fast'.filledWith(d)
     });
   }
 

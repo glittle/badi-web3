@@ -1,23 +1,29 @@
 <template>
   <article class="layout-padding" id="Listing">
-    <button v-on:click="loadDates(prevYear)" class="small light btnPrev">View previous year ({{prevYear}} BE)</button>
+    <button v-on:click="loadDates(prevYear)" class="small light btnPrev">Previous year ({{prevYear}} BE)</button>
     <h3>{{this.title}}</h3>
-    <div class=location>Times for {{location}}</div>
+    <div class=location>Times for <span v-html="location"></span></div>
     <div class="switches">
-      <label><q-toggle v-model="includeHolyDays" class="teal" id="includeHolyDays"></q-toggle>
+      <div class="toggles">
+        <label>
+          <q-toggle v-model="includeHolyDays" class="teal" id="includeHolyDays"></q-toggle>
           <span v-msg="'includeHolyDays,extractAccessKeyFor:includeHolyDays'"></span>
         </label>
-      <label><q-toggle v-model="includeFeasts" class="teal" id="includeFeasts"></q-toggle>
+        <label>
+          <q-toggle v-model="includeFeasts" class="teal" id="includeFeasts"></q-toggle>
           <span v-msg="'includeFeasts,extractAccessKeyFor:includeFeasts'"></span>
         </label>
-      <label><q-toggle v-model="includeOther" class="teal" id="includeOther"></q-toggle>
+        <label>
+          <q-toggle v-model="includeOther" class="teal" id="includeOther"></q-toggle>
           <span v-msg="'includeOther,extractAccessKeyFor:includeOther'"></span>
         </label>
-      <label><q-toggle v-model="includeFast" class="teal" id="includeFast"></q-toggle>
+        <label>
+          <q-toggle v-model="includeFast" class="teal" id="includeFast"></q-toggle>
           <span v-msg="'includeFast,extractAccessKeyFor:includeFast'"></span>
         </label>
+      </div>
       <div class="suggestedStart">
-        <span>Suggest start at </span>
+        <span>Suggested start at </span>
         <select v-model=suggestedStart>
           <option value="">none</option>
           <option value=1800>6:00 pm</option>
@@ -32,7 +38,7 @@
         <div class="item-content dayContent Feast" :class="day.RowClass" v-if="day.Type==='M'">
           <div class="col1">
             <!--<span class=dayType><i>date_range</i></span>-->
-            <img src="../statics/calendar.png">
+            <img :class="day.di.element" src="../statics/calendar.png">
           </div>
           <div class="col2">
             <!--<input type="checkbox" class=toggleInfo></div>-->
@@ -46,10 +52,10 @@
           </div>
           <div class="col3">
             <div class=sunsetStart>
-              <img src="../statics/sunset.png"> {{day.Sunset}}
+              <img src="../statics/sunset.png">
+              <span v-html="day.Sunset"></span>
             </div>
-            <div class=gDate>
-              {{day.di.gCombinedY}}
+            <div class=gDate v-html="day.di.gCombinedY">
             </div>
           </div>
         </div>
@@ -60,36 +66,43 @@
           </div>
           <div class="col2">
             <div class=dayName v-html="day.A"></div>
-            <div>{{day.D}}</div>
+            <div v-html="day.D"></div>
             <div v-html="day.A2"></div>
             <div :class="getNoWorkClass(day.di.frag2Weekday)" v-html="getNoWork(day.NoWork)"></div>
             <div :class="getSpecialTime(day).classes" v-html="getSpecialTime(day).html"></div>
           </div>
           <div class="col3">
             <div class=sunsetStart>
-              <img src="../statics/sunset.png"> {{day.Sunset}}
+              <img src="../statics/sunset.png">
+              <span v-html="day.Sunset"></span>
             </div>
-            <div class=gDate>
-              {{day.di.gCombinedY}}
+            <div class=gDate v-html="day.di.gCombinedY">
             </div>
           </div>
         </div>
         <div class="item-content dayContent Fast" :class="day.RowClass" v-if="day.Type==='Fast'">
           <div class="col1">
             <!--<span class=dayType><i>date_range</i></span>-->
-            <img src="../statics/calendar.png">
+            <img src="../statics/sun.png">
           </div>
           <div class="col2">
             <div class=dayName v-html="day.D"></div>
-            <div v-html="day.NameEn + ' - ' + day.FastDay"></div>
+            <div>
+              <span v-html="day.NameEn"></span>
+              <span>-</span>
+              <span v-html="day.FastDay"></span>
+            </div>
           </div>
           <div class="col3">
             <div class=sunsetStart>
-               {{day.FastSunrise}}
-              <img src="../statics/sunrise.png">
-              <span> to </span>
-              <img src="../statics/sunset.png"> 
-              {{day.FastSunset}}
+              <div>
+                <img src="../statics/sunrise.png">
+                <span v-html="day.FastSunrise"></span>
+              </div>
+              <div>
+                <img src="../statics/sunset.png">
+                <span v-html="day.FastSunset"></span>
+              </div>
             </div>
           </div>
         </div>
@@ -100,7 +113,7 @@
           <div class="col2">
             <!--<input type="checkbox" class=toggleInfo></div>-->
             <div class=dayName v-html="day.NameEn"></div>
-            <div>{{day.D}}</div>
+            <div v-html="day.D"></div>
             <div v-html="day.A2"></div>
             <!--<div class=toggleInfoTarget>
               More Info!
@@ -108,35 +121,30 @@
           </div>
           <div class="col3">
             <div class=sunsetStart>
-              <img src="../statics/sunset.png"> {{day.Sunset}}
+              <img src="../statics/sunset.png">
+              <span v-html="day.Sunset"></span>
             </div>
-            <div class=gDate>
-              {{day.di.gCombinedY}}
+            <div class=gDate v-html="day.di.gCombinedY">
             </div>
           </div>
         </div>
         <div class="item-content dayContent Today" :class="day.RowClass" v-if="day.Type==='Today'">
           <div class="col1"> </div>
           <div class="col2">
-            Today: {{day.D}}</div>
+            Today: <span v-html="day.D"></span></div>
           <div class="col3">
             <div class=sunsetStart>
-              <img src="../statics/sunset.png"> {{day.Sunset}}
+              <img src="../statics/sunset.png">
+              <span v-html="day.Sunset"></span>
             </div>
-            <div class=gDate>
-              {{day.di.gCombinedY}}
+            <div class=gDate v-html="day.di.gCombinedY">
             </div>
           </div>
         </div>
       </div>
     </div>
-    <button v-on:click="loadDates(nextYear)" class="primary full-width">View next year ({{nextYear}} BE)</button>
-    <!--<q-list-item v-for="item in filteredList" :item="item" link :active="itemIsSelected" @click.native="clickedOnItem()"></q-list-item>-->
-    <!--<q-data-table :data="filteredList" :config="config" :columns="columns">
-      <template slot="col-Type" scope="cell">
-        <span class="light-paragraph" v-html="test(cell)"></span>
-      </template>
-    </q-data-table>-->
+    <button v-on:click="loadDates(nextYear)" class="primary full-width">Next year ({{nextYear}} BE)</button>
+    <button v-on:click="resetToFirstYear()" class="light full-width">Reset to this year only</button>
   </article>
 </template>
 <script src="./Listing.vue.js"></script>

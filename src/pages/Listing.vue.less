@@ -2,14 +2,24 @@
     .location {
         color: #2980b9;
         margin: 4px 0 8px 0;
+        clear: both;
     }
     .btnPrev {
         float: right;
     }
     .switches {
-        margin: 16px 0 24px 0;
-        label {
-            margin-right: 4px;
+        margin: 0 0 24px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+    .toggles {
+        >label {
+            display: inline-block;
+            margin: 8px 4px 0 0;
+            white-space: nowrap;
+            span {
+                vertical-align: middle;
+            }
         }
     }
     .suggestedStart {
@@ -19,6 +29,7 @@
         text-align: center;
         span {
             display: block;
+            padding-bottom: 1px;
         }
     }
     .dayList {
@@ -27,6 +38,7 @@
     }
     .item {
         height: auto;
+        line-height: normal;
     }
     .dayContent {
         padding: 8px 0;
@@ -56,6 +68,7 @@
         .col1 {
             width: 40px;
             text-align: center;
+            flex-shrink: 0;
             img {
                 margin-top: 2px;
                 width: 24px;
@@ -64,12 +77,16 @@
         .col2 {
             text-align: left;
             flex-grow: 1;
+            white-space: normal;
             .dayName {
                 font-variant: small-caps;
                 font-weight: bolder;
             }
             div {
                 margin-bottom: 4px;
+                span {
+                    white-space: nowrap;
+                }
             }
             .NoWork {
                 color: #7f8c8d;
@@ -89,6 +106,7 @@
         .col3 {
             padding: 0 10px;
             text-align: right;
+            flex-shrink: 0;
             .sunsetStart {
                 font-size: .8em;
                 color: #d35400;
@@ -107,10 +125,22 @@
             }
         }
     }
-    .HolyDay {
+    .Feast {
         .col1 {
-            i {
-                color: #aaaa00;
+            img {
+               border-radius: 3px;
+               &.Fire{
+                   background-color: #e74c3c;
+               }
+               &.Air{
+                   background-color: #ecf0f1;
+               }
+               &.Water{
+                   background-color: #3498db;
+               }
+               &.Earth{
+                   background-color: #2ecc71;
+               }
             }
         }
     }
@@ -120,5 +150,11 @@
         .col2 {
             padding-top: 4px;
         }
+    }
+}
+
+@media (max-width: 500px) {
+    #Listing .dayContent.HolyDay {
+        padding-left: 0;
     }
 }

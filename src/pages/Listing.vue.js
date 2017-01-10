@@ -10,7 +10,7 @@ export default {
       icon: 'people',
       includeHolyDays: true,
       includeFeasts: true,
-      includeOther: false,
+      includeOther: true,
       includeFast: false,
       originalYear: 0,
       firstYear: 9999,
@@ -61,6 +61,13 @@ export default {
     }
   },
   methods: {
+    resetToFirstYear: function(){
+      var vue = this;
+      vue.list = [];
+      this.firstYear = this.originalYear;
+      this.lastYear = this.originalYear;
+      vue.loadDates(this.originalYear);
+    },
     getSpecialTime: function (day) {
       var prefix = 'Suggested start at';
       var list = ['SpecialTime'];
