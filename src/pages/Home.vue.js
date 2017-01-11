@@ -5,15 +5,14 @@ import * as shared from '../scripts/shared'
 require('../scripts/stringExt')
 const moment = require('moment-timezone');
 const Highcharts = require('highcharts');
-var versionInfo = require('../../version.json')
 
 var routeList = require('./routes');
 
 export default {
   data() {
     return {
-      title: messages.get('HomePage', null, 'Home'),
-      icon: 'home',
+      title: messages.get('HomePage', null, 'Today'),
+      icon: '../statics/sunWhite.png',
       location: shared.coords.name,
     }
   },
@@ -40,14 +39,6 @@ export default {
     shortDay() {
       return shared.formats.shortDay.filledWith(this.di)
     },
-    version() {
-      var age = moment(versionInfo.buildDate, "_ MMM D YYYY HH:mm:ss _Z").fromNow();
-
-      // var buildDi = {}
-      // badiCalc.generateDateInfo(buildDi, buildDate.toDate());
-
-      return '{0} ({1})'.filledWith(versionInfo.version, age)
-    }
   },
   methods: {},
   // watch: {

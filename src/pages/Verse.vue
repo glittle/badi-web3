@@ -26,8 +26,8 @@
     name: 'verse', // for Vue debugger
     data() {
       return {
-        title: "Bahá'í Quote",
-        icon: 'import_contacts',
+        title: "Quote",
+        icon: '../statics/verseWhite.png',
         verse: '',
         suffix: '',
         timeOfDay: '',
@@ -119,8 +119,9 @@
     background-image: url('~assets/reciting.jpg');
     width: 200px;
     height: 150px;
-    box-shadow: 0 0 8px 8px white inset;
-    margin-left: 1px;
+    opacity: 0.5;
+    box-shadow: 0 0 4px 1px white inset;
+    margin: 15px 0 0 0;
   }
 
 </style>

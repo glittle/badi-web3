@@ -1,3 +1,7 @@
+#Listing {
+  max-width: 700px;
+  width: 100%;
+}
 #Listing .location {
   color: #2980b9;
   margin: 4px 0 8px 0;
@@ -44,9 +48,6 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-}
-#Listing .dayContent:hover {
-  background-color: #eaf5dd;
 }
 #Listing .dayContent.HolyDay {
   padding-left: 25px;
@@ -109,7 +110,6 @@
   vertical-align: middle;
 }
 #Listing .dayContent .col3 .sunsetStart span {
-  color: #7f8c8d;
   margin: 0 3px;
 }
 #Listing .dayContent .col3 .gDate {

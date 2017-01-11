@@ -12,7 +12,7 @@ const names = [
   {
     name: 'Home',
     path: '/',
-    group: ['main', 'setup']
+    group: 'main'
   }, {
     name: 'Listing',
     group: 'main'

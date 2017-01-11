@@ -10,7 +10,7 @@
       </div>
       <div id="sunChart"></div>
     </div>
-    <div class="card">
+    <!--<div class="card">
       <div class="card-content">
         <p>Temporary page list...</p>
         <div class="list no-border">
@@ -19,8 +19,7 @@
             <i :title="page.text">{{page.icon}}</i>
           </router-link>
         </div>
-        <p>Version {{version}}</p>
-      </div>
+      </div>-->
     </div>
   </article>
 </template>

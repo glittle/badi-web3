@@ -1,13 +1,46 @@
 <template>
   <q-layout>
     <div slot="header" class="toolbar">
-      <button class="hide-on-drawer-visible" @click="$refs.leftDrawer.open()">
+      <!--<button class="hide-on-drawer-visible" @click="$refs.leftDrawer.open()">
         <i>menu</i>
-      </button>
+      </button>-->
       <q-toolbar-title>
         <h1>Wondrous-Badí' Calendar</h1>
         <h2 v-html="topDate"></h2>
       </q-toolbar-title>
+      <!--<button ref="target" class="primary">
+        <i>more_vert</i>
+        <q-popover ref="popover">
+           <div class="list">
+            <div class="item item-link" v-for="page in pages.filter(p=>p.group.includes('setup'))" @click="$refs.popover.close()">
+              <q-drawer-link :icon="page.icon" :to="page.to" >{{page.text}}</q-drawer-link>
+            </div>
+          </div>
+      </q-popover>
+      </button>-->
+    </div>
+    <!--<q-drawer ref="leftDrawer">
+      <div class="toolbar light">
+        <q-toolbar-title>
+          Pages
+        </q-toolbar-title>
+      </div>
+      <div class="list no-border platform-delimiter">
+        <q-drawer-link v-for="page in pages" :class="'menu-' + page.group.toString().replace(/,/g,'_')" :icon="page.icon" :to="page.to">{{page.text}}</q-drawer-link>
+      </div>
+    </q-drawer>-->
+    <keep-alive>
+      <router-view v-touch-swipe.horizontal.scroll="swipePage" class="layout-view q-touch-x"></router-view>
+    </keep-alive>
+    <div slot="footer" class="toolbar">
+      <div v-link.replace="page.to" :title="page.text" class="tbLink" v-for="page in pages.filter(p=>!p.group.includes('setup'))">
+        <img class="tbIcon" :src="page.icon" :alt="page.text"></span>
+        <span v-html="page.text"></span>
+      </div>
+      <!--<router-link tag="button" class="item item-link" :class="'icon_' + page.group" v-for="page in pages.filter(p=>!p.group.includes('setup'))"
+        :to="page.to">
+        <i :title="page.text">{{page.icon}}</i>
+      </router-link>-->
       <button ref="target" class="primary">
         <i>more_vert</i>
         <q-popover ref="popover">
@@ -17,23 +50,11 @@
             <div class="item item-link" v-for="page in pages.filter(p=>p.group.includes('setup'))" @click="$refs.popover.close()">
               <q-drawer-link :icon="page.icon" :to="page.to" >{{page.text}}</q-drawer-link>
             </div>
+            <div class=version>Version {{version}}</div>
           </div>
       </q-popover>
       </button>
     </div>
-    <q-drawer ref="leftDrawer">
-      <div class="toolbar light">
-        <q-toolbar-title>
-          Pages
-        </q-toolbar-title>
-      </div>
-      <div class="list no-border platform-delimiter">
-        <q-drawer-link v-for="page in pages" :class="'menu-' + page.group.toString().replace(/,/g,'_')" :icon="page.icon" :to="page.to">{{page.text}}</q-drawer-link>
-      </div>
-    </q-drawer>
-    <keep-alive>
-      <router-view v-touch-swipe.horizontal.scroll="swipePage" class="layout-view q-touch-x"></router-view>
-    </keep-alive>
   </q-layout>
 </template>
 <script>
@@ -45,6 +66,8 @@
   import badiCalc from './scripts/badiCalc'
   import * as notify from './scripts/notification'
   import * as shared from './scripts/shared'
+  const moment = require('moment-timezone');
+  var versionInfo = require('../version.json')
 
   require('./scripts/stringExt')
 
@@ -59,7 +82,12 @@
         this.$store.state.pulseNum // force this compute to update on every pulse
         doWorkOnPulse();
         return shared.formats.topTitle.filledWith(badiCalc.di)
+      },
+      version() {
+        var age = moment(versionInfo.buildDate, "_ MMM D YYYY HH:mm:ss _Z").fromNow();
+        return '{0} ({1})'.filledWith(versionInfo.version, age)
       }
+
     },
     methods: {
       swipePage(obj) {

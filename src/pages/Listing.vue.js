@@ -7,7 +7,7 @@ export default {
   data() {
     return {
       title: "Bahá'í Dates",
-      icon: 'people',
+      icon: '../statics/calendarWhite.png',
       includeHolyDays: true,
       includeFeasts: true,
       includeOther: true,
