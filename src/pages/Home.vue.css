@@ -22,11 +22,17 @@ button.item-link.icon_setup {
 #sunChart .highcharts-data-label {
   text-align: center;
 }
-#sunChart .highcharts-xaxis-labels div {
-  display: inline-block;
-  margin: 0 5px;
+#sunChart .highcharts-xaxis-labels > span {
+  width: 150px;
 }
-#sunChart .highcharts-xaxis-labels div.left {
+#sunChart .highcharts-xaxis-labels > span span {
+  display: inline-block;
+  padding: 0 5px;
+  box-sizing: border-box;
+  width: 74px;
+  text-align: left;
+}
+#sunChart .highcharts-xaxis-labels > span span.left {
   text-align: right;
 }
 div.line {

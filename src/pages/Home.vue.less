@@ -24,11 +24,17 @@ button.item-link {
         text-align: center;
     }
     .highcharts-xaxis-labels {
-        div {
-            display: inline-block;
-            margin: 0 5px;
-            &.left {
-                text-align: right;
+        >span {
+            width: 150px;
+            span {
+                display: inline-block;
+                padding: 0 5px;
+                box-sizing: border-box;
+                width: 74px;
+                text-align: left;
+                &.left {
+                    text-align: right;
+                }
             }
         }
     }

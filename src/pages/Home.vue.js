@@ -365,7 +365,7 @@ function drawChart(sun) {
     }
   });
 
-  _chart = Highcharts.chart('sunChart', {
+  var options = {
     chart: {
       type: 'areaspline',
       //spacingBottom: 50
@@ -391,11 +391,12 @@ function drawChart(sun) {
         align: 'center',
         useHTML: true,
         y: 12,
+        x: 0,
         formatter: function () {
           // only one tick, at midnight
           var yesterday = moment(midnight).subtract(1, 's');
-          var html = '<div class=left>{0}<br>{1}</div>'.filledWith(yesterday.format('MMM D'), yesterday.format('dddd')) +
-            '<div>{0}<br>{1}</div>'.filledWith(midnight.format('MMM D'), midnight.format('dddd'));
+          var html = '<span class=left>{0}<br>{1}</span>'.filledWith(yesterday.format('MMM D'), yesterday.format('dddd')) +
+            ' <span>{0}<br>{1}</span>'.filledWith(midnight.format('MMM D'), midnight.format('dddd'));
           return html;
         }
       },
@@ -455,9 +456,17 @@ function drawChart(sun) {
       },
       lineWidth: 0
     }]
-  }, function (chart) {
-    showNowLine(chart, sun);
-  });
+  };
+
+  try {
+    _chart = Highcharts.chart('sunChart', options, function (chart) {
+      showNowLine(chart, sun);
+    });
+  } catch (error) {
+    // catch highcharts error to ensure it doesn't kill javascript  
+    console.log(error);
+    console.log(sun);
+  }
 }
 
 function showNowLine(chart, sun) {
