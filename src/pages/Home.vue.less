@@ -25,15 +25,14 @@ button.item-link {
     }
     .highcharts-xaxis-labels {
         >span {
-            width: 150px;
             span {
-                display: inline-block;
-                padding: 0 5px;
-                box-sizing: border-box;
-                width: 74px;
-                text-align: left;
-                &.left {
+                display: block;
+                position: absolute;
+                &.before {
                     text-align: right;
+                }
+                &.after {
+                    text-align: left;
                 }
             }
         }

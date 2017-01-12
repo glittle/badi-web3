@@ -126,7 +126,8 @@ function fillSunDisplay(di) {
     setStart: null,
     rise: null,
     setEnd: null,
-    now: now
+    now: now,
+    diStamp: di.stamp
   };
 
   if (now.isAfter(sunset1)) {
@@ -275,7 +276,7 @@ function drawChart(sun) {
   //   setEnd: null,
   //   now: now
 
-  var key = sun.now.format('MMdd');
+  var key = sun.diStamp;
   if (_lastChartDay === key) {
     showNowLine(_chart, sun);
     return;
@@ -287,7 +288,6 @@ function drawChart(sun) {
   var twilight = 4;
   var colorFullSun = '#ffff00';
   var colorFullDark = '#000000';
-  // var nowLabel = 'Now'; //<br>' + sun.now.format('HH:mm');
   var v = [];
   var chartMin = sun.setStart.valueOf();
   var chartMax = sun.setEnd.valueOf();
@@ -315,11 +315,6 @@ function drawChart(sun) {
   addPoint(sun.setStart, 'Sunset', 'lightgrey');
   addPoint(sun.setEnd, 'Sunset', 'lightgrey');
   addPoint(sun.rise, 'Sunrise', 'lightgrey');
-  var midnight = moment(sun.rise).set({
-    hour: 0,
-    minute: 0,
-    second: 0
-  });
 
   // fill in the rest
   var minutesBetweenPoints = 60;
@@ -356,6 +351,14 @@ function drawChart(sun) {
     }
   });
 
+  var midnight = moment(sun.rise).set({
+    hour: 0,
+    minute: 0,
+    second: 0
+  });
+
+  var midnightMs = midnight.toDate().getTime();
+
   var options = {
     chart: {
       type: 'areaspline',
@@ -377,18 +380,22 @@ function drawChart(sun) {
     xAxis: {
       type: 'datetime',
       tickLength: 35,
-      tickPositions: [midnight.toDate().getTime()],
+      tickPositions: [
+        midnightMs - 60000,
+        midnightMs + 60000
+      ],
       labels: {
-        align: 'center',
+        align: 'left',
         useHTML: true,
         y: 12,
         x: 0,
         formatter: function () {
-          // only one tick, at midnight
-          var yesterday = moment(midnight).subtract(1, 's');
-          var html = '<span class=left>{0}<br>{1}</span>'.filledWith(yesterday.format('MMM D'), yesterday.format('dddd')) +
-            ' <span>{0}<br>{1}</span>'.filledWith(midnight.format('MMM D'), midnight.format('dddd'));
-          return html;
+          var tickMs = this.value;
+          var before = tickMs < midnight;
+          var tickTime = moment(tickMs);
+          var html = '{0}<br>{1}'.filledWith(tickTime.format('MMM D'), tickTime.format('dddd'));
+          // return '<span class="XLabel {0}" data-text="{^1}" data-before={0}>{^1}</span>'.filledWith(before ? "before" : "after", html);
+          return '<span class="XLabel {0}" data-before={0}>{^1}</span>'.filledWith(before ? "before" : "after", html);
         }
       },
     },
@@ -452,6 +459,7 @@ function drawChart(sun) {
   try {
     _chart = Highcharts.chart('sunChart', options, function (chart) {
       showNowLine(chart, sun);
+      alignLabels();
     });
   } catch (error) {
     // catch highcharts error to ensure it doesn't kill javascript  
@@ -460,14 +468,29 @@ function drawChart(sun) {
   }
 }
 
+function alignLabels() {
+  var labels = document.getElementsByClassName('XLabel');
+  for (var i = 0; i < labels.length; i++) {
+    var label = labels[i];
+    // label.innerHTML = label.dataset.text;
+    var before = label.dataset.before;
+    if (before === 'before') {
+      label.style.right = '5px';
+    } else {
+      label.style.left = '6px';
+    }
+  }
+}
+
 function showNowLine(chart, sun) {
   var now = sun.now;
   chart.xAxis[0].removePlotLine('now');
 
   var timeFromSunset = sun.now.diff(sun.setStart, 'h', true);
-  var align = timeFromSunset < 3 ? 'left' :
-    timeFromSunset > 21 ? 'right' :
-    'center';
+  var timeToSunset = sun.setEnd.diff(sun.now, 'h', true);
+  var align = 'center';
+  if (timeFromSunset < 3) align = 'left';
+  if (timeToSunset < 3) align = 'right';
 
   chart.xAxis[0].addPlotLine({
     value: now.toDate(),

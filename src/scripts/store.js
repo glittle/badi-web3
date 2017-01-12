@@ -41,7 +41,9 @@ function scheduleNextPulse() {
   }, delay);
 }
 
-export function doPulse() {
+export function doPulse(newTestTime) {
+  window.testTime = newTestTime; // okay if undefined
+
   badiCalc.refreshDateInfo();
   store.commit('pulsed')
     // console.log('pulsed');
@@ -54,3 +56,5 @@ export default store
 
 // for development
 window.doPulse = doPulse
+
+console.log('For testing other dates:\n  doPulse(new Date(y,m-1,d,h,m,s))');
