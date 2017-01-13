@@ -1,24 +1,24 @@
 <template>
-  <article class="layout-padding About">
-    <h1>{{this.title}}</h1>
-    <p>This web app is all about the Wondrous calendar!</p>
-    <p>It is developed and maintained by Glen Little (<a href="mailto:glen.little@gmail.com">email</a>). Please share suggestions
-      and comments with him!</p>
-    <p><span>Version {{version}}</span></p>
+  <div class="About">
+    <article class="layout-padding">
+      <div class=ShareThis>
+        <h2>Share this App!</h2>
+        <img class=qr src="~statics/qr.png">
+        <a href="https://www.wondrous-badi.ga/">
+          <span>Open in Web Browser</span>
+          <span>https://www.wondrous-badi.ga/</span>
+        </a>
+      </div>
+      <h1>{{this.title}}</h1>
+      <p>This web app is all about the Wondrous calendar!</p>
+      <p>It is developed and maintained by Glen Little (<a href="mailto:glen.little@gmail.com">email</a>). Please share suggestions
+        and comments with him!</p>
+      <p><span>Version {{version}}</span></p>
+    </article>
     <iframe class="statusDoc" src="https://docs.google.com/document/d/1Q1RtnOocBjW917CHceBbJPSljlDSN5GaZLBp5pu2inA/pub?embedded=false"></iframe>
-  </article>
+  </div>
 </template>
-<style>
-  .statusDoc {
-    margin: 25px 0 0 0;
-    width: 100%;
-    height: 100%;
-    box-sizing: content-box;
-    box-shadow: 1px 3px 4px 0px black;
-    border: none;
-  }
-
-</style>
+<style src="./About.vue.css"></style>
 <script>
   const moment = require('moment-timezone');
   var versionInfo = require('../../version.json')

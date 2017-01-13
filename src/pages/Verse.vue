@@ -116,7 +116,7 @@
   }
   
   .reciting div {
-    background-image: url('~assets/reciting.jpg');
+    background-image: url('~statics/reciting.jpg');
     width: 200px;
     height: 150px;
     opacity: 0.5;
