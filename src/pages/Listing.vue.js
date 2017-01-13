@@ -6,7 +6,7 @@ export default {
   name: 'listing', // for Vue debugger
   data() {
     return {
-      title: "Bahá'í Dates",
+      title: "Dates",
       icon: '../statics/calendarWhite.png',
       includeHolyDays: true,
       includeFeasts: true,

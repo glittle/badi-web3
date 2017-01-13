@@ -1622,11 +1622,13 @@ var TalkifyWordHighlighter = function () {
 
 var exportedPlayer;
 
-export default {
-  getPlayer: function () {
-    if (!exportedPlayer) {
-      exportedPlayer = new TtsPlayer();
-    }
-    return exportedPlayer;
+function getPlayer() {
+  if (!exportedPlayer) {
+    exportedPlayer = new TtsPlayer();
   }
+  return exportedPlayer;
+}
+
+export default {
+  player: getPlayer
 }

@@ -36,6 +36,7 @@ button.primary {
 
 .layout {
     width: auto;
+    height: auto;
 }
 
 article {
@@ -124,29 +125,35 @@ p {
 
 .layout-footer {
     .toolbar {
-        height: 40px;
-        min-height: 40px;
-        padding: 4px 0 0 0;
-        box-sizing: content-box;
-        >button{
+        height: 45px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        >button {
             width: 10%;
             max-width: 50px;
         }
     }
     .tbLink {
         text-align: center;
-        height: 100%;
+        cursor: pointer;
         flex-grow: 1;
+        div {
+            display: flex;
+            flex-direction: column;
+            padding: 4px 0 8px 0;
+        }
         img {
-            height: 80%;
+            height: 65%;
             max-height: 64px;
         }
         span {
-            display: none;
-            font-size: 10px;
+            display: block;
+            font-size: 13px;
+            font-weight: 300;
         }
     }
-
 }
 
 .q-popover {

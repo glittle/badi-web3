@@ -48,7 +48,9 @@
           <q-drawer-link v-for="page in pages.filter(p=>p.group.includes('setup'))" :icon="page.icon" :to="page.to" @click="$refs.popover.close()">{{page.text}}</q-drawer-link>-->
            <div class="list">
             <div class="item item-link" v-for="page in pages.filter(p=>p.group.includes('setup'))" @click="$refs.popover.close()">
-              <q-drawer-link :icon="page.icon" :to="page.to" >{{page.text}}</q-drawer-link>
+              <div>
+                <q-drawer-link :icon="page.icon" :to="page.to" >{{page.text}}</q-drawer-link>
+              </div>
             </div>
             <div class=version>Version {{version}}</div>
           </div>

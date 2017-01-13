@@ -1,21 +1,30 @@
 <template>
-  <article class="layout-padding">
-    <div class="verseText">{{verse}}</div>
-    <div class="suffix">{{suffix}}</div>
-    <div class="speakButtons">
-      <button id="btnRead" class="push small" v-if="offerVoice" @click="speak">
+  <article class="layout-padding Verse">
+    <div class="verseHost">
+      <div class="verseText" v-html="verse"></div>
+      <div class="suffix" v-html="suffix"></div>
+      <div class="webSearch" v-if="online">
+        <a target="_blank" v-bind:href="searchUrl">
+          <i>search</i> Find this verse on the Internet
+        </a>
+      </div>
+      <div class="speakButtons">
+        <button id="btnRead" class="push small" v-show="offerVoice" @click="speak">
           <i>record_voice_over</i>
         </button>
+      </div>
     </div>
     <p class="source">
-      A verse for {{timeOfDay}} from <cite>Reciting the Verses of God</cite>
-      <br> by Shahin Vafai & Dwight W. Allen.
+      A verse for {{timeOfDay}}
+      <br>from <cite>Reciting the Verses of God</cite>
+      <br>compiled by Shahin Vafai & Dwight W. Allen.
     </p>
     <div class="reciting">
       <div></div>
     </div>
   </article>
 </template>
+<style src="./Verse.vue.css"></style>
 <script>
   import verses from '../assets/verses.json'
   import moment from 'moment'
@@ -26,16 +35,29 @@
     name: 'verse', // for Vue debugger
     data() {
       return {
-        title: "Quote",
+        title: "Verse",
         icon: '../statics/verseWhite.png',
         verse: '',
         suffix: '',
         timeOfDay: '',
-        offerVoice: false // tts not working...  // navigator.onLine
+        offerVoice: false, // tts not working...  // navigator.onLine
+        online: navigator.onLine,
+        player: null
       }
     },
     created() {
       this.showToday()
+    },
+    computed: {
+      searchUrl: function () {
+        return 'https://www.google.com/search?q=' +
+          "Bahá'u'lláh+" +
+          this.verse.replace(/ /g, '+') +
+          '+youtube' // hint to find at youtube
+      },
+    },
+    mounted: function () {
+      // this.player = talk.player();
     },
     methods: {
       showToday() {
@@ -46,20 +68,19 @@
           // var hour = now.hour();
           // var isAm = hour < 12;
           var isEve = badiCalc.di.bNow.eve;
-          this.timeOfDay = (isEve ? 'the evening' : 'the morning') + ' of ' + now.format("MMM D")
+          this.timeOfDay = (isEve ? 'the evening' : 'the morning') + ' of ' + now.format("MMMM D")
 
           var verseInfo = dayVerses[isEve ? 'pm' : 'am'];
           // TODO: use sunset information for today
           if (verseInfo) {
-            this.suffix = `(Bahá'u'lláh, ${verseInfo.r})`;
+            this.suffix = `Bahá'u'lláh, ${verseInfo.r}`;
             this.verse = verseInfo.q;
           }
         }
       },
       speak() {
         // console.log(badiCalc.di.bMonth)
-        // var p = talk.getPlayer();
-        // p.playText('Hello world')
+        this.player.playText('Hello world')
 
         // var P = talk.Player;
         // var x = new P()
@@ -89,39 +110,3 @@
   }
 
 </script>
-<style scoped>
-  .verseText {
-    font-size: 1.3rem;
-    /*font-family: 'Gentium Book Basic', serif;*/
-  }
-  
-  .suffix {
-    text-align: right;
-    font-size: 1rem;
-    margin-top: 1em;
-  }
-  
-  .source {
-    margin-top: 4em;
-    margin-bottom: 0;
-    font-size: 0.85rem;
-    line-height: normal;
-    color: grey;
-    text-align: center;
-  }
-  
-  .reciting {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .reciting div {
-    background-image: url('~statics/reciting.jpg');
-    width: 200px;
-    height: 150px;
-    opacity: 0.5;
-    box-shadow: 0 0 4px 1px white inset;
-    margin: 15px 0 0 0;
-  }
-
-</style>

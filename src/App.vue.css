@@ -27,6 +27,7 @@ button.primary {
 }
 .layout {
   width: auto;
+  height: auto;
 }
 article h1 {
   margin: 15px 0 5px 0;
@@ -98,10 +99,11 @@ p {
   background-color: #fff;
 }
 .layout-footer .toolbar {
-  height: 40px;
-  min-height: 40px;
-  padding: 4px 0 0 0;
-  box-sizing: content-box;
+  height: 45px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
 }
 .layout-footer .toolbar > button {
   width: 10%;
@@ -109,16 +111,22 @@ p {
 }
 .layout-footer .tbLink {
   text-align: center;
-  height: 100%;
+  cursor: pointer;
   flex-grow: 1;
 }
+.layout-footer .tbLink div {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0 8px 0;
+}
 .layout-footer .tbLink img {
-  height: 80%;
+  height: 65%;
   max-height: 64px;
 }
 .layout-footer .tbLink span {
-  display: none;
-  font-size: 10px;
+  display: block;
+  font-size: 13px;
+  font-weight: 300;
 }
 .q-popover .version {
   font-size: 85%;
