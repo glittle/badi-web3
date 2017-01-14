@@ -34,7 +34,7 @@
         </select></div>
     </div>
     <div class="dayList">
-      <div class="item" v-for="day in filteredList">
+      <div class="item" v-for="day in filteredList" :id="makeId(day.di)">
         <div class="item-content dayContent Feast" :class="day.RowClass" v-if="day.Type==='M'">
           <div class="col1">
             <!--<span class=dayType><i>date_range</i></span>-->

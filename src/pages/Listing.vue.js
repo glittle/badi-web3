@@ -61,12 +61,15 @@ export default {
     }
   },
   methods: {
-    resetToFirstYear: function(){
+    resetToFirstYear: function () {
       var vue = this;
       vue.list = [];
       this.firstYear = this.originalYear;
       this.lastYear = this.originalYear;
       vue.loadDates(this.originalYear);
+    },
+    makeId: function (di) {
+      return 'M' + di.bYear + di.bMonth00;
     },
     getSpecialTime: function (day) {
       var prefix = 'Suggested start at';
@@ -82,10 +85,19 @@ export default {
           prefix = 'Celebrate at';
           list.push('setTime')
           break;
+
+        default:
+          if (!this.suggestedStart || !day.EventTime) {
+            return {
+              classes: '',
+              html: ''
+            }
+          }
+          break;
       }
 
       return {
-        // TODO: must be a better way to bind to two values...
+        // must be a better way to bind to two values...
         classes: list,
         html: prefix + ' ' + day.EventTime
       }
@@ -118,6 +130,19 @@ export default {
         return extendDayInfo(d, year - vue.originalYear)
       }));
       vue.list.sort(sortDates)
+
+      if (year === vue.originalYear) {
+        this.moveToThisMonth()
+      }
+    },
+    moveToThisMonth: function () {
+      // find dayContent Today
+      // find start of Month
+      // move to Month
+      var target = this.makeId(badi.di);
+      setTimeout(function () {
+        document.getElementById(target).scrollIntoView(true);
+      }, 0)
     },
     test: function (cell) {
       switch (cell.data) {
