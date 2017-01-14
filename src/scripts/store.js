@@ -12,6 +12,7 @@ const store = new Vuex.Store({
   mutations: {
     pulsed(state) {
       state.pulseNum++
+        document.dispatchEvent(new Event('pulsed'));
     },
     newDate(state, di) {
       state.di = di //TODO integrate into system
@@ -23,14 +24,14 @@ const store = new Vuex.Store({
 
 // ----------------------------
 
-// const pulseTime = 1000 * 60; // normally 1 minute
+const pulseSeconds = 60; // normally 60 seconds
 
 function scheduleNextPulse() {
   // start the timer just after the minute
   var nextMinute = new Date();
   //   console.log('start called at ' + nextMinute)
 
-  nextMinute.setHours(nextMinute.getHours(), nextMinute.getMinutes() + 1, 0, 1)
+  nextMinute.setHours(nextMinute.getHours(), nextMinute.getMinutes(), nextMinute.getSeconds() + pulseSeconds, 1)
   var delay = nextMinute.getTime() - new Date().getTime();
 
   //   console.log('start pulse in ' + delay);
@@ -42,11 +43,14 @@ function scheduleNextPulse() {
 }
 
 export function doPulse(newTestTime) {
+  if (newTestTime) {
+    // debugger;
+  }
   window.testTime = newTestTime; // okay if undefined
 
   badiCalc.refreshDateInfo();
   store.commit('pulsed')
-    // console.log('pulsed');
+
   scheduleNextPulse();
 }
 

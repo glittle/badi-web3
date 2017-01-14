@@ -77,13 +77,12 @@
     data() {
       return {
         pages: routeList.menuPages,
+        di: badiCalc.di
       }
     },
     computed: {
       topDate: function () {
-        this.$store.state.pulseNum // force this compute to update on every pulse
-        doWorkOnPulse();
-        return shared.formats.topTitle.filledWith(badiCalc.di)
+        return shared.formats.topTitle.filledWith(this.di)
       },
       version() {
         var age = moment(versionInfo.buildDate, "_ MMM D YYYY HH:mm:ss _Z").fromNow();
@@ -91,7 +90,22 @@
       }
 
     },
+    created() {
+      document.addEventListener('pulsed', this.doWorkOnPulse, false)
+    },
     methods: {
+      doWorkOnPulse() {
+        // console.log('app pulse')
+          // notification icon
+        var di = badiCalc.di;
+        var key = di.stamp;
+        if (key !== lastNotificationKey) {
+          // console.log('do notify')
+          this.di = di;
+          notify.showNow();
+          lastNotificationKey = key;
+        }
+      },
       swipePage(obj) {
         // console.log(obj)
         var delta;
@@ -141,17 +155,6 @@
   }
 
   var lastNotificationKey = null;
-
-  function doWorkOnPulse() {
-    // console.log('app pulse')
-    // notification icon
-    var key = badiCalc.di.stamp;
-    if (key !== lastNotificationKey) {
-      // console.log('do notify')
-      notify.showNow();
-      lastNotificationKey = key;
-    }
-  }
 
   function checkLocation(vue) {
     var src = shared.coords.source;

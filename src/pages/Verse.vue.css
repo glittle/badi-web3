@@ -1,6 +1,7 @@
 .Verse .verseText {
   font-size: 1.3rem;
   /*font-family: 'Gentium Book Basic', serif;*/
+  min-height: 105px;
 }
 .Verse .verseHost {
   max-width: 35em;
@@ -38,4 +39,7 @@
 .Verse .webSearch i {
   padding: 0 0 1px 0;
   font-size: 140%;
+}
+.Verse .verseNav {
+  text-align: center;
 }

@@ -125,7 +125,7 @@ export default {
       }
       console.log('loading', year)
       var info = badi.buildSpecialDaysTable(year, this.suggestedStart);
-      window.dis = cloneDeep(info); // for developer access in console
+      window._days = cloneDeep(info); // for developer access in console
       vue.list = vue.list.concat(info.map(function (d) {
         return extendDayInfo(d, year - vue.originalYear)
       }));

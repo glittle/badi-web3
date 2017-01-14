@@ -268,6 +268,8 @@ function setNextRefreshAt(refreshTime, midnightUpdate) {
 
 var _chart = null;
 var _lastChartDay = null;
+var _fontSize = '12px';
+var _fontColor = '#212121';
 
 function drawChart(sun) {
   //   console.log('drawing chart')
@@ -512,5 +514,3 @@ function showNowLine(chart, sun) {
     }
   });
 }
-var _fontSize = '12px';
-var _fontColor = '#212121';

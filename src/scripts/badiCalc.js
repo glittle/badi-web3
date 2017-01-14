@@ -647,10 +647,22 @@ function dateInfosRaw() {
     },
 
     // { Type: 'OtherRange', BDateCode: '2.13', BDateCodeTo: '3.5', NameEn: 'FestivalRidvan' },
-    { Type: 'OtherRange', Special: 'AYYAM.Intercalary', NameAr: 'Ayyám-i-Há', NameEn: 'Intercalary' },
+    {
+      Type: 'OtherRange',
+      Special: 'AYYAM.Intercalary',
+      NameAr: 'Ayyám-i-Há',
+      NameEn: 'Intercalary'
+    },
 
-    { Type: 'OtherDay', BDateCode: '2.13', NameEn: 'Annual Meeting and Election' },
-    { Type: 'OtherDay', Special: 'JAN1', NameEn: 'Start of Gregorian Year ' }
+    {
+      Type: 'OtherDay',
+      BDateCode: '2.13',
+      NameEn: 'Annual Meeting and Election'
+    }, {
+      Type: 'OtherDay',
+      Special: 'JAN1',
+      NameEn: 'Start of Gregorian Year '
+    }
   ];
 };
 
@@ -2657,13 +2669,13 @@ function setupLanguageChoice() {
 
 function refreshDateInfo() {
   if (window.testTime) {
-    generateDateInfo(_di, window.testTime);
+    generateDateInfo(_di, window.testTime, false, true);
   } else {
-    generateDateInfo(_di, new Date());
+    generateDateInfo(_di, new Date(), false, true);
   }
 }
 
-function generateDateInfo(di, currentTime, onlyStamp) {
+function generateDateInfo(di, currentTime, onlyStamp, updateWindowsNowDi) {
   // hard code limits
   var minDate = new Date(1844, 2, 21, 0, 0, 0, 0);
   if (currentTime < minDate) {
@@ -2680,7 +2692,6 @@ function generateDateInfo(di, currentTime, onlyStamp) {
   //   if (known) {
   //     return known;
   //   }
-
   var bNow = getBDate(currentTime);
   if (onlyStamp) {
     return {
@@ -2689,9 +2700,11 @@ function generateDateInfo(di, currentTime, onlyStamp) {
     };
   }
 
+  var thisMoment = currentTime.getTime();
+
   // split the Baha'i day to be "Eve" - sunset to midnight;
   // and "Morn" - from midnight through to sunset
-  var frag1Noon = new Date(currentTime.getTime());
+  var frag1Noon = new Date(thisMoment);
   frag1Noon.setHours(12, 0, 0, 0);
   if (!bNow.eve) {
     // if not already frag1, make it so
@@ -2820,7 +2833,6 @@ function generateDateInfo(di, currentTime, onlyStamp) {
 
 
   di.currentRelationToSunset = messages.get(bNow.eve ? 'afterSunset' : 'beforeSunset');
-  var thisMoment = new Date().getTime();
   di.dayStarted = messages.get(thisMoment > di.frag1SunTimes.sunset.getTime() ? 'dayStartedPast' : 'dayStartedFuture');
   di.dayEnded = messages.get(thisMoment > di.frag2SunTimes.sunset.getTime() ? 'dayEndedPast' : 'dayEndedFuture');
   di.dayStartedLower = di.dayStarted.toLocaleLowerCase();
@@ -2856,7 +2868,10 @@ function generateDateInfo(di, currentTime, onlyStamp) {
   //   knownDateInfos[currentTime] = _di;
 
   // for development
-  window.di = cloneDeep(di);
+  if (updateWindowsNowDi) {
+    window._nowDi = cloneDeep(di);
+    // console.log('updat win nowid', window._nowDi.stamp)
+  }
 }
 
 function getElementNum(num) {

@@ -6,8 +6,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: 0.02em;
 }
+.disabled,
+[disabled],
+.disabled *,
+[disabled] * {
+  pointer-events: none;
+}
 div.toolbar {
   background-color: #2980b9;
+}
+div.toolbar .toolbar-title {
+  text-align: center;
 }
 body.desktop button.primary:not(.disabled):hover:not(.clear) {
   background: #2980b9;

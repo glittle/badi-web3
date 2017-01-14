@@ -5,7 +5,7 @@
       <div class="suffix" v-html="suffix"></div>
       <div class="webSearch" v-if="online">
         <a target="_blank" v-bind:href="searchUrl">
-          <i>search</i> Find this verse on the Internet
+          <i>search</i> Find uses of this verse on the Internet and YouTube
         </a>
       </div>
       <div class="speakButtons">
@@ -14,10 +14,14 @@
         </button>
       </div>
     </div>
+    <div class="verseNav">
+      <button class="small light" v-on:click="showPrevious">Previous</button>
+      <button class="small light" v-on:click="showNext" v-bind:disabled="!canShowNext">Next</button>
+    </div>
     <p class="source">
-      A verse for {{timeOfDay}}
-      <br>from <cite>Reciting the Verses of God</cite>
-      <br>compiled by Shahin Vafai & Dwight W. Allen.
+      A verse for {{timeOfDay}} 
+      <br>from <cite>Reciting the Verses of God</cite> compiled
+      <br>by Shahin Vafai & Dwight W. Allen.
     </p>
     <div class="reciting">
       <div></div>
