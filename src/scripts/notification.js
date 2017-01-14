@@ -1,6 +1,7 @@
 import badiCalc from './badiCalc'
 import storage from './storage'
 import * as shared from './shared'
+import verseHelper from './verseHelper'
 require('../scripts/stringExt')
   // const moment = require('moment-timezone');
 
@@ -8,7 +9,8 @@ require('../scripts/stringExt')
 
 export function showNow() {
   show(shared.formats.noticationMain.filledWith(badiCalc.di),
-    shared.formats.noticationSub.filledWith(badiCalc.di),
+    shared.formats.noticationSub.filledWith(badiCalc.di)
+    + '\n\n' + verseHelper.forDi(badiCalc.di).verse,
     shared.formats.statusIconText.filledWith(badiCalc.di),
     badiCalc.di.bDay,
     false)
