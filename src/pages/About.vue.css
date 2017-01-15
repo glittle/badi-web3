@@ -22,6 +22,7 @@
 .About .ShareThis .qr {
   width: 150px;
   max-width: 80%;
+  margin: 8px 0 4px 0;
 }
 .About .ShareThis a {
   font-size: 0.75rem;
@@ -29,4 +30,7 @@
 }
 .About .ShareThis a span {
   display: block;
+}
+.About .ShareThis a span.underline {
+  text-decoration: underline;
 }

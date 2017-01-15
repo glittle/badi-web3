@@ -20,7 +20,7 @@ var coords = {
     return storage.get('coord.name', 'Wilmette')
   },
   set name(v) {
-    storage.set('coord.name', v)
+    storage.set('coord.name', v || '')
   },
   get source() {
     return storage.get('coord.source', 'default')

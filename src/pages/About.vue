@@ -5,8 +5,8 @@
         <h2>Share this App!</h2>
         <img class=qr src="~statics/qr.png">
         <a href="https://www.wondrous-badi.ga/">
-          <span>Open in Web Browser</span>
-          <span>https://www.wondrous-badi.ga/</span>
+          <span>Open in your web browser</span>
+          <span class=underline>Wondrous-Badi.ga</span>
         </a>
       </div>
       <h1>{{this.title}}</h1>

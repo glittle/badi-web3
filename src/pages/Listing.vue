@@ -86,9 +86,9 @@
             <img src="../statics/sun.png">
           </div>
           <div class="col2">
-            <div class=dayName v-html="day.D"></div>
+              <div class=dayName v-html="day.NameEn"></div>
             <div>
-              <span v-html="day.NameEn"></span>
+              <span v-html="day.D"></span>
               <span>-</span>
               <span v-html="day.FastDay"></span>
             </div>
@@ -106,18 +106,13 @@
             </div>
           </div>
         </div>
-        <div class="item-content dayContent Other" :class="day.RowClass" v-if="day.Type.startsWith('Other')">
+        <div class="item-content dayContent Other" :class="day.RowClass" v-if="day.Type==='OtherDay'">
           <div class="col1">
-            <!--<img src="../statics/calendar.png">-->
           </div>
           <div class="col2">
-            <!--<input type="checkbox" class=toggleInfo></div>-->
             <div class=dayName v-html="day.NameEn"></div>
             <div v-html="day.D"></div>
             <div v-html="day.A2"></div>
-            <!--<div class=toggleInfoTarget>
-              More Info!
-            </div>-->
           </div>
           <div class="col3">
             <div class=sunsetStart>
@@ -125,6 +120,25 @@
               <span v-html="day.Sunset"></span>
             </div>
             <div class=gDate v-html="day.di.gCombinedY">
+            </div>
+          </div>
+        </div>
+        <div class="item-content dayContent Other" :class="day.RowClass" v-if="day.Type==='Ayyam'">
+          <div class="col1">
+          </div>
+          <div class="col2">
+            <div class="dayName" v-html="day.NameAr"></div>
+            <div v-html="'{daysInAyyamiHa} {A}'.filledWith(day)"></div>
+          </div>
+          <div class="col3">
+            <div class="sunsetStart">
+              <img src="../statics/sunset.png">
+              <span v-html="day.Sunset"></span>
+            </div>
+            <div class="gDate" v-html="day.di.gCombinedY + '<br>to<br>' + day.lastDayDi.gCombinedY">
+              <!--<span v-html="day.di.gCombined"></span>-->
+              <span>to</span>
+              <!--<span v-html="day.lastDayDi.gCombinedY"></span>-->
             </div>
           </div>
         </div>

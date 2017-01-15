@@ -1,5 +1,4 @@
 #Listing {
-  max-width: 700px;
   width: 100%;
 }
 #Listing .location {
@@ -113,8 +112,9 @@
   margin: 0 3px;
 }
 #Listing .dayContent .col3 .gDate {
-  font-size: .7em;
+  font-size: .72em;
   color: #7f8c8d;
+  font-weight: 400;
 }
 #Listing .Feast .col1 img {
   border-radius: 3px;

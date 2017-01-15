@@ -1,5 +1,7 @@
 import badi from '../scripts/badiCalc'
 import * as shared from '../scripts/shared'
+import storage from '../scripts/storage'
+
 var cloneDeep = require('lodash/cloneDeep');
 
 export default {
@@ -8,21 +10,49 @@ export default {
     return {
       title: "Dates",
       icon: '../statics/calendarWhite.png',
-      includeHolyDays: true,
-      includeFeasts: true,
-      includeOther: true,
-      includeFast: false,
+      includeHolyDays: storage.get('includeHolyDays', true),
+      includeFeasts: storage.get('includeFeasts', true),
+      includeOther: storage.get('includeOther', true),
+      includeFast: storage.get('includeFast', false),
+      suggestedStart: storage.get('suggestedStart', '1930'),
       originalYear: 0,
       firstYear: 9999,
       lastYear: -1,
       list: [],
       location: shared.coords.name,
-      suggestedStart: '1930'
+      scrollDone: false
     }
+  },
+  watch: {
+    includeHolyDays: function (v) {
+      storage.set('includeHolyDays', v)
+    },
+    includeFeasts: function (v) {
+      storage.set('includeFeasts', v)
+    },
+    includeOther: function (v) {
+      storage.set('includeOther', v)
+    },
+    includeFast: function (v) {
+      storage.set('includeFast', v)
+    },
+    suggestedStart: function (v) {
+      storage.set('suggestedStart', v)
+      var vue = this;
+      vue.list = [];
+      // TODO: does not redisplay if reusing previous year
+      for (var i = vue.firstYear; i <= vue.lastYear; i++) {
+        vue.loadDates(i);
+      }
+    },
   },
   created: function () {
     this.originalYear = badi.di.bYear;
     this.loadDates(this.originalYear);
+
+    if(badi.di.bMonth > 17 || badi.di.bMonth === 0){
+      this.loadDates(this.nextYear);
+    }
   },
   computed: {
     nextYear: function () {
@@ -41,26 +71,20 @@ export default {
         filter.push('M');
       }
       if (this.includeOther) {
-        filter.push('OtherRange');
+        filter.push('Ayyam');
         filter.push('OtherDay');
       }
       if (this.includeFast) {
         filter.push('Fast');
       }
       return this.list.filter(item => filter.includes(item.Type));
-    }
-  },
-  watch: {
-    suggestedStart: function () {
-      var vue = this;
-      vue.list = [];
-      // TODO: does not redisplay if reusing previous year
-      for (var i = vue.firstYear; i <= vue.lastYear; i++) {
-        vue.loadDates(i);
-      }
-    }
+    },
   },
   methods: {
+    ayyam2: function(day){
+      console.log(day)
+      return day.lastDayDi.gCombinedY
+    },
     resetToFirstYear: function () {
       var vue = this;
       vue.list = [];
@@ -131,14 +155,12 @@ export default {
       }));
       vue.list.sort(sortDates)
 
-      if (year === vue.originalYear) {
+      if (!this.scrollDone) {
         this.moveToThisMonth()
+        this.scrollDone = true;
       }
     },
     moveToThisMonth: function () {
-      // find dayContent Today
-      // find start of Month
-      // move to Month
       var target = this.makeId(badi.di);
       setTimeout(function () {
         document.getElementById(target).scrollIntoView(true);

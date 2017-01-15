@@ -76,6 +76,8 @@ function prepareDateInfos(bYear) {
     var bm = makeBMonthDay(dateInfo.MonthNum, 1);
 
     if (dateInfo.Type === 'M') {
+      // if (!dateInfo.MonthNum) {
+      // }
       dateInfo.BMonthDay = bm;
       dateInfo.BMonthDayTo = makeBMonthDay(dateInfo.MonthNum, 19);
     }
@@ -113,10 +115,16 @@ function prepareDateInfos(bYear) {
 
           var lastDayOfAyyamiHa = new Date(getGregorianDate(bYear, 19, 1).getTime());
           lastDayOfAyyamiHa.setDate(lastDayOfAyyamiHa.getDate() - 1);
+
+          var lastDi = {};
+          generateDateInfo(lastDi, lastDayOfAyyamiHa);
+          dateInfo.lastDayDi = lastDi;
           // log('last #2')
           // log(lastAyyamiHa);
           var numDaysInAyyamiHa = 1 + Math.round(Math.abs((firstDayOfAyyamiHa.getTime() - lastDayOfAyyamiHa.getTime()) / _msInDay));
           dateInfo.BMonthDayTo = makeBMonthDay(0, numDaysInAyyamiHa);
+          dateInfo.daysInAyyamiHa = numDaysInAyyamiHa;
+
 
           dateInfo.GYearOffset = 1;
 
@@ -159,7 +167,7 @@ function prepareDateInfos(bYear) {
       dateInfo.GDateTo = getGDateYBDate(bYear, dateInfo.BMonthDayTo);
     }
 
-    if (!dateInfo.BDateCode) {
+    if (!dateInfo.BDateCode && bm.m) {
       dateInfo.BDateCode = bm.m + '.' + bm.d;
     }
 
@@ -169,7 +177,6 @@ function prepareDateInfos(bYear) {
   _dateInfos.sort(function (a, b) {
     // try{
     // if(a.BMonthDay.m == 19){
-    // if(a.Sort == b.Sort) debugger;
     // }
     // }catch(e){
     // log(e);
@@ -198,10 +205,10 @@ function prepareDateInfos(bYear) {
       // month first
       return 1;
     }
-    if (a.Type === 'OtherRange') {
+    if (a.Type === 'Ayyam') {
       return -1;
     }
-    if (b.Type === 'OtherRange') {
+    if (b.Type === 'Ayyam') {
       return 1;
     }
     return 0;
@@ -423,7 +430,7 @@ function getUpcomingRaw(di, numToAdd) {
     } else {
       if (dateInfo.Type === 'M' ||
         dateInfo.Type.slice(0, 1) === 'H' ||
-        dateInfo.Type === 'OtherRange' && dateInfo.Special && dateInfo.Special.slice(0, 5) === 'AYYAM'
+        dateInfo.Type === 'Ayyam'
       ) {
         upcoming.push(dateInfo);
         // log(dateInfo);
@@ -648,8 +655,9 @@ function dateInfosRaw() {
 
     // { Type: 'OtherRange', BDateCode: '2.13', BDateCodeTo: '3.5', NameEn: 'FestivalRidvan' },
     {
-      Type: 'OtherRange',
+      Type: 'Ayyam',
       Special: 'AYYAM.Intercalary',
+      MonthNum: 0,
       NameAr: 'Ayyám-i-Há',
       NameEn: 'Intercalary'
     },
