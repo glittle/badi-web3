@@ -13,7 +13,7 @@
         </label>
       </div>
     </div>
-    <h2>Date Formats</h2>
+    <!--<h2>Date Formats</h2>
     <div class="section formats">
       <div>
         <b>Top of App:</b>
@@ -29,7 +29,7 @@
       <div class="card-content">
         These will configurable in a future version.
       </div>
-    </div>
+    </div>-->
   </article>
 </template>
 <style src="./OtherSetup.vue.css"></style>
@@ -55,7 +55,9 @@
         },
         set: function (v) {
           storage.set('useArNames', v);
-          window.location.reload();
+          setTimeout(function () {
+              window.location.reload();
+            }, 300) // let user see button change before reloading
         }
       }
     },
