@@ -115,8 +115,7 @@ p {
   align-items: stretch;
 }
 .layout-footer .toolbar > button {
-  width: 10%;
-  max-width: 50px;
+  width: 2rem;
 }
 .layout-footer .tbLink {
   text-align: center;
