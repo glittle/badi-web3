@@ -4,6 +4,10 @@
     <div class="section">
       <p>Enter the location manually below, or click the "Get Location" button.
       </p>
+      <div class="statusLines" v-show="statusLines.length">
+        <b>Name Search</b>
+        <div class='status' v-html="statusLines.join('<br>')"></div>
+      </div>
       <p><span>Latitude</span>
         <input type="number" min="-85" max="85" step="any" v-model.number="lat" :class="{'has-error': validation.hasError('lat')}">
       </p>
@@ -25,10 +29,7 @@
           The approximate location of this device/computer is required and must match its timezone!
         </div>
       </div>
-      <p v-show="statusLines.length">
-        <b>Status</b>
-        <div class='status' v-html="statusLines.join('<br>')"></div>
-      </p>
+      
     </div>
   </article>
 </template>

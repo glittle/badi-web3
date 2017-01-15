@@ -1,6 +1,3 @@
-.LocationSetup p {
-  margin: 1em 0;
-}
 .LocationSetup p span {
   margin-right: 10px;
 }
@@ -12,6 +9,13 @@
 }
 .LocationSetup p.buttons {
   margin-top: 1em;
+}
+.LocationSetup .statusLines {
+  float: right;
+  max-width: 50%;
+  padding: 5px;
+  border: 1px solid lightgray;
+  border-radius: 2px;
 }
 .LocationSetup .status {
   transition: height 0.5s;

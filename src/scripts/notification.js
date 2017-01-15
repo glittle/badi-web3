@@ -9,8 +9,8 @@ require('../scripts/stringExt')
 
 export function showNow() {
   show(shared.formats.noticationMain.filledWith(badiCalc.di),
-    shared.formats.noticationSub.filledWith(badiCalc.di)
-    + '\n\n' + verseHelper.forDi(badiCalc.di).verse,
+    shared.formats.noticationSub.filledWith(badiCalc.di) +
+    '\n\n' + verseHelper.forDi(badiCalc.di).verse,
     shared.formats.statusIconText.filledWith(badiCalc.di),
     badiCalc.di.bDay,
     false)
@@ -49,38 +49,40 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
     // prepareImage(function () {
     // var icon = generateOnImage(iconDayNum);
 
-    navigator.serviceWorker.ready.then(function (registration) {
-      var options = {
-        body: note2,
-        // icon: icon,
-        icon: '/statics/images/d{0}.png'.filledWith(iconDayNum),
-        //image: '/images/badiIcon32.png',
-        //badge: '/images/19.png',
-        badge: generateStatusIcon(iconText, iconDayNum, 'center', 128),
-        tag: 'badi',
-        data: {
-          url: location.origin
-        },
-        //vibrate: makeSound ? [200, 100, 200, 100, 200, 100, 400] : null,
-        silent: !makeSound,
-        renotify: !makeSound,
-        requireInteraction: true
-      };
-      if (makeSound) {
-        options.vibrate = [200, 100, 200, 100, 200, 100, 400]
-      }
-      var n = registration.showNotification(note1, options);
-      // Remove the notification from Notification Center when clicked.
-      n.onclick = function () {
-        console.log('Notification clicked');
-        // registration.cl
-        this.close();
-      };
-      // Callback function when the notification is closed.
-      n.onclose = function () {
-        console.log('Notification closed');
-      };
-    });
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.ready.then(function (registration) {
+        var options = {
+          body: note2,
+          // icon: icon,
+          icon: '/statics/images/d{0}.png'.filledWith(iconDayNum),
+          //image: '/images/badiIcon32.png',
+          //badge: '/images/19.png',
+          badge: generateStatusIcon(iconText, iconDayNum, 'center', 128),
+          tag: 'badi',
+          data: {
+            url: location.origin
+          },
+          //vibrate: makeSound ? [200, 100, 200, 100, 200, 100, 400] : null,
+          silent: !makeSound,
+          renotify: !makeSound,
+          requireInteraction: true
+        };
+        if (makeSound) {
+          options.vibrate = [200, 100, 200, 100, 200, 100, 400]
+        }
+        var n = registration.showNotification(note1, options);
+        // Remove the notification from Notification Center when clicked.
+        n.onclick = function () {
+          console.log('Notification clicked');
+          // registration.cl
+          this.close();
+        };
+        // Callback function when the notification is closed.
+        n.onclose = function () {
+          console.log('Notification closed');
+        };
+      });
+    }
     // })
   }
   // If the user does not want notifications to come from this domain...
