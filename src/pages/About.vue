@@ -21,7 +21,7 @@
 <style src="./About.vue.css"></style>
 <script>
   const moment = require('moment-timezone');
-  var versionInfo = require('../../version.json')
+  var versionInfo = require('../../root/version.json')
 
   export default {
     data() {

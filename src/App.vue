@@ -69,7 +69,7 @@
   import * as notify from './scripts/notification'
   import * as shared from './scripts/shared'
   const moment = require('moment-timezone');
-  var versionInfo = require('../version.json')
+  var versionInfo = require('../root/version.json')
 
   require('./scripts/stringExt')
 

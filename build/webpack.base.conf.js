@@ -104,7 +104,7 @@ module.exports = {
   "buildDate": "<%= currentTime %>",
 	"version":   "<%= package.version %>"
 }`,
-      outputFile: path.join(__dirname, '../version.json')
+      outputFile: path.join(__dirname, '../root/version.json')
     }),
     new CopyWebpackPlugin([{
       from: 'root/'
