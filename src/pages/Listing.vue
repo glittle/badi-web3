@@ -39,6 +39,7 @@
           <div class="col1">
             <!--<span class=dayType><i>date_range</i></span>-->
             <img :class="day.di.element" src="../statics/calendar.png">
+            <div>{{day.di.bMonth}}</div>
           </div>
           <div class="col2">
             <!--<input type="checkbox" class=toggleInfo></div>-->

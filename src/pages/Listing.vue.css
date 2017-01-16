@@ -131,6 +131,11 @@
 #Listing .Feast .col1 img.Earth {
   background-color: #2ecc71;
 }
+#Listing .Feast .col1 div {
+  font-size: 0.7rem;
+  font-weight: 400;
+  margin-top: -5px;
+}
 #Listing .Today {
   background-color: #eafff5;
   padding: 4px 0;
