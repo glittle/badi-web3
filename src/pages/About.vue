@@ -15,7 +15,8 @@
         <span itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">Glen Little</span> (<a href="mailto:glen.little@gmail.com">email</a>).</span> Please
         share suggestions and comments with him!</p>
-      <p><span>Version <span itemprop="softwareVersion">{{version}}</span> ({{versionAge}})</span></p>
+      <p><span>Version <span itemprop="softwareVersion">{{version}}</span> ({{versionAge}})</span>
+      </p>
     </article>
     <iframe class="statusDoc" src="https://docs.google.com/document/d/1Q1RtnOocBjW917CHceBbJPSljlDSN5GaZLBp5pu2inA/pub?embedded=false"></iframe>
   </div>
@@ -36,7 +37,7 @@
       version() {
         return versionInfo.version;
       },
-      versionAge(){
+      versionAge() {
         var age = moment(versionInfo.buildDate, "_ MMM D YYYY HH:mm:ss _Z").fromNow();
         return age;
       }
