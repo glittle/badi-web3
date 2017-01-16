@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: http://wondrous-badi.ga/sitemap.xml
