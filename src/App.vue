@@ -1,11 +1,11 @@
 <template>
-  <q-layout>
+  <q-layout itemscope itemtype="http://schema.org/SoftwareApplication">
     <div slot="header" class="toolbar">
       <!--<button class="hide-on-drawer-visible" @click="$refs.leftDrawer.open()">
         <i>menu</i>
       </button>-->
       <q-toolbar-title>
-        <h1>Wondrous-Badí' Calendar</h1>
+        <h1 itemprop="name">Wondrous-Badí' Calendar</h1>
         <h2 v-html="topDate"></h2>
       </q-toolbar-title>
       <!--<button ref="target" class="primary">
