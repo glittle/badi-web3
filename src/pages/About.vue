@@ -13,8 +13,16 @@
       <p>This web app is all about the <span itemprop="applicationCategory">Wondrous calendar</span>!</p>
       <p>It is developed and maintained by
         <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">Glen Little</span> (<a href="mailto:glen.little@gmail.com">email</a>).</span> Please
-        share suggestions and comments with him!</p>
+        <span itemprop="name">Glen Little</span> (<a href="mailto:glen.little@gmail.com">email</a>).</span>
+        Please share suggestions and comments with him! 
+      </p>
+      <p class="pp">
+        <a href="https://www.paypal.me/GlenLittle/19" target="_blank"></a>
+        <span>If you find this web app to be useful for making the Wondrous-Badí' 
+          calendar a part of your daily life, please click the 
+          <a href="https://www.paypal.me/GlenLittle/19" target="_blank">PayPal icon</a> and pay whatever
+          you feel is appropriate!
+      </p>
       <p><span>Version <span itemprop="softwareVersion">{{version}}</span> ({{versionAge}})</span>
       </p>
     </article>
