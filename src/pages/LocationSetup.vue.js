@@ -6,7 +6,7 @@ var Vue = require('vue');
 var SimpleVueValidation = require('simple-vue-validator');
 var Validator = SimpleVueValidation.Validator;
 
-Vue.use(SimpleVueValidation);
+// Vue.use(SimpleVueValidation);
 
 // var timeout = null;
 var clearLog = true;

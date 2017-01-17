@@ -45,6 +45,8 @@ function scheduleNextPulse() {
 export function doPulse(newTestTime) {
   if (newTestTime) {
     // debugger;
+    // reset some...
+    badiCalc.reset();
   }
   window.testTime = newTestTime; // okay if undefined
 
@@ -54,7 +56,7 @@ export function doPulse(newTestTime) {
   scheduleNextPulse();
 }
 
-scheduleNextPulse();
+// scheduleNextPulse();
 
 export default store
 
@@ -62,3 +64,7 @@ export default store
 window.doPulse = doPulse
 
 console.log('For testing other dates:\n  doPulse(new Date(y,m-1,d,h,m,s))');
+
+setTimeout(function () {
+  doPulse(new Date(2017, 0, 17, 23, 4, 59))
+}, 0)

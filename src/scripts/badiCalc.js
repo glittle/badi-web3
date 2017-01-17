@@ -15,6 +15,11 @@ var _dateInfos = null;
 var _dateInfosForYear = 0;
 var _msInDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
 
+function reset() {
+  _cachedDateInfos = {};
+  _dateInfos = null;
+}
+
 fillDatePresets();
 
 function prepareDateInfos(bYear) {
@@ -3052,6 +3057,7 @@ function determineDaysAway(_di, moment1, moment2, sameDay) {
 
 export default {
   di: _di,
+  reset: reset,
   getUpcoming: getUpcoming,
   setFocusTime: setFocusTime,
   languageCode: _languageCode,
