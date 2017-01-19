@@ -2,34 +2,40 @@
   <article class="LocationSetup layout-padding">
     <h1>Location</h1>
     <div class="section">
-      <p>Enter your location manually below, or click the "Get Location" button.
+      <p>
+        The approximate location of this device/computer is required and must match its timezone! </p>
+      <p>
+        Click <button @click="getLocation" class="small primary">Get Location</button> or manually enter your location coordinates
+        below.
       </p>
-      <div class="statusLines" v-show="statusLines.length">
-        <b>Name Search</b>
-        <div class='status' v-html="statusLines.join('<br>')"></div>
-      </div>
-      <p><span>Latitude</span>
-        <input type="number" min="-85" max="85" step="any" v-model.number="lat" :class="{'has-error': validation.hasError('lat')}">
-      </p>
-      <p><span>Longitude</span>
-        <input type="number" min="-180" max="180" step="any" v-model.number="lng" :class="{'has-error': validation.hasError('lng')}">
+      <p class="latlng">
+        <span>
+          <span>Latitude</span>
+        <input type="number" min="-85" max="85" step="any" v-model.number="lat" :class="{'has-error': latError}">
+        <span class="busy" v-show="gettingLocation">
+            <span></span>
+        </span>
+        </span>
+        <span>
+          <span>Longitude</span>
+        <input type="number" min="-180" max="180" step="any" v-model.number="lng" :class="{'has-error': lngError}">
+        <span class="busy" v-show="gettingLocation">
+            <span></span>
+        </span>
+        </span>
       </p>
       <p>
         <span>Name</span><input type="text" v-model="name">
+        <span class="busy" v-show="gettingName">
+          <span></span>
+        </span>
       </p>
       <p>
         <span>Time zone</span><span v-text="timezone"></span>
       </p>
       <p class=buttons>
-        <button @click="getLocation" class="small primary">Get Location</button>
         <button @click="openMap" class="small light">Show on a Map</button>
       </p>
-      <div class="card">
-        <div class="card-content">
-          The approximate location of this device/computer is required and must match its timezone!
-        </div>
-      </div>
-      
     </div>
   </article>
 </template>

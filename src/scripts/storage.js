@@ -7,7 +7,14 @@ export default {
     LocalStorage.set(key, value)
   },
   get: function (key, defaultValue) {
-    return LocalStorage.has(key) ? LocalStorage.get.item(key) : defaultValue
+    if (LocalStorage.has(key)) {
+      var v = LocalStorage.get.item(key);
+      if (v !== '__q_strn|') {
+        // Quasar LocalStorage fails sometimes
+        return v;
+      }
+    }
+    return defaultValue
   }
 }
 

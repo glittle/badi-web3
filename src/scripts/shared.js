@@ -3,21 +3,21 @@ import store from './store'
 
 var coords = {
   get lat() {
-    return storage.get('coord.lat', 42.0744279) // House of Worship  :)
+    return storage.get('coord.lat', 0)
   },
   set lat(v) {
     storage.set('coord.lat', v)
     updatedCoords()
   },
   get lng() {
-    return storage.get('coord.lng', -87.6843469)
+    return storage.get('coord.lng', new Date().getTimezoneOffset() / 60 * -15)
   },
   set lng(v) {
     storage.set('coord.lng', v)
     updatedCoords()
   },
   get name() {
-    return storage.get('coord.name', 'Wilmette')
+    return storage.get('coord.name', '?')
   },
   set name(v) {
     storage.set('coord.name', v || '')
@@ -40,9 +40,9 @@ function updatedCoords() {
 }
 
 var formats = {
-  topTitle: '{bDay} {bMonthNamePri}/{bMonthNameSec} {bYear} <span>{endingSunsetDesc}</span>',
+  topTitle: '{bDay} {bMonthNamePri}-{bMonthNameSec} {bYear} <span>{endingSunsetDesc}</span>',
   statusIconText: '{bMonthNamePri}',
-  noticationMain: 'Today is {bDay} {bMonthNamePri}/{bMonthNameSec} {bYear}',
+  noticationMain: 'Today is {bDay} {bMonthNamePri}-{bMonthNameSec} {bYear}',
   noticationSub: '{nearestSunset}',
   shortDay: 'the {bDayOrdinal} day of {bMonthNamePri}',
 }

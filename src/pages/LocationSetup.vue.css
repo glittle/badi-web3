@@ -1,5 +1,5 @@
 .LocationSetup p span {
-  margin-right: 10px;
+  margin-right: 15px;
 }
 .LocationSetup p input {
   padding: 2px 0;
@@ -11,6 +11,11 @@
   margin-top: 1em;
   margin-bottom: 8px;
 }
+.LocationSetup .latlng {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
 .LocationSetup .statusLines {
   float: right;
   max-width: 50%;
@@ -20,4 +25,11 @@
 }
 .LocationSetup .status {
   transition: height 0.5s;
+}
+.LocationSetup .busy span {
+  display: inline-block;
+  background-image: url(/statics/ajax-loader-white.gif);
+  margin-left: 5px;
+  width: 16px;
+  height: 16px;
 }

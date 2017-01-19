@@ -8,6 +8,7 @@ const moment = require('moment-timezone');
 const cloneDeep = require('lodash/cloneDeep');
 
 var _cachedDateInfos = {};
+var _cachedSpecialDays = {};
 var _nawRuzOffsetFrom21 = [];
 var _twinHolyBirthdays = [];
 var _dateInfos = null;
@@ -17,10 +18,11 @@ var _msInDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
 
 function reset() {
   _cachedDateInfos = {};
+  _cachedSpecialDays = {};
   _dateInfos = null;
 }
 
-fillDatePresets();
+loadDatePresets();
 
 function prepareDateInfos(bYear) {
   _dateInfos = dateInfosRaw();
@@ -223,7 +225,6 @@ function prepareDateInfos(bYear) {
   return _dateInfos;
 }
 
-var _cachedSpecialDays = {};
 
 function buildSpecialDaysTable(year, defaultEventStart) {
   var cacheKey = year + '_' + defaultEventStart;
@@ -846,7 +847,7 @@ var getBDate = function (gSourceDate) {
 
 // =============================================================
 // table of Naw Ruz dates
-function fillDatePresets() {
+function loadDatePresets() {
   _nawRuzOffsetFrom21 = {
     // by default and historically, on March 21. If not, year is listed here with the offset... 173 is March 20
     // can be 0, -1, -2? and will never change by more than 1 day between years

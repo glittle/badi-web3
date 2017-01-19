@@ -55,18 +55,21 @@ export default {
     // debugger;
   },
   mounted() {
+    // drawChart(local.sun)
+  },
+  activated() {
     drawChart(local.sun)
   },
-  updated() {
-    // console.log('mounted', routeList)
-    // this.$nextTick(() => {
-    // })
-    // debugger;
-    // this.pulseNumber = pulse.pulseNumber
-    // fillDayDisplay(this)
-    // fillSunDisplay(this)
-    drawChart(local.sun)
-  },
+  // updated() {
+  // console.log('mounted', routeList)
+  // this.$nextTick(() => {
+  // })
+  // debugger;
+  // this.pulseNumber = pulse.pulseNumber
+  // fillDayDisplay(this)
+  // fillSunDisplay(this)
+  //   drawChart(local.sun)
+  // },
   beforeUpdate() {
     // console.log('update', routeList)
   },
@@ -84,15 +87,15 @@ function fillDayDisplay(di) {
 
   answers.push({
     t: 'Day of Month',
-    v: '{bDayNamePri} / {bDayNameSec} / <b>{bDay}</b>'.filledWith(di)
+    v: '{bDayNamePri} – {bDayNameSec} – <b>{bDay}</b>'.filledWith(di)
   });
   answers.push({
     t: 'Day of Week',
-    v: '{bWeekdayNamePri} / {bWeekdayNameSec} / {bWeekday}'.filledWith(di)
+    v: '{bWeekdayNamePri} – {bWeekdayNameSec} – {bWeekday}'.filledWith(di)
   });
   answers.push({
     t: 'Month',
-    v: '<b>{bMonthNamePri}</b> / {bMonthNameSec} / {bMonth}'.filledWith(di)
+    v: '<b>{bMonthNamePri}</b> – {bMonthNameSec} – {bMonth}'.filledWith(di)
   });
   answers.push({
     t: 'Section of Year',
@@ -100,7 +103,7 @@ function fillDayDisplay(di) {
   });
   answers.push({
     t: 'Year',
-    v: 'Year {bYearInVahid} of Vahid {bVahid} / <b>{bYear}</b>'.filledWith(di)
+    v: 'Year {bYearInVahid} of Vahid {bVahid} – <b>{bYear}</b>'.filledWith(di)
   });
 
   return answers.map(function (ans) {
@@ -272,11 +275,15 @@ var _fontSize = '12px';
 var _fontColor = '#212121';
 
 function drawChart(sun) {
-  //   console.log('drawing chart')
   //   setStart: null,
   //   rise: null,
   //   setEnd: null,
   //   now: now
+  if (!document.getElementById('sunChart')) {
+    // console.log('chart update not possible')
+    return;
+  }
+  // console.log('drawing chart')
 
   var key = sun.diStamp;
   if (_lastChartDay === key) {
@@ -409,7 +416,8 @@ function drawChart(sun) {
       endOnTick: false
     },
     plotOptions: {
-      area: {
+      areaspline: {
+        enableMouseTracking: false,
         marker: {
           enabled: false
         }

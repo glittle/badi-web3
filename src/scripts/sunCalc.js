@@ -9,6 +9,8 @@ import {
  https://github.com/mourner/suncalc
 */
 
+var SunCalc = {};
+
 (function () {
   'use strict';
 
@@ -93,7 +95,6 @@ import {
   }
 
 
-  var SunCalc = {};
 
 
   // calculates sun position for a given date and latitude/longitude
@@ -200,6 +201,6 @@ import {
 
     return result;
   };
-
-  module.exports = SunCalc;
 }());
+
+export default SunCalc;

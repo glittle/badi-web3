@@ -60,9 +60,10 @@
   </q-layout>
 </template>
 <script>
-  import {
-    Toast
-  } from 'quasar'
+  // --> Toast failing in quasar 0.12
+  // import {
+  //   Toast
+  // } from 'quasar'
 
   import routeList from './pages/routes'
   import badiCalc from './scripts/badiCalc'
@@ -96,7 +97,7 @@
     methods: {
       doWorkOnPulse() {
         // console.log('app pulse')
-          // notification icon
+        // notification icon
         var di = badiCalc.di;
         var key = di.stamp;
         if (key !== lastNotificationKey) {
@@ -162,19 +163,23 @@
     var okay = c !== 0 && src !== 'default';
 
     if (!okay) {
-      Toast.create.negative({
-        html: 'Location must be set for dates and times to be correct!',
-        timeout: 1e11, // very long
-        button: {
-          label: 'Fix Now',
-          handler() {
-            vue.$router.push('locationsetup')
-          },
-          onDismiss() {
-            vue.$router.push('locationsetup')
-          }
-        }
-      })
+      if (vue.$router.currentRoute.path !== '/locationsetup') {
+        vue.$router.push('/locationsetup');
+      }
+
+      // Toast.create.negative({
+      //   html: 'Location must be set for dates and times to be correct!',
+      //   timeout: 1e11, // very long
+      //   button: {
+      //     label: 'Fix Now',
+      //     handler() {
+      //       vue.$router.push('locationsetup')
+      //     },
+      //     onDismiss() {
+      //       vue.$router.push('locationsetup')
+      //     }
+      //   }
+      // })
     }
   }
 

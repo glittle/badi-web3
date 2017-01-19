@@ -25,6 +25,7 @@ const store = new Vuex.Store({
 // ----------------------------
 
 const pulseSeconds = 60; // normally 60 seconds
+var pulseTimer = null;
 
 function scheduleNextPulse() {
   // start the timer just after the minute
@@ -36,13 +37,15 @@ function scheduleNextPulse() {
 
   //   console.log('start pulse in ' + delay);
 
-  setTimeout(function () {
+  pulseTimer = setTimeout(function () {
     // just after the top of the minute
     doPulse();
   }, delay);
 }
 
 export function doPulse(newTestTime) {
+  clearTimeout(pulseTimer);
+
   if (newTestTime) {
     // debugger;
     // reset some...
@@ -65,6 +68,6 @@ window.doPulse = doPulse
 
 console.log('For testing other dates:\n  doPulse(new Date(y,m-1,d,h,m,s))');
 
-setTimeout(function () {
-  doPulse(new Date(2017, 0, 17, 23, 4, 59))
-}, 0)
+// setTimeout(function () {
+//   doPulse(new Date(2017, 0, 17, 23, 4, 59))
+// }, 0)
