@@ -34,14 +34,9 @@
 .About .ShareThis a span.underline {
   text-decoration: underline;
 }
-.About .pp {
-  display: flex;
-  align-items: center;
-}
-.About .pp > a {
-  flex-shrink: 0;
-  background-image: url(https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_37x23.jpg);
-  background-position: center center;
-  width: 74px;
-  height: 46px;
+.About .pp img {
+  width: 1em;
+  height: 1em;
+  vertical-align: text-top;
+  margin-left: 4px;
 }
