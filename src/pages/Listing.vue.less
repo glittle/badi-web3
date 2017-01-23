@@ -1,6 +1,10 @@
 #Listing {
     // max-width: 700px;
     width: 100%;
+    >div {
+        max-width: 700px;
+        margin: 0 auto;
+    }
     .location {
         color: #2980b9;
         margin: 4px 0 8px 0;
@@ -157,6 +161,60 @@
         padding: 4px 0;
         .col2 {
             padding-top: 4px;
+        }
+    }
+    .q-collapsible {
+        position: relative;
+        .item-collapsible {
+            height: 0;
+            // .item-secondary {
+            //     position: absolute;
+            //     top: -55px;
+            // }
+        }
+    }
+    .links {
+        display: flex;
+        margin: -4px 0 24px 0;
+        transition: all .3s;
+        .col1 {
+            width: 40px;
+        }
+        .col2 {
+            // border: 1px solid #666;
+            // border-radius: 8px;
+            // border-top: none;
+            // border-bottom: none;
+            // border-right: none;
+            padding: 4px 12px 4px 8px;
+            text-align: left;
+            background-color: #f9f1f9;
+        }
+        .iconDivider {
+            height: 13px;
+            width: 22px;
+            vertical-align: middle;
+            margin: 5px 3px 7px 3px;
+        }
+        .monthImage {
+            height: 24px;
+            vertical-align: middle;
+            margin: 5px 3px 7px 3px;
+        }
+        .icon20 {
+            height: 20px;
+            width: 20px;
+            vertical-align: middle;
+            margin: 5px 3px 7px 3px;
+        }
+    }
+    .linkToggle {
+        height: 25px;
+        margin: 4px 0 0 4px;
+        >span {
+            font-size: .72em;
+            color: #7f8c8d;
+            font-weight: 400;
         }
     }
 }

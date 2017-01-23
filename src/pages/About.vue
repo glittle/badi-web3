@@ -5,25 +5,19 @@
         <h2>Share this App!</h2>
         <img class=qr src="~statics/qr.png">
         <a href="https://www.wondrous-badi.ga/" itemprop="url">
-          <span>Open in your web browser</span>
+          <span>Open in any web browser:</span>
           <span class=underline>Wondrous-Badi.ga</span>
         </a>
       </div>
       <h1>{{this.title}}</h1>
-      <p>This web app is all about the <span itemprop="applicationCategory">Wondrous calendar</span>!</p>
+      <p>This web app is all about the <span itemprop="applicationCategory">Wondrous calendar</span>! It is free to use - share
+        it with others!</p>
       <p>It is developed and maintained by
         <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">Glen Little</span> (<a href="mailto:glen.little@gmail.com">email</a>).</span>
-        Please share suggestions and comments with him!
-      </p>
-      <p class="pp">
-        <span>If you find this web app to be useful for making the Wondrous-Badí' 
-          calendar a part of your daily life and want to support 
-          the developer, please visit  
-          <a href="https://patreon.com/GlenLittle" 
-        target="_blank"><img src="https://www.patreon.com/images/patreon_navigation_logo_mini_orange.png">
-        Patreon.com/GlenLittle</a> and consider
-          becoming a patron!
+        <span itemprop="name">Glen Little</span>.</span>
+        Please share suggestions and comments with him (<a href="mailto:glen.little@gmail.com">email</a>) and considering becoming a development patron! Visit
+        <a href="https://patreon.com/GlenLittle" target="_blank"><img class="pat" src="https://www.patreon.com/images/patreon_navigation_logo_mini_orange.png"> Patreon.com/GlenLittle
+        </a> for details!
       </p>
       <p><span>Version <span itemprop="softwareVersion">{{version}}</span> ({{versionAge}})</span>
       </p>

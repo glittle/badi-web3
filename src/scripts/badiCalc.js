@@ -563,10 +563,12 @@ function dateInfosRaw() {
     {
       Type: 'HS',
       BDateCode: '1.1',
-      NameEn: 'HolyDay_NawRuz'
+      NameEn: 'HolyDay_NawRuz',
+      DayCode: 'NawRuz'
     }, {
       Type: 'HS',
       BDateCode: '2.13',
+      DayCode: 'Ridvan1',
       NameEn: 'HolyDay_Ridvan1',
       Time: '1500S',
       TimeReason: '3 pm Standard time',
@@ -574,24 +576,27 @@ function dateInfosRaw() {
     }, {
       Type: 'HS',
       BDateCode: '3.2',
+      DayCode: 'Ridvan9',
       NameEn: 'HolyDay_Ridvan9'
     }, {
       Type: 'HS',
       BDateCode: '3.5',
+      DayCode: 'Ridvan12',
       NameEn: 'HolyDay_Ridvan12'
     }, {
       Type: 'HS',
       BDateCode: '4.13',
+      DayCode: "AscBaha",
       NameEn: "HolyDay_AscBaha",
       Time: '0300S',
       TimeReason: '3 am Standard time',
       EventType: 'Tablet'
     },
-
     {
       Type: 'HS',
       UntilYear: 171,
       BDateCode: '4.7',
+      DayCode: 'DeclBab',
       NameEn: 'HolyDay_DeclBab',
       Time: 'SS2',
       TimeReason: 'about 2 hours after sunset',
@@ -600,6 +605,7 @@ function dateInfosRaw() {
       Type: 'HS',
       FromYear: 172,
       BDateCode: '4.8',
+      DayCode: 'DeclBab',
       NameEn: 'HolyDay_DeclBab',
       Time: 'SS2',
       TimeReason: 'about 2 hours after sunset',
@@ -610,6 +616,7 @@ function dateInfosRaw() {
       Type: 'HS',
       UntilYear: 171,
       BDateCode: '6.16',
+      DayCode: 'Martyrdom',
       NameEn: 'HolyDay_Martyrdom',
       Time: '1200S',
       TimeReason: 'Noon Standard time',
@@ -618,6 +625,7 @@ function dateInfosRaw() {
       Type: 'HS',
       FromYear: 172,
       BDateCode: '6.17',
+      DayCode: 'Martyrdom',
       NameEn: 'HolyDay_Martyrdom',
       Time: '1200S',
       TimeReason: 'Noon Standard time',
@@ -628,31 +636,37 @@ function dateInfosRaw() {
       Type: 'HS',
       UntilYear: 171,
       BDateCode: '12.5',
+      DayCode: 'BirthBab',
       NameEn: 'HolyDay_BirthBab'
     }, {
       Type: 'HS',
       UntilYear: 171,
       BDateCode: '13.9',
+      DayCode: 'BirthBaha',
       NameEn: "HolyDay_BirthBaha"
     }, {
       Type: 'HS',
       FromYear: 172,
       Special: 'THB.1',
+      DayCode: 'BirthBab',
       NameEn: 'HolyDay_BirthBab'
     }, {
       Type: 'HS',
       FromYear: 172,
       Special: 'THB.2',
+      DayCode: 'BirthBaha',
       NameEn: "HolyDay_BirthBaha"
     },
 
     {
       Type: 'HO',
       BDateCode: '14.4',
+      DayCode: 'Covenant',
       NameEn: 'HolyDay_Covenant'
     }, {
       Type: 'HO',
       BDateCode: '14.6',
+      DayCode: "AscAbdul",
       NameEn: "HolyDay_AscAbdul",
       Time: '0100S',
       TimeReason: '1 am Standard time',
@@ -663,6 +677,7 @@ function dateInfosRaw() {
     {
       Type: 'Ayyam',
       Special: 'AYYAM.Intercalary',
+      DayCode: 'Ayyam',
       MonthNum: 0,
       NameAr: 'Ayyám-i-Há',
       NameEn: 'Intercalary'

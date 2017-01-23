@@ -20,8 +20,9 @@
   font-weight: 300;
 }
 .About .ShareThis .qr {
-  width: 150px;
-  max-width: 80%;
+  width: 100px;
+  height: 100px;
+  box-sizing: content-box;
   margin: 8px 0 4px 0;
 }
 .About .ShareThis a {
@@ -33,8 +34,10 @@
 }
 .About .ShareThis a span.underline {
   text-decoration: underline;
+  font-size: 14px;
+  font-weight: bold;
 }
-.About .pp img {
+.About img.pat {
   width: 1em;
   height: 1em;
   vertical-align: text-top;

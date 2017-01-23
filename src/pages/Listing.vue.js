@@ -1,6 +1,7 @@
 import badi from '../scripts/badiCalc'
 import * as shared from '../scripts/shared'
 import storage from '../scripts/storage'
+import dateLinksInfo from '../assets/datelinks.json'
 
 var cloneDeep = require('lodash/cloneDeep');
 
@@ -50,7 +51,7 @@ export default {
     this.originalYear = badi.di.bYear;
     this.loadDates(this.originalYear);
 
-    if(badi.di.bMonth > 17 || badi.di.bMonth === 0){
+    if (badi.di.bMonth > 17 || badi.di.bMonth === 0) {
       this.loadDates(this.nextYear);
     }
   },
@@ -81,7 +82,7 @@ export default {
     },
   },
   methods: {
-    ayyam2: function(day){
+    ayyam2: function (day) {
       console.log(day)
       return day.lastDayDi.gCombinedY
     },
@@ -92,8 +93,70 @@ export default {
       this.lastYear = this.originalYear;
       vue.loadDates(this.originalYear);
     },
-    makeId: function (di) {
-      return 'M' + di.bYear + di.bMonth00;
+    makeId: function (day) {
+      if (day.id) {
+        return day.id;
+      }
+
+      var di = day.di;
+      var id = [day.DayCode || day.Type, di.bYear, day.Type === 'M' ? di.bMonth00 : ''].filter(function (s) {
+        return !!s
+      }).join('-');
+      day.id = id;
+      return id;
+    },
+    getDateLinks: function (day) {
+      if (day.links) {
+        console.log('reused links')
+        return day.links;
+      }
+      var id = this.makeId(day);
+      var info = dateLinksInfo[id];
+      var links = [];
+      if (info) {
+        this.getLinks(links, info);
+      }
+
+      var parts = id.split('-');
+      info = dateLinksInfo[parts[0]];
+      if (info) {
+        this.getLinks(links, info);
+      }
+
+      if (parts[0] === 'M') {
+        var id2 = parts[0] + parts[2];
+        info = dateLinksInfo[id2];
+        if (info) {
+          this.getLinks(links, info);
+        }
+      } else {}
+      day.links = links;
+      return day.links;
+    },
+    getLinks: function (links, info) {
+      for (var i = 0; i < info.length; i++) {
+        var item = info[i];
+        switch (item.icon) {
+          case '-badiMonthA':
+            item.icon = '/images/thumb/' + item.url + '.jpg';
+            item.url = '/images/' + item.url;
+            item.class = 'monthImage'
+            break;
+          case '-DOR':
+            item.icon = '../statics/divider.png';
+            item.class = 'iconDivider'
+            break;
+          case '-readingsDoc':
+            item.icon = '../statics/doc.gif';
+            item.class = 'icon20'
+            break;
+          case '-readingsWeb':
+            item.icon = '../statics/web.png';
+            item.class = 'icon20'
+            break;
+        }
+        links.push(item);
+      }
     },
     getSpecialTime: function (day) {
       var prefix = 'Suggested start at';
@@ -149,9 +212,10 @@ export default {
       }
       console.log('loading', year)
       var info = badi.buildSpecialDaysTable(year, this.suggestedStart);
+
       window._days = cloneDeep(info); // for developer access in console
       vue.list = vue.list.concat(info.map(function (d) {
-        return extendDayInfo(d, year - vue.originalYear)
+        return extendDayInfo(vue, d, year - vue.originalYear)
       }));
       vue.list.sort(sortDates)
 
@@ -161,7 +225,10 @@ export default {
       }
     },
     moveToThisMonth: function () {
-      var target = this.makeId(badi.di);
+      var target = this.makeId({
+        Type: 'M',
+        di: badi.di
+      });
       setTimeout(function () {
         document.getElementById(target).scrollIntoView(true);
       }, 0)
@@ -196,11 +263,13 @@ export default {
 
 }
 
-function extendDayInfo(d, diff) {
+function extendDayInfo(vue, d, diff) {
+  d.showingLinks = false;
   d.Month = '{bMonthNamePri} {bYear}'.filledWith(d.di)
   if (Math.abs(diff) % 2 === 1) {
     d.RowClass.push('oddYear')
   }
+  d.links = vue.getDateLinks(d)
   return d;
 }
 
