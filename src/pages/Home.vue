@@ -6,7 +6,7 @@
     <div class="card">
       <div class="card-content sunDisplay" v-html="sunDisplay"></div>
       <div class="card-content">
-        <div>Sun times for <span v-html="shortDay"></span> in <span v-html="location"></span><span>:</span></div>
+        <div>Sun times in <span v-html="location"></span> for <span v-html="shortDay"></span><span>:</span></div>
       </div>
       <div id="sunChart"></div>
     </div>

@@ -69,6 +69,7 @@
   import badiCalc from './scripts/badiCalc'
   import * as notify from './scripts/notification'
   import * as shared from './scripts/shared'
+  import * as store from './scripts/store'
   const moment = require('moment-timezone');
   var versionInfo = require('../root/version.json')
 
@@ -83,7 +84,8 @@
     },
     computed: {
       topDate: function () {
-        return shared.formats.topTitle.filledWith(this.di)
+        var template = this.di.bNow.eve ? shared.formats.topTitleEve : shared.formats.topTitleDay;
+        return template.filledWith(this.di)
       },
       version() {
         var age = moment(versionInfo.buildDate, "_ MMM D YYYY HH:mm:ss _Z").fromNow();
@@ -92,7 +94,8 @@
 
     },
     created() {
-      document.addEventListener('pulsed', this.doWorkOnPulse, false)
+      document.addEventListener('pulsed', this.doWorkOnPulse, false);
+      store.doPulse();
     },
     methods: {
       doWorkOnPulse() {
@@ -100,10 +103,11 @@
         // notification icon
         var di = badiCalc.di;
         var key = di.stamp;
+        // console.log(key, lastNotificationKey);
         if (key !== lastNotificationKey) {
           // console.log('do notify')
           this.di = di;
-          notify.showNow();
+          notify.showNow(di);
           lastNotificationKey = key;
         }
       },

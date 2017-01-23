@@ -22,14 +22,18 @@ export default {
     },
     di() {
       this.$store.state.pulseNum;
-      this.$store.commit('newDate', badiCalc.di);
+      // this.$store.commit('newDate', badiCalc.di);
       return badiCalc.di;
     },
     dayDisplay() {
-      return fillDayDisplay(this.di)
+      var html = fillDayDisplay(this.di);
+      return html;
     },
     sunDisplay() {
-      return fillSunDisplay(this.di)
+      var html = fillSunDisplay(this.di);
+      // console.log('sun display')
+      drawChart(local.sun);
+      return html;
     },
     pageList() {
       return routeList.default.menuPages.filter(function (p) {
@@ -60,6 +64,10 @@ export default {
   activated() {
     drawChart(local.sun)
   },
+  // doWorkOnPulse() {
+  //   console.log('pulse in home');
+  //   drawChart(local.sun)
+  // },
   // updated() {
   // console.log('mounted', routeList)
   // this.$nextTick(() => {
@@ -283,7 +291,6 @@ function drawChart(sun) {
     // console.log('chart update not possible')
     return;
   }
-  // console.log('drawing chart')
 
   var key = sun.diStamp;
   if (_lastChartDay === key) {
@@ -292,6 +299,7 @@ function drawChart(sun) {
   } else {
     _lastChartDay = key;
   }
+  // console.log('drawing chart')
 
   var yFactor = 10;
   var twilight = 4;
@@ -493,6 +501,7 @@ function alignLabels() {
 }
 
 function showNowLine(chart, sun) {
+  // console.log('updating now line');
   var now = sun.now;
   chart.xAxis[0].removePlotLine('now');
 

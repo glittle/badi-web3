@@ -40,7 +40,8 @@ function updatedCoords() {
 }
 
 var formats = {
-  topTitle: '{bDay} {bMonthNamePri}-{bMonthNameSec} {bYear} <span>{endingSunsetDesc}</span>',
+  topTitleDay: '{bDay} {bMonthNamePri}-{bMonthNameSec} {bYear} <span>⇒ {endingSunsetDesc}</span>',
+  topTitleEve: '{bDay} {bMonthNamePri}-{bMonthNameSec} {bYear} <span>{startingSunsetDesc} ⇒</span>',
   statusIconText: '{bMonthNamePri}',
   noticationMain: 'Today is {bDay} {bMonthNamePri}-{bMonthNameSec} {bYear}',
   noticationSub: '{nearestSunset}',

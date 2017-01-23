@@ -230,7 +230,10 @@ export default {
         di: badi.di
       });
       setTimeout(function () {
-        document.getElementById(target).scrollIntoView(true);
+        var el = document.getElementById(target);
+        if (el) {
+          el.scrollIntoView(true);
+        }
       }, 0)
     },
     test: function (cell) {

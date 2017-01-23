@@ -3,16 +3,18 @@ import storage from './storage'
 import * as shared from './shared'
 import verseHelper from './verseHelper'
 require('../scripts/stringExt')
-  // const moment = require('moment-timezone');
+// const moment = require('moment-timezone');
 
 // var image = null;
 
-export function showNow() {
-  show(shared.formats.noticationMain.filledWith(badiCalc.di),
-    shared.formats.noticationSub.filledWith(badiCalc.di) +
-    '\n\n' + verseHelper.forDi(badiCalc.di).verse,
-    shared.formats.statusIconText.filledWith(badiCalc.di),
-    badiCalc.di.bDay,
+export function showNow(di) {
+  di = di || badiCalc.di;
+
+  show(shared.formats.noticationMain.filledWith(di),
+    shared.formats.noticationSub.filledWith(di) +
+    '\n\n' + verseHelper.forDi(di).verse,
+    shared.formats.statusIconText.filledWith(di),
+    di.bDay,
     false)
 }
 
