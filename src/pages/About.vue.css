@@ -43,3 +43,7 @@
   vertical-align: text-top;
   margin-left: 4px;
 }
+.About .reload {
+  text-decoration: underline;
+  cursor: pointer;
+}
