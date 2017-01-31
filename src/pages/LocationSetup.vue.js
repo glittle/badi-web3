@@ -3,6 +3,7 @@ import * as shared from '../scripts/shared'
 import moment from 'moment'
 import badiCalc from '../scripts/badiCalc'
 import * as store from '../scripts/store'
+import storage from '../scripts/storage'
 
 var Vue = require('vue');
 var versionInfo = require('../../root/version.json');
@@ -30,6 +31,8 @@ export default {
       // manual validator to match SimpleVueValidation
       latError: false,
       lngError: false,
+      latSaved: 0 + shared.coords.lat,
+      lngSaved: 0 + shared.coords.lng
     }
   },
   // validators: {
@@ -41,6 +44,16 @@ export default {
   //   },
   // },
   computed: {
+    saveNeeded() {
+      // if needed and possible
+      if (this.lat == 0 || this.lng == 0) {
+        return false;
+      }
+      if (this.lat === this.latSaved && this.lng == this.lngSaved) {
+        return false;
+      }
+      return true;
+    },
     timezone() {
       var tz = moment.tz.guess();
       return `${tz.replace(/_/g, ' ')} (${moment.tz(tz).format("Z z")})`
@@ -70,6 +83,19 @@ export default {
     }
   },
   methods: {
+    saveCoords: function (source) {
+      var vue = this;
+      shared.coords.source = source;
+      this.latSaved = this.lat;
+      this.lngSaved = this.lng;
+      store.doPulse();
+
+      // if (storage.get('initialSetup', false)) {
+      //   setTimeout(function () {
+      //     vue.$router.go(-1);
+      //   }, 1000);
+      // }
+    },
     checkValidation(which, n) {
       // "SimpleVueValidation" is failing... do manual validation
       var value = +n;
@@ -94,7 +120,6 @@ export default {
 
       if (n >= min && n <= max) {
         this[which + 'Error'] = false;
-        shared.coords.source = 'user';
         shared.coords[which] = +n;
 
         this.getLocationName();
@@ -127,7 +152,6 @@ export default {
         navigator.geolocation.getCurrentPosition(function (loc) {
           vue.lat = loc.coords.latitude;
           vue.lng = loc.coords.longitude;
-          shared.coords.source = 'user';
 
           vue.addToLog('Learned coordinates')
 
@@ -135,6 +159,8 @@ export default {
           OneSignal.sendTag("longitude", vue.lng);
           OneSignal.sendTag("version", versionInfo.version);
           vue.gettingLocation = false;
+
+          vue.saveCoords('getter');
 
           vue.getLocationName();
         })
@@ -178,7 +204,7 @@ export default {
           if (location) {
             vue.addToLog('==> ' + location);
           } else {
-            location = '?'
+            location = '(unknown)'
             clearLog = false;
             vue.addToLog('No location!')
           }
@@ -204,7 +230,7 @@ export default {
     },
     addToLog(msg) {
       var vue = this;
-      console.log(msg);
+      // console.log(msg);
       if (vue.statusLines.indexOf(msg) === -1) {
         vue.statusLines.push(msg)
       }

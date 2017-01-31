@@ -51,11 +51,11 @@ var onesignalOptions = {
     enable: false
   },
   welcomeNotification: {
-    message: 'You are ready for notifications!'
+    message: 'You are ready for remote notifications!'
   },
   safari_web_id: 'web.onesignal.auto.2c31ff0c-1624-4aec-8f89-a4f0b1da0ea1'
 };
-if (process.env.NODE_ENV === 'development') {
+if (location.hostname === 'localhost') {
   onesignalOptions.allowLocalhostAsSecureOrigin = true;
 }
 OneSignal.push(["init", onesignalOptions]);

@@ -10,28 +10,31 @@
       </p>
       <p class="latlng">
         <span>
-          <span>Latitude</span>
+          <span>Latitude:</span>
         <input type="number" min="-85" max="85" step="any" v-model.number="lat" :class="{'has-error': latError}">
-        <span class="busy" v-show="gettingLocation">
-            <span></span>
-        </span>
         </span>
         <span>
-          <span>Longitude</span>
+          <span>Longitude:</span>
         <input type="number" min="-180" max="180" step="any" v-model.number="lng" :class="{'has-error': lngError}">
-        <span class="busy" v-show="gettingLocation">
-            <span></span>
         </span>
+        <span>
+          <button v-bind:disabled="!saveNeeded" 
+                  v-on:click="saveCoords('user')"
+                  class="small light primary">Save</button>
+          <span class="busy" v-show="gettingLocation">
+                <span></span>
+          </span>
         </span>
       </p>
       <p>
-        <span>Name</span><input type="text" v-model="name">
-        <span class="busy" v-show="gettingName">
-          <span></span>
+        <span>Name:</span> 
+        <input type="text" v-model="name" v-if="!gettingName">
+        <span class="busyWord" v-if="gettingName">
+          (getting name)
         </span>
       </p>
       <p>
-        <span>Time zone</span><span v-text="timezone"></span>
+        <span>Time zone:</span><span v-text="timezone"></span>
       </p>
       <p class=buttons>
         <button @click="openMap" class="small light">Show on a Map</button>

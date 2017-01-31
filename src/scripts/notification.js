@@ -25,14 +25,18 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
     return;
   }
 
+console.log("notification", Notification.permission)
+
   // If the user has not been asked to grant or deny notifications
   // from this domain...
   if (Notification.permission === 'default') {
-    console.log('asking for permission to notify');
-    Notification.requestPermission(function () {
-      // ...callback this function once a permission level has been set.
-      (note1, note2, iconText, iconDayNum, makeSound);
-    });
+    return;
+
+    // console.log('asking for permission to notify');
+    // Notification.requestPermission(function () {
+    //   // ...callback this function once a permission level has been set.
+    //   (note1, note2, iconText, iconDayNum, makeSound);
+    // });
   }
   // If the user has granted permission for this domain to send notifications...
   else if (Notification.permission === 'granted') {

@@ -27,10 +27,13 @@ const names = [
     group: 'setup'
   }, {
     name: 'OtherSetup',
-    group: 'setup'
+    group: ['setup', 'initial']
   }, {
     name: 'About',
     group: 'setup'
+  }, {
+    name: 'InitialSetup',
+    group: 'initial'
   }, {
     name: 'Error404', // must be last!
     path: '*',
@@ -93,7 +96,8 @@ export default {
   raw: routeInfoList.map(function (ri) {
     return {
       component: ri.component,
-      path: '/' + ri.path
+      path: '/' + ri.path,
+      name: ri.name
     }
   }),
   menuPages: menuPages,

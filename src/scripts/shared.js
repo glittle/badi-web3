@@ -17,13 +17,13 @@ var coords = {
     updatedCoords()
   },
   get name() {
-    return storage.get('coord.name', '?')
+    return storage.get('coord.name', '(unknown)')
   },
   set name(v) {
     storage.set('coord.name', v || '')
   },
   get source() {
-    return storage.get('coord.source', 'default')
+    return storage.get('coord.source', 'not set')
   },
   set source(v) {
     storage.set('coord.source', v)

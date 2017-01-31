@@ -1,0 +1,36 @@
+.InitialSetup h4 {
+  margin-top: 1.25em;
+  font-size: 1.3em;
+  font-weight: 300;
+  border-bottom: 1px solid #ccc;
+}
+.InitialSetup .item {
+  display: inline-block;
+  margin: 0 8px;
+  height: 40px;
+  background-color: #f0f0ff;
+  border: 1px solid #777;
+  border-radius: 4px;
+}
+.InitialSetup .item > i.item-primary {
+  margin: 7px 0 0 2px;
+}
+.InitialSetup .item > i.item-primary ~ .item-content {
+  padding: 7px 0 0 0;
+  margin: 4px 11px 0 36px;
+  display: inline-block;
+}
+.InitialSetup .Done {
+  color: green;
+  margin-left: 1em;
+  font-weight: bold;
+}
+.InitialSetup article.LocationSetup {
+  padding: 0;
+}
+.InitialSetup article.LocationSetup h1 {
+  display: none;
+}
+.InitialSetup article.LocationSetup .section {
+  margin: 0;
+}
