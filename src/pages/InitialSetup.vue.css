@@ -1,6 +1,6 @@
 .InitialSetup h4 {
-  margin-top: 1.25em;
-  font-size: 1.3em;
+  margin-top: 8px;
+  font-size: 1.6em;
   font-weight: 300;
   border-bottom: 1px solid #ccc;
 }
@@ -23,7 +23,6 @@
 .InitialSetup .Done {
   color: green;
   margin-left: 1em;
-  font-weight: bold;
 }
 .InitialSetup article.LocationSetup {
   padding: 0;
@@ -32,5 +31,14 @@
   display: none;
 }
 .InitialSetup article.LocationSetup .section {
+  margin: 0;
+}
+.InitialSetup article.Notifications {
+  padding: 0;
+}
+.InitialSetup article.Notifications h1 {
+  display: none;
+}
+.InitialSetup article.Notifications .section {
   margin: 0;
 }

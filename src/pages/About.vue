@@ -4,9 +4,9 @@
       <div class=ShareThis>
         <h2>Share this App!</h2>
         <img class=qr src="~statics/qr.png">
-        <a href="https://www.wondrous-badi.ga/" itemprop="url">
+        <a href="https://www.wondrous-badi.today/" itemprop="url">
           <span>Open in any web browser:</span>
-          <span class=underline>Wondrous-Badi.ga</span>
+          <span class=underline>Wondrous-Badi.Today</span>
         </a>
       </div>
       <h1>{{this.title}}</h1>

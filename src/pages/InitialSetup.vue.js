@@ -4,8 +4,8 @@ import routeList from './routes.js'
 export default {
   data() {
     return {
-      title: 'InitialSetup',
-      icon: 'info',
+      title: 'Initial Setup',
+      icon: 'arrow_forward',
       pages: [],
       routes: []
     }

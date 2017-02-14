@@ -33,7 +33,7 @@ const names = [
     group: 'setup'
   }, {
     name: 'InitialSetup',
-    group: 'initial'
+    group: 'setup'
   }, {
     name: 'Error404', // must be last!
     path: '*',

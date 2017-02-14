@@ -3,7 +3,7 @@
     <h1>Location</h1>
     <div class="section">
       <p>
-        The approximate location of this device/computer is required and must match its timezone! </p>
+        Please provide the location of this device/computer. It can be approximate, but must match its timezone! </p>
       <p>
         Click <button @click="getLocation" class="small primary">Get Location</button> or manually enter your location coordinates
         below.

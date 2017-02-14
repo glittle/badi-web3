@@ -4,7 +4,9 @@ import * as notify from '../scripts/notification'
 
 export default {
   name: 'Notifications',
-  created() {},
+  props: {
+    embedded: Boolean
+  },
   data() {
     return {
       title: 'Notifications',
@@ -88,6 +90,11 @@ export default {
       ]
     }
   },
+  computed: {
+      localPushSupported: function(){
+        return 'serviceWorker' in navigator && 'PushManager' in window;
+      },    
+  },
   mounted() {
     // var host = document.getElementById('images');
     // notify.makeImage(host, 1);
@@ -167,10 +174,10 @@ export default {
     },
     startUpOneSignal() {
       var vue = this;
-
+      console.log('11')
       OneSignal.push(function () {
         OneSignal.getTags(function (tags) {
-          console.log('tags', tags);
+          console.log('12 tags', tags);
           vue.tags = tags;
           if (tags && tags.when) {
             console.log('got tags');
@@ -178,7 +185,7 @@ export default {
           }
         });
         OneSignal.getUserId(function (userId, a, b) {
-          console.log(userId, a, b)
+          console.log('13 ' + userId, a, b)
           vue.userId = userId;
           vue.showStep(2, userId != null);
           console.log(userId); // leave in console, for help desk support
@@ -187,6 +194,7 @@ export default {
       OneSignal.push(function () {
         /* These examples are all valid */
         var isPushSupported = OneSignal.isPushNotificationsSupported();
+        console.log('22 ' + isPushSupported)
         if (isPushSupported) {
           vue.remotePushSupported = true
         } else {
@@ -198,11 +206,13 @@ export default {
       }]);
     },
     askForPush() {
-        OneSignal.push(function () {
-          OneSignal.registerForPushNotifications({
-            modalPrompt: false
-          });
+      console.log('33')
+      OneSignal.push(function () {
+        console.log('44')
+        OneSignal.registerForPushNotifications({
+          modalPrompt: false
         });
+      });
     },
     showStep(n, known) {
 
