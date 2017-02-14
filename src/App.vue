@@ -2,7 +2,7 @@
   <q-layout itemscope itemtype="http://schema.org/SoftwareApplication">
     <div slot="header" class="toolbar">
       <q-toolbar-title>
-        <h1 itemprop="name">Wondrous-Badí' Calendar</h1>
+        <h1 itemprop="name">Wondrous-Badí' Today</h1>
         <h2 v-show="setupDone" v-html="topDate"></h2>
       </q-toolbar-title>
     </div>

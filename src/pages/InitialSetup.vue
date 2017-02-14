@@ -3,7 +3,7 @@
     <article>
       <div class="card">
         <div class="card-content">
-          <p>Welcome to the Wondrous-Badí' Calendar app!</p>
+          <p>Welcome to the Wondrous-Badí' Today app!</p>
           <p>To get started, there are two things we need to do...</p>
         </div>
       </div>
