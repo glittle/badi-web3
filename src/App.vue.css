@@ -93,6 +93,15 @@ p {
   font-size: .85em;
   color: rgba(255, 255, 255, 0.5);
 }
+.toolbar-title h2.alert {
+  white-space: normal;
+  font-weight: bold;
+  color: #ffbfbf;
+}
+.toolbar-title h2.alert a {
+  color: #ffbfbf;
+  text-decoration: underline;
+}
 .layout-padding {
   margin-top: 0 !important;
   margin-bottom: 0 !important;

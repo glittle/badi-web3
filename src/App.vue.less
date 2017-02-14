@@ -10,7 +10,6 @@ body {
     letter-spacing: 0.02em;
 }
 
-
 .disabled,
 [disabled],
 .disabled *,
@@ -110,6 +109,15 @@ p {
             margin-left: 1em;
             font-size: .85em;
             color: rgba(255, 255, 255, 0.5);
+        }
+        &.alert {
+            white-space: normal;
+            font-weight: bold;
+            color: #ffbfbf;
+            a {
+                color: #ffbfbf;
+                text-decoration: underline;
+            }
         }
     }
 }

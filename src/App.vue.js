@@ -19,10 +19,15 @@ export default {
     return {
       pages: routeList.menuPages,
       di: badiCalc.di,
-      setupDone: false
+      setupDone: false,
+      oldRedirectCountdown: 20
     }
   },
   computed: {
+    oldHost: function () {
+      var host = window.location.hostname;
+      return host.endsWith('.ga');//  || host === 'localhost';
+    },
     topDate: function () {
       var template = this.di.bNow.eve ? shared.formats.topTitleEve : shared.formats.topTitleDay;
       return template.filledWith(this.di)
@@ -38,6 +43,18 @@ export default {
     store.doPulse();
   },
   methods: {
+    goToNewSite() {
+      var vue = this;
+      if (this.oldHost) {
+        var i = setInterval(function () {
+          vue.oldRedirectCountdown--;
+          if (vue.oldRedirectCountdown <= 0) {
+            clearInterval(i);
+            window.location.href = 'https://wondrous-badi.today/';
+          }
+        }, 1000);
+      }
+    },
     doWorkOnPulse() {
       // console.log('app pulse')
       // notification icon
@@ -85,7 +102,8 @@ export default {
     }
   },
   mounted() {
-    checkLocation(this)
+    checkLocation(this);
+    this.goToNewSite();
   },
   head: {
     title: function () {

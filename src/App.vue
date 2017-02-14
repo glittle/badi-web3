@@ -4,6 +4,11 @@
       <q-toolbar-title>
         <h1 itemprop="name">Wondrous-Badí' Today</h1>
         <h2 v-show="setupDone" v-html="topDate"></h2>
+        <h2 v-if="oldHost" class="alert">Effective immediately, this app has moved to 
+          <br><a href="https://wondrous-badi.today">https://wondrous-badi.today</a>!
+          <br>Please update your bookmarks!
+          <br>Going there in <b v-html="oldRedirectCountdown"></b> seconds... 
+        </h2>
       </q-toolbar-title>
     </div>
     <keep-alive>
