@@ -45,6 +45,7 @@ var formats = {
   statusIconText: '{bMonthNamePri}',
   noticationMain: 'Today is {bDay} {bMonthNamePri}-{bMonthNameSec} {bYear}',
   noticationSub: '{nearestSunset}',
+  noticationSubFast: 'From {sunriseDesc} to {endingSunsetDesc}',
   shortDay: 'the {bDayOrdinal} day of {bMonthNamePri}',
 }
 

@@ -20,6 +20,9 @@ const names = [
     name: 'Verse',
     group: 'main'
   }, {
+    name: 'InitialSetup',
+    group: 'setup'
+  }, {
     name: 'Notifications',
     group: 'setup'
   }, {
@@ -30,9 +33,6 @@ const names = [
     group: ['setup', 'initial']
   }, {
     name: 'About',
-    group: 'setup'
-  }, {
-    name: 'InitialSetup',
     group: 'setup'
   }, {
     name: 'Error404', // must be last!

@@ -2,6 +2,7 @@ import badiCalc from './badiCalc'
 import storage from './storage'
 import * as shared from './shared'
 import verseHelper from './verseHelper'
+import messages from './messages'
 require('../scripts/stringExt')
 // const moment = require('moment-timezone');
 
@@ -10,9 +11,12 @@ require('../scripts/stringExt')
 export function showNow(di) {
   di = di || badiCalc.di;
 
-  show(shared.formats.noticationMain.filledWith(di),
-    shared.formats.noticationSub.filledWith(di) +
-    '\n\n' + verseHelper.forDi(di).verse,
+  var mainTitle = shared.formats.noticationMain.filledWith(di);
+  var body = messages.get(di.bNow.eve ? 'planIncludeWhatEve' : 'planIncludeWhatDay') + ' - '
+    + (di.bMonth === 19 && !di.bNow.eve ? shared.formats.noticationSubFast : shared.formats.noticationSub).filledWith(di)
+    + '\n\n' + verseHelper.forDi(di).verse;
+
+  show(mainTitle, body,
     shared.formats.statusIconText.filledWith(di),
     di.bDay,
     false)
@@ -25,7 +29,7 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
     return;
   }
 
-console.log("notification", Notification.permission)
+  console.log("notification", Notification.permission)
 
   // If the user has not been asked to grant or deny notifications
   // from this domain...
