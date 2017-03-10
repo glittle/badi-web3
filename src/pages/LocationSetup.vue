@@ -18,7 +18,7 @@
         <input type="number" min="-180" max="180" step="any" v-model.number="lng" :class="{'has-error': lngError}">
         </span>
         <span>
-          <button v-bind:disabled="!saveNeeded" 
+          <button v-show="saveNeeded" 
                   v-on:click="saveCoords('user')"
                   class="small light primary">Save</button>
           <span class="busy" v-show="gettingLocation">

@@ -96,9 +96,7 @@ export default {
       },    
   },
   mounted() {
-    // var host = document.getElementById('images');
-    // notify.makeImage(host, 1);
-    // notify.makeImage(host, 2);
+    // sometimes runs before OneSignal is ready :(
     this.startUpOneSignal();
   },
   methods: {
@@ -203,6 +201,9 @@ export default {
       });
       OneSignal.push(["getNotificationPermission", function (permission) {
         vue.permission = permission;
+        if(permission==='granted'){
+          vue.$emit('permissionGranted');
+        };
       }]);
     },
     askForPush() {
@@ -212,6 +213,9 @@ export default {
         OneSignal.registerForPushNotifications({
           modalPrompt: false
         });
+        setTimeout(function(){
+          window.location.reload();
+        }, 100)
       });
     },
     showStep(n, known) {

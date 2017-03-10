@@ -3,8 +3,8 @@
     <article>
       <div class="card">
         <div class="card-content">
-          <p>Welcome to the Wondrous-Badí' Today app!</p>
-          <p>To get started, there are two things we need to do...</p>
+          <p>Welcome to the <strong>Wondrous-Badí' Today</strong> web app!</p>
+          <p>To get started, there are two things we need to do.</p>
         </div>
       </div>
     </article>
@@ -13,8 +13,7 @@
         <div class="card-content">
           <div>
             <h4>1. Set your Location <span v-show="locationSet" class="Done">(Done)</span></h4>
-            <p>Why? &nbsp; Days in the Wondrous-Badí' calendar start at sunset so we need your location to calculate when the
-              sun sets!</p>
+            <p>Why? &nbsp; Days in the Wondrous calendar start at sunset where you are!</p>
             <!--<p>Click here:
               <q-drawer-link v-for="page in pages.filter(p=>p.name==='LocationSetup')" :icon="page.icon" :to="page.to">{{page.text}}</q-drawer-link>
             </p>-->
@@ -31,7 +30,11 @@
             <!--<p>Click here:
               <q-drawer-link v-for="page in pages.filter(p=>p.name==='Notifications')" :icon="page.icon" :to="page.to">{{page.text}}</q-drawer-link>
             </p>-->
-            <component v-bind:is="page.component" v-bind:embedded="true" v-for="page in routes.filter(p=>p.name==='Notifications')"></component>
+            <component 
+            v-bind:is="page.component" 
+            v-bind:embedded="true" 
+            v-on:permissionGranted="notificationDone = true"
+            v-for="page in routes.filter(p=>p.name==='Notifications')"></component>
           </div>
         </div>
       </div>
@@ -40,8 +43,8 @@
       <div class="card">
         <div class="card-content">
           <div>
-            <h4>Next</h4>
-            <p>Choose one of the options below to use the web app! </p>
+            <h4>3. Next</h4>
+            <p>Click one of the icons below to use the web app! </p>
           </div>
         </div>
       </div>

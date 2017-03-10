@@ -20,8 +20,7 @@
       <div v-if="permission==='granted'" v-cloak>
         <div class="section">
           <p>
-            Click
-            <button class="small primary" v-on:click="testNotification">Show Now</button> to show a test notification.</p>
+            Click <button class="small primary" v-on:click="testNotification">Show Now</button> to show a notification.</p>
         </div>
         <div v-if="false">
           <h3>Additional notifications</h3>

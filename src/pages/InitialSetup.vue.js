@@ -7,7 +7,8 @@ export default {
       title: 'Initial Setup',
       icon: 'arrow_forward',
       pages: [],
-      routes: []
+      routes: [],
+      notificationDone: false
     }
   },
   mounted() {
@@ -18,9 +19,6 @@ export default {
     locationSet: function () {
       return shared.coords.source !== 'not set';
     },
-    notificationDone: function(){
-        return false;
-    }
   },
   methods: {}
 }

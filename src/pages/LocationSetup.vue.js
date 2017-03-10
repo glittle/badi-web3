@@ -59,7 +59,7 @@ export default {
       return `${tz.replace(/_/g, ' ')} (${moment.tz(tz).format("Z z")})`
     }
   },
-  created() {},
+  created() { },
   watch: {
     lat: function (n, o) {
       this.checkValidation('lat', n)
@@ -215,9 +215,9 @@ export default {
           shared.coords.name = location;
           vue.name = location;
 
-          Vue.nextTick(function () {
+          setTimeout(function () {
             vue.updateUiToNewLocation()
-          })
+          }, 0)
         })
         .catch(function (error) {
           console.log(error);

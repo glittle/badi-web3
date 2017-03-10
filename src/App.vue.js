@@ -20,14 +20,20 @@ export default {
       pages: routeList.menuPages,
       di: badiCalc.di,
       setupDone: false,
-      oldRedirectCountdown: 20
+      // oldRedirectCountdown: 20
     }
   },
   computed: {
-    oldHost: function () {
-      var host = window.location.hostname;
-      return host.endsWith('.ga');//  || host === 'localhost';
-    },
+//     oldHost: function () {
+//       var host = window.location.hostname;
+//       return host.endsWith('.ga');//  || host === 'localhost';
+// /*
+//       <h2 v-if="oldHost" class="alert">Effective immediately, this app has moved to 
+//           <br><a href="https://wondrous-badi.today">https://wondrous-badi.today</a>!
+//           <br>Please update your bookmarks!
+//           <br>Going there in <b v-html="oldRedirectCountdown"></b> seconds... 
+//         </h2>*/
+//     },
     topDate: function () {
       var template = this.di.bNow.eve ? shared.formats.topTitleEve : shared.formats.topTitleDay;
       return template.filledWith(this.di)
@@ -43,18 +49,18 @@ export default {
     store.doPulse();
   },
   methods: {
-    goToNewSite() {
-      var vue = this;
-      if (this.oldHost) {
-        var i = setInterval(function () {
-          vue.oldRedirectCountdown--;
-          if (vue.oldRedirectCountdown <= 0) {
-            clearInterval(i);
-            window.location.href = 'https://wondrous-badi.today/';
-          }
-        }, 1000);
-      }
-    },
+    // goToNewSite() {
+    //   var vue = this;
+    //   if (this.oldHost) {
+    //     var i = setInterval(function () {
+    //       vue.oldRedirectCountdown--;
+    //       if (vue.oldRedirectCountdown <= 0) {
+    //         clearInterval(i);
+    //         window.location.href = 'https://wondrous-badi.today/';
+    //       }
+    //     }, 1000);
+    //   }
+    // },
     doWorkOnPulse() {
       // console.log('app pulse')
       // notification icon
@@ -103,7 +109,7 @@ export default {
   },
   mounted() {
     checkLocation(this);
-    this.goToNewSite();
+    // this.goToNewSite();
   },
   head: {
     title: function () {
@@ -125,7 +131,7 @@ export default {
 var lastNotificationKey = null;
 
 function checkLocation(vue) {
-  //TODO: don't robots to the setup pages
+  //TODO: don't send robots to the setup pages
 
   if (!vue.setupDone) {
     if (vue.$router.currentRoute.path !== '/locationsetup' &&
