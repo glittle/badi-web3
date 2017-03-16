@@ -1,14 +1,33 @@
 <template>
-  <article class="layout-padding">
+  <article class="layout-padding tightTop">
+    
     <div class="card">
-      <div class="card-content" v-html="dayDisplay"></div>
-    </div>
-    <div class="card">
-      <div class="card-content sunDisplay" v-html="sunDisplay"></div>
-      <div class="card-content">
-        <div>Sun times in <span v-html="location"></span> for <span v-html="shortDay"></span><span>:</span></div>
+      <div class="heading">
+        <span class="type">Time</span>
+        <span class="desc" v-html="sunDisplay"></span>
       </div>
       <div id="sunChart"></div>
+    </div>
+    <div class="card">
+      <Grid19 v-bind:info="info('month')"></Grid19>
+    </div>
+    <div class="card">
+      <Grid19 v-bind:info="info('year')"></Grid19>
+    </div>
+    <div class="card">
+      <Grid19 v-bind:info="info('vahid')"></Grid19>
+    </div>
+    <div class="card">
+      <Grid19 v-bind:info="info('kull')"></Grid19>
+    </div>
+    <div class="card">
+      <Grid19 v-bind:info="info('kull2')"></Grid19>
+    </div>
+    <div class="card" v-on:click="$router.push('verse')">
+      <div class="heading">
+        <span class="type">Verse</span>
+      </div>
+      <Verse></Verse>
     </div>
     <!--<div class="card">
       <div class="card-content">

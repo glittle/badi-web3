@@ -1,6 +1,9 @@
 import messages from '../scripts/messages'
 import badiCalc from '../scripts/badiCalc'
 import sunCalc from '../scripts/sunCalc'
+import Grid19 from '../components/Grid19';
+import Verse from './Verse';
+
 import * as shared from '../scripts/shared'
 require('../scripts/stringExt')
 const moment = require('moment-timezone');
@@ -16,6 +19,10 @@ export default {
       location: shared.coords.name,
     }
   },
+  components: {
+    Grid19,
+    Verse
+  },
   computed: {
     position() {
       return null;
@@ -26,14 +33,28 @@ export default {
       return badiCalc.di;
     },
     dayDisplay() {
-      var html = fillDayDisplay(this.di);
+      /*
+      <div class="card">
+            <div class="card-content" v-html="dayDisplay"></div>
+          </div>
+      */
+
+      var html = this.fillDayDisplay(this.di);
       return html;
     },
     sunDisplay() {
-      var html = fillSunDisplay(this.di);
-      // console.log('sun display')
+      var di = this.di;
+      prepareSunDisplay(di);
       drawChart(local.sun);
-      return html;
+      var now = moment(di.currentTime);
+      var info = [
+        di.bNow.eve ? 'Eve' : 'Day',
+        now.format('H:mm')
+      ];
+      if (now.hour() > 11) {
+        info.push(now.format('h:mma'))
+      }
+      return info.join(' – ');
     },
     pageList() {
       return routeList.default.menuPages.filter(function (p) {
@@ -44,12 +65,83 @@ export default {
       return shared.formats.shortDay.filledWith(this.di)
     },
   },
-  methods: {},
+  methods: {
+    info: function (mode) {
+      var di = this.di;
+      var type, desc, num;
+      switch (mode) {
+        case 'month':
+          type = 'Day';
+          // desc = '{bDayNamePri} – {bDayNameSec} – <b>{bDay}</b>'.filledWith(di);
+          desc = '<b>{bDay}</b> – {bDayNamePri} – {bDayNameSec}'.filledWith(di);
+          num = di.bDay;
+          break;
+        case 'year':
+          type = 'Month';
+          // desc = '<b>{bMonthNamePri}</b> – {bMonthNameSec} – {bMonth}'.filledWith(di);
+          desc = '{bMonth} – <b>{bMonthNamePri}</b> – {bMonthNameSec} – {element}'.filledWith(di);
+          num = di.bMonth;
+          break;
+        case 'vahid':
+          type = 'Year';
+          // desc = '<b>{bYearInVahidNamePri}</b> - {bYearInVahidNameSec} - {bYearInVahid}'.filledWith(di)
+          desc = '{bYearInVahid} – {bYearInVahidNamePri} – {bYearInVahidNameSec} – <b>{bYear} B.E.</b>'.filledWith(di)
+          num = di.bYearInVahid;
+          break;
+        case 'kull':
+          type = di.VahidLabelPri;
+          num = di.bVahid;
+          desc = '{bVahid} ({VahidLabelSec})'.filledWith(di)
+          break;
+        case 'kull2':
+          type = di.KullishayLabelPri;
+          desc = '{bKullishay} ({KullishayLabelSec})'.filledWith(di);
+          num = 1;
+          break;
+      }
+      return {
+        num: num,
+        mode: mode,
+        desc: desc,
+        type: type
+      };
+    },
+    fillDayDisplay: function (di) {
+      var answers = [];
+      // var di = badiCalc.di;
+
+      answers.push({
+        t: 'Day of Month',
+        v: '{bDayNamePri} – {bDayNameSec} – <b>{bDay}</b>'.filledWith(di)
+      });
+      answers.push({
+        t: 'Day of Week',
+        v: '{bWeekdayNamePri} – {bWeekdayNameSec} – {bWeekday}'.filledWith(di)
+      });
+      answers.push({
+        t: 'Month',
+        v: '<b>{bMonthNamePri}</b> – {bMonthNameSec} – {bMonth}'.filledWith(di)
+      });
+      answers.push({
+        t: 'Section of Year',
+        v: '{element}'.filledWith(di)
+      });
+      answers.push({
+        t: 'Year',
+        v: 'Year {bYearInVahid} of Vahid {bVahid} – <b>{bYear}</b>'.filledWith(di)
+      });
+
+      return answers.map(function (ans) {
+        return `<div class="line ${ans.c || ''}"><label>${ans.t}</label> <span>${ans.v}</span></div>`;
+      }).join('');
+
+    }
+  },
   // watch: {
   //   di: function () {
   //     console.log('di changed')
   //     // fillDayDisplay(this)
-  //     // fillSunDisplay(this)
+  //     // prepareSunDisplay(this)
   //   }
   // },
   beforeMount() {
@@ -75,13 +167,13 @@ export default {
   // debugger;
   // this.pulseNumber = pulse.pulseNumber
   // fillDayDisplay(this)
-  // fillSunDisplay(this)
+  // prepareSunDisplay(this)
   //   drawChart(local.sun)
   // },
   beforeUpdate() {
     // console.log('update', routeList)
   },
-  beforeDestroy() {},
+  beforeDestroy() { },
 }
 
 var local = {
@@ -89,37 +181,7 @@ var local = {
   chart: null
 };
 
-function fillDayDisplay(di) {
-  var answers = [];
-  // var di = badiCalc.di;
-
-  answers.push({
-    t: 'Day of Month',
-    v: '{bDayNamePri} – {bDayNameSec} – <b>{bDay}</b>'.filledWith(di)
-  });
-  answers.push({
-    t: 'Day of Week',
-    v: '{bWeekdayNamePri} – {bWeekdayNameSec} – {bWeekday}'.filledWith(di)
-  });
-  answers.push({
-    t: 'Month',
-    v: '<b>{bMonthNamePri}</b> – {bMonthNameSec} – {bMonth}'.filledWith(di)
-  });
-  answers.push({
-    t: 'Section of Year',
-    v: '{element}'.filledWith(di)
-  });
-  answers.push({
-    t: 'Year',
-    v: 'Year {bYearInVahid} of Vahid {bVahid} – <b>{bYear}</b>'.filledWith(di)
-  });
-
-  return answers.map(function (ans) {
-    return `<div class="line ${ans.c || ''}"><label>${ans.t}</label> <span>${ans.v}</span></div>`;
-  }).join('');
-}
-
-function fillSunDisplay(di) {
+function prepareSunDisplay(di) {
   var answers = [];
 
   const readableFormat = 'ddd, MMM D [at] HH:mm';
@@ -136,6 +198,7 @@ function fillSunDisplay(di) {
   var sun = {
     setStart: null,
     rise: null,
+    noon: null,
     setEnd: null,
     now: now,
     diStamp: di.stamp
@@ -154,6 +217,7 @@ function fillSunDisplay(di) {
 
     sun.setStart = sunset1;
     sun.rise = sunrise2;
+    sun.noon = moment(sun2.solarNoon)
     sun.setEnd = sunset2;
 
     // if (now.isBefore(sunrise2)) {
@@ -190,6 +254,7 @@ function fillSunDisplay(di) {
 
     sun.setStart = sunset0;
     sun.rise = sunrise1;
+    sun.noon = moment(sun1.solarNoon)
     sun.setEnd = sunset1;
 
     // answers.push({
@@ -301,7 +366,7 @@ function drawChart(sun) {
   }
   // console.log('drawing chart')
 
-  var yFactor = 10;
+  var yFactor = 5;
   var twilight = 4;
   var colorFullSun = '#ffff00';
   var colorFullDark = '#000000';
@@ -332,6 +397,7 @@ function drawChart(sun) {
   addPoint(sun.setStart, 'Sunset', 'lightgrey');
   addPoint(sun.setEnd, 'Sunset', 'lightgrey');
   addPoint(sun.rise, 'Sunrise', 'lightgrey');
+  addPoint(sun.noon, 'Solar Noon', 'lightgrey');
 
   // fill in the rest
   var minutesBetweenPoints = 60;

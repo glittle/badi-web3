@@ -1,0 +1,72 @@
+.Grid19 {
+  margin: 3px;
+  border-spacing: 0;
+}
+.Grid19 .title {
+  text-align: right;
+}
+.Grid19 th {
+  font-weight: normal;
+  text-align: left;
+}
+.Grid19 th .type {
+  color: #999;
+  width: 80px;
+  display: inline-block;
+}
+.Grid19 td {
+  font-size: 11px;
+}
+.Grid19 .cell {
+  position: relative;
+  width: 79px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  color: #ccc;
+}
+.Grid19 .cell .a {
+  padding: 0 3px;
+}
+.Grid19 .cell .b {
+  position: absolute;
+  bottom: 0;
+  right: 2px;
+}
+.Grid19 .cell.now {
+  border-width: 2px;
+  border-color: #666;
+}
+.Grid19 .cell.now .a {
+  color: #000;
+  font-weight: bold;
+}
+.Grid19 .cell.future {
+  opacity: 0.25;
+}
+.Grid19 .gridRow.row1 .cell.past {
+  color: #eb7265;
+  background-color: #fef6f5;
+}
+.Grid19 .gridRow.row1 .cell.now {
+  background-color: #eb7265;
+}
+.Grid19 .gridRow.row2 .cell.past {
+  background-color: #f5f7f7;
+}
+.Grid19 .gridRow.row2 .cell.now {
+  background-color: #ecf0f1;
+}
+.Grid19 .gridRow.row3 .cell.past {
+  color: #3498db;
+  background-color: #eaf4fb;
+}
+.Grid19 .gridRow.row3 .cell.now {
+  background-color: #3498db;
+}
+.Grid19 .gridRow.row4 .cell.past {
+  color: #2ecc71;
+  background-color: #e2f8eb;
+}
+.Grid19 .gridRow.row4 .cell.now {
+  background-color: #2ecc71;
+}

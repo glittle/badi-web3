@@ -1,0 +1,104 @@
+.Grid19 {
+    @fire: #eb7265;
+    @air: #ecf0f1;
+    @water: #3498db;
+    @earth: #2ecc71;
+    @fire1: lighten(@fire, 32%);
+    @air1: lighten(@air, 3%);
+    @water1: lighten(@water, 42%);
+    @earth1: lighten(@earth, 44%);
+    margin: 3px;
+    border-spacing: 0;
+    .title {
+        text-align: right;
+    }
+    th {
+        font-weight: normal;
+        text-align: left;
+        .type {
+            color: #999;
+            width: 80px;
+            display: inline-block;
+        }
+    }
+    td {
+        font-size: 11px;
+    }
+    .cell {
+        position: relative;
+        width: 79px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        color: #ccc;
+        .a {
+            padding: 0 3px;
+        }
+        .b {
+            position: absolute;
+            bottom: 0;
+            right: 2px;
+        }
+        &.now {
+            border-width: 2px;
+            border-color: #666;
+            .a {
+                color: #000;
+                font-weight: bold;
+            }
+        }
+        &.past {
+            // border: 1px solid #ccc;
+        }
+        &.future {
+            opacity: 0.25;
+        }
+    }
+    .gridRow {
+        &.row1 {
+            .cell {
+                &.past {
+                    color: @fire;
+                    background-color: @fire1;
+                }
+                &.now {
+                    background-color: @fire;
+                }
+            }
+        }
+        &.row2 {
+            .cell {
+                // border-color: #ecf0f1;
+                &.past {
+                    background-color: @air1;
+                }
+                &.now {
+                    background-color: @air;
+                }
+            }
+        }
+        &.row3 {
+            .cell {
+                // border-color: #3498db;
+                &.past {
+                    color: @water;
+                    background-color: @water1;
+                }
+                &.now {
+                    background-color: @water;
+                }
+            }
+        }
+        &.row4 {
+            .cell {
+                // border-color: #2ecc71;
+                &.past {
+                    color: @earth;
+                    background-color: @earth1;
+                }
+                &.now {
+                    background-color: @earth;
+                }
+            }
+        }
+    }
+}

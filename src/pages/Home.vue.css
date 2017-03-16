@@ -1,3 +1,24 @@
+.tightTop div.card:first-child {
+  margin-top: 0;
+}
+.card article.Verse {
+  cursor: pointer;
+  padding: 3px;
+}
+.card article.Verse > * {
+  display: none;
+}
+.card article.Verse .verseHost {
+  display: block;
+  margin: 0 8px 4px 8px;
+}
+.card article.Verse .verseHost > * {
+  display: none;
+}
+.card article.Verse .verseHost .verseText {
+  display: block;
+  font-size: 17px;
+}
 button.item-link {
   display: inline-block;
   line-height: normal;
@@ -9,13 +30,21 @@ button.item-link {
 button.item-link.icon_setup {
   background: rgba(0, 0, 255, 0.06);
 }
-.sunDisplay {
-  display: none;
+.heading {
+  margin: 3px 0 0 3px;
+}
+.heading .type {
+  color: #999;
+  width: 80px;
+  display: inline-block;
+}
+.heading .desc {
+  font-size: 12px;
 }
 #sunChart {
   width: 100%;
   max-width: 800px;
-  height: 200px;
+  height: 140px;
   margin: 0 auto;
   box-sizing: border-box;
 }

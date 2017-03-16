@@ -1,3 +1,28 @@
+.tightTop {
+    div.card:first-child {
+        margin-top: 0;
+    }
+}
+
+.card article.Verse {
+    cursor: pointer;
+    padding: 3px;
+    >* {
+        display: none;
+    }
+    .verseHost {
+        display: block;
+        margin: 0 8px 4px 8px;
+        >* {
+            display: none;
+        }
+        .verseText{
+            display: block;
+            font-size: 17px;
+        }
+    }
+}
+
 button.item-link {
     display: inline-block;
     line-height: normal;
@@ -10,14 +35,22 @@ button.item-link {
     }
 }
 
-.sunDisplay {
-    display: none; // using sunChart
+.heading {
+    margin: 3px 0 0 3px;
+    .type {
+        color: #999;
+        width: 80px;
+        display: inline-block;
+    }
+    .desc {
+        font-size: 12px;
+    }
 }
 
 #sunChart {
     width: 100%;
     max-width: 800px;
-    height: 200px;
+    height: 140px;
     margin: 0 auto;
     box-sizing: border-box;
     .highcharts-data-label {
