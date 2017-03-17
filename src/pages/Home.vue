@@ -33,7 +33,7 @@
         <label><input type=checkbox v-model="tapSounds">Sounds</label>
         <button 
           v-on:click="reset95"
-          class="reset small light round raised">Reset</button> </span>
+          class="reset small light round">Reset</button> </span>
       </div>
       <div class="main95">
         <button 

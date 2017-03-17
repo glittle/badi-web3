@@ -87,11 +87,9 @@ div.line b {
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  margin: 3px;
-  box-sizing: border-box;
 }
 .tap95card .heading {
-  margin: 3px;
+  width: 100%;
 }
 .tap95card .heading label {
   margin-right: 16px;
@@ -101,7 +99,7 @@ div.line b {
   margin-right: 2px;
 }
 .tap95card button.reset {
-  margin: 1px 3px;
+  margin: 1px 6px;
   padding: 3px 8px;
   min-height: 1rem;
 }
