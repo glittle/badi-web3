@@ -91,6 +91,9 @@ div.line b {
 .tap95card .heading {
   width: 100%;
 }
+.tap95card .heading .type {
+  margin-left: 3px;
+}
 .tap95card .heading label {
   margin-right: 16px;
 }
@@ -99,7 +102,7 @@ div.line b {
   margin-right: 2px;
 }
 .tap95card button.reset {
-  margin: 1px 6px;
+  margin: 1px 10px 0 0;
   padding: 3px 8px;
   min-height: 1rem;
 }
