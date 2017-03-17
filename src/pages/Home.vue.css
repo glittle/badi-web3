@@ -86,6 +86,10 @@ div.line b {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  width: 100%;
+}
+.tap95card .heading {
+  width: 100%;
 }
 .tap95card .heading label {
   margin-right: 16px;
@@ -102,6 +106,7 @@ div.line b {
 .tap95card .main95 {
   display: flex;
   height: 200px;
+  width: 100%;
   justify-content: space-around;
   align-items: center;
 }
