@@ -51,6 +51,8 @@ export default {
         var grid = this.$el;
         var info = this.info;
 
+        this.$store.state.pulseNum;
+
         for (var c = 1; c <= 19; c++) {
             var cell = grid.getElementsByClassName('cell' + c)[0];
             var a = cell.getElementsByClassName('a')[0];

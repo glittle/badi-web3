@@ -16,9 +16,9 @@
         >* {
             display: none;
         }
-        .verseText{
+        .verseText {
             display: block;
-            font-size: 17px;
+            font-size: 18px;
         }
     }
 }
@@ -36,14 +36,13 @@ button.item-link {
 }
 
 .heading {
-    margin: 3px 0 0 3px;
+    display: flex;
+    justify-content: space-between;
+    margin: 3px 3px 3px 3px;
     .type {
         color: #999;
-        width: 80px;
-        display: inline-block;
-    }
-    .desc {
-        font-size: 12px;
+        display: block;
+        text-align: right;
     }
 }
 
@@ -92,5 +91,63 @@ div.line {
         background-color: rgba(2, 123, 227, 0.06);
         border-radius: 2px;
         padding: 0 2px;
+    }
+}
+
+.tap95card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    .heading {
+        label {
+            margin-right: 16px;
+            input {
+                vertical-align: text-bottom;
+                margin-right: 2px;
+            }
+        }
+    }
+    button.reset {
+        margin: 1px 3px;
+        padding: 3px 8px;
+        min-height: 1rem;
+    }
+    .main95 {
+        display: flex;
+        height: 200px;
+        justify-content: space-around;
+        align-items: center;
+        button.circular.big {
+            height: 100px;
+            width: 100px;
+        }
+        span.tapNum {
+            font-size: 50px;
+            width: 100%;
+            text-align: center;
+            display: block;
+        }
+    }
+    #tapBlocks {
+        div {
+            height: 9px;
+        }
+        span {
+            background-color: #eee;
+            display: inline-block;
+            height: 5px;
+            width: 5px;
+            margin: 1px;
+            &.tapped {
+                background-color: #027be3;
+                &.five {
+                    background-color: #FFA726;
+                }
+            }
+            &.five {
+                // margin-right: 3px;
+            }
+        }
     }
 }

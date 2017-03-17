@@ -1,16 +1,18 @@
 <template>
   <table class="Grid19">
     <tr>
-      <th colspan=6>
-        <span class="type" v-html="info.type"></span>
+      <th colspan=4>
         <span class="desc" v-html="info.desc"></span>
+      </th>
+      <th colspan=2>
+        <span class="type" v-html="info.type"></span>
      </th>
     </tr>
     <tr class="gridRow row1">
       <td class="cell cell1"><span class=a></span><span class=b></span></td>
       <td class="cell cell2"><span class=a></span><span class=b></span></td>
       <td class="cell cell3"><span class=a></span><span class=b></span></td>
-      <td class="title" colspan="3"></td>
+      <th colspan="3"><span class="type type2" v-html="info.type2"></span></th>
     </tr>
     <tr class="gridRow row2">
       <td class="cell cell4"><span class=a></span><span class=b></span></td>

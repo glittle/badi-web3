@@ -1,6 +1,6 @@
 .Grid19 {
   margin: 3px;
-  border-spacing: 0;
+  border-spacing: 1px;
 }
 .Grid19 .title {
   text-align: right;
@@ -8,11 +8,15 @@
 .Grid19 th {
   font-weight: normal;
   text-align: left;
+  padding-bottom: 4px;
 }
 .Grid19 th .type {
   color: #999;
-  width: 80px;
-  display: inline-block;
+  display: block;
+  text-align: right;
+}
+.Grid19 th .type2 {
+  font-size: 80%;
 }
 .Grid19 td {
   font-size: 11px;
@@ -20,7 +24,6 @@
 .Grid19 .cell {
   position: relative;
   width: 79px;
-  border: 1px solid #ccc;
   box-sizing: border-box;
   color: #ccc;
 }
@@ -33,40 +36,42 @@
   right: 2px;
 }
 .Grid19 .cell.now {
-  border-width: 2px;
-  border-color: #666;
-}
-.Grid19 .cell.now .a {
-  color: #000;
   font-weight: bold;
+  font-size: 15px;
 }
 .Grid19 .cell.future {
-  opacity: 0.25;
+  opacity: 0.35;
+  background-color: #fafafa;
 }
 .Grid19 .gridRow.row1 .cell.past {
-  color: #eb7265;
+  color: #f8d1cd;
   background-color: #fef6f5;
 }
 .Grid19 .gridRow.row1 .cell.now {
+  color: #75190f;
   background-color: #eb7265;
 }
 .Grid19 .gridRow.row2 .cell.past {
+  color: #d5dde0;
   background-color: #f5f7f7;
 }
 .Grid19 .gridRow.row2 .cell.now {
+  color: #d5dde0;
   background-color: #ecf0f1;
 }
 .Grid19 .gridRow.row3 .cell.past {
-  color: #3498db;
+  color: #b6daf2;
   background-color: #eaf4fb;
 }
 .Grid19 .gridRow.row3 .cell.now {
+  color: #0a2639;
   background-color: #3498db;
 }
 .Grid19 .gridRow.row4 .cell.past {
-  color: #2ecc71;
+  color: #a8ebc4;
   background-color: #e2f8eb;
 }
 .Grid19 .gridRow.row4 .cell.now {
+  color: #1b7943;
   background-color: #2ecc71;
 }

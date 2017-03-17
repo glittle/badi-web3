@@ -3,12 +3,23 @@
     @air: #ecf0f1;
     @water: #3498db;
     @earth: #2ecc71;
+    // light background
     @fire1: lighten(@fire, 32%);
     @air1: lighten(@air, 3%);
     @water1: lighten(@water, 42%);
     @earth1: lighten(@earth, 44%);
+    //light font
+    @fire2: lighten(@fire, 23%);
+    @air2: darken(@air, 8%);
+    @water2: lighten(@water, 30%);
+    @earth2: lighten(@earth, 30%);
+    //dark font
+    @fire3: darken(@fire, 40%);
+    @air3: darken(@air, 8%);
+    @water3: darken(@water, 40%);
+    @earth3: darken(@earth, 20%);
     margin: 3px;
-    border-spacing: 0;
+    border-spacing: 1px;
     .title {
         text-align: right;
     }
@@ -17,9 +28,13 @@
         text-align: left;
         .type {
             color: #999;
-            width: 80px;
-            display: inline-block;
+            display: block;
+            text-align: right;
         }
+        .type2 {
+            font-size: 80%;
+        }
+        padding-bottom: 4px;
     }
     td {
         font-size: 11px;
@@ -27,7 +42,7 @@
     .cell {
         position: relative;
         width: 79px;
-        border: 1px solid #ccc;
+        // border: 1px solid #ccc;
         box-sizing: border-box;
         color: #ccc;
         .a {
@@ -39,28 +54,26 @@
             right: 2px;
         }
         &.now {
-            border-width: 2px;
-            border-color: #666;
-            .a {
-                color: #000;
-                font-weight: bold;
-            }
+            font-weight: bold;
+            font-size: 15px;
         }
         &.past {
             // border: 1px solid #ccc;
         }
         &.future {
-            opacity: 0.25;
+            opacity: 0.35;
+            background-color: #fafafa;
         }
     }
     .gridRow {
         &.row1 {
             .cell {
                 &.past {
-                    color: @fire;
+                    color: @fire2;
                     background-color: @fire1;
                 }
                 &.now {
+                    color: @fire3;
                     background-color: @fire;
                 }
             }
@@ -69,9 +82,11 @@
             .cell {
                 // border-color: #ecf0f1;
                 &.past {
+                    color: @air2;
                     background-color: @air1;
                 }
                 &.now {
+                    color: @air3;
                     background-color: @air;
                 }
             }
@@ -80,10 +95,11 @@
             .cell {
                 // border-color: #3498db;
                 &.past {
-                    color: @water;
+                    color: @water2;
                     background-color: @water1;
                 }
                 &.now {
+                    color: @water3;
                     background-color: @water;
                 }
             }
@@ -92,10 +108,11 @@
             .cell {
                 // border-color: #2ecc71;
                 &.past {
-                    color: @earth;
+                    color: @earth2;
                     background-color: @earth1;
                 }
                 &.now {
+                    color: @earth3;
                     background-color: @earth;
                 }
             }

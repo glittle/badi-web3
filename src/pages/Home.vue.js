@@ -17,6 +17,8 @@ export default {
       title: messages.get('HomePage', null, 'Today'),
       icon: '../statics/sunWhite.png',
       location: shared.coords.name,
+      tapNum: 0,
+      tapSounds: true
     }
   },
   components: {
@@ -26,6 +28,12 @@ export default {
   computed: {
     position() {
       return null;
+    },
+    tapSound1() {
+      return document.getElementById('tapSound1');
+    },
+    tapSound2() {
+      return document.getElementById('tapSound2');
     },
     di() {
       this.$store.state.pulseNum;
@@ -46,15 +54,16 @@ export default {
       var di = this.di;
       prepareSunDisplay(di);
       drawChart(local.sun);
-      var now = moment(di.currentTime);
-      var info = [
-        di.bNow.eve ? 'Eve' : 'Day',
-        now.format('H:mm')
-      ];
-      if (now.hour() > 11) {
-        info.push(now.format('h:mma'))
-      }
-      return info.join(' – ');
+      // var now = moment(di.currentTime);
+      // var info = [
+      //   di.bNow.eve ? 'Eve' : 'Day',
+      //   now.format('H:mm')
+      // ];
+      // if (now.hour() > 11) {
+      //   info.push(now.format('h:mma'))
+      // }
+      // return info.join(' – ');
+      return 'Time in ' + this.location;
     },
     pageList() {
       return routeList.default.menuPages.filter(function (p) {
@@ -68,42 +77,46 @@ export default {
   methods: {
     info: function (mode) {
       var di = this.di;
-      var type, desc, num;
+      var type, type2, desc, num;
       switch (mode) {
         case 'month':
-          type = 'Day';
+          type = '…in this Month';
           // desc = '{bDayNamePri} – {bDayNameSec} – <b>{bDay}</b>'.filledWith(di);
-          desc = '<b>{bDay}</b> – {bDayNamePri} – {bDayNameSec}'.filledWith(di);
+          desc = 'Day <b>{bDay}</b> – {bDayNamePri} – {bDayNameSec}'.filledWith(di);
           num = di.bDay;
           break;
         case 'year':
-          type = 'Month';
+          type = '…in this Year';
           // desc = '<b>{bMonthNamePri}</b> – {bMonthNameSec} – {bMonth}'.filledWith(di);
-          desc = '{bMonth} – <b>{bMonthNamePri}</b> – {bMonthNameSec} – {element}'.filledWith(di);
+          //  – {element}
+          desc = 'Month {bMonth} – <b>{bMonthNamePri}</b> – {bMonthNameSec}'.filledWith(di);
           num = di.bMonth;
           break;
         case 'vahid':
-          type = 'Year';
+          type = '…in this ' + di.VahidLabelPri;
+          type2 = di.VahidLabelSec;
           // desc = '<b>{bYearInVahidNamePri}</b> - {bYearInVahidNameSec} - {bYearInVahid}'.filledWith(di)
-          desc = '{bYearInVahid} – {bYearInVahidNamePri} – {bYearInVahidNameSec} – <b>{bYear} B.E.</b>'.filledWith(di)
+          desc = 'Year {bYearInVahid} – {bYearInVahidNamePri} – {bYearInVahidNameSec} – <b>{bYear} B.E.</b>'.filledWith(di)
           num = di.bYearInVahid;
           break;
         case 'kull':
-          type = di.VahidLabelPri;
+          type = '…in this ' + di.KullishayLabelPri;
+          type2 = di.KullishayLabelSec;
           num = di.bVahid;
-          desc = '{bVahid} ({VahidLabelSec})'.filledWith(di)
+          desc = '{VahidLabelPri} {bVahid} ({VahidLabelSec})'.filledWith(di)
           break;
-        case 'kull2':
-          type = di.KullishayLabelPri;
-          desc = '{bKullishay} ({KullishayLabelSec})'.filledWith(di);
-          num = 1;
-          break;
+        // case 'kull2':
+        //   type = '??';
+        //   desc = '{bKullishay} ({KullishayLabelSec})'.filledWith(di);
+        //   num = 1;
+        //   break;
       }
       return {
         num: num,
         mode: mode,
         desc: desc,
-        type: type
+        type: type,
+        type2: type2
       };
     },
     fillDayDisplay: function (di) {
@@ -135,6 +148,45 @@ export default {
         return `<div class="line ${ans.c || ''}"><label>${ans.t}</label> <span>${ans.v}</span></div>`;
       }).join('');
 
+    },
+    tap95: function () {
+      if (this.tapNum >= 95) {
+        return;
+      }
+      this.tapNum++;
+      document.getElementById('tap_' + this.tapNum).classList.add('tapped');
+      if (this.tapSounds) {
+        var s = this.tapNum < 95 ? this.tapSound1 : this.tapSound2;
+        s.pause();
+        s.currentTime = 0;
+        s.play();
+      }
+    },
+    reset95: function () {
+      this.tapNum = 0;
+      var blocks = document.getElementsByClassName('tapped');
+      for (var b = blocks.length; b--; b > 0) {
+        blocks[b].classList.remove('tapped');
+      }
+    },
+    makeTapBlocks: function () {
+      var html = [];
+      var perRow = 19;
+      for (var r = 0; r < 5; r++) {
+        html.push('<div>');
+        for (var c = 0; c < perRow; c++) {
+          var num = (1 + r * perRow + c);
+          if (num > 95) {
+            // if not 19 per row
+            break;
+          }
+          var classes = num % 5 === 0 ? ' class=five' : '';
+          html.push('<span id=tap_' + num + classes + '></span>')
+        }
+        html.push('</div>');
+      }
+      var host = document.getElementById('tapBlocks');
+      host.innerHTML = html.join('');
     }
   },
   // watch: {
@@ -152,6 +204,7 @@ export default {
   },
   mounted() {
     // drawChart(local.sun)
+    this.makeTapBlocks();
   },
   activated() {
     drawChart(local.sun)
@@ -375,7 +428,7 @@ function drawChart(sun) {
   var chartMax = sun.setEnd.valueOf();
   var chartRange = chartMax - chartMin;
 
-  function addPoint(m, name, color) {
+  function addPoint(m, name, color, underAxis) {
     var t = m.toDate();
     var o = {
       x: t,
@@ -385,6 +438,10 @@ function drawChart(sun) {
       color: color,
       pct: (t.getTime() - chartMin) / chartRange
     };
+    if (underAxis) {
+      o.name = '<br>' + o.name;
+      o.dataLabels = { verticalAlign: 'bottom' };
+    }
     if (o.y > twilight) {
       o.color = colorFullSun;
     }
@@ -397,7 +454,7 @@ function drawChart(sun) {
   addPoint(sun.setStart, 'Sunset', 'lightgrey');
   addPoint(sun.setEnd, 'Sunset', 'lightgrey');
   addPoint(sun.rise, 'Sunrise', 'lightgrey');
-  addPoint(sun.noon, 'Solar Noon', 'lightgrey');
+  addPoint(sun.noon, 'Solar Noon', 'lightgrey', true);
 
   // fill in the rest
   var minutesBetweenPoints = 60;
@@ -426,7 +483,7 @@ function drawChart(sun) {
     return a.x < b.x ? -1 : 1
   })
 
-  //   console.table(v);
+  // console.table(v);
 
   Highcharts.setOptions({
     global: {
@@ -505,6 +562,7 @@ function drawChart(sun) {
       dataLabels: {
         enabled: true,
         useHTML: true,
+        verticalAlign: 'bottom',
         formatter: function () {
           var point = this.point;
           return point.name ? (point.name + '<br>' + point.time) : null;
@@ -568,6 +626,10 @@ function alignLabels() {
 
 function showNowLine(chart, sun) {
   // console.log('updating now line');
+  if (!chart.xAxis) {
+    return;
+  }
+
   var now = sun.now;
   chart.xAxis[0].removePlotLine('now');
 
