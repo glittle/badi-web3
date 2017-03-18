@@ -35,6 +35,9 @@ button.item-link.icon_setup {
   justify-content: space-between;
   margin: 3px 3px 3px 3px;
 }
+.heading .desc span {
+  font-size: 12px;
+}
 .heading .type {
   color: #999;
   display: block;

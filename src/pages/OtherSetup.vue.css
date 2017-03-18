@@ -1,3 +1,22 @@
+.otherSetup .section div {
+  white-space: nowrap;
+}
+.otherSetup .section label label {
+  display: inline-block;
+  vertical-align: top;
+}
+.otherSetup .section label div {
+  display: inline-block;
+  vertical-align: top;
+  white-space: normal;
+}
+.otherSetup .section label div > span {
+  display: block;
+  margin-left: 1em;
+}
+.otherSetup .section span.active {
+  font-weight: bold;
+}
 .formats div {
   white-space: normal;
   margin: 4px 0;

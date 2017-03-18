@@ -1,41 +1,36 @@
 <template>
   <table class="Grid19">
     <tr>
-      <th colspan=4>
+      <th colspan=19>
         <span class="desc" v-html="info.desc"></span>
-      </th>
-      <th colspan=2>
-        <span class="type" v-html="info.type"></span>
+        <span class="type">
+          <span v-html="info.type"></span>
+          <span v-if="info.type2">
+            (<span v-html="info.type2"></span>)
+          </span>
+        </span>
      </th>
     </tr>
-    <tr class="gridRow row1">
-      <td class="cell cell1"><span class=a></span><span class=b></span></td>
-      <td class="cell cell2"><span class=a></span><span class=b></span></td>
-      <td class="cell cell3"><span class=a></span><span class=b></span></td>
-      <th colspan="3"><span class="type type2" v-html="info.type2"></span></th>
-    </tr>
-    <tr class="gridRow row2">
-      <td class="cell cell4"><span class=a></span><span class=b></span></td>
-      <td class="cell cell5"><span class=a></span><span class=b></span></td>
-      <td class="cell cell6"><span class=a></span><span class=b></span></td>
-      <td class="cell cell7"><span class=a></span><span class=b></span></td>
-      <td colspan="2"></td>
-    </tr>
-    <tr class="gridRow row3">
-      <td class="cell cell8"><span class=a></span><span class=b></span></td>
-      <td class="cell cell9"><span class=a></span><span class=b></span></td>
-      <td class="cell cell10"><span class=a></span><span class=b></span></td>
-      <td class="cell cell11"><span class=a></span><span class=b></span></td>
-      <td class="cell cell12"><span class=a></span><span class=b></span></td>
-      <td class="cell cell13"><span class=a></span><span class=b></span></td>
-    </tr>
-    <tr class="gridRow row4">
-      <td class="cell cell14"><span class=a></span><span class=b></span></td>
-      <td class="cell cell15"><span class=a></span><span class=b></span></td>
-      <td class="cell cell16"><span class=a></span><span class=b></span></td>
-      <td class="cell cell17"><span class=a></span><span class=b></span></td>
-      <td class="cell cell18"><span class=a></span><span class=b></span></td>
-      <td class="cell cell19"><span class=a></span><span class=b></span></td>
+    <tr class="gridRow">
+      <td class="cell row1 cell1"><span class=a></span><span class=b></span></td>
+      <td class="cell row1 cell2"><span class=a></span><span class=b></span></td>
+      <td class="cell row1 cell3"><span class=a></span><span class=b></span></td>
+      <td class="cell row2 cell4"><span class=a></span><span class=b></span></td>
+      <td class="cell row2 cell5"><span class=a></span><span class=b></span></td>
+      <td class="cell row2 cell6"><span class=a></span><span class=b></span></td>
+      <td class="cell row2 cell7"><span class=a></span><span class=b></span></td>
+      <td class="cell row3 cell8"><span class=a></span><span class=b></span></td>
+      <td class="cell row3 cell9"><span class=a></span><span class=b></span></td>
+      <td class="cell row3 cell10"><span class=a></span><span class=b></span></td>
+      <td class="cell row3 cell11"><span class=a></span><span class=b></span></td>
+      <td class="cell row3 cell12"><span class=a></span><span class=b></span></td>
+      <td class="cell row3 cell13"><span class=a></span><span class=b></span></td>
+      <td class="cell row4 cell14"><span class=a></span><span class=b></span></td>
+      <td class="cell row4 cell15"><span class=a></span><span class=b></span></td>
+      <td class="cell row4 cell16"><span class=a></span><span class=b></span></td>
+      <td class="cell row4 cell17"><span class=a></span><span class=b></span></td>
+      <td class="cell row4 cell18"><span class=a></span><span class=b></span></td>
+      <td class="cell row4 cell19"><span class=a></span><span class=b></span></td>
     </tr>
     </table>
 </template>

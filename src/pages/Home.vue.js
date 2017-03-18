@@ -1,6 +1,7 @@
 import messages from '../scripts/messages'
 import badiCalc from '../scripts/badiCalc'
 import sunCalc from '../scripts/sunCalc'
+import storage from '../scripts/storage'
 import Grid19 from '../components/Grid19';
 import Verse from './Verse';
 
@@ -40,6 +41,9 @@ export default {
       // this.$store.commit('newDate', badiCalc.di);
       return badiCalc.di;
     },
+    timeFormat() { 
+      return storage.get('use24hour', false) ? 'HH:mm' : 'h:mm a';
+    },
     dayDisplay() {
       /*
       <div class="card">
@@ -52,9 +56,9 @@ export default {
     },
     sunDisplay() {
       var di = this.di;
-      prepareSunDisplay(di);
-      drawChart(local.sun);
-      // var now = moment(di.currentTime);
+      prepareSunDisplay(di, this.timeFormat);
+      drawChart(local.sun, this.timeFormat);
+      var now = moment(di.currentTime);
       // var info = [
       //   di.bNow.eve ? 'Eve' : 'Day',
       //   now.format('H:mm')
@@ -63,7 +67,7 @@ export default {
       //   info.push(now.format('h:mma'))
       // }
       // return info.join(' – ');
-      return 'Time in ' + this.location;
+      return 'Time in ' + this.location + '<span> – ' + now.format(this.timeFormat) + '</span>';
     },
     pageList() {
       return routeList.default.menuPages.filter(function (p) {
@@ -207,7 +211,7 @@ export default {
     this.makeTapBlocks();
   },
   activated() {
-    drawChart(local.sun)
+    drawChart(local.sun, this.timeFormat)
   },
   // doWorkOnPulse() {
   //   console.log('pulse in home');
@@ -234,10 +238,10 @@ var local = {
   chart: null
 };
 
-function prepareSunDisplay(di) {
+function prepareSunDisplay(di, timeFormat) {
   var answers = [];
 
-  const readableFormat = 'ddd, MMM D [at] HH:mm';
+  const readableFormat = 'ddd, MMM D [at] ' + timeFormat;
   const nowFormat = readableFormat; // 'ddd, MMM D [at] HH:mm:ss';
 
   const now = moment(di.currentTime);
@@ -400,7 +404,7 @@ var _lastChartDay = null;
 var _fontSize = '12px';
 var _fontColor = '#212121';
 
-function drawChart(sun) {
+function drawChart(sun, timeFormat) {
   //   setStart: null,
   //   rise: null,
   //   setEnd: null,
@@ -412,7 +416,7 @@ function drawChart(sun) {
 
   var key = sun.diStamp;
   if (_lastChartDay === key) {
-    showNowLine(_chart, sun);
+    showNowLine(_chart, sun, timeFormat);
     return;
   } else {
     _lastChartDay = key;
@@ -434,7 +438,7 @@ function drawChart(sun) {
       x: t,
       y: sunCalc.getPosition(t).altitude * yFactor,
       name: name,
-      time: m.format('H:mm'),
+      time: m.format(timeFormat),
       color: color,
       pct: (t.getTime() - chartMin) / chartRange
     };
@@ -503,6 +507,9 @@ function drawChart(sun) {
     chart: {
       type: 'areaspline',
       //spacingBottom: 50
+      style: {
+        fontFamily: 'Roboto, "Helvetica Neue", "Calibri Light", sans-serif'
+      }
     },
     title: {
       text: null
@@ -525,7 +532,6 @@ function drawChart(sun) {
         midnightMs + 60000
       ],
       labels: {
-        align: 'left',
         useHTML: true,
         y: 12,
         x: 0,
@@ -600,7 +606,7 @@ function drawChart(sun) {
 
   try {
     _chart = Highcharts.chart('sunChart', options, function (chart) {
-      showNowLine(chart, sun);
+      showNowLine(chart, sun, timeFormat);
       alignLabels();
     });
   } catch (error) {
@@ -624,7 +630,7 @@ function alignLabels() {
   }
 }
 
-function showNowLine(chart, sun) {
+function showNowLine(chart, sun, timeFormat) {
   // console.log('updating now line');
   if (!chart.xAxis) {
     return;
@@ -636,8 +642,8 @@ function showNowLine(chart, sun) {
   var timeFromSunset = sun.now.diff(sun.setStart, 'h', true);
   var timeToSunset = sun.setEnd.diff(sun.now, 'h', true);
   var align = 'center';
-  if (timeFromSunset < 3) align = 'left';
-  if (timeToSunset < 3) align = 'right';
+  if (timeFromSunset < 4) align = 'left';
+  if (timeToSunset < 4) align = 'right';
 
   chart.xAxis[0].addPlotLine({
     value: now.toDate(),
@@ -647,13 +653,14 @@ function showNowLine(chart, sun) {
     zIndex: 5, //    zIndex: 0,
     label: {
       rotation: 0,
-      text: 'Now ' + now.format('H:mm'),
+      text: 'Now ' + now.format(timeFormat),
       align: align,
+      x: -1,
       style: {
         color: _fontColor,
         fontSize: _fontSize,
         fontWeight: "normal",
-        textOutline: "1px 1px contrast",
+        textOutline: "2px 2px contrast",
         backgroundColor: '#ffffff'
       }
     }

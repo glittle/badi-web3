@@ -2652,14 +2652,14 @@ var lists = {};
 
 settings.useArNames = storage.get('useArNames', false);
 
-var use24HourClock = false;
+var use24HourClock = storage.get('use24hour', false);
 
 onLocaleLoaded();
 
 function onLocaleLoaded() {
   _languageCode = messages.get('translation');
   _languageDir = ',fa'.search(_languageCode) !== -1 ? 'rtl' : 'ltr';
-  use24HourClock = messages.get('use24HourClock') === 'true';
+  // use24HourClock = messages.get('use24HourClock') === 'true';
 
   lists.bMonthNameAr = messages.get("bMonthNameAr").split(splitSeparator);
   lists.bMonthMeaning = messages.get("bMonthMeaning").split(splitSeparator);
