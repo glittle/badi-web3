@@ -18,7 +18,8 @@ export default {
       title: messages.get('HomePage', null, 'Today'),
       icon: '../statics/sunWhite.png',
       location: shared.coords.name,
-      tapNum: 0
+      tapNum: 0,
+      tapSounds: storage.get('tapSound', true)
     }
   },
   components: {
@@ -26,14 +27,6 @@ export default {
     Verse
   },
   computed: {
-    tapSounds: {
-      get: function () {
-        return storage.get('tapSound', true)
-      },
-      set: function (v) {
-        storage.set('tapSound', v)
-      }
-    },
     verseTime() {
       return this.di.bNow.eve ? 'Evening Verse' : 'Morning Verse';
     },
@@ -203,13 +196,16 @@ export default {
       host.innerHTML = html.join('');
     }
   },
-  // watch: {
-  //   di: function () {
-  //     console.log('di changed')
-  //     // fillDayDisplay(this)
-  //     // prepareSunDisplay(this)
-  //   }
-  // },
+  watch: {
+    tapSounds: function (a, b) {
+      storage.set('tapSound', a);
+    }
+    //   di: function () {
+    //     console.log('di changed')
+    //     // fillDayDisplay(this)
+    //     // prepareSunDisplay(this)
+    //   }
+  },
   beforeMount() {
     // console.log('before mount', routeList)
     // this.pages = routeList.default.named;
