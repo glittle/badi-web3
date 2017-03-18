@@ -20,20 +20,21 @@ export default {
       pages: routeList.menuPages,
       di: badiCalc.di,
       setupDone: false,
+      routeName: this.$route.name
       // oldRedirectCountdown: 20
     }
   },
   computed: {
-//     oldHost: function () {
-//       var host = window.location.hostname;
-//       return host.endsWith('.ga');//  || host === 'localhost';
-// /*
-//       <h2 v-if="oldHost" class="alert">Effective immediately, this app has moved to 
-//           <br><a href="https://wondrous-badi.today">https://wondrous-badi.today</a>!
-//           <br>Please update your bookmarks!
-//           <br>Going there in <b v-html="oldRedirectCountdown"></b> seconds... 
-//         </h2>*/
-//     },
+    //     oldHost: function () {
+    //       var host = window.location.hostname;
+    //       return host.endsWith('.ga');//  || host === 'localhost';
+    // /*
+    //       <h2 v-if="oldHost" class="alert">Effective immediately, this app has moved to 
+    //           <br><a href="https://wondrous-badi.today">https://wondrous-badi.today</a>!
+    //           <br>Please update your bookmarks!
+    //           <br>Going there in <b v-html="oldRedirectCountdown"></b> seconds... 
+    //         </h2>*/
+    //     },
     topDate: function () {
       var template = this.di.bNow.eve ? shared.formats.topTitleEve : shared.formats.topTitleDay;
       return template.filledWith(this.di)
@@ -41,12 +42,21 @@ export default {
     version() {
       var age = moment(versionInfo.buildDate, "_ MMM D YYYY HH:mm:ss _Z").fromNow();
       return '{0} ({1})'.filledWith(versionInfo.version, age)
-    }
-
+    },
+    // routeName() {
+    //   console.log('getname', this.$router.currentRoute.Name)
+    //   return this.$router.currentRoute.Name;
+    // }
   },
   created() {
     document.addEventListener('pulsed', this.doWorkOnPulse, false);
     store.doPulse();
+  },
+  watch: {
+    '$route'(to, from) {
+      this.routeName = to.name;
+      // console.log('route change to', to);
+    }
   },
   methods: {
     // goToNewSite() {
@@ -65,7 +75,7 @@ export default {
       // console.log('app pulse')
       // notification icon
       if (!this.setupDone) {
-        if (shared.coords.source !== 'not set') {
+        if (shared.coords.sourceIsSet) {
           this.setupDone = true;
         }
       }
@@ -132,7 +142,7 @@ var lastNotificationKey = null;
 
 function checkLocation(vue) {
   //TODO: don't send robots to the setup pages
-
+  
   if (!vue.setupDone) {
     if (vue.$router.currentRoute.path !== '/locationsetup' &&
       vue.$router.currentRoute.path !== '/initialsetup') {

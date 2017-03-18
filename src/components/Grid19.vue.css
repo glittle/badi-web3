@@ -1,6 +1,8 @@
 .Grid19 {
-  width: 100%;
+  width: 97%;
   border-spacing: 0;
+  margin: 15px auto 5px;
+  border-top: solid 1px #f9f9f9;
 }
 .Grid19 .title {
   text-align: right;
@@ -8,7 +10,6 @@
 .Grid19 th {
   font-weight: normal;
   text-align: left;
-  padding-bottom: 4px;
 }
 .Grid19 th .type {
   color: #999;

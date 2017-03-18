@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     locationSet: function () {
-      return shared.coords.source !== 'not set';
+      return shared.coords.sourceIsSet;
     },
   },
   methods: {}

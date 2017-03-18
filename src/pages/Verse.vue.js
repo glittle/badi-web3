@@ -73,8 +73,8 @@ export default {
       var thisDi = this.historyStack[this.historyIndex];
       var info = verseHelper.forDi(thisDi);
       if (info.verse) {
-        var isEve = thisDi.bNow.eve;
-        this.timeOfDay = (isEve ? 'the evening' : 'the morning') + ' of {currentMonthLong} {currentDay}'.filledWith(thisDi)
+        // console.log(info, thisDi.bNow)
+        this.timeOfDay = (thisDi.bNow.eve ? 'the evening' : 'the morning') + ' of {currentMonthLong} {currentDay}'.filledWith(thisDi)
         this.suffix = info.suffix;
         this.verse = info.verse;
       }

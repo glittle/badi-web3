@@ -1,25 +1,27 @@
+@fire: #eb7265;
+@air: #ecf0f1;
+@water: #3498db;
+@earth: #2ecc71;
+// light background
+@fire1: lighten(@fire, 32%);
+@air1: lighten(@air, 3%);
+@water1: lighten(@water, 42%);
+@earth1: lighten(@earth, 44%);
+//light font
+@fire2: lighten(@fire, 23%);
+@air2: darken(@air, 8%);
+@water2: lighten(@water, 30%);
+@earth2: lighten(@earth, 30%);
+//dark font
+@fire3: darken(@fire, 40%);
+@air3: darken(@air, 8%);
+@water3: darken(@water, 40%);
+@earth3: darken(@earth, 20%);
 .Grid19 {
-    @fire: #eb7265;
-    @air: #ecf0f1;
-    @water: #3498db;
-    @earth: #2ecc71;
-    // light background
-    @fire1: lighten(@fire, 32%);
-    @air1: lighten(@air, 3%);
-    @water1: lighten(@water, 42%);
-    @earth1: lighten(@earth, 44%);
-    //light font
-    @fire2: lighten(@fire, 23%);
-    @air2: darken(@air, 8%);
-    @water2: lighten(@water, 30%);
-    @earth2: lighten(@earth, 30%);
-    //dark font
-    @fire3: darken(@fire, 40%);
-    @air3: darken(@air, 8%);
-    @water3: darken(@water, 40%);
-    @earth3: darken(@earth, 20%);
-    width: 100%;
+    width: 97%;
     border-spacing: 0;
+    margin: 15px auto 5px;
+    border-top: solid 1px #f9f9f9;
     .title {
         text-align: right;
     }
@@ -33,7 +35,6 @@
         .type2 {
             font-size: 80%;
         }
-        padding-bottom: 4px;
     }
     td {
         font-size: 11px;

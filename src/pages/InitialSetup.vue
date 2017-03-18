@@ -3,8 +3,7 @@
     <article>
       <div class="card">
         <div class="card-content">
-          <p>Welcome to the <strong>Wondrous-Badí' Today</strong> web app!</p>
-          <p>To get started, there are two things we need to do.</p>
+          <p>Welcome! To get started, there are two things you need to do...</p>
         </div>
       </div>
     </article>

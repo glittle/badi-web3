@@ -4,25 +4,21 @@
     <div class="card">
       <div class="heading">
         <span class="desc" v-html="sunDisplay"></span>
-        <span class="type">…in this Day</span>
       </div>
       <div id="sunChart"></div>
-    </div>
-    <div class="card">
       <Grid19 v-bind:info="info('month')"></Grid19>
-    </div>
-    <div class="card">
       <Grid19 v-bind:info="info('year')"></Grid19>
-    </div>
-    <div class="card">
       <Grid19 v-bind:info="info('vahid')"></Grid19>
-    </div>
-    <div class="card">
       <Grid19 v-bind:info="info('kull')"></Grid19>
     </div>
-    <div class="card" v-on:click="$router.push('verse')">
+    <div class="card verse">
       <div class="heading">
-        <span class="type">Verse</span>
+        <span class="type" v-html="verseTime"></span>
+        <span>
+          <button 
+            v-on:click="$router.push('verse')"
+            class="small light round">View</button> 
+        </span>
       </div>
       <Verse></Verse>
     </div>
@@ -30,17 +26,18 @@
      <div class="heading">
         <span class="type">95 Alláh-u-Abhás</span>
         <span>
-        <label><input type=checkbox v-model="tapSounds">Sounds</label>
-        <button 
-          v-on:click="reset95"
-          class="reset small light round">Reset</button> </span>
+          <label><input type=checkbox v-model="tapSounds">Sound</label>
+          <button 
+            v-on:click="reset95"
+            class="reset small light round">Reset</button> 
+        </span>
       </div>
       <div class="main95">
         <button 
         v-on:click="tap95"
         v-bind:disabled="tapNum == 95"
         class="primary circular big"
-        >Tap Me</button>
+        >Tap Here</button>
         <div>
           <span class=tapNum v-html="tapNum"></span>
           <div id=tapBlocks></div>

@@ -146,6 +146,9 @@ p {
   font-size: 13px;
   font-weight: 300;
 }
+.layout-footer .tbLink.active span {
+  font-weight: 500;
+}
 .q-popover .version {
   font-size: 85%;
   padding: 3px 5px;

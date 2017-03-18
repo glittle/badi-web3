@@ -18,8 +18,7 @@ export default {
       title: messages.get('HomePage', null, 'Today'),
       icon: '../statics/sunWhite.png',
       location: shared.coords.name,
-      tapNum: 0,
-      tapSounds: true
+      tapNum: 0
     }
   },
   components: {
@@ -27,6 +26,17 @@ export default {
     Verse
   },
   computed: {
+    tapSounds: {
+      get: function () {
+        return storage.get('tapSound', true)
+      },
+      set: function (v) {
+        storage.set('tapSound', v)
+      }
+    },
+    verseTime() {
+      return this.di.bNow.eve ? 'Evening Verse' : 'Morning Verse';
+    },
     position() {
       return null;
     },
@@ -41,7 +51,7 @@ export default {
       // this.$store.commit('newDate', badiCalc.di);
       return badiCalc.di;
     },
-    timeFormat() { 
+    timeFormat() {
       return storage.get('use24hour', false) ? 'HH:mm' : 'h:mm a';
     },
     dayDisplay() {
@@ -67,7 +77,7 @@ export default {
       //   info.push(now.format('h:mma'))
       // }
       // return info.join(' – ');
-      return 'Time in ' + this.location + '<span> – ' + now.format(this.timeFormat) + '</span>';
+      return 'Today in ' + this.location + '<span> – ' + now.format(this.timeFormat) + '</span>';
     },
     pageList() {
       return routeList.default.menuPages.filter(function (p) {
@@ -402,7 +412,7 @@ function setNextRefreshAt(refreshTime, midnightUpdate) {
 var _chart = null;
 var _lastChartDay = null;
 var _fontSize = '12px';
-var _fontColor = '#212121';
+var _fontColor = '#999';
 
 function drawChart(sun, timeFormat) {
   //   setStart: null,

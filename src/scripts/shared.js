@@ -27,6 +27,9 @@ var coords = {
   },
   set source(v) {
     storage.set('coord.source', v)
+  },
+  get sourceIsSet() {
+    return this.source !== 'not set'
   }
 }
 

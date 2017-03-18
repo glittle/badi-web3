@@ -5,7 +5,7 @@
       <div class="suffix" v-html="suffix"></div>
       <div class="webSearch" v-if="online">
         <a target="_blank" v-bind:href="searchUrl">
-          <i>search</i> Find uses of this verse on the Internet and YouTube
+          <i>search</i> View uses of this verse on<br>the Internet and YouTube
         </a>
       </div>
       <div class="speakButtons">

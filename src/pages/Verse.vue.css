@@ -1,7 +1,8 @@
 .Verse .verseText {
   font-size: 1.3rem;
-  /*font-family: 'Gentium Book Basic', serif;*/
+  font-family: 'Gentium Book Basic', serif;
   min-height: 105px;
+  user-select: text;
 }
 .Verse .verseHost {
   max-width: 35em;
@@ -11,6 +12,7 @@
   font-size: 1rem;
   margin-top: 3em;
   text-align: center;
+  user-select: all;
 }
 .Verse .source {
   margin-top: 1em;

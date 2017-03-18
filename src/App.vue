@@ -10,7 +10,11 @@
       <router-view v-touch-swipe.horizontal.scroll="swipePage" class="layout-view q-touch-x"></router-view>
     </keep-alive>
     <div slot="footer" class="toolbar">
-      <div v-link.replace="page.to" :title="page.text" class="tbLink" v-for="page in pages.filter(p=>p.group.includes('main'))">
+      <div v-link.replace="page.to" 
+          :title="page.text"
+          class="tbLink"
+          v-bind:class="{active: routeName==page.name}"
+          v-for="page in pages.filter(p=>p.group.includes('main'))">
         <img class="tbIcon" :src="page.icon" :alt="page.text"></span>
         <span v-html="page.text"></span>
       </div>

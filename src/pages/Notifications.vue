@@ -10,7 +10,9 @@
           Why? &nbsp; On most computer and phones, we can show you a notification with today's date. This is not required, but you
           should try it!
         </p>
-        Click <button class="small primary" v-on:click="askForPush">Ask Now</button> to allow for notifications.
+        <p>
+          <span>Click</span> <button class="small primary" v-on:click="askForPush">Ask Now</button> to allow for notifications.
+        </p>
       </div>
       <div v-if="remotePushSupported">
         <div v-if="!userId" v-cloak>
