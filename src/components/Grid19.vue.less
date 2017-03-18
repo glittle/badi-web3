@@ -18,7 +18,7 @@
     @air3: darken(@air, 8%);
     @water3: darken(@water, 40%);
     @earth3: darken(@earth, 20%);
-    margin: 3px;
+    width: 100%;
     border-spacing: 0;
     .title {
         text-align: right;
@@ -39,10 +39,6 @@
         font-size: 11px;
     }
     .cell {
-        position: relative;
-        width: 79px;
-        // border: 1px solid #ccc;
-        box-sizing: border-box;
         color: #ccc;
         text-align: center;
         .a {
@@ -52,9 +48,6 @@
         }
         .b {
             display: none;
-            position: absolute;
-            bottom: 0;
-            right: 2px;
         }
         &.now {
             font-weight: bold;

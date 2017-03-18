@@ -1,6 +1,10 @@
 .tightTop div.card:first-child {
   margin-top: 0;
 }
+div.card {
+  padding: 3px;
+  margin: 10px auto 10px auto;
+}
 .card article.Verse {
   cursor: pointer;
   padding: 3px;
@@ -36,7 +40,7 @@ button.item-link.icon_setup {
   margin: 3px 3px 3px 3px;
 }
 .heading .desc span {
-  font-size: 12px;
+  font-size: 13px;
 }
 .heading .type {
   color: #999;

@@ -1,5 +1,5 @@
 .Grid19 {
-  margin: 3px;
+  width: 100%;
   border-spacing: 0;
 }
 .Grid19 .title {
@@ -21,9 +21,6 @@
   font-size: 11px;
 }
 .Grid19 .cell {
-  position: relative;
-  width: 79px;
-  box-sizing: border-box;
   color: #ccc;
   text-align: center;
 }
@@ -34,9 +31,6 @@
 }
 .Grid19 .cell .b {
   display: none;
-  position: absolute;
-  bottom: 0;
-  right: 2px;
 }
 .Grid19 .cell.now {
   font-weight: bold;
