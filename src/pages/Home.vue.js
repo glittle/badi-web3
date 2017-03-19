@@ -70,7 +70,11 @@ export default {
       //   info.push(now.format('h:mma'))
       // }
       // return info.join(' – ');
-      return 'Today in ' + this.location + '<span> – ' + now.format(this.timeFormat) + '</span>';
+      return 'Today in '
+        + this.location 
+        + '<span> – ' + now.format(this.timeFormat) 
+        + ' – {bWeekdayNamePri} ({bWeekdayNameSec})'.filledWith(di)
+        + '</span>';
     },
     pageList() {
       return routeList.default.menuPages.filter(function (p) {
