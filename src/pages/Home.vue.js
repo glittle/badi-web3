@@ -581,7 +581,10 @@ function drawChart(sun, timeFormat) {
         verticalAlign: 'bottom',
         formatter: function () {
           var point = this.point;
-          return point.name ? (point.name + '<br>' + point.time) : null;
+          return 
+          // (point.color ? point.color : '') 
+          // + ' x '
+          + (point.name ? (point.name + '<br>' + point.time) : '');
         },
         align: 'center',
         zIndex: 4,
