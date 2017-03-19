@@ -135,6 +135,12 @@ export default {
         type2: type2
       };
     },
+    handleResize: function (event) {
+      var vue = this;
+      setTimeout(function () {
+        drawChart(local.sun, vue.timeFormat, true)
+      }, 0);
+    },
     fillDayDisplay: function (di) {
       var answers = [];
       // var di = badiCalc.di;
@@ -203,6 +209,9 @@ export default {
       }
       var host = document.getElementById('tapBlocks');
       host.innerHTML = html.join('');
+    },
+    drawChart:function(){
+      drawChart(local.sun, this.timeFormat, true);
     }
   },
   watch: {
@@ -219,14 +228,14 @@ export default {
     // console.log('before mount', routeList)
     // this.pages = routeList.default.named;
     // this.pageList = routeList.default.menuPages;
-    // debugger;
   },
   mounted() {
     // drawChart(local.sun)
     this.makeTapBlocks();
+    window.addEventListener('resize', this.handleResize)
   },
   activated() {
-    drawChart(local.sun, this.timeFormat)
+    drawChart(local.sun, this.timeFormat, true)
   },
   // doWorkOnPulse() {
   //   console.log('pulse in home');
@@ -236,7 +245,6 @@ export default {
   // console.log('mounted', routeList)
   // this.$nextTick(() => {
   // })
-  // debugger;
   // this.pulseNumber = pulse.pulseNumber
   // fillDayDisplay(this)
   // prepareSunDisplay(this)
@@ -245,7 +253,9 @@ export default {
   beforeUpdate() {
     // console.log('update', routeList)
   },
-  beforeDestroy() { },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.handleResize)
+  },
 }
 
 var local = {
@@ -422,7 +432,7 @@ var _lastChartDay = null;
 var _fontSize = '12px';
 var _fontColor = '#999';
 
-function drawChart(sun, timeFormat) {
+function drawChart(sun, timeFormat, redraw) {
   //   setStart: null,
   //   rise: null,
   //   setEnd: null,
@@ -433,7 +443,7 @@ function drawChart(sun, timeFormat) {
   }
 
   var key = sun.diStamp;
-  if (_lastChartDay === key) {
+  if (_lastChartDay === key && !redraw) {
     showNowLine(_chart, sun, timeFormat);
     return;
   } else {
