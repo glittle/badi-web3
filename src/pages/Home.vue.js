@@ -71,8 +71,8 @@ export default {
       // }
       // return info.join(' – ');
       return 'Today in '
-        + this.location 
-        + '<span> – ' + now.format(this.timeFormat) 
+        + this.location
+        + '<span> – ' + now.format(this.timeFormat)
         + ' – {bWeekdayNamePri} ({bWeekdayNameSec})'.filledWith(di)
         + '</span>';
     },
@@ -581,10 +581,12 @@ function drawChart(sun, timeFormat) {
         verticalAlign: 'bottom',
         formatter: function () {
           var point = this.point;
-          return 
-          (point.color ? point.color : '') 
-          + ' x '
-          + (point.name ? (point.name + '<br>' + point.time) : '');
+          var label =
+            (point.color ? point.color : '')
+            + ' x '
+            + (point.name ? (point.name + '<br>' + point.time) : '');
+          console.log(label)
+          return label;
         },
         align: 'center',
         zIndex: 4,
