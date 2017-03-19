@@ -264,6 +264,7 @@ function prepareSunDisplay(di, timeFormat) {
 
   var sun = {
     setStart: null,
+    nadir: null,
     rise: null,
     noon: null,
     setEnd: null,
@@ -284,7 +285,8 @@ function prepareSunDisplay(di, timeFormat) {
 
     sun.setStart = sunset1;
     sun.rise = sunrise2;
-    sun.noon = moment(sun2.solarNoon)
+    sun.noon = moment(sun2.solarNoon);
+    sun.nadir = moment(sun2.nadir);
     sun.setEnd = sunset2;
 
     // if (now.isBefore(sunrise2)) {
@@ -322,6 +324,7 @@ function prepareSunDisplay(di, timeFormat) {
     sun.setStart = sunset0;
     sun.rise = sunrise1;
     sun.noon = moment(sun1.solarNoon)
+    sun.nadir = moment(sun1.nadir)
     sun.setEnd = sunset1;
 
     // answers.push({
@@ -434,13 +437,15 @@ function drawChart(sun, timeFormat) {
   // console.log('drawing chart')
 
   var yFactor = 5;
-  var twilight = 4;
+  var twilight = yFactor * 2; // adjusted after 
   var colorFullSun = '#ffff00';
   var colorFullDark = '#000000';
-  var v = [];
+  var points = [];
   var chartMin = sun.setStart.valueOf();
   var chartMax = sun.setEnd.valueOf();
   var chartRange = chartMax - chartMin;
+  var maxY = 0;
+  var minY = 0;
 
   function addPoint(m, name, color, underAxis) {
     var t = m.toDate();
@@ -452,23 +457,32 @@ function drawChart(sun, timeFormat) {
       color: color,
       pct: (t.getTime() - chartMin) / chartRange
     };
-    if (underAxis) {
-      o.name = '<br>' + o.name;
-      o.dataLabels = { verticalAlign: 'bottom' };
-    }
+
     if (o.y > twilight) {
       o.color = colorFullSun;
     }
     if (o.y < -1 * twilight) {
       o.color = colorFullDark;
     }
-    v.push(o);
+    if (underAxis) {
+      o.name = '<br>' + o.name;
+      o.dataLabels = { verticalAlign: 'bottom' };
+      o.color = colorFullSun; // hack for solar noon
+    }
+    if (o.y > maxY) maxY = o.y;
+    if (o.y < minY) minY = o.y;
+    points.push(o);
   }
 
   addPoint(sun.setStart, 'Sunset', 'lightgrey');
   addPoint(sun.setEnd, 'Sunset', 'lightgrey');
   addPoint(sun.rise, 'Sunrise', 'lightgrey');
   addPoint(sun.noon, 'Solar Noon', 'lightgrey', true);
+  addPoint(sun.nadir, null);
+
+  // console.log('min', minY, 'max', maxY, 'twi', twilight)
+  twilight = 0.3 * maxY;
+  // console.log(JSON.stringify(points));
 
   // fill in the rest
   var minutesBetweenPoints = 60;
@@ -480,11 +494,12 @@ function drawChart(sun, timeFormat) {
     addPoint(time, null) // nameless points
     time.add(minutesBetweenPoints, 'm')
   }
+  // console.log('min', minY, 'max', maxY, 'twi', twilight)
 
   var minSun = 99;
   var maxSun = -99;
-  for (var i = 0; i < v.length; i++) {
-    var y = v[i].y;
+  for (var i = 0; i < points.length; i++) {
+    var y = points[i].y;
     if (y < minSun) {
       minSun = y;
     }
@@ -493,7 +508,7 @@ function drawChart(sun, timeFormat) {
     }
   }
 
-  v.sort(function (a, b) {
+  points.sort(function (a, b) {
     return a.x < b.x ? -1 : 1
   })
 
@@ -571,7 +586,7 @@ function drawChart(sun, timeFormat) {
       }
     },
     series: [{
-      data: v,
+      data: points,
       tooltip: {
         enabled: false
       },
@@ -581,11 +596,11 @@ function drawChart(sun, timeFormat) {
         verticalAlign: 'bottom',
         formatter: function () {
           var point = this.point;
-          var label =
-            (point.color ? point.color : '')
-            + ' x '
-            + (point.name ? (point.name + '<br>' + point.time) : '');
-          console.log(label)
+          var label = point.name ? (point.name + '<br>' + point.time) : null;
+            // (point.color ? point.color : '') +
+            // ' x ' +
+            // (point.name ? (point.name + '<br>' + point.time) : '');
+          // console.log('point', point, 'label', label, 'color', point.color)
           return label;
         },
         align: 'center',
@@ -605,7 +620,7 @@ function drawChart(sun, timeFormat) {
           x2: 1,
           y2: 0
         },
-        stops: v
+        stops: points
           .filter(function (p) {
             return p.color
           }).map(function (p) {
