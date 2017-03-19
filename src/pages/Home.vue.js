@@ -100,8 +100,13 @@ export default {
           type = '…in this Year';
           // desc = '<b>{bMonthNamePri}</b> – {bMonthNameSec} – {bMonth}'.filledWith(di);
           //  – {element}
-          desc = 'Month – {bMonth} – <b>{bMonthNamePri}</b> ({bMonthNameSec})'.filledWith(di);
           num = di.bMonth;
+          if (num) {
+            desc = 'Month – {bMonth} – <b>{bMonthNamePri}</b> ({bMonthNameSec})'.filledWith(di);
+          } else {
+            desc = 'Month – <b>{bMonthNamePri}</b> ({bMonthNameSec})'.filledWith(di);
+            num = 18.5;
+          }
           break;
         case 'vahid':
           type = '…in this ' + di.VahidLabelPri;
@@ -597,9 +602,9 @@ function drawChart(sun, timeFormat) {
         formatter: function () {
           var point = this.point;
           var label = point.name ? (point.name + '<br>' + point.time) : null;
-            // (point.color ? point.color : '') +
-            // ' x ' +
-            // (point.name ? (point.name + '<br>' + point.time) : '');
+          // (point.color ? point.color : '') +
+          // ' x ' +
+          // (point.name ? (point.name + '<br>' + point.time) : '');
           // console.log('point', point, 'label', label, 'color', point.color)
           return label;
         },
