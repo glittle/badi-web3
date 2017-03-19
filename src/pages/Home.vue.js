@@ -582,8 +582,8 @@ function drawChart(sun, timeFormat) {
         formatter: function () {
           var point = this.point;
           return 
-          // (point.color ? point.color : '') 
-          // + ' x '
+          (point.color ? point.color : '') 
+          + ' x '
           + (point.name ? (point.name + '<br>' + point.time) : '');
         },
         align: 'center',
