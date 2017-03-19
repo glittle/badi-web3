@@ -43,10 +43,10 @@ function updatedCoords() {
 }
 
 var formats = {
-  topTitleDay: '{bDay} {bMonthNamePri}-{bMonthNameSec} {bYear} <span>⇒ {endingSunsetDesc}</span>',
-  topTitleEve: '<span>{startingSunsetDesc} ⇒</span> {bDay} {bMonthNamePri}-{bMonthNameSec} {bYear}',
+  topTitleDay: '{bDay} {bMonthNamePri} ({bMonthNameSec}) {bYear} <span>⇒ {endingSunsetDesc}</span>',
+  topTitleEve: '<span>{startingSunsetDesc} ⇒</span> {bDay} {bMonthNamePri} ({bMonthNameSec}) {bYear}',
   statusIconText: '{bMonthNamePri}',
-  noticationMain: 'Today is {bDay} {bMonthNamePri}-{bMonthNameSec} {bYear}',
+  noticationMain: 'Today is {bDay} {bMonthNamePri} ({bMonthNameSec}) {bYear}',
   noticationSub: '{nearestSunset}',
   noticationSubFast: 'Fast from {sunriseDesc} to {endingSunsetDesc}',
   shortDay: 'the {bDayOrdinal} day of {bMonthNamePri}',

@@ -93,28 +93,28 @@ export default {
         case 'month':
           type = '…in this Month';
           // desc = '{bDayNamePri} – {bDayNameSec} – <b>{bDay}</b>'.filledWith(di);
-          desc = 'Day <b>{bDay}</b> – {bDayNamePri} – {bDayNameSec}'.filledWith(di);
+          desc = 'Day – <b>{bDay}</b> – {bDayNamePri} ({bDayNameSec})'.filledWith(di);
           num = di.bDay;
           break;
         case 'year':
           type = '…in this Year';
           // desc = '<b>{bMonthNamePri}</b> – {bMonthNameSec} – {bMonth}'.filledWith(di);
           //  – {element}
-          desc = 'Month {bMonth} – <b>{bMonthNamePri}</b> – {bMonthNameSec}'.filledWith(di);
+          desc = 'Month – {bMonth} – <b>{bMonthNamePri}</b> ({bMonthNameSec})'.filledWith(di);
           num = di.bMonth;
           break;
         case 'vahid':
           type = '…in this ' + di.VahidLabelPri;
           type2 = di.VahidLabelSec;
           // desc = '<b>{bYearInVahidNamePri}</b> - {bYearInVahidNameSec} - {bYearInVahid}'.filledWith(di)
-          desc = 'Year {bYearInVahid} – {bYearInVahidNamePri} – {bYearInVahidNameSec} – <b>{bYear} B.E.</b>'.filledWith(di)
+          desc = 'Year – {bYearInVahid} – {bYearInVahidNamePri} ({bYearInVahidNameSec}) – <b>{bYear} B.E.</b>'.filledWith(di)
           num = di.bYearInVahid;
           break;
         case 'kull':
           type = '…in this ' + di.KullishayLabelPri;
           type2 = di.KullishayLabelSec;
           num = di.bVahid;
-          desc = '{VahidLabelPri} {bVahid} ({VahidLabelSec})'.filledWith(di)
+          desc = '{VahidLabelPri} ({VahidLabelSec}) – {bVahid}'.filledWith(di)
           break;
         // case 'kull2':
         //   type = '??';

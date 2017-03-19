@@ -1,15 +1,16 @@
 <template>
-  <table class="Grid19">
+  <table class="Grid19" v-bind:data-dummy="showDelayed">
     <tr>
       <th colspan=19>
-        <span class="desc" v-html="info.desc"></span>
+        <span class="desc"
+              v-html="info.desc"></span>
         <span class="type">
-          <span v-html="info.type"></span>
-          <span v-if="info.type2">
-            (<span v-html="info.type2"></span>)
-          </span>
+            <span v-html="info.type"></span>
+        <span v-if="info.type2">
+              (<span v-html="info.type2"></span>)
         </span>
-     </th>
+        </span>
+      </th>
     </tr>
     <tr class="gridRow">
       <td class="cell row1 cell1"><span class=a></span><span class=b></span></td>
@@ -32,7 +33,7 @@
       <td class="cell row4 cell18"><span class=a></span><span class=b></span></td>
       <td class="cell row4 cell19"><span class=a></span><span class=b></span></td>
     </tr>
-    </table>
+  </table>
 </template>
 <style src="./Grid19.vue.css"></style>
 <script src="./Grid19.vue.js"></script>
