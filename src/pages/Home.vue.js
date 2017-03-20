@@ -104,7 +104,7 @@ export default {
           if (num) {
             desc = 'Month – {bMonth} – <b>{bMonthNamePri}</b> ({bMonthNameSec})'.filledWith(di);
           } else {
-            desc = 'Month – <b>{bMonthNamePri}</b> ({bMonthNameSec})'.filledWith(di);
+            desc = '<b>{bMonthNamePri}</b> ({bMonthNameSec})'.filledWith(di);
             num = 18.5;
           }
           break;
