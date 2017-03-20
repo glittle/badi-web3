@@ -73,3 +73,11 @@
   color: #1b7943;
   background-color: #2ecc71;
 }
+.Grid19.ayyamiha .gridRow .cell.past .a {
+  color: #d5dde0;
+  background-color: #f5f7f7;
+}
+.Grid19.ayyamiha .gridRow .cell.now .a {
+  color: #666;
+  background-color: #ecf0f1;
+}

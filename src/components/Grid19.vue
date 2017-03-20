@@ -1,5 +1,5 @@
 <template>
-  <table class="Grid19" v-bind:data-dummy="showDelayed">
+  <table class="Grid19" v-bind:class="{ayyamiha: info.ayyamiha}" v-bind:data-dummy="showDelayed">
     <tr>
       <th colspan=19>
         <span class="desc"

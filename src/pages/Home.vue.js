@@ -89,11 +89,18 @@ export default {
     info: function (mode) {
       var di = this.di;
       var type, type2, desc, num;
+      var ayyamiha = false;
       switch (mode) {
         case 'month':
-          type = '…in this Month';
-          // desc = '{bDayNamePri} – {bDayNameSec} – <b>{bDay}</b>'.filledWith(di);
-          desc = 'Day – <b>{bDay}</b> – {bDayNamePri} ({bDayNameSec})'.filledWith(di);
+          if (di.bMonth) {
+            type = '…in this Month';
+            desc = 'Day – <b>{bDay}</b> – {bDayNamePri} ({bDayNameSec})'.filledWith(di);
+          } else {
+            // ayyam-i-ha
+            type = '…in the <b>{bMonthNamePri}</b> ({bMonthNameSec})'.filledWith(di);
+            ayyamiha = di.numDaysInAyyamiHa;
+            desc = 'Day – <b>{bDay}</b>'.filledWith(di);
+          }
           num = di.bDay;
           break;
         case 'year':
@@ -132,7 +139,8 @@ export default {
         mode: mode,
         desc: desc,
         type: type,
-        type2: type2
+        type2: type2,
+        ayyamiha: ayyamiha
       };
     },
     handleResize: function (event) {
@@ -210,7 +218,7 @@ export default {
       var host = document.getElementById('tapBlocks');
       host.innerHTML = html.join('');
     },
-    drawChart:function(){
+    drawChart: function () {
       drawChart(local.sun, this.timeFormat, true);
     }
   },

@@ -2820,6 +2820,8 @@ function generateDateInfo(di, currentTime, onlyStamp, updateWindowsNowDi) {
   di.bWeekdayNamePri = settings.useArNames ? di.bWeekdayNameAr : di.bWeekdayMeaning;
   di.bWeekdayNameSec = !settings.useArNames ? di.bWeekdayNameAr : di.bWeekdayMeaning;
 
+  di.numDaysInAyyamiHa = daysInAyyamiHa(bNow.y);
+
   di.elementNum = getElementNum(bNow.m);
   di.element = lists.elements[di.elementNum - 1];
 
