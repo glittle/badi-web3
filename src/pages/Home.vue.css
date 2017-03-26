@@ -139,10 +139,10 @@ div.line b {
   height: 9px;
 }
 .tap95card #tapBlocks span {
-  background-color: #eee;
+  background-color: #ddd;
   display: inline-block;
-  height: 5px;
-  width: 5px;
+  height: 7px;
+  width: 7px;
   margin: 1px;
 }
 .tap95card #tapBlocks span.tapped {

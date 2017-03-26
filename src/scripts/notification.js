@@ -34,7 +34,6 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
   // If the user has not been asked to grant or deny notifications
   // from this domain...
   if (Notification.permission === 'default') {
-    return;
 
     // console.log('asking for permission to notify');
     // Notification.requestPermission(function () {
@@ -99,7 +98,6 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
   else if (Notification.permission === 'denied') {
     // ...remain silent.
     console.log('permission to notify - denied')
-    return;
   }
 };
 

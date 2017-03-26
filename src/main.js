@@ -61,7 +61,7 @@ if (location.hostname === 'localhost') {
 OneSignal.push(["init", onesignalOptions]);
 
 // analytics
-/* eslint-disable no-sequences, no-undef */
+/* eslint-disable no-sequences, no-undef, no-unused-expressions */
 (function (i, s, o, g, r, a, m) {
   i['GoogleAnalyticsObject'] = r;
   i[r] = i[r] || function () {

@@ -50,7 +50,8 @@ const routeInfoList = names.map(function (n) {
     component: Vue.component(vueName, require(`${folder}${vueName}.vue`)),
     name: vueName,
     path: path,
-    group: group
+    group: group,
+    key: vueName
   }
 })
 
@@ -97,7 +98,8 @@ export default {
     return {
       component: ri.component,
       path: '/' + ri.path,
-      name: ri.name
+      name: ri.name,
+      key: ri.key
     }
   }),
   menuPages: menuPages,

@@ -14,6 +14,7 @@ export default {
   mounted() {
     this.pages = routeList.menuPages;
     this.routes = routeList.raw;
+    console.log(this.routes)
   },
   computed: {
     locationSet: function () {

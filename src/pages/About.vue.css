@@ -2,7 +2,7 @@
   flex-direction: column;
 }
 .About .statusDoc {
-  margin: 25px 0 0 0;
+  margin: 25px 0 0 1;
   width: 100%;
   height: 100%;
   box-sizing: content-box;
@@ -13,6 +13,7 @@
   clear: both;
   float: right;
   max-width: 40%;
+  margin-left: 10px;
   text-align: center;
 }
 .About .ShareThis h2 {
