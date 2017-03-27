@@ -74,7 +74,7 @@ export default {
             break;
         }
       }
-      console.log('worker loaded', this.myWorker)
+      // console.log('worker loaded', this.myWorker)
     },
     scheduleNextNotification(di) {
       // at next midnight or sunset
