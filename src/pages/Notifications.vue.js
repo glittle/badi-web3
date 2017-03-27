@@ -175,7 +175,7 @@ export default {
       console.log('11')
       OneSignal.push(function () {
         OneSignal.getTags(function (tags) {
-          console.log('12 tags', tags);
+          console.log('11B tags', tags);
           vue.tags = tags;
           if (tags && tags.when) {
             console.log('got tags');
