@@ -20,7 +20,8 @@ export default {
       pages: routeList.menuPages,
       di: badiCalc.di,
       setupDone: false,
-      routeName: this.$route.name
+      routeName: this.$route.name,
+      myWorker: null
       // oldRedirectCountdown: 20
     }
   },
@@ -51,6 +52,8 @@ export default {
   created() {
     document.addEventListener('pulsed', this.doWorkOnPulse, false);
     store.doPulse();
+
+    this.prepareWorker();
   },
   watch: {
     '$route'(to, from) {
@@ -59,6 +62,37 @@ export default {
     }
   },
   methods: {
+    prepareWorker() {
+      this.myWorker = new Worker('/ww.js'); // ?' + Math.random().toString().slice(2, 7));
+      this.myWorker.onmessage = function (ev) {
+        // console.log('received from ww', ev.data);
+
+        switch (ev.data.msg) {
+          case 'callingBack':
+            console.log('called back at', new Date());
+            store.doPulse();
+            break;
+        }
+      }
+      console.log('worker loaded', this.myWorker)
+    },
+    scheduleNextNotification(di) {
+      // at next midnight or sunset
+      var sunset = moment(di.frag2SunTimes.sunset);
+      var midnight = moment().startOf('day').add(1, 'day');
+      var next = moment.min(sunset, midnight);
+
+      var delay = next.valueOf() - moment().valueOf();
+      console.log('scheduled update for', next.format(), 'in', moment.duration(delay, 'ms').humanize())
+
+      var vue = this;
+      setTimeout(function () {
+        vue.myWorker.postMessage({
+          msg: 'doCallback',
+          delay: delay
+        });
+      }, 0)
+    },
     // goToNewSite() {
     //   var vue = this;
     //   if (this.oldHost) {
@@ -87,6 +121,8 @@ export default {
         this.di = di;
         notify.showNow(di);
         lastNotificationKey = key;
+
+        this.scheduleNextNotification(di);
       }
     },
     swipePage(obj) {
@@ -142,7 +178,7 @@ var lastNotificationKey = null;
 
 function checkLocation(vue) {
   //TODO: don't send robots to the setup pages
-  
+
   if (!vue.setupDone) {
     if (vue.$router.currentRoute.path !== '/locationsetup' &&
       vue.$router.currentRoute.path !== '/initialsetup') {
