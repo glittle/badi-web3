@@ -220,6 +220,7 @@ export default {
           this.updateTapDisplay();
         } else {
           this.tapAutoRunning = true;
+          clearTimeout(this.tapAutoTimer);
           this.tapAutoTimer = setTimeout(this.doTap, 500);
         }
       } else {
@@ -246,6 +247,8 @@ export default {
     },
     reset95: function () {
       this.tapNum = 0;
+      clearTimeout(this.tapAutoTimer);
+      this.tapAutoRunning = false;
       var blocks = document.getElementsByClassName('tapped');
       for (var b = blocks.length; b--; b > 0) {
         blocks[b].classList.remove('tapped');

@@ -144,12 +144,12 @@ div.line b {
   vertical-align: middle;
 }
 .tap95card .q-range .q-range-handle-container {
-  margin: 0;
+  margin: 0 0 0 10px;
 }
 .tap95card .tapDelaySpan {
   white-space: nowrap;
-  display: block;
   vertical-align: middle;
+  display: block;
 }
 .tap95card #tapBlocks div {
   height: 9px;
