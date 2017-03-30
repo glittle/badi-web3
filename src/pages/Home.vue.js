@@ -19,7 +19,7 @@ export default {
       icon: '../statics/sunWhite.png',
       location: shared.coords.name,
       tapNum: 0,
-      tapBtnText: 'Tap Here',
+      tapBtnText: '',
       tapAutoRunning: false,
       tapAutoTimer: null,
       tapAutoDelay: storage.get('tapAutoDelay', 2000),
@@ -96,14 +96,25 @@ export default {
     },
     tapAutoRunning: function (a) {
       this.updateTapDisplay();
+      if (!a) {
+        clearTimeout(this.tapAutoTimer);
+      }
     },
     tapAuto: function (a) {
       storage.set('tapAuto', a);
       this.tapAuto = a;
+      if (!a) {
+        clearTimeout(this.tapAutoTimer);
+        this.tapAutoRunning = false;
+      }
       this.updateTapDisplay();
     },
     tapAutoDelay: function (a) {
       storage.set('tapAutoDelay', a);
+      clearTimeout(this.tapAutoTimer);
+      if (this.tapAutoRunning) {
+        this.tapAutoTimer = setTimeout(this.doTap, this.tapAutoDelay);
+      }
     }
     //   di: function () {
     //     console.log('di changed')
@@ -214,32 +225,38 @@ export default {
     },
     tap95: function () {
       if (this.tapAuto) {
+        clearTimeout(this.tapAutoTimer);
         if (this.tapAutoRunning) {
           this.tapAutoRunning = false;
-          clearTimeout(this.tapAutoTimer);
-          this.updateTapDisplay();
         } else {
+          this.tapAutoTimer = setTimeout(this.doTap, 200);
           this.tapAutoRunning = true;
-          clearTimeout(this.tapAutoTimer);
-          this.tapAutoTimer = setTimeout(this.doTap, 500);
         }
+        this.updateTapDisplay();
       } else {
         this.doTap();
       }
     },
     doTap: function () {
+      clearTimeout(this.tapAutoTimer);
       if (this.tapNum >= 95) {
         this.tapAutoRunning = false;
-        clearTimeout(this.tapAutoTimer);
+        this.updateTapDisplay();
         return;
       }
       this.tapNum++;
-      document.getElementById('tap_' + this.tapNum).classList.add('tapped');
       if (this.tapSounds) {
-        var s = this.tapNum < 95 ? this.tapSound1 : this.tapSound2;
+        // var s = this.tapNum < 95 ? this.tapSound1 : this.tapSound2;
+        // if (this.tapNum < 95) {
+        var s = this.tapSound1;
         s.pause();
         s.currentTime = 0;
         s.play();
+        // }
+      }
+      document.getElementById('tap_' + this.tapNum).classList.add('tapped');
+      if (this.tapNum >= 95) {
+        this.tapAutoRunning = false;
       }
       if (this.tapAutoRunning) {
         this.tapAutoTimer = setTimeout(this.doTap, this.tapAutoDelay);
@@ -287,6 +304,15 @@ export default {
     // drawChart(local.sun)
     this.makeTapBlocks();
     this.updateTapDisplay();
+    this.tapSound1.addEventListener("ended", function () {
+      if (this.tapNum === 95) {
+        var s2 = this.tapSound2;
+        s2.pause();
+        s2.currentTime = 0;
+        s2.play();
+      }
+    });
+
     window.addEventListener('resize', this.handleResize)
   },
   activated() {

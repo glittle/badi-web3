@@ -126,7 +126,7 @@ div.line {
             margin-left: 3px;
         }
         label {
-            margin-right: 16px;
+            margin-right: 5px;
             input {
                 vertical-align: text-bottom;
                 margin-right: 2px;
@@ -158,17 +158,19 @@ div.line {
     .q-range {
         display: inline-block;
         width: 100px;
-        height: auto;
+        margin: 6px 0 0 0;
+        height: 20px;
         vertical-align: middle;
         .q-range-handle-container {
-            margin: 0 0 0 10px;
+            margin: 0 10px;
         }
-
     }
-    .tapDelaySpan{
+    .tapDelaySpan {
         white-space: nowrap;
-        vertical-align: middle;
         display: block;
+        span {
+            vertical-align: sub;
+        }
     }
     #tapBlocks {
         div {
@@ -180,7 +182,9 @@ div.line {
             height: 7px;
             width: 7px;
             margin: 1px;
+            transition: all 1.5s;
             &.tapped {
+                border-radius: 50%;
                 background-color: #027be3;
                 &.five {
                     background-color: #FFA726;

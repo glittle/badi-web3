@@ -109,7 +109,7 @@ div.line b {
   margin-left: 3px;
 }
 .tap95card .heading label {
-  margin-right: 16px;
+  margin-right: 5px;
 }
 .tap95card .heading label input {
   vertical-align: text-bottom;
@@ -140,16 +140,19 @@ div.line b {
 .tap95card .q-range {
   display: inline-block;
   width: 100px;
-  height: auto;
+  margin: 6px 0 0 0;
+  height: 20px;
   vertical-align: middle;
 }
 .tap95card .q-range .q-range-handle-container {
-  margin: 0 0 0 10px;
+  margin: 0 10px;
 }
 .tap95card .tapDelaySpan {
   white-space: nowrap;
-  vertical-align: middle;
   display: block;
+}
+.tap95card .tapDelaySpan span {
+  vertical-align: sub;
 }
 .tap95card #tapBlocks div {
   height: 9px;
@@ -160,8 +163,10 @@ div.line b {
   height: 7px;
   width: 7px;
   margin: 1px;
+  transition: all 1.5s;
 }
 .tap95card #tapBlocks span.tapped {
+  border-radius: 50%;
   background-color: #027be3;
 }
 .tap95card #tapBlocks span.tapped.five {

@@ -33,13 +33,13 @@
                   <button 
                     v-on:click="reset95"
                     class="reset small light round">Reset</button> 
-                    <span class="tapDelaySpan" v-bind:style="{opacity: tapAuto ? 1 : 0.3}">
-                    Speed
+                    <span class="tapDelaySpan" v-bind:style="{opacity: tapAuto ? 1 : 0.25}">
+                    <span>Time</span>
             <q-range v-model="tapAutoDelay"
                      :min="1000"
-                     :max="5000"
-                     :step="500"
-                     :snap="true"></q-range>
+                     :max="10000"
+                     ></q-range>
+                     <span v-html="Math.round(tapAutoDelay/100)/10 + ' s'"></span>
                     </span>
         </span>
       </div>
