@@ -19,6 +19,11 @@ export default {
       icon: '../statics/sunWhite.png',
       location: shared.coords.name,
       tapNum: 0,
+      tapBtnText: 'Tap Here',
+      tapAutoRunning: false,
+      tapAutoTimer: null,
+      tapAutoDelay: storage.get('tapAutoDelay', 2000),
+      tapAuto: storage.get('tapAuto', true),
       tapSounds: storage.get('tapSound', true)
     }
   },
@@ -28,7 +33,7 @@ export default {
   },
   computed: {
     verseTime() {
-      return this.di.bNow.eve ? 'Evening Verse' : 'Morning Verse';
+      return (this.di.bNow.eve ? 'Evening Verse' : 'Morning Verse') + " from Bahá'u'lláh";
     },
     position() {
       return null;
@@ -84,6 +89,27 @@ export default {
     shortDay() {
       return shared.formats.shortDay.filledWith(this.di)
     },
+  },
+  watch: {
+    tapSounds: function (a) {
+      storage.set('tapSound', a);
+    },
+    tapAutoRunning: function (a) {
+      this.updateTapDisplay();
+    },
+    tapAuto: function (a) {
+      storage.set('tapAuto', a);
+      this.tapAuto = a;
+      this.updateTapDisplay();
+    },
+    tapAutoDelay: function (a) {
+      storage.set('tapAutoDelay', a);
+    }
+    //   di: function () {
+    //     console.log('di changed')
+    //     // fillDayDisplay(this)
+    //     // prepareSunDisplay(this)
+    //   }
   },
   methods: {
     info: function (mode) {
@@ -179,8 +205,31 @@ export default {
       }).join('');
 
     },
+    updateTapDisplay: function () {
+      if (this.tapAuto) {
+        this.tapBtnText = this.tapAutoRunning ? 'Pause' : this.tapNum === 0 ? 'Start' : 'Resume';
+      } else {
+        this.tapBtnText = 'Tap Here';
+      }
+    },
     tap95: function () {
+      if (this.tapAuto) {
+        if (this.tapAutoRunning) {
+          this.tapAutoRunning = false;
+          clearTimeout(this.tapAutoTimer);
+          this.updateTapDisplay();
+        } else {
+          this.tapAutoRunning = true;
+          this.tapAutoTimer = setTimeout(this.doTap, 500);
+        }
+      } else {
+        this.doTap();
+      }
+    },
+    doTap: function () {
       if (this.tapNum >= 95) {
+        this.tapAutoRunning = false;
+        clearTimeout(this.tapAutoTimer);
         return;
       }
       this.tapNum++;
@@ -191,6 +240,9 @@ export default {
         s.currentTime = 0;
         s.play();
       }
+      if (this.tapAutoRunning) {
+        this.tapAutoTimer = setTimeout(this.doTap, this.tapAutoDelay);
+      }
     },
     reset95: function () {
       this.tapNum = 0;
@@ -198,6 +250,7 @@ export default {
       for (var b = blocks.length; b--; b > 0) {
         blocks[b].classList.remove('tapped');
       }
+      this.updateTapDisplay();
     },
     makeTapBlocks: function () {
       var html = [];
@@ -222,16 +275,6 @@ export default {
       drawChart(local.sun, this.timeFormat, true);
     }
   },
-  watch: {
-    tapSounds: function (a, b) {
-      storage.set('tapSound', a);
-    }
-    //   di: function () {
-    //     console.log('di changed')
-    //     // fillDayDisplay(this)
-    //     // prepareSunDisplay(this)
-    //   }
-  },
   beforeMount() {
     // console.log('before mount', routeList)
     // this.pages = routeList.default.named;
@@ -240,6 +283,7 @@ export default {
   mounted() {
     // drawChart(local.sun)
     this.makeTapBlocks();
+    this.updateTapDisplay();
     window.addEventListener('resize', this.handleResize)
   },
   activated() {

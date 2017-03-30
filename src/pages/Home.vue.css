@@ -22,6 +22,8 @@ div.card {
 .card article.Verse .verseHost .verseText {
   display: block;
   font-size: 18px;
+  min-height: auto;
+  padding-bottom: .5em;
 }
 button.item-link {
   display: inline-block;
@@ -120,7 +122,7 @@ div.line b {
 }
 .tap95card .main95 {
   display: flex;
-  height: 200px;
+  height: 180px;
   width: 100%;
   justify-content: space-around;
   align-items: center;
@@ -134,6 +136,20 @@ div.line b {
   width: 100%;
   text-align: center;
   display: block;
+}
+.tap95card .q-range {
+  display: inline-block;
+  width: 100px;
+  height: auto;
+  vertical-align: middle;
+}
+.tap95card .q-range .q-range-handle-container {
+  margin: 0;
+}
+.tap95card .tapDelaySpan {
+  white-space: nowrap;
+  display: block;
+  vertical-align: middle;
 }
 .tap95card #tapBlocks div {
   height: 9px;

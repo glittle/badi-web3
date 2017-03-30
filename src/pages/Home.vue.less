@@ -24,6 +24,8 @@ div.card {
         .verseText {
             display: block;
             font-size: 18px;
+            min-height: auto;
+            padding-bottom: .5em;
         }
     }
 }
@@ -138,7 +140,7 @@ div.line {
     }
     .main95 {
         display: flex;
-        height: 200px;
+        height: 180px;
         width: 100%;
         justify-content: space-around;
         align-items: center;
@@ -152,6 +154,21 @@ div.line {
             text-align: center;
             display: block;
         }
+    }
+    .q-range {
+        display: inline-block;
+        width: 100px;
+        height: auto;
+        vertical-align: middle;
+        .q-range-handle-container {
+            margin: 0;
+        }
+
+    }
+    .tapDelaySpan{
+        white-space: nowrap;
+        display: block;
+        vertical-align: middle;
     }
     #tapBlocks {
         div {

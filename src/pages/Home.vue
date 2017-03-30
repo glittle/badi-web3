@@ -1,9 +1,10 @@
 <template>
   <article class="layout-padding tightTop">
-    
+  
     <div class="card">
       <div class="heading">
-        <span class="desc" v-html="sunDisplay"></span>
+        <span class="desc"
+              v-html="sunDisplay"></span>
       </div>
       <div id="sunChart"></div>
       <Grid19 v-bind:info="info('month')"></Grid19>
@@ -13,49 +14,63 @@
     </div>
     <div class="card verse">
       <div class="heading">
-        <span class="type" v-html="verseTime"></span>
+        <span class="type"
+              v-html="verseTime"></span>
         <span>
-          <button 
-            v-on:click="$router.push('verse')"
-            class="small light round">View</button> 
-        </span>
+                  <button 
+                    v-on:click="$router.push('verse')"
+                    class="small light round">View</button> 
+                </span>
       </div>
       <Verse></Verse>
     </div>
     <div class="card tap95card">
-     <div class="heading">
+      <div class="heading">
         <span class="type">95 Alláh-u-Abhás</span>
         <span>
-          <label><input type=checkbox v-model="tapSounds">Sound</label>
-          <button 
-            v-on:click="reset95"
-            class="reset small light round">Reset</button> 
+                  <label><input type=checkbox v-model="tapAuto">Auto</label>
+                  <label><input type=checkbox v-model="tapSounds">Sound</label>
+                  <button 
+                    v-on:click="reset95"
+                    class="reset small light round">Reset</button> 
+                    <span class="tapDelaySpan" v-bind:style="{opacity: tapAuto ? 1 : 0.3}">
+                    Speed
+            <q-range v-model="tapAutoDelay"
+                     :min="1000"
+                     :max="5000"
+                     :step="500"
+                     :snap="true"></q-range>
+                    </span>
         </span>
       </div>
       <div class="main95">
-        <button 
-        v-on:click="tap95"
-        v-bind:disabled="tapNum == 95"
-        class="primary circular big"
-        >Tap Here</button>
+        <button v-on:click="tap95"
+                v-bind:disabled="tapNum == 95"
+                v-html="tapBtnText"
+                class="primary circular big"></button>
         <div>
-          <span class=tapNum v-html="tapNum"></span>
+          <span class=tapNum
+                v-html="tapNum"></span>
           <div id=tapBlocks></div>
         </div>
       </div>
     </div>
-    <audio id="tapSound1" src="/statics/371753__problematist__dhumm2.ogg" autostart="false" ></audio>
-    <audio id="tapSound2" src="/statics/230157__akshaylaya__bheem-e-022.wav" autostart="false" ></audio>
+    <audio id="tapSound1"
+           src="/statics/371753__problematist__dhumm2.ogg"
+           autostart="false"></audio>
+    <audio id="tapSound2"
+           src="/statics/230157__akshaylaya__bheem-e-022.wav"
+           autostart="false"></audio>
     <!--<div class="card">
-      <div class="card-content">
-        <p>Temporary page list...</p>
-        <div class="list no-border">
-          <router-link tag="button" class="item item-link" :class="'icon_' + page.group" v-for="page in pageList.filter(p=>p.to!=='Home')"
-            :to="page.to">
-            <i :title="page.text">{{page.icon}}</i>
-          </router-link>
-        </div>
-      </div>-->
+              <div class="card-content">
+                <p>Temporary page list...</p>
+                <div class="list no-border">
+                  <router-link tag="button" class="item item-link" :class="'icon_' + page.group" v-for="page in pageList.filter(p=>p.to!=='Home')"
+                    :to="page.to">
+                    <i :title="page.text">{{page.icon}}</i>
+                  </router-link>
+                </div>
+              </div>-->
     </div>
   </article>
 </template>
