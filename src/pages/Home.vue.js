@@ -18,7 +18,7 @@ export default {
       title: messages.get('HomePage', null, 'Today'),
       icon: '../statics/sunWhite.png',
       location: shared.coords.name,
-      tapNum: 90,
+      tapNum: 0,
       tapBtnText: '',
       tapLastTime: 0,
       tapAutoRunning: false,
