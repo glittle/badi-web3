@@ -18,8 +18,9 @@ export default {
       title: messages.get('HomePage', null, 'Today'),
       icon: '../statics/sunWhite.png',
       location: shared.coords.name,
-      tapNum: 0,
+      tapNum: 90,
       tapBtnText: '',
+      tapLastTime: 0,
       tapAutoRunning: false,
       tapAutoTimer: null,
       tapAutoDelay: storage.get('tapAutoDelay', 2000),
@@ -109,11 +110,23 @@ export default {
       }
       this.updateTapDisplay();
     },
-    tapAutoDelay: function (a) {
+    tapAutoDelay: function (a, b) {
+      if (isNaN(a)) {
+        // not sure why, but sometimes get isNaN
+        // reset it from last known good value
+        console.log('bad delay', a, b)
+        this.tapAutoDelay = storage.get('tapAutoDelay', 2000);
+        return;
+      }
       storage.set('tapAutoDelay', a);
       clearTimeout(this.tapAutoTimer);
       if (this.tapAutoRunning) {
-        this.tapAutoTimer = setTimeout(this.doTap, this.tapAutoDelay);
+        // determine time since last tap
+        var elapsed = new Date().getTime() - this.tapLastTime;
+        var timeTillNext = Math.max(0, this.tapAutoDelay - elapsed);
+        // console.log('new delay', elapsed, timeTillNext, this.tapAutoDelay);
+
+        this.tapAutoTimer = setTimeout(this.doTap, timeTillNext);
       }
     }
     //   di: function () {
@@ -254,6 +267,7 @@ export default {
         s.play();
         // }
       }
+      this.tapLastTime = new Date().getTime();
       document.getElementById('tap_' + this.tapNum).classList.add('tapped');
       if (this.tapNum >= 95) {
         this.tapAutoRunning = false;
@@ -302,11 +316,13 @@ export default {
   },
   mounted() {
     // drawChart(local.sun)
+    var vue = this;
     this.makeTapBlocks();
     this.updateTapDisplay();
     this.tapSound1.addEventListener("ended", function () {
-      if (this.tapNum === 95) {
-        var s2 = this.tapSound2;
+      // console.log('sounded', vue.tapNum, vue.tapSounds)
+      if (vue.tapNum >= 95 && vue.tapSounds) {
+        var s2 = vue.tapSound2;
         s2.pause();
         s2.currentTime = 0;
         s2.play();

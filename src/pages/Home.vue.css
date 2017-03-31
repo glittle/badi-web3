@@ -137,22 +137,18 @@ div.line b {
   text-align: center;
   display: block;
 }
-.tap95card .q-range {
-  display: inline-block;
-  width: 100px;
-  margin: 6px 0 0 0;
-  height: 20px;
-  vertical-align: middle;
+.tap95card .tapDelayArea {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 85%;
 }
-.tap95card .q-range .q-range-handle-container {
+.tap95card .tapDelayArea .q-range .q-range-handle-container {
   margin: 0 10px;
 }
-.tap95card .tapDelaySpan {
+.tap95card .tapDelayArea span {
   white-space: nowrap;
-  display: block;
-}
-.tap95card .tapDelaySpan span {
-  vertical-align: sub;
 }
 .tap95card #tapBlocks div {
   height: 9px;
