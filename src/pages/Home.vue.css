@@ -128,7 +128,6 @@ div.line b {
   display: flex;
   height: 180px;
   width: 100%;
-  border: 1px solid #ccc;
   justify-content: space-around;
   align-items: center;
   display: -webkit-flex;
@@ -178,4 +177,21 @@ div.line b {
 }
 .tap95card #tapBlocks span.tapped.five {
   background-color: #FFA726;
+}
+.card.share .heading button {
+  margin: 1px 3px 0 0;
+  padding: 3px 8px;
+  min-height: 1rem;
+}
+.card.share .support {
+  margin: 0 8px 4px 8px;
+  display: flex;
+  display: -webkit-flex;
+}
+.card.share .qr {
+  width: 75px;
+  height: 75px;
+}
+.card.share p {
+  margin: 0 8px 4px 8px;
 }

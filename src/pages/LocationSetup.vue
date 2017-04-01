@@ -2,61 +2,73 @@
   <article class="LocationSetup layout-padding">
     <h1>Location</h1>
     <div class="section">
-      <p>
-        Please confirm the location of this device/computer. It can be approximate, but must match its timezone!</p>
-      <p>
-        Click "Lookup My Location" below, or manually adjust your location coordinates.
-      </p>
-      <div class="latlng">
-        <div>
-          <button @click="getLocation"
-                  class="small primary">Lookup My Location</button>
+      <p>Please confirm the location of this device/computer.</p>
+      <div v-show="guessing"
+           class="confirmGuess">
+        <p>Are you in (or near):</p>
+        <div class="guessName"
+             v-html="name"></div>
+        <div class="confirmGuessBtns">
+          <button @click="confirmLocation"
+                  class="primary">Yes</button>
+          <button @click="guessNo"
+                  class="primary">No</button>
         </div>
-        <div>
-          <span>Latitude:</span>
-          <input type="number"
-                 min="-85"
-                 max="85"
-                 step="any"
-                 v-model.number="lat"
-                 :class="{'has-error': latError}">
-        </div>
-        <div>
-          <span>Longitude:</span>
-          <input type="number"
-                 min="-180"
-                 max="180"
-                 step="any"
-                 v-model.number="lng"
-                 :class="{'has-error': lngError}">
-        </div>
-        <div>
-          <button v-show="saveNeeded"
-                  v-on:click="saveCoords('user')"
-                  class="small light primary">Save</button>
-          <span class="busy"
-                v-show="gettingLocation">
-                    <span></span>
-          </span>
+  
+      </div>
+      <div v-show="!guessing">
+        <p>
+          Click "Lookup My Location" below, or manually adjust your location coordinates. They can be approximate, but must match the timezone!
+        </p>
+        <div class="latlng">
+          <div>
+            <button @click="getLocation"
+                    v-bind:class="{primary: name==='(unknown)'}"
+                    class="small secondary">Lookup My Location
+  
+            </button>
+            <button @click="openMap"
+                    class="small light">Show with Google Maps</button>
+          </div>
+          <div>
+            <span>Latitude:</span>
+            <input type="number"
+                   min="-85"
+                   max="85"
+                   step="any"
+                   v-model.number="lat"
+                   :class="{'has-error': latError}">
+            <span class="busy"
+                  v-show="gettingLocation"></span>
+          </div>
+          <div>
+            <span>Longitude:</span>
+            <input type="number"
+                   min="-180"
+                   max="180"
+                   step="any"
+                   v-model.number="lng"
+                   :class="{'has-error': lngError}">
+          </div>
+          <div>
+            <span>Name:</span>
+            <input type="text"
+                   v-model="name"
+                   v-if="!gettingName">
+            <span class="busyWord"
+                  v-if="gettingName">(getting name)</span>
+          </div>
+          <div>
+            <span>Time zone:</span><span v-text="timezone"></span>
+          </div>
+          <div>
+            <button v-on:click="confirmLocation"
+                    v-bind:class="{primary: !sourceIsSet}"
+                    class="small secondary">Use This Location</button>
+          </div>
+  
         </div>
       </div>
-      <p>
-        <span>Name:</span>
-        <input type="text"
-               v-model="name"
-               v-if="!gettingName">
-        <span class="busyWord"
-              v-if="gettingName">
-              (getting name)
-            </span>
-      </p>
-      <p>
-        <span>Time zone:</span><span v-text="timezone"></span>
-      </p>
-      <p class=buttons>
-        <button @click="openMap"
-                class="small light">Show in Google Maps</button>
-      </p>
     </div>
   </article>
 </template>

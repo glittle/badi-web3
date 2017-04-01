@@ -20,9 +20,9 @@ const names = [
     name: 'Verse',
     group: 'main'
   }, {
-    name: 'InitialSetup',
-    group: 'setup'
-  }, {
+  //   name: 'InitialSetup',
+  //   group: 'setup'
+  // }, {
     name: 'Notifications',
     group: 'setup'
   }, {

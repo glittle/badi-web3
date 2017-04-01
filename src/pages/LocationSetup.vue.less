@@ -1,5 +1,6 @@
 .LocationSetup {
-    p, .latlng {
+    p,
+    .latlng {
         span {
             margin-right: 15px;
         }
@@ -14,6 +15,22 @@
             margin-bottom: 8px;
         }
     }
+    .confirmGuess {
+        padding: 1rem 10% 1rem;
+        border-radius: 10px;
+        text-align: center;
+        background: #d9d7f5;
+        .guessName {
+            margin: 10px auto;
+            font-size: 2rem;
+        }
+        .confirmGuessBtns {
+            margin-top: 1.5rem;
+            button {
+                margin: 0 10px;
+            }
+        }
+    }
     .latlng {
         margin: 8px 5px 8px 0;
         font-size: 1rem;
@@ -22,6 +39,9 @@
         line-height: 24px;
         padding: 0;
         -webkit-font-smoothing: antialiased;
+        > div{
+            margin: 5px 0;
+        }
     }
     .statusLines {
         float: right;

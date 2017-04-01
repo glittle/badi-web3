@@ -180,7 +180,7 @@ function checkLocation(vue) {
 
       storage.set('initialSetup', true);
 
-      vue.$router.push('/initialsetup');
+      vue.$router.push('/locationsetup');
     }
 
     // Toast.create.negative({

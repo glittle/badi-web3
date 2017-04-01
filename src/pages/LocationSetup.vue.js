@@ -25,7 +25,10 @@ export default {
       lat: shared.coords.lat,
       lng: shared.coords.lng,
       name: shared.coords.name,
+      source: shared.coords.source,
+      sourceIsSet: shared.coords.sourceIsSet,
       statusLines: [],
+      guessing: false,
       gettingLocation: false,
       gettingName: false,
       // manual validator to match SimpleVueValidation
@@ -46,7 +49,7 @@ export default {
   computed: {
     saveNeeded() {
       // if needed and possible
-      if (this.lat == 0 || this.lng == 0) {
+      if (this.lat === 0 || this.lng === 0) {
         return false;
       }
       if (this.lat === this.latSaved && this.lng == this.lngSaved) {
@@ -60,8 +63,11 @@ export default {
     }
   },
   created() {
-    if (!shared.coords.sourceIsSet) {
+    if (!shared.coords.sourceIsSet || this.source === 'guess') {
+      this.guessing = true;
       this.guessLocation();
+    } else {
+      this.guessing = false;
     }
   },
   watch: {
@@ -90,6 +96,7 @@ export default {
     saveCoords: function (source) {
       var vue = this;
       shared.coords.source = source;
+      this.source = source;
       this.latSaved = this.lat;
       this.lngSaved = this.lng;
       store.doPulse();
@@ -100,32 +107,52 @@ export default {
       //   }, 1000);
       // }
     },
+    confirmLocation() {
+      var vue = this;
+      setTimeout(function () {
+        vue.saveCoords('user');
+        vue.updateUiToNewLocation()
+        vue.$router.push('/');
+      }, 0)
+    },
+    guessNo() {
+      this.guessing = false;
+    },
     guessLocation() {
       var vue = this;
       var url = "https://ipinfo.io/geo?json";
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-          var info = JSON.parse(xhr.responseText);
-          var loc = info.loc.split(',');
-          // saveLocation(loc[0], loc[1], info.city);
-          vue.lat = loc[0];
-          vue.lng = loc[1];
-          var location = info.city;
+        if (xhr.readyState !== 4) {
+          return;
+        }
+        switch (xhr.status) {
+          case 200:
+            var info = JSON.parse(xhr.responseText);
+            var loc = info.loc.split(',');
+            // saveLocation(loc[0], loc[1], info.city);
+            vue.lat = loc[0];
+            vue.lng = loc[1];
+            var location = info.city;
 
-          vue.addToLog('Guessed coordinates')
+            vue.addToLog('Guessed coordinates')
 
-          OneSignal.sendTag("latitude", vue.lat);
-          OneSignal.sendTag("longitude", vue.lng);
-          OneSignal.sendTag("version", versionInfo.version);
-          vue.gettingLocation = false;
+            OneSignal.sendTag("latitude", vue.lat);
+            OneSignal.sendTag("longitude", vue.lng);
+            OneSignal.sendTag("version", versionInfo.version);
+            vue.gettingLocation = false;
 
-          vue.saveCoords('guess');
+            vue.saveCoords('guess');
 
-          OneSignal.sendTag("location", location);
-          OneSignal.sendTag("zoneName", moment.tz.guess());
-          shared.coords.name = location;
-          vue.name = location;
+            OneSignal.sendTag("location", location);
+            OneSignal.sendTag("zoneName", moment.tz.guess());
+            shared.coords.name = location;
+            vue.name = location;
+            vue.source = 'guess';
+            break;
+          default:
+            vue.guessing = false;
+            break;
         }
       }
       xhr.open("GET", url, true);
