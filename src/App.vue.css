@@ -38,6 +38,9 @@ button.primary {
   width: auto;
   height: auto;
 }
+.layout-content {
+  overflow: auto;
+}
 article h1 {
   margin: 15px 0 5px 0;
   font-size: 1.8rem;
