@@ -102,7 +102,7 @@ export default {
     },
     guessLocation() {
       var vue = this;
-      var url = "http://ipinfo.io/geo?json";
+      var url = "https://ipinfo.io/geo?json";
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
