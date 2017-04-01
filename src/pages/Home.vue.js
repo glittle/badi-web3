@@ -25,7 +25,7 @@ export default {
       tapAutoTimer: null,
       tapAutoDelay: storage.get('tapAutoDelay', 2000),
       tapAuto: storage.get('tapAuto', true),
-      tapSounds: storage.get('tapSound', true)
+      tapSounds: storage.get('tapSounds', true)
     }
   },
   components: {
@@ -93,7 +93,7 @@ export default {
   },
   watch: {
     tapSounds: function (a) {
-      storage.set('tapSound', a);
+      storage.set('tapSounds', a);
     },
     tapAutoRunning: function (a) {
       this.updateTapDisplay();

@@ -1,10 +1,3 @@
-
-import Es6polyfill from 'es6-promise';
-Es6polyfill.polyfill();
-console.log('es6 in app.vue.js')
-// require('es6-promise').polyfill();
-// console.log('es6 in app.vue.js')
-
 import routeList from './pages/routes'
 import badiCalc from './scripts/badiCalc'
 import * as notify from './scripts/notification'

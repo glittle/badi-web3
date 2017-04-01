@@ -1,6 +1,5 @@
 import Es6polyfill from 'es6-promise';
 Es6polyfill.polyfill();
-console.log('es6 in store.js')
 
 import Vue from 'vue'
 import Vuex from 'vuex'

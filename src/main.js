@@ -7,10 +7,6 @@ console.log('start')
 require(`quasar/dist/quasar.${__THEME}.css`)
   // ==============================
 
-import Es6polyfill from 'es6-promise';
-Es6polyfill.polyfill();
-console.log('es6 in main.js')
-
 import Vue from 'vue'
 import router from 'router'
 import VueHead from 'vue-head'
