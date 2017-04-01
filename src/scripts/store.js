@@ -1,3 +1,7 @@
+import Es6polyfill from 'es6-promise';
+Es6polyfill.polyfill();
+console.log('es6 in store.js')
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 import badiCalc from './badiCalc'
@@ -73,6 +77,7 @@ export default store
 // for development
 window.doPulse = doPulse
 
+// debugger;
 console.log('For testing other dates:\n  doPulse(new Date(y,m-1,d,h,m,s))');
 
 // setTimeout(function () {

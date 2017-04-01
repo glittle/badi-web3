@@ -38,8 +38,8 @@ button.primary {
   width: auto;
   height: auto;
 }
-.layout-content {
-  overflow: auto;
+.layout-view {
+  overflow-y: scroll;
 }
 article h1 {
   margin: 15px 0 5px 0;

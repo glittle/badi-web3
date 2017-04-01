@@ -1,20 +1,28 @@
-.LocationSetup p span {
+.LocationSetup p span,
+.LocationSetup .latlng span {
   margin-right: 15px;
 }
-.LocationSetup p input {
+.LocationSetup p input,
+.LocationSetup .latlng input {
   padding: 2px 0;
 }
-.LocationSetup p input[type=number] {
+.LocationSetup p input[type=number],
+.LocationSetup .latlng input[type=number] {
   width: 100px;
 }
-.LocationSetup p.buttons {
+.LocationSetup p.buttons,
+.LocationSetup .latlng.buttons {
   margin-top: 1em;
   margin-bottom: 8px;
 }
 .LocationSetup .latlng {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  margin: 8px 5px 8px 0;
+  font-size: 1rem;
+  letter-spacing: 0;
+  margin: 0 0 1rem;
+  line-height: 24px;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
 }
 .LocationSetup .statusLines {
   float: right;

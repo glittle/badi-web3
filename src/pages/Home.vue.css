@@ -96,10 +96,13 @@ div.line b {
   min-height: 1rem;
 }
 .tap95card {
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-direction: column;
   flex-direction: column;
   -webkit-justify-content: space-around;
   justify-content: space-around;
+  -webkit-align-items: center;
   align-items: center;
   width: 100%;
 }
@@ -125,13 +128,16 @@ div.line b {
   display: flex;
   height: 180px;
   width: 100%;
-  -webkit-justify-content: space-around;
+  border: 1px solid #ccc;
   justify-content: space-around;
   align-items: center;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  -webkit-justify-content: space-around;
 }
 .tap95card .main95 button.circular.big {
-  height: 120px;
-  width: 120px;
+  height: 95px;
+  width: 95px;
 }
 .tap95card .main95 span.tapNum {
   font-size: 40px;
@@ -144,6 +150,9 @@ div.line b {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  display: -webkit-flex;
+  -webkit-justify-content: space-between;
+  -webkit-align-items: center;
   font-size: 85%;
 }
 .tap95card .tapDelayArea .q-range .q-range-handle-container {

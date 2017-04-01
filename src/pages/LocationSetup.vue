@@ -7,37 +7,39 @@
       <p>
         Click "Lookup My Location" below, or manually adjust your location coordinates.
       </p>
-      <p class="latlng">
-        <span>
-          <button @click="getLocation" class="small primary">Lookup My Location</button>
-        </span>
-        <span>
-            <span>Latitude:</span>
-            <input type="number"
-               min="-85"
-               max="85"
-               step="any"
-               v-model.number="lat"
-               :class="{'has-error': latError}">
-        </span>
-        <span>
-            <span>Longitude:</span>
-            <input type="number"
-               min="-180"
-               max="180"
-               step="any"
-               v-model.number="lng"
-               :class="{'has-error': lngError}">
-        </span>
-        <span>
-            <button v-show="saveNeeded" 
-                    v-on:click="saveCoords('user')"
-                    class="small light primary">Save</button>
-            <span class="busy" v-show="gettingLocation">
-                  <span></span>
-        </span>
-        </span>
-      </p>
+      <div class="latlng">
+        <div>
+          <button @click="getLocation"
+                  class="small primary">Lookup My Location</button>
+        </div>
+        <div>
+          <span>Latitude:</span>
+          <input type="number"
+                 min="-85"
+                 max="85"
+                 step="any"
+                 v-model.number="lat"
+                 :class="{'has-error': latError}">
+        </div>
+        <div>
+          <span>Longitude:</span>
+          <input type="number"
+                 min="-180"
+                 max="180"
+                 step="any"
+                 v-model.number="lng"
+                 :class="{'has-error': lngError}">
+        </div>
+        <div>
+          <button v-show="saveNeeded"
+                  v-on:click="saveCoords('user')"
+                  class="small light primary">Save</button>
+          <span class="busy"
+                v-show="gettingLocation">
+                    <span></span>
+          </span>
+        </div>
+      </div>
       <p>
         <span>Name:</span>
         <input type="text"
@@ -45,8 +47,8 @@
                v-if="!gettingName">
         <span class="busyWord"
               v-if="gettingName">
-            (getting name)
-          </span>
+              (getting name)
+            </span>
       </p>
       <p>
         <span>Time zone:</span><span v-text="timezone"></span>

@@ -233,7 +233,7 @@ export default {
       if (this.tapAuto) {
         this.tapBtnText = this.tapAutoRunning ? 'Pause' : this.tapNum === 0 ? 'Start' : 'Resume';
       } else {
-        this.tapBtnText = 'Tap Here';
+        this.tapBtnText = 'Tap';
       }
     },
     tap95: function () {
@@ -257,16 +257,15 @@ export default {
         this.updateTapDisplay();
         return;
       }
-      this.tapNum++;
       if (this.tapSounds) {
-        // var s = this.tapNum < 95 ? this.tapSound1 : this.tapSound2;
-        // if (this.tapNum < 95) {
         var s = this.tapSound1;
         s.pause();
-        s.currentTime = 0;
+        if (s.currentTime !== 0) {
+          s.currentTime = 0;
+        }
         s.play();
-        // }
       }
+      this.tapNum++;
       this.tapLastTime = new Date().getTime();
       document.getElementById('tap_' + this.tapNum).classList.add('tapped');
       if (this.tapNum >= 95) {
@@ -323,8 +322,6 @@ export default {
       // console.log('sounded', vue.tapNum, vue.tapSounds)
       if (vue.tapNum >= 95 && vue.tapSounds) {
         var s2 = vue.tapSound2;
-        s2.pause();
-        s2.currentTime = 0;
         s2.play();
       }
     });

@@ -58,10 +58,10 @@
       </div>
     </div>
     <audio id="tapSound1"
-           src="/statics/371753__problematist__dhumm2.ogg"
+           src="/statics/gong1.mp3"
            autostart="false"></audio>
     <audio id="tapSound2"
-           src="/statics/230157__akshaylaya__bheem-e-022.wav"
+           src="/statics/gong2.mp3"
            autostart="false"></audio>
     <!--<div class="card">
                 <div class="card-content">
