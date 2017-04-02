@@ -54,14 +54,18 @@
         <button v-on:click="tap95"
                 v-bind:disabled="tapNum == 95"
                 v-html="tapBtnText"
+                title="Tap here. In Auto mode, tap to Start or Stop"
                 class="primary circular big"></button>
       </div>
     </div>
-    <audio id="tapSound1"
-           src="/statics/gong1.mp3"
-           autostart="false"></audio>
-    <audio id="tapSound2"
+    <audio id="tapSoundForSteps"
            src="/statics/gong2.mp3"
+           autostart="false"></audio>
+    <audio id="tapSoundForSteps19"
+           src="/statics/gong2b.mp3"
+           autostart="false"></audio>
+    <audio id="tapSoundForEnd"
+           src="/statics/gong1.mp3"
            autostart="false"></audio>
     <!--<div class="card">
                       <div class="card-content">

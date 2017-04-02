@@ -39,11 +39,14 @@ export default {
     position() {
       return null;
     },
-    tapSound1() {
-      return document.getElementById('tapSound1');
+    tapSoundForSteps() {
+      return document.getElementById('tapSoundForSteps');
     },
-    tapSound2() {
-      return document.getElementById('tapSound2');
+    tapSoundForSteps19() {
+      return document.getElementById('tapSoundForSteps19');
+    },
+    tapSoundForEnd() {
+      return document.getElementById('tapSoundForEnd');
     },
     di() {
       this.$store.state.pulseNum;
@@ -231,9 +234,9 @@ export default {
     },
     updateTapDisplay: function () {
       if (this.tapAuto) {
-        this.tapBtnText = this.tapAutoRunning ? 'Pause' : this.tapNum === 0 ? 'Start' : 'Resume';
+        this.tapBtnText = this.tapAutoRunning ? 'Pau<u>s</u>e' : this.tapNum === 0 ? '<u>S</u>tart' : 'Re<u>s</u>ume';
       } else {
-        this.tapBtnText = 'Tap';
+        this.tapBtnText = '<u>T</u>ap';
       }
     },
     tap95: function () {
@@ -257,23 +260,31 @@ export default {
         this.updateTapDisplay();
         return;
       }
-      if (this.tapSounds) {
-        var s = this.tapSound1;
-        s.pause();
-        if (s.currentTime !== 0) {
-          s.currentTime = 0;
-        }
-        s.play();
-      }
       this.tapNum++;
-      this.tapLastTime = new Date().getTime();
       document.getElementById('tap_' + this.tapNum).classList.add('tapped');
+      if (this.tapSounds) {
+        if (this.tapNum === 95) {
+          this.playSound(this.tapSoundForEnd);
+        } else if (this.tapNum % 19 === 0) {
+          this.playSound(this.tapSoundForSteps19);
+        } else {
+          this.playSound(this.tapSoundForSteps);
+        }
+      }
       if (this.tapNum >= 95) {
         this.tapAutoRunning = false;
       }
       if (this.tapAutoRunning) {
         this.tapAutoTimer = setTimeout(this.doTap, this.tapAutoDelay);
       }
+      this.tapLastTime = new Date().getTime();
+    },
+    playSound: function (s) {
+      if (s.currentTime !== 0) {
+        s.pause();
+        s.currentTime = 0;
+      }
+      s.play();
     },
     reset95: function () {
       this.tapNum = 0;
@@ -306,7 +317,23 @@ export default {
     },
     drawChart: function () {
       drawChart(local.sun, this.timeFormat, true);
-    }
+    },
+    keyup: function (ev) {
+      switch (ev.code) {
+        case 'KeyT':
+          if (!this.tapAuto) {
+            this.tap95(); // do the tap
+          }
+          break;
+
+        case 'KeyS':
+          if (this.tapAuto) {
+            this.tap95(); // start/stop
+          }
+          break;
+      }
+    },
+
   },
   beforeMount() {
     // console.log('before mount', routeList)
@@ -318,15 +345,15 @@ export default {
     var vue = this;
     this.makeTapBlocks();
     this.updateTapDisplay();
-    this.tapSound1.addEventListener("ended", function () {
+    this.tapSoundForSteps.addEventListener("ended", function () {
       // console.log('sounded', vue.tapNum, vue.tapSounds)
       if (vue.tapNum >= 95 && vue.tapSounds) {
-        var s2 = vue.tapSound2;
-        s2.play();
+        vue.playSound(vue.tapSoundForEnd);
       }
     });
 
     window.addEventListener('resize', this.handleResize)
+    window.addEventListener('keyup', this.keyup)
   },
   activated() {
     drawChart(local.sun, this.timeFormat, true)
