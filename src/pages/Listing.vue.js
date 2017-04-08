@@ -7,6 +7,9 @@ var cloneDeep = require('lodash/cloneDeep');
 
 export default {
   name: 'listing', // for Vue debugger
+  props: {
+    onHome: Boolean
+  },
   data() {
     return {
       title: "Dates",
@@ -48,12 +51,8 @@ export default {
     },
   },
   created: function () {
-    this.originalYear = badi.di.bYear;
-    this.loadDates(this.originalYear);
-
-    if (badi.di.bMonth > 17 || badi.di.bMonth === 0) {
-      this.loadDates(this.nextYear);
-    }
+    this.prepare();
+    _messageBus.$on('changedDay', this.prepare);
   },
   computed: {
     nextYear: function () {
@@ -82,6 +81,14 @@ export default {
     },
   },
   methods: {
+    prepare: function () {
+      this.originalYear = badi.di.bYear;
+      this.loadDates(this.originalYear);
+
+      if (badi.di.bMonth > 17 || badi.di.bMonth === 0) {
+        this.loadDates(this.nextYear);
+      }
+    },
     ayyam2: function (day) {
       console.log(day)
       return day.lastDayDi.gCombinedY
@@ -129,7 +136,7 @@ export default {
         if (info) {
           this.getLinks(links, info);
         }
-      } else {}
+      } else { }
       day.links = links;
       return day.links;
     },
@@ -219,10 +226,33 @@ export default {
       }));
       vue.list.sort(sortDates)
 
-      if (!this.scrollDone) {
-        this.moveToThisMonth()
-        this.scrollDone = true;
+      if (vue.onHome) {
+        // vue.includeFeast = true;
+        // vue.includeFast = true;
+        // vue.includeHolyDays = true;
+        // vue.includeOther = true;
+        var numShown = 0;
+        var toShow = 4;
+        var today = window._nowDi.frag1SunTimes.sunset;
+        vue.list = vue.list.filter(function (day) {
+          if (day.di.frag1SunTimes.sunset <= today) {
+            return false;
+          }
+          if (numShown >= toShow) {
+            return false;
+          }
+          if (numShown === 0) {
+            day.showingLinks = true;
+          }
+          numShown++;
+          return true;
+        })
       }
+
+      // if (!this.scrollDone) {
+      //   this.moveToThisMonth()
+      //   this.scrollDone = true;
+      // }
     },
     moveToThisMonth: function () {
       var target = this.makeId({
@@ -279,9 +309,9 @@ function extendDayInfo(vue, d, diff) {
 function sortDates(a, b) {
   return a.GDate < b.GDate ? -1 :
     a.GDate > b.GDate ? 1 :
-    a.Type === 'M' ? -1 :
-    a.Type === 'HS' ? -1 :
-    a.Type === 'HO' ? -1 :
-    a.Type === 'Fast' ? -1 :
-    1;
+      a.Type === 'M' ? -1 :
+        a.Type === 'HS' ? -1 :
+          a.Type === 'HO' ? -1 :
+            a.Type === 'Fast' ? -1 :
+              1;
 }

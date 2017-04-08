@@ -33,6 +33,7 @@ const store = new Vuex.Store({
 
 const pulseSeconds = 60; // normally 60 seconds
 var pulseTimer = null;
+var lastPulseStamp = null;
 
 function scheduleNextPulse() {
   // start the timer just after the minute
@@ -65,6 +66,13 @@ export function doPulse(newTestTime) {
   badiCalc.refreshDateInfo();
 
   store.commit('pulsed')
+
+  var newStamp = window._nowDi.stamp;
+  if (newStamp !== lastPulseStamp) {
+    lastPulseStamp = newStamp;
+    window._messageBus.$emit('changedDay');
+  }
+
 
   scheduleNextPulse();
 }

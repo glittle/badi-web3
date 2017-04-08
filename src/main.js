@@ -7,6 +7,9 @@ require(`quasar/dist/quasar.${__THEME}.css`)
   // ==============================
 
 import Vue from 'vue'
+
+window._messageBus = new Vue();
+
 import router from 'router'
 import VueHead from 'vue-head'
 import Quasar from 'quasar'
@@ -18,8 +21,6 @@ import badiCalc from './scripts/badiCalc'
 import './scripts/swHandler';
 import './scripts/messages';
 import './components/msg-directive';
-
-window._messageBus = new Vue();
 
 Vue.use(VueHead)
 Vue.use(Quasar) // Install Quasar Framework

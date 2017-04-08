@@ -100,7 +100,7 @@
   color: #d35400;
 }
 #Listing .dayContent .col3 {
-  padding: 0 10px;
+  padding: 3px 10px 0 10px;
   text-align: right;
   flex-shrink: 0;
 }

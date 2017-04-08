@@ -104,7 +104,7 @@ export default {
       // console.log('app pulse')
       // notification icon
       if (!this.setupDone) {
-        if (shared.coords.sourceIsSet) {
+        if (shared.coords.sourceIsSet && shared.coords.lat) {
           this.setupDone = true;
         }
       }
@@ -175,13 +175,13 @@ function checkLocation(vue) {
   //TODO: don't send robots to the setup pages
 
   if (!vue.setupDone) {
-    if (vue.$router.currentRoute.path !== '/locationsetup' &&
-      vue.$router.currentRoute.path !== '/initialsetup') {
+    // if (vue.$router.currentRoute.path !== '/locationsetup' &&
+    //   vue.$router.currentRoute.path !== '/initialsetup') {
 
-      storage.set('initialSetup', true);
+    //   storage.set('initialSetup', true);
 
-      vue.$router.push('/locationsetup');
-    }
+    //   vue.$router.push('/locationsetup');
+    // }
 
     // Toast.create.negative({
     //   html: 'Location must be set for dates and times to be correct!',
@@ -198,3 +198,7 @@ function checkLocation(vue) {
     // })
   }
 }
+
+setTimeout(function () {
+  //(adsbygoogle = window.adsbygoogle || []).push({});
+}, 0);

@@ -18,6 +18,7 @@ export default {
       title: messages.get('HomePage', null, 'Daily'),
       icon: '../statics/sunWhite.png',
       location: shared.coords.name,
+      setupDone: false,
       tapNum: 0,
       tapBtnText: '',
       tapLastTime: 0,
@@ -352,13 +353,28 @@ export default {
       }
     });
 
+    if (!this.setupDone) {
+      if (shared.coords.sourceIsSet && shared.coords.source !== 'guess') {
+        this.setupDone = true;
+      }
+    }
+
+
+    (adsbygoogle = window.adsbygoogle || []).push({});
+
     window.addEventListener('resize', this.handleResize)
     window.addEventListener('keyup', this.keyup)
 
-    _messageBus.$on('locationChanged', function(){
+    _messageBus.$on('locationChanged', function () {
       vue.location = shared.coords.name
+      if (!vue.setupDone) {
+        if (shared.coords.sourceIsSet && shared.coords.source !== 'guess') {
+          vue.setupDone = true;
+        }
+      }
     });
-    
+
+
   },
   activated() {
     drawChart(local.sun, this.timeFormat, true)

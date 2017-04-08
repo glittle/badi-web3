@@ -1,3 +1,32 @@
+.Home .locationHolder {
+  width: 100%;
+  max-width: 480px;
+  margin: -10px auto 10px auto;
+}
+.Home .locationHolder .LocationSetup {
+  padding: 5px;
+}
+.Home .locationHolder .LocationSetup h1 {
+  display: none;
+}
+.Home .locationHolder .LocationSetup .confirmGuess {
+  padding: 0.3rem 10% 1rem;
+}
+.Home .locationHolder .LocationSetup .section {
+  margin: 0;
+}
+.Home .locationHolder .LocationSetup .section button {
+  min-height: 2rem;
+}
+.Home .locationHolder .LocationSetup .section > p {
+  display: none;
+}
+.Home #Listing {
+  padding-top: 0;
+}
+.Home #Listing .dayContent.HolyDay {
+  padding-left: 0;
+}
 .tightTop div.card:first-child {
   margin-top: 0;
 }
@@ -194,4 +223,7 @@ div.line b {
 }
 .card.share p {
   margin: 0 8px 4px 8px;
+}
+.googleAd {
+  text-align: center;
 }
