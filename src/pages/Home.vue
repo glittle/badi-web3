@@ -21,10 +21,10 @@
         <span class="type"
               v-html="verseTime"></span>
         <span>
-                                        <button 
-                                          v-on:click="$router.push('verse')"
-                                          class="small light round">More</button> 
-                                      </span>
+                                          <button 
+                                            v-on:click="$router.push('verse')"
+                                            class="small light round">More</button> 
+                                        </span>
       </div>
       <Verse></Verse>
     </div>
@@ -32,13 +32,13 @@
       <div class="heading">
         <span class="type">95 Alláh-u-Abhás</span>
         <span>
-                                        <label><input type=checkbox v-model="tapAuto">Auto</label>
-                                        <label><input type=checkbox v-model="tapSounds">Sound</label>
-                                        <button 
-                                          v-on:click="reset95"
-                                          class="reset small light round">Reset</button> 
-                                          
-                              </span>
+                                          <label><input type=checkbox v-model="tapAuto">Auto</label>
+                                          <label><input type=checkbox v-model="tapSounds">Sound</label>
+                                          <button 
+                                            v-on:click="reset95"
+                                            class="reset small light round">Reset</button> 
+                                            
+                                </span>
       </div>
       <div class="main95">
         <div>
@@ -72,23 +72,23 @@
            src="/statics/gong1.mp3"
            autostart="false"></audio>
     <!--<div class="card">
-                                    <div class="card-content">
-                                      <p>Temporary page list...</p>
-                                      <div class="list no-border">
-                                        <router-link tag="button" class="item item-link" :class="'icon_' + page.group" v-for="page in pageList.filter(p=>p.to!=='Home')"
-                                          :to="page.to">
-                                          <i :title="page.text">{{page.icon}}</i>
-                                        </router-link>
-                                      </div>
-                                    </div>-->
+                                      <div class="card-content">
+                                        <p>Temporary page list...</p>
+                                        <div class="list no-border">
+                                          <router-link tag="button" class="item item-link" :class="'icon_' + page.group" v-for="page in pageList.filter(p=>p.to!=='Home')"
+                                            :to="page.to">
+                                            <i :title="page.text">{{page.icon}}</i>
+                                          </router-link>
+                                        </div>
+                                      </div>-->
     <div class="card share">
       <div class="heading">
         <span class="type">Upcoming Dates</span>
         <span>
-                  <button 
-                    v-on:click="$router.push('listing')"
-                    class="small light round">More</button> 
-                </span>
+                    <button 
+                      v-on:click="$router.push('listing')"
+                      class="small light round">More</button> 
+                  </span>
       </div>
       <listing :onHome="true"></listing>
     </div>
@@ -97,10 +97,10 @@
       <div class="heading">
         <span class="type">Share and Support</span>
         <span>
-                                        <button 
-                                          v-on:click="$router.push('about')"
-                                          class="small light round">About</button> 
-                                      </span>
+                                          <button 
+                                            v-on:click="$router.push('about')"
+                                            class="small light round">About</button> 
+                                        </span>
       </div>
       <div class="support">
         <img class="qr"
@@ -110,13 +110,12 @@
         </p>
       </div>
     </div>
-    <div class="googleAd">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-1303486522648633"
-           data-ad-slot="7213676280"
-           data-ad-format="auto"></ins>
-    </div>
+    <!-- google_ad_1 -->
+    <ins class="adsbygoogle google_ad_1"
+         style="display:block"
+         data-ad-client="ca-pub-1303486522648633"
+         data-ad-slot="7213676280"
+         data-ad-format="auto"></ins>
   </article>
 </template>
 <style src="./Home.vue.css"></style>
