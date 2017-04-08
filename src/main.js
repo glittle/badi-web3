@@ -19,6 +19,8 @@ import './scripts/swHandler';
 import './scripts/messages';
 import './components/msg-directive';
 
+window._messageBus = new Vue();
+
 Vue.use(VueHead)
 Vue.use(Quasar) // Install Quasar Framework
 Vue.use(VueHighcharts);

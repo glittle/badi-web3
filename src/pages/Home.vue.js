@@ -354,6 +354,11 @@ export default {
 
     window.addEventListener('resize', this.handleResize)
     window.addEventListener('keyup', this.keyup)
+
+    _messageBus.$on('locationChanged', function(){
+      vue.location = shared.coords.name
+    });
+    
   },
   activated() {
     drawChart(local.sun, this.timeFormat, true)

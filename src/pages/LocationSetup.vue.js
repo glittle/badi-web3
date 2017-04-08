@@ -292,6 +292,7 @@ export default {
     updateUiToNewLocation() {
       badiCalc.reset();
       store.doPulse();
+      _messageBus.$emit('locationChanged');
     },
     addToLog(msg) {
       var vue = this;
