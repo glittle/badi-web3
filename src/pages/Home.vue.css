@@ -98,6 +98,9 @@ button.item-link.icon_setup {
 #sunChart .highcharts-xaxis-labels > span span.after {
   text-align: left;
 }
+#sunChart .wk1 {
+  color: #212121;
+}
 div.line {
   margin: 3px 0;
   overflow: auto;

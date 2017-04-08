@@ -1,14 +1,16 @@
 <template>
-  <table class="Grid19" v-bind:class="{ayyamiha: info.ayyamiha}" v-bind:data-dummy="showDelayed">
+  <table class="Grid19"
+         v-bind:class="{ayyamiha: info.ayyamiha}"
+         v-bind:data-dummy="showDelayed">
     <tr>
       <th colspan=19>
         <span class="desc"
               v-html="info.desc"></span>
         <span class="type">
-            <span v-html="info.type"></span>
-        <span v-if="info.type2">
-              (<span v-html="info.type2"></span>)
-        </span>
+              <span v-html="info.type"></span>
+              <span v-if="info.type2">
+                      (<span v-html="info.type2"></span>)
+              </span>
         </span>
       </th>
     </tr>

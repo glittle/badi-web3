@@ -76,7 +76,7 @@
               <div class=gDate
                    v-html="day.di.gCombinedY">
               </div>
-              <div class=sunsetStart>
+              <div class=sunsetStart title="Starting sunset">
                 <img src="statics/sunset.png">
                 <span v-html="day.Sunset"></span>
               </div>
@@ -109,7 +109,7 @@
               <div class=gDate
                    v-html="day.di.gCombinedY">
               </div>
-              <div class=sunsetStart>
+              <div class=sunsetStart title="Starting sunset">
                 <img src="statics/sunset.png">
                 <span v-html="day.Sunset"></span>
               </div>
@@ -143,7 +143,7 @@
                   <img src="statics/sunrise.png">
                   <span v-html="day.FastSunrise"></span>
                 </div>
-                <div>
+                <div title="Ending sunset">
                   <img src="statics/sunset.png">
                   <span v-html="day.FastSunset"></span>
                 </div>

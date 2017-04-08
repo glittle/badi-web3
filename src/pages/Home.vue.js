@@ -57,16 +57,16 @@ export default {
     timeFormat() {
       return storage.get('use24hour', false) ? 'HH:mm' : 'h:mm a';
     },
-    dayDisplay() {
-      /*
-      <div class="card">
-            <div class="card-content" v-html="dayDisplay"></div>
-          </div>
-      */
+    // dayDisplay() {
+    //   /*
+    //   <div class="card">
+    //         <div class="card-content" v-html="dayDisplay"></div>
+    //       </div>
+    //   */
 
-      var html = this.fillDayDisplay(this.di);
-      return html;
-    },
+    //   var html = this.fillDayDisplay(this.di);
+    //   return html;
+    // },
     sunDisplay() {
       var di = this.di;
       prepareSunDisplay(di, this.timeFormat);
@@ -83,8 +83,8 @@ export default {
       return 'Today in '
         + this.location
         + '<span> – ' + now.format(this.timeFormat)
-        + ' – {bWeekdayNamePri} ({bWeekdayNameSec})'.filledWith(di)
-        + '</span>';
+        // + ' – {bWeekdayNamePri} ({bWeekdayNameSec})'.filledWith(di)
+        // + '</span>';
     },
     pageList() {
       return routeList.default.menuPages.filter(function (p) {
@@ -145,6 +145,11 @@ export default {
       var type, type2, desc, num;
       var ayyamiha = false;
       switch (mode) {
+        // case 'week':
+        //   type = '…in this Week';
+        //   desc = 'Day – <b>{bWeekday}</b> – {bWeekdayNamePri} ({bWeekdayNameSec})'.filledWith(di);
+        //   num = di.bWeekday;
+        //   break;
         case 'month':
           if (di.bMonth) {
             type = '…in this Month';
@@ -203,36 +208,36 @@ export default {
         drawChart(local.sun, vue.timeFormat, true)
       }, 0);
     },
-    fillDayDisplay: function (di) {
-      var answers = [];
-      // var di = badiCalc.di;
+    // fillDayDisplay: function (di) {
+    //   var answers = [];
+    //   // var di = badiCalc.di;
 
-      answers.push({
-        t: 'Day of Month',
-        v: '{bDayNamePri} – {bDayNameSec} – <b>{bDay}</b>'.filledWith(di)
-      });
-      answers.push({
-        t: 'Day of Week',
-        v: '{bWeekdayNamePri} – {bWeekdayNameSec} – {bWeekday}'.filledWith(di)
-      });
-      answers.push({
-        t: 'Month',
-        v: '<b>{bMonthNamePri}</b> – {bMonthNameSec} – {bMonth}'.filledWith(di)
-      });
-      answers.push({
-        t: 'Section of Year',
-        v: '{element}'.filledWith(di)
-      });
-      answers.push({
-        t: 'Year',
-        v: 'Year {bYearInVahid} of Vahid {bVahid} – <b>{bYear}</b>'.filledWith(di)
-      });
+    //   answers.push({
+    //     t: 'Day of Month',
+    //     v: '{bDayNamePri} – {bDayNameSec} – <b>{bDay}</b>'.filledWith(di)
+    //   });
+    //   answers.push({
+    //     t: 'Day of Week',
+    //     v: '{bWeekdayNamePri} – {bWeekdayNameSec} – {bWeekday}'.filledWith(di)
+    //   });
+    //   answers.push({
+    //     t: 'Month',
+    //     v: '<b>{bMonthNamePri}</b> – {bMonthNameSec} – {bMonth}'.filledWith(di)
+    //   });
+    //   answers.push({
+    //     t: 'Section of Year',
+    //     v: '{element}'.filledWith(di)
+    //   });
+    //   answers.push({
+    //     t: 'Year',
+    //     v: 'Year {bYearInVahid} of Vahid {bVahid} – <b>{bYear}</b>'.filledWith(di)
+    //   });
 
-      return answers.map(function (ans) {
-        return `<div class="line ${ans.c || ''}"><label>${ans.t}</label> <span>${ans.v}</span></div>`;
-      }).join('');
+    //   return answers.map(function (ans) {
+    //     return `<div class="line ${ans.c || ''}"><label>${ans.t}</label> <span>${ans.v}</span></div>`;
+    //   }).join('');
 
-    },
+    // },
     updateTapDisplay: function () {
       if (this.tapAuto) {
         this.tapBtnText = this.tapAutoRunning ? 'Pau<u>s</u>e' : this.tapNum === 0 ? '<u>S</u>tart' : 'Re<u>s</u>ume';
@@ -593,6 +598,10 @@ function drawChart(sun, timeFormat, redraw) {
   }
   // console.log('drawing chart')
 
+
+  // var weekDayInfo = '<span class="wk1">Weekday – <b>{bWeekday}</b> – {bWeekdayNamePri} ({bWeekdayNameSec})</span> &nbsp; <span class="wk2">…in this Week</span>'.filledWith(_nowDi);
+  var weekDayInfo = 'Weekday – {bWeekday} – {bWeekdayNamePri} ({bWeekdayNameSec})'.filledWith(_nowDi);
+
   var yFactor = 5;
   var twilight = yFactor * 2; // adjusted after 
   var colorFullSun = '#ffff00';
@@ -694,9 +703,19 @@ function drawChart(sun, timeFormat, redraw) {
       }
     },
     title: {
-      text: null
-    },
-    credits: {
+      align: 'right',
+      floating: true,
+      style: {
+        color: '#212121',
+        fontSize:'13px',
+        fontWeight: 'normal'
+      },
+      text: weekDayInfo,
+      useHTML: true,
+      verticalAlign: 'bottom',
+      x: 0,
+      y: -18
+    }, credits: {
       enabled: false
     },
     legend: {
@@ -721,7 +740,7 @@ function drawChart(sun, timeFormat, redraw) {
           var tickMs = this.value;
           var before = tickMs < midnight;
           var tickTime = moment(tickMs);
-          var html = '{0}<br>{1}'.filledWith(tickTime.format('MMM D'), tickTime.format('dddd'));
+          var html = '{0}<br>{1}'.filledWith(tickTime.format('MMM D'), tickTime.format('ddd'));
           // return '<span class="XLabel {0}" data-text="{^1}" data-before={0}>{^1}</span>'.filledWith(before ? "before" : "after", html);
           return '<span class="XLabel {0}" data-before={0}>{^1}</span>'.filledWith(before ? "before" : "after", html);
         }

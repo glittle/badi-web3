@@ -235,7 +235,7 @@ export default {
         var toShow = 4;
         var today = window._nowDi.frag1SunTimes.sunset;
         vue.list = vue.list.filter(function (day) {
-          if (day.di.frag1SunTimes.sunset <= today) {
+          if (day.di.frag1SunTimes.sunset < today) {
             return false;
           }
           if (numShown >= toShow) {
