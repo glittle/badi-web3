@@ -11,6 +11,7 @@ export default {
     return {
       title: 'Notifications',
       icon: 'message',
+      featureEnabled: false, // still in development
       remotePushSupported: true,
       permission: 'default', // not answered
       tags: '',
@@ -20,84 +21,86 @@ export default {
       customWhen: '13:00',
       whens: [],
       offsets: [{
-          min: 0,
-          desc: "30 minutes before"
-        },
-        {
-          min: 15,
-          desc: "15 minutes before"
-        },
-        {
-          min: 20,
-          desc: "10 minutes before"
-        },
-        {
-          min: 25,
-          desc: "5 minutes before"
-        },
-        {
-          min: 26,
-          desc: "4 minutes before"
-        },
-        {
-          min: 27,
-          desc: "3 minutes before"
-        },
-        {
-          min: 28,
-          desc: "2 minutes before"
-        },
-        {
-          min: 29,
-          desc: "1 minute before"
-        },
-        {
-          min: 30,
-          desc: "At"
-        },
-        {
-          min: 31,
-          desc: "1 minute after"
-        },
-        {
-          min: 32,
-          desc: "2 minutes after"
-        },
-        {
-          min: 33,
-          desc: "3 minutes after"
-        },
-        {
-          min: 34,
-          desc: "4 minutes after"
-        },
-        {
-          min: 35,
-          desc: "5 minutes after"
-        },
-        {
-          min: 40,
-          desc: "10 minutes after"
-        },
-        {
-          min: 45,
-          desc: "15 minutes after"
-        },
-        {
-          min: 60,
-          desc: "30 minutes after"
-        }
+        min: 0,
+        desc: "30 minutes before"
+      },
+      {
+        min: 15,
+        desc: "15 minutes before"
+      },
+      {
+        min: 20,
+        desc: "10 minutes before"
+      },
+      {
+        min: 25,
+        desc: "5 minutes before"
+      },
+      {
+        min: 26,
+        desc: "4 minutes before"
+      },
+      {
+        min: 27,
+        desc: "3 minutes before"
+      },
+      {
+        min: 28,
+        desc: "2 minutes before"
+      },
+      {
+        min: 29,
+        desc: "1 minute before"
+      },
+      {
+        min: 30,
+        desc: "At"
+      },
+      {
+        min: 31,
+        desc: "1 minute after"
+      },
+      {
+        min: 32,
+        desc: "2 minutes after"
+      },
+      {
+        min: 33,
+        desc: "3 minutes after"
+      },
+      {
+        min: 34,
+        desc: "4 minutes after"
+      },
+      {
+        min: 35,
+        desc: "5 minutes after"
+      },
+      {
+        min: 40,
+        desc: "10 minutes after"
+      },
+      {
+        min: 45,
+        desc: "15 minutes after"
+      },
+      {
+        min: 60,
+        desc: "30 minutes after"
+      }
       ]
     }
   },
   computed: {
-      localPushSupported: function(){
-        return 'serviceWorker' in navigator && 'PushManager' in window;
-      },    
+    localPushSupported: function () {
+      return 'serviceWorker' in navigator && 'PushManager' in window;
+    },
   },
   mounted() {
     // sometimes runs before OneSignal is ready :(
-    this.startUpOneSignal();
+    if (this.featureEnabled) {
+      this.startUpOneSignal();
+    }
   },
   methods: {
     testNotification() {
@@ -201,7 +204,7 @@ export default {
       });
       OneSignal.push(["getNotificationPermission", function (permission) {
         vue.permission = permission;
-        if(permission==='granted'){
+        if (permission === 'granted') {
           vue.$emit('permissionGranted');
         };
       }]);
@@ -213,9 +216,9 @@ export default {
         OneSignal.registerForPushNotifications({
           modalPrompt: false
         });
-        setTimeout(function(){
-          window.location.reload();
-        }, 100)
+        // setTimeout(function(){
+        //   window.location.reload();
+        // }, 100)
       });
     },
     showStep(n, known) {
