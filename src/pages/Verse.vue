@@ -4,7 +4,7 @@
       <div class="verseText" v-html="verse"></div>
       <div class="suffix" v-html="suffix"></div>
       <div class="webSearch" v-if="online">
-        <a target="_blank" v-bind:href="searchUrl">
+        <a target="_blank" rel="noopener" v-bind:href="searchUrl">
           <i>search</i> View uses of this verse on<br>the Internet and YouTube
         </a>
       </div>
