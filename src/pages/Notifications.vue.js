@@ -98,9 +98,9 @@ export default {
   },
   mounted() {
     // sometimes runs before OneSignal is ready :(
-    if (this.featureEnabled) {
+    // if (this.featureEnabled) {
       this.startUpOneSignal();
-    }
+    // }
   },
   methods: {
     testNotification() {

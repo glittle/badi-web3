@@ -46,29 +46,29 @@ var body = document.getElementsByTagName('body')[0];
 body.classList.add(badiCalc.languageDir, badiCalc.languageCode, badiCalc.languageCode.slice(0, 2))
 
 // onesignal
-// var OneSignal = window.OneSignal || [];
-// var onesignalOptions = {
-//   appId: "2b535ce7-1ca1-4950-813f-2d89c9f281c2", // get an ID at OneSignal.com
-//   autoRegister: false,
-//   notifyButton: {
-//     enable: false
-//   },
-//   welcomeNotification: {
-//     message: 'You are ready for remote notifications!'
-//   },
-//   safari_web_id: 'web.onesignal.auto.2c31ff0c-1624-4aec-8f89-a4f0b1da0ea1'
-// };
-// if (location.hostname === 'localhost') {
-//   onesignalOptions.allowLocalhostAsSecureOrigin = true;
-// }
-// OneSignal.push(["init", onesignalOptions]);
-
-var OneSignal = {
-  sendTag: function () {
-    // dummy while disabled
-  }
+var OneSignal = window.OneSignal || [];
+var onesignalOptions = {
+  appId: "2b535ce7-1ca1-4950-813f-2d89c9f281c2", // get an ID at OneSignal.com
+  autoRegister: false,
+  notifyButton: {
+    enable: false
+  },
+  welcomeNotification: {
+    message: 'You are ready for remote notifications!'
+  },
+  safari_web_id: 'web.onesignal.auto.2c31ff0c-1624-4aec-8f89-a4f0b1da0ea1'
 };
-OneSignal.sendTag(null);
+if (location.hostname === 'localhost') {
+  onesignalOptions.allowLocalhostAsSecureOrigin = true;
+}
+OneSignal.push(["init", onesignalOptions]);
+
+// var OneSignal = {
+//   sendTag: function () {
+//     // dummy while disabled
+//   }
+// };
+// OneSignal.sendTag(null);
 
 // analytics
 /* eslint-disable no-sequences, no-undef, no-unused-expressions */
