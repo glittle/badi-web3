@@ -234,7 +234,7 @@ export default {
         var numShown = 0;
         var toShow = 4;
         var today = window._nowDi.frag1SunTimes.sunset;
-        vue.list = vue.list.filter(function (day) {
+        var newList = vue.list.filter(function (day) {
           if (numShown >= toShow) {
             return false;
           }
@@ -249,7 +249,8 @@ export default {
           }
           numShown++;
           return true;
-        })
+        });
+        vue.list = newList;
       }
 
       // if (!this.scrollDone) {

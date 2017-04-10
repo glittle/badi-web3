@@ -83,8 +83,8 @@ export default {
       return 'Today in '
         + this.location
         + '<span> – ' + now.format(this.timeFormat)
-        // + ' – {bWeekdayNamePri} ({bWeekdayNameSec})'.filledWith(di)
-        // + '</span>';
+      // + ' – {bWeekdayNamePri} ({bWeekdayNameSec})'.filledWith(di)
+      // + '</span>';
     },
     pageList() {
       return routeList.default.menuPages.filter(function (p) {
@@ -286,9 +286,11 @@ export default {
       this.tapLastTime = new Date().getTime();
     },
     playSound: function (s) {
-      if (s.currentTime !== 0) {
+      try {
         s.pause();
         s.currentTime = 0;
+      } catch (e) {
+        // ignore errors
       }
       s.play();
     },
@@ -707,7 +709,7 @@ function drawChart(sun, timeFormat, redraw) {
       floating: true,
       style: {
         color: '#212121',
-        fontSize:'13px',
+        fontSize: '13px',
         fontWeight: 'normal'
       },
       text: weekDayInfo,
