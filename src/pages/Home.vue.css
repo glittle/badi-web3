@@ -69,9 +69,17 @@ button.item-link.icon_setup {
   display: flex;
   justify-content: space-between;
   margin: 3px 3px 3px 3px;
+  position: relative;
 }
 .heading .desc span {
   font-size: 13px;
+}
+.heading .mid {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  font-weight: bold;
 }
 .heading .type {
   color: #999;

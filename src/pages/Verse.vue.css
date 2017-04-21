@@ -22,6 +22,9 @@
   color: grey;
   text-align: center;
 }
+.Verse .speakButtons {
+  text-align: center;
+}
 .Verse .reciting {
   display: flex;
   justify-content: center;

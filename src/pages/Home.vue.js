@@ -19,7 +19,7 @@ export default {
       icon: '../statics/sunWhite.png',
       location: shared.coords.name,
       setupDone: false,
-      tapNum: 0,
+      tapNum: 17,
       tapBtnText: '',
       tapLastTime: 0,
       tapAutoRunning: false,
@@ -80,12 +80,15 @@ export default {
       //   info.push(now.format('h:mma'))
       // }
       // return info.join(' – ');
-      return 'Today in '
-        + this.location
-        + '<span> – ' + now.format(this.timeFormat)
+
+      // return 'Today in '
+      //   + this.location
+      //   + '<span> – ' + now.format(this.timeFormat)
+
       // + ' – {bWeekdayNamePri} ({bWeekdayNameSec})'.filledWith(di)
       // + '</span>';
-    },
+        return 'Time'
+  },
     pageList() {
       return routeList.default.menuPages.filter(function (p) {
         return p.to !== '/'
@@ -287,10 +290,11 @@ export default {
     },
     playSound: function (s) {
       try {
+        s.currentTime = 0;
         s.pause();
         s.currentTime = 0;
       } catch (e) {
-        // ignore errors
+        console.log(e);
       }
       s.play();
     },

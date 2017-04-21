@@ -12,7 +12,7 @@ export default {
       verse: '',
       suffix: '',
       timeOfDay: '',
-      offerVoice: false, // tts not working...  // navigator.onLine
+      offerVoice: ('speechSynthesis' in window), //false, // tts not working...  // navigator.onLine
       online: navigator.onLine,
       player: null,
       historyStack: [badiCalc.di],
@@ -99,8 +99,56 @@ export default {
       this.historyStack.push(newDi);
     },
     speak() {
-      // console.log(badiCalc.di.bMonth)
-      this.player.playText('Hello world')
+
+      // as per https://bugs.chromium.org/p/chromium/issues/detail?id=679437
+      // don't let each one be very long
+
+      //http://stackoverflow.com/a/36465144/32429
+      var parts = this.verse.match(/[^\,\.\;\!]+[\,\.\;\!]?|[\,\.\;\!]/g);
+
+      // ensure none are too long
+      const maxLength = 1000; // arbitrary number... need to be less than 15 seconds long
+      const midPoint = maxLength / 2;
+
+      for (var i = parts.length - 1; i >= 0; i--) {
+        var part = parts[i]
+        // console.log(i, part)
+        var offset = 0;
+        while (part.length > maxLength) {
+          // get next space after midpoint
+          var breakPoint = part.indexOf(' ', midPoint);
+
+          var firstPart = part.substring(0, breakPoint);
+          part = part.substring(breakPoint + 1);
+
+          if (offset) {
+            parts.splice(i + offset++, 0, firstPart)
+          }
+          else {
+            parts[i] = firstPart;
+            offset++;
+          }
+        }
+        if (offset) {
+          // did some splitting
+          parts.splice(i + offset++, 0, part)
+        }
+      }
+      console.log(parts);
+
+      var msg = new SpeechSynthesisUtterance(parts.splice(0, 1));
+      msg.lang = 'en-US';
+      msg.rate = 0.9;
+      msg.onend = function () {
+        // read next?
+        // console.log('ended')
+        if (parts.length) {
+          msg.text = parts.splice(0, 1);
+          // console.log(msg.text);
+          window.speechSynthesis.speak(msg);
+        }
+      };
+      window.speechSynthesis.speak(msg);
 
       // var P = talk.Player;
       // var x = new P()

@@ -2,16 +2,16 @@
   <article class="layout-padding Verse">
     <div class="verseHost">
       <div class="verseText" v-html="verse"></div>
+      <div class="speakButtons" v-if="offerVoice" >
+        <button id="btnRead" class="push small" @click="speak">
+          Read aloud &nbsp; <i>record_voice_over</i>
+        </button>
+      </div>
       <div class="suffix" v-html="suffix"></div>
       <div class="webSearch" v-if="online">
         <a target="_blank" rel="noopener" v-bind:href="searchUrl">
           <i>search</i> View uses of this verse on<br>the Internet and YouTube
         </a>
-      </div>
-      <div class="speakButtons">
-        <button id="btnRead" class="push small" v-show="offerVoice" @click="speak">
-          <i>record_voice_over</i>
-        </button>
       </div>
     </div>
     <div class="verseNav">
