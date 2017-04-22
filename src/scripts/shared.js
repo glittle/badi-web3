@@ -1,6 +1,14 @@
 import storage from './storage'
 import store from './store'
 
+var speech = {
+  get volume() {
+    return storage.get('volume', 80);
+  },
+  set volume(v) {
+    storage.set('volume', v);
+  }
+}
 var coords = {
   get lat() {
     return storage.get('coord.lat', 0)
@@ -54,5 +62,6 @@ var formats = {
 
 export {
   coords,
-  formats
+  formats,
+  speech
 }

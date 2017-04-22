@@ -2,7 +2,7 @@ import moment from 'moment'
 // import talk from '../scripts/talkify'
 import badiCalc from '../scripts/badiCalc'
 import verseHelper from '../scripts/verseHelper'
-import storage from '../scripts/storage'
+import * as shared from '../scripts/shared'
 
 export default {
   name: 'verse', // for Vue debugger
@@ -17,7 +17,7 @@ export default {
       suffix: '',
       timeOfDay: '',
       offerVoice: ('speechSynthesis' in window), //false, // tts not working...  // navigator.onLine
-      volume: storage.get('speechVolume', 80),
+      volume: shared.speech.volume,
       speechMsg: null,
       speakingNow: false, // could use window.speechSynthesis.speaking but this also cancels next phrase
       // voice: storage.get('voice', ''),
@@ -56,17 +56,17 @@ export default {
   },
   watch: {
     volume: function (a) {
-      if (this.speechMsg) {
-        window.speechSynthesis.pause();
-        this.speechMsg.volume = a / 100;
-        window.speechSynthesis.resume();
-      }
-      storage.set('speechVolume', a)
+      shared.speech.volume = a;
+      // if (this.speechMsg) {
+      //   window.speechSynthesis.pause();
+      //   this.speechMsg.volume = a / 100;
+      //   window.speechSynthesis.resume();
+      // }
     },
-    toggleVerseSpeech: function(){
-      if(this.speakingNow){
+    toggleVerseSpeech: function () {
+      if (this.speakingNow) {
         this.stopSpeaking()
-      }else{
+      } else {
         this.speak();
       }
     }
@@ -202,10 +202,12 @@ export default {
 
       // var voice = this.voice;
       // console.log(voice);
+      var volume = shared.speech.volume / 100;
+      console.log('volume', volume)
 
       var msg = this.speechMsg = new SpeechSynthesisUtterance(parts.splice(0, 1));
       msg.lang = 'en-US';
-      msg.volume = this.volume / 100;
+      msg.volume = volume;
       // msg.voiceURI = voice;
       msg.rate = 0.85;
       msg.onend = function () {
