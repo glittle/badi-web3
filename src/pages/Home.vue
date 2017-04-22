@@ -1,16 +1,19 @@
 <template>
   <article class="layout-padding tightTop Home">
     <div v-if="!setupDone"
-         class="locationHolder">
-      <location-setup></location-setup>
+         class="card">
+      <div class="locationHolder">
+        <location-setup></location-setup>
+      </div>
     </div>
   
     <div class="card">
       <div class="heading">
-        <span class="desc"
-              v-html="sunDisplay"></span>
-        <span class="mid"
-              v-text="location"></span>
+        <span class="desc">
+            <span v-html="sunDisplay"></span>
+        <span v-html="location"
+              class="bold"></span>
+        </span>
         <span class="type">…in this Day</span>
       </div>
       <div id="sunChart"></div>
@@ -21,27 +24,27 @@
     </div>
     <div class="card verse">
       <div class="heading">
-        <span class="type"
+        <span class="desc"
               v-html="verseTime"></span>
         <span>
-                                                <button 
-                                                  v-on:click="$router.push('verse')"
-                                                  class="small light round">More</button> 
-                                              </span>
+              <button 
+                v-on:click="$router.push('verse')"
+                class="small light round">More</button> 
+            </span>
       </div>
-      <Verse></Verse>
+      <Verse v-bind:toggleVerseSpeech="toggleVerseSpeech"></Verse>
     </div>
     <div class="card tap95card">
       <div class="heading">
-        <span class="type">95 Alláh-u-Abhás</span>
+        <span class="desc">95 Alláh-u-Abhás</span>
         <span>
-                                                <label><input type=checkbox v-model="tapAuto">Auto</label>
-                                                <label><input type=checkbox v-model="tapSounds">Sound</label>
-                                                <button 
-                                                  v-on:click="reset95"
-                                                  class="reset small light round">Reset</button> 
-                                                  
-                                      </span>
+                                                    <label><input type=checkbox v-model="tapAuto">Auto</label>
+                                                    <label><input type=checkbox v-model="tapSounds">Sound</label>
+                                                    <button 
+                                                      v-on:click="reset95"
+                                                      class="reset small light round">Reset</button> 
+                                                      
+                                          </span>
       </div>
       <div class="main95">
         <div>
@@ -75,41 +78,41 @@
            src="/statics/gong1.mp3"
            autostart="false"></audio>
     <!--<div class="card">
-                                            <div class="card-content">
-                                              <p>Temporary page list...</p>
-                                              <div class="list no-border">
-                                                <router-link tag="button" class="item item-link" :class="'icon_' + page.group" v-for="page in pageList.filter(p=>p.to!=='Home')"
-                                                  :to="page.to">
-                                                  <i :title="page.text">{{page.icon}}</i>
-                                                </router-link>
-                                              </div>
-                                            </div>-->
+                                                <div class="card-content">
+                                                  <p>Temporary page list...</p>
+                                                  <div class="list no-border">
+                                                    <router-link tag="button" class="item item-link" :class="'icon_' + page.group" v-for="page in pageList.filter(p=>p.to!=='Home')"
+                                                      :to="page.to">
+                                                      <i :title="page.text">{{page.icon}}</i>
+                                                    </router-link>
+                                                  </div>
+                                                </div>-->
     <div class="card share">
       <div class="heading">
-        <span class="type">Upcoming Dates</span>
+        <span class="desc">Upcoming Dates</span>
         <span>
-                          <button 
-                            v-on:click="$router.push('listing')"
-                            class="small light round">More</button> 
-                        </span>
+                              <button 
+                                v-on:click="$router.push('listing')"
+                                class="small light round">More</button> 
+                            </span>
       </div>
       <listing :onHome="true"></listing>
     </div>
   
     <div class="card share">
       <div class="heading">
-        <span class="type">Share and Support</span>
+        <span class="desc">Share and Support</span>
         <span>
-                                                <button 
-                                                  v-on:click="$router.push('about')"
-                                                  class="small light round">About</button> 
-                                              </span>
+                                                    <button 
+                                                      v-on:click="$router.push('about')"
+                                                      class="small light round">About</button> 
+                                                  </span>
       </div>
       <div class="support">
         <img class="qr"
              src="~statics/qr.png">
         <p>
-          Share this web site (wondrous-badi.today) with a friend! See the "About" page to support the developer. See also the <a href="https://sites.google.com/site/badicalendartools/home/web-extension"
+          Share this site (https://wondrous-badi.today) with a friend! See the "About" page to support the developer and send suggestions! For more calendar tools, get the <a href="https://sites.google.com/site/badicalendartools/home/web-extension"
              rel="noopener"
              target='sites'>Badí' Calendar</a> web extension for Chrome (desktop only).
         </p>

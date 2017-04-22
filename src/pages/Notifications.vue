@@ -5,23 +5,23 @@
       <p>Unfortunately, we can't do notifications on this device.</p>
     </div>
     <div v-else>
-      <div class="section">
-        <p>
-          Click
-          <button class="small primary"
-                  v-on:click="testNotification">Show Now</button> to show the current notification.</p>
-        <p>This notification will be refreshed whenever you visit the website.</p>
-      </div>
       <div v-if="permission==='default'"
            v-cloak>
         <p v-if="!embedded">
-          Why? &nbsp; On most computer and phones, we can show you a notification with today's date. This is not required, but you should try it!
+          On most computer and phones, we can show you a notification with today's date. This is not required, but you should try it!
         </p>
         <p>
           <span>Click</span>
           <button class="small primary"
                   v-on:click="askForPush">Ask Now</button> to allow for notifications.
         </p>
+      </div>
+      <div class="section">
+        <p>
+          Click
+          <button class="small primary"
+                  v-on:click="testNotification">Show Now</button> to show the current notification.</p>
+        <p>This notification will be refreshed whenever you visit the website.</p>
       </div>
       <div v-if="featureEnabled && remotePushSupported">
         <div v-if="!userId"

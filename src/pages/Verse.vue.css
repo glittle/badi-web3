@@ -10,7 +10,7 @@
 }
 .Verse .suffix {
   font-size: 1rem;
-  margin-top: 3em;
+  margin-top: 2em;
   text-align: center;
   user-select: all;
 }
@@ -23,7 +23,25 @@
   text-align: center;
 }
 .Verse .speakButtons {
+  margin-top: 2em;
   text-align: center;
+}
+.Verse .speakButtons > span {
+  padding-right: 0.5em;
+}
+.Verse .volume {
+  width: 40%;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+}
+.Verse .volume::before {
+  content: 'Volume';
+  position: absolute;
+  top: 6px;
+  left: 12px;
+  font-size: 9px;
+  color: #ccc;
 }
 .Verse .reciting {
   display: flex;
@@ -46,5 +64,5 @@
   font-size: 140%;
 }
 .Verse .verseNav {
-  text-align: center;
+  text-align: right;
 }

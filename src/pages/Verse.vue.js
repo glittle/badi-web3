@@ -2,9 +2,13 @@ import moment from 'moment'
 // import talk from '../scripts/talkify'
 import badiCalc from '../scripts/badiCalc'
 import verseHelper from '../scripts/verseHelper'
+import storage from '../scripts/storage'
 
 export default {
   name: 'verse', // for Vue debugger
+  props: {
+    toggleVerseSpeech: Boolean
+  },
   data() {
     return {
       title: "Verse",
@@ -13,6 +17,11 @@ export default {
       suffix: '',
       timeOfDay: '',
       offerVoice: ('speechSynthesis' in window), //false, // tts not working...  // navigator.onLine
+      volume: storage.get('speechVolume', 80),
+      speechMsg: null,
+      speakingNow: false, // could use window.speechSynthesis.speaking but this also cancels next phrase
+      // voice: storage.get('voice', ''),
+      // voices: [],
       online: navigator.onLine,
       player: null,
       historyStack: [badiCalc.di],
@@ -23,6 +32,12 @@ export default {
   created() {
     this.showVerse()
     this.addPrevious()
+
+    var vue = this;
+    // window.speechSynthesis.onvoiceschanged = function () {
+    //   vue.fillVoicesList();
+    //   window.speechSynthesis.onvoiceschanged = null;
+    // }
 
     document.addEventListener('pulsed', this.onPulse, false)
   },
@@ -38,9 +53,45 @@ export default {
     }
   },
   mounted: function () {
-    // this.player = talk.player();
+  },
+  watch: {
+    volume: function (a) {
+      if (this.speechMsg) {
+        window.speechSynthesis.pause();
+        this.speechMsg.volume = a / 100;
+        window.speechSynthesis.resume();
+      }
+      storage.set('speechVolume', a)
+    },
+    toggleVerseSpeech: function(){
+      if(this.speakingNow){
+        this.stopSpeaking()
+      }else{
+        this.speak();
+      }
+    }
+    // voice: function (a) {
+    //   if (this.speechMsg) {
+    //     window.speechSynthesis.pause();
+    //     this.speechMsg.voiceURI = a;
+    //     window.speechSynthesis.resume();
+    //   }
+    //   storage.set('voice', a)
+    // }
   },
   methods: {
+    // fillVoicesList: function () {
+    //   if (this.offerVoice) {
+    //     var list = window.speechSynthesis.getVoices()
+    //       .filter(function (v) { return v.lang.startsWith('en') })
+    //       .map(function (v) { return { label: v.name, value: v.voiceURI } });
+    //     this.voices = list;
+    //     console.log(list);
+    //     if (!this.voice) {
+    //       this.voice = list[0].value;
+    //     };
+    //   }
+    // },
     showPrevious() {
       if (this.historyIndex + 1 >= this.historyStack.length) {
         this.addPrevious();
@@ -98,13 +149,22 @@ export default {
       }
       this.historyStack.push(newDi);
     },
+    stopSpeaking() {
+      window.speechSynthesis.cancel();
+      this.speakingNow = false;
+    },
     speak() {
-
+      var vue = this;
       // as per https://bugs.chromium.org/p/chromium/issues/detail?id=679437
       // don't let each one be very long
 
+      var text = '' + this.verse;
+
+      text = text.replace(/["']/g, ' ');
+      text = text.replace(/--/g, ',');
+
       //http://stackoverflow.com/a/36465144/32429
-      var parts = this.verse.match(/[^\,\.\;\!]+[\,\.\;\!]?|[\,\.\;\!]/g);
+      var parts = text.match(/[^\,\.\;\!]+[\,\.\;\!]?|[\,\.\;\!]/g);
 
       // ensure none are too long
       const maxLength = 1000; // arbitrary number... need to be less than 15 seconds long
@@ -134,21 +194,37 @@ export default {
           parts.splice(i + offset++, 0, part)
         }
       }
-      console.log(parts);
+      // console.log(parts);
 
-      var msg = new SpeechSynthesisUtterance(parts.splice(0, 1));
+      if (this.speechMsg) {
+        window.speechSynthesis.cancel();
+      }
+
+      // var voice = this.voice;
+      // console.log(voice);
+
+      var msg = this.speechMsg = new SpeechSynthesisUtterance(parts.splice(0, 1));
       msg.lang = 'en-US';
-      msg.rate = 0.9;
+      msg.volume = this.volume / 100;
+      // msg.voiceURI = voice;
+      msg.rate = 0.85;
       msg.onend = function () {
+        if (!vue.speakingNow) {
+          return;
+        }
+
+        vue.speakingNow = false;
         // read next?
         // console.log('ended')
         if (parts.length) {
           msg.text = parts.splice(0, 1);
           // console.log(msg.text);
           window.speechSynthesis.speak(msg);
+          vue.speakingNow = true;
         }
       };
       window.speechSynthesis.speak(msg);
+      vue.speakingNow = true;
 
       // var P = talk.Player;
       // var x = new P()

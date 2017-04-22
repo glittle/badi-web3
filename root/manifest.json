@@ -1,8 +1,10 @@
 {
   "name": "Wondrous-Bad\u00ed Today",
-  "short_name": "Wondrous-Bad\u00ed Today",
-  "description": "Living by the Wondrous-Bad\u00ed' calendar, the official calendar of the Baha'i Faith.",
+  "short_name": "Wondrous",
+  "description": "Helping us to live by the Wondrous-Bad\u00ed' calendar, the official calendar of the Baha'i Faith.",
   "start_url": "/",
+  "scope": "/",
+  "lang": "en-US",
   "icons": [
     {
       "src": "/statics/icons/android-chrome-192x192.png?v=v1",
@@ -10,9 +12,9 @@
       "type": "image/png"
     }
   ],
-	"theme_color": "#FA9330",
+	"theme_color": "#2980b9",
   "background_color": "#FA9330",
   "gcm_sender_id": "482941778795",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "any"
 }

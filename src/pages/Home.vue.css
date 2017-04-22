@@ -11,6 +11,7 @@
 }
 .Home .locationHolder .LocationSetup .confirmGuess {
   padding: 0.3rem 10% 1rem;
+  background: none;
 }
 .Home .locationHolder .LocationSetup .section {
   margin: 0;
@@ -20,6 +21,9 @@
 }
 .Home .locationHolder .LocationSetup .section > p {
   display: none;
+}
+.Home .bold {
+  font-weight: bold;
 }
 .Home #Listing {
   padding-top: 0;
@@ -43,7 +47,7 @@ div.card {
 }
 .card article.Verse .verseHost {
   display: block;
-  margin: 0 8px 4px 8px;
+  margin: 5px 8px 0px 10px;
 }
 .card article.Verse .verseHost > * {
   display: none;
@@ -53,6 +57,22 @@ div.card {
   font-size: 18px;
   min-height: auto;
   padding-bottom: .5em;
+}
+.card article.Verse .verseHost .speakButtons {
+  display: block;
+  position: absolute;
+  margin: 0;
+  top: 4px;
+  right: 73px;
+}
+.card article.Verse .verseHost .speakButtons .volume {
+  display: none;
+}
+.card article.Verse .verseHost .speakButtons button {
+  padding: 1px 8px;
+}
+.card article.Verse .verseHost .speakButtons > span {
+  display: none;
 }
 button.item-link {
   display: inline-block;
@@ -71,8 +91,8 @@ button.item-link.icon_setup {
   margin: 3px 3px 3px 3px;
   position: relative;
 }
-.heading .desc span {
-  font-size: 13px;
+.heading .desc {
+  color: #333;
 }
 .heading .mid {
   text-align: center;

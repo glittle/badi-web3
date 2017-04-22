@@ -19,7 +19,8 @@ export default {
       icon: '../statics/sunWhite.png',
       location: shared.coords.name,
       setupDone: false,
-      tapNum: 17,
+      toggleVerseSpeech: false,
+      tapNum: 0,
       tapBtnText: '',
       tapLastTime: 0,
       tapAutoRunning: false,
@@ -35,7 +36,7 @@ export default {
   },
   computed: {
     verseTime() {
-      return (this.di.bNow.eve ? 'Evening Verse' : 'Morning Verse') + " from Bahá'u'lláh";
+      return (this.di.bNow.eve ? 'Evening' : 'Morning') + " <u>V</u>erse from Bahá'u'lláh";
     },
     position() {
       return null;
@@ -87,7 +88,7 @@ export default {
 
       // + ' – {bWeekdayNamePri} ({bWeekdayNameSec})'.filledWith(di)
       // + '</span>';
-        return 'Time'
+        return 'Time in'; // in <strong>' + this.location + '</strong>';
   },
     pageList() {
       return routeList.default.menuPages.filter(function (p) {
@@ -332,6 +333,10 @@ export default {
     },
     keyup: function (ev) {
       switch (ev.code) {
+        case 'KeyV':
+          this.toggleVerseSpeech = !this.toggleVerseSpeech;
+          break;
+
         case 'KeyT':
           if (!this.tapAuto) {
             this.tap95(); // do the tap
@@ -363,9 +368,9 @@ export default {
         vue.playSound(vue.tapSoundForEnd);
       }
     });
-
+console.log(shared.coords.source)
     if (!this.setupDone) {
-      if (shared.coords.sourceIsSet && shared.coords.source !== 'guess') {
+      if (shared.coords.sourceIsSet && shared.coords.source === 'user') {
         this.setupDone = true;
       }
     }
@@ -378,8 +383,9 @@ export default {
 
     _messageBus.$on('locationChanged', function () {
       vue.location = shared.coords.name
+console.log(shared.coords.source)
       if (!vue.setupDone) {
-        if (shared.coords.sourceIsSet && shared.coords.source !== 'guess') {
+        if (shared.coords.sourceIsSet && shared.coords.source === 'user') {
           vue.setupDone = true;
         }
       }

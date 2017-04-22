@@ -5,7 +5,7 @@
       <p>Please confirm the location of this device/computer.</p>
       <div v-show="guessing"
            class="confirmGuess">
-        <p>Are you in or close to...</p>
+        <p>Welcome here! &nbsp; Are you in or close to...</p>
         <div class="guessName"
              v-html="name + '?'"></div>
         <div class="confirmGuessBtns">
@@ -27,8 +27,9 @@
                     class="small secondary">Lookup My Location
   
             </button>
+           <!--
             <button @click="openMap"
-                    class="small secondary floatRight">Open Google Maps</button>
+                    class="small secondary floatRight">Open Google Maps</button> -->
           </div>
           <div>
             <span>Latitude:</span>
@@ -63,7 +64,7 @@
           </div>
           <div>
             <button v-on:click="confirmLocation"
-                    class="small primary">Use This Location</button>
+                    class="small primary">Yes! &nbsp; Use This Location</button>
           </div>
   
         </div>
