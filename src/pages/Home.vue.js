@@ -88,8 +88,8 @@ export default {
 
       // + ' – {bWeekdayNamePri} ({bWeekdayNameSec})'.filledWith(di)
       // + '</span>';
-        return 'Time in'; // in <strong>' + this.location + '</strong>';
-  },
+      return 'Time in'; // in <strong>' + this.location + '</strong>';
+    },
     pageList() {
       return routeList.default.menuPages.filter(function (p) {
         return p.to !== '/'
@@ -250,6 +250,7 @@ export default {
       }
     },
     tap95: function () {
+      this.initializeSounds();
       if (this.tapAuto) {
         clearTimeout(this.tapAutoTimer);
         if (this.tapAutoRunning) {
@@ -261,6 +262,14 @@ export default {
         this.updateTapDisplay();
       } else {
         this.doTap();
+      }
+    },
+    initializeSounds: function () {
+      // only do once
+      if (!this.tapNum && this.tapSounds) {
+        this.playSound(this.tapSoundForSteps19, .1);
+        this.playSound(this.tapSoundForEnd, .1);
+        this.playSound(this.tapSoundForSteps, .1);
       }
     },
     doTap: function () {
@@ -289,15 +298,23 @@ export default {
       }
       this.tapLastTime = new Date().getTime();
     },
-    playSound: function (s) {
+    playSound: function (s, volume) {
+      // console.log('play sound', s)
       try {
         s.currentTime = 0;
         s.pause();
         s.currentTime = 0;
       } catch (e) {
-        console.log(e);
+        console.log('catch 1', e)
       }
-      s.play();
+      try {
+        s.volume = volume || 1;
+        s.play().catch(function (e) {
+          console.log('catch 2', e)
+        });
+      } catch (e) {
+        console.log('catch 3', e)
+      }
     },
     reset95: function () {
       this.tapNum = 0;
@@ -368,7 +385,7 @@ export default {
         vue.playSound(vue.tapSoundForEnd);
       }
     });
-console.log(shared.coords.source)
+    // console.log(shared.coords.source)
     if (!this.setupDone) {
       if (shared.coords.sourceIsSet && shared.coords.source === 'user') {
         this.setupDone = true;
@@ -383,7 +400,7 @@ console.log(shared.coords.source)
 
     _messageBus.$on('locationChanged', function () {
       vue.location = shared.coords.name
-console.log(shared.coords.source)
+      // console.log(shared.coords.source)
       if (!vue.setupDone) {
         if (shared.coords.sourceIsSet && shared.coords.source === 'user') {
           vue.setupDone = true;

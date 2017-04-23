@@ -221,14 +221,14 @@ div.line b {
   white-space: nowrap;
 }
 .tap95card #tapBlocks div {
-  height: 9px;
+  height: 10px;
 }
 .tap95card #tapBlocks span {
-  background-color: #ddd;
+  background-color: #eee;
   display: inline-block;
   height: 7px;
   width: 7px;
-  margin: 1px;
+  margin: 2px;
   transition: all 1.5s;
 }
 .tap95card #tapBlocks span.tapped {

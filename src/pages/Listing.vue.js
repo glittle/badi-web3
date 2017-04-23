@@ -90,7 +90,7 @@ export default {
       }
     },
     ayyam2: function (day) {
-      console.log(day)
+      // console.log(day)
       return day.lastDayDi.gCombinedY
     },
     resetToFirstYear: function () {
@@ -114,7 +114,7 @@ export default {
     },
     getDateLinks: function (day) {
       if (day.links) {
-        console.log('reused links')
+        // console.log('reused links')
         return day.links;
       }
       var id = this.makeId(day);
@@ -217,7 +217,7 @@ export default {
       if (year > vue.lastYear) {
         vue.lastYear = year
       }
-      console.log('loading', year)
+      // console.log('loading', year)
       var info = badi.buildSpecialDaysTable(year, this.suggestedStart);
 
       window._days = cloneDeep(info); // for developer access in console
