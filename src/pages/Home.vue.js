@@ -271,6 +271,10 @@ export default {
         this.playSound(this.tapSoundForEnd, .1);
         this.playSound(this.tapSoundForSteps, .1);
       }
+      if (!this.tapNum) {
+        console.log('tap ga')
+        this.$ga.event('tap95', 'started', this.tapAuto ? 'auto' : 'manual');
+      }
     },
     doTap: function () {
       clearTimeout(this.tapAutoTimer);
@@ -367,7 +371,10 @@ export default {
           break;
       }
     },
-
+    changeLocation() {
+      shared.coords.source = '?';
+      this.setupDone = false;
+    }
   },
   beforeMount() {
     // console.log('before mount', routeList)
@@ -387,11 +394,13 @@ export default {
     });
     // console.log(shared.coords.source)
     if (!this.setupDone) {
-      if (shared.coords.sourceIsSet && shared.coords.source === 'user') {
+      if (shared.coords.sourceIsSet) {
         this.setupDone = true;
       }
     }
-
+    if (!shared.coords.tz) {
+      shared.coords.tz = new Date().getTimezoneOffset();
+    }
 
     (adsbygoogle = window.adsbygoogle || []).push({});
 
@@ -402,7 +411,7 @@ export default {
       vue.location = shared.coords.name
       // console.log(shared.coords.source)
       if (!vue.setupDone) {
-        if (shared.coords.sourceIsSet && shared.coords.source === 'user') {
+        if (shared.coords.sourceIsSet) {
           vue.setupDone = true;
         }
       }
@@ -411,6 +420,11 @@ export default {
 
   },
   activated() {
+    var vue = this;
+    if (shared.coords.tz && shared.coords.tz !== new Date().getTimezoneOffset()) {
+      shared.coords.source = 'tz?';
+      vue.setupDone = false;
+    }
     drawChart(local.sun, this.timeFormat, true)
   },
   // doWorkOnPulse() {

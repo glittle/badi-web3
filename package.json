@@ -29,6 +29,7 @@
     "simple-vue-validator": "^0.13.2",
     "velocity-animate": "^1.2.3",
     "vue": "^2.1.10",
+    "vue-analytics": "^4.1.0",
     "vue-head": "^2.0.10",
     "vue-highcharts": "^0.0.9",
     "vue-router": "^2.1.2",

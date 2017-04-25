@@ -4,6 +4,7 @@ import * as notify from './scripts/notification'
 import * as shared from './scripts/shared'
 import * as store from './scripts/store'
 import storage from './scripts/storage'
+
 const moment = require('moment-timezone');
 var versionInfo = require('../root/version.json')
 

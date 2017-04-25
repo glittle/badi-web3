@@ -15,6 +15,17 @@ import VueHead from 'vue-head'
 import Quasar from 'quasar'
 import VueHighcharts from 'vue-highcharts';
 
+import VueAnalytics from 'vue-analytics'
+
+// https://www.npmjs.com/package/vue-analytics
+Vue.use(VueAnalytics, {
+  id: 'UA-1312528-11',
+  router,
+  autoTracking: {
+    exception: true
+  }
+})
+
 import store from './scripts/store'
 import badiCalc from './scripts/badiCalc'
 
@@ -72,16 +83,16 @@ OneSignal.push(["init", onesignalOptions]);
 
 // analytics
 /* eslint-disable no-sequences, no-undef, no-unused-expressions */
-(function (i, s, o, g, r, a, m) {
-  i['GoogleAnalyticsObject'] = r;
-  i[r] = i[r] || function () {
-    (i[r].q = i[r].q || []).push(arguments)
-  }, i[r].l = 1 * new Date();
-  a = s.createElement(o),
-    m = s.getElementsByTagName(o)[0];
-  a.async = 1;
-  a.src = g;
-  m.parentNode.insertBefore(a, m)
-})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-ga('create', 'UA-1312528-11', 'auto');
-ga('send', 'pageview');
+// (function (i, s, o, g, r, a, m) {
+//   i['GoogleAnalyticsObject'] = r;
+//   i[r] = i[r] || function () {
+//     (i[r].q = i[r].q || []).push(arguments)
+//   }, i[r].l = 1 * new Date();
+//   a = s.createElement(o),
+//     m = s.getElementsByTagName(o)[0];
+//   a.async = 1;
+//   a.src = g;
+//   m.parentNode.insertBefore(a, m)
+// })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+// ga('create', 'UA-1312528-11', 'auto');
+// ga('send', 'pageview');

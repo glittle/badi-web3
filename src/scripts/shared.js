@@ -24,6 +24,12 @@ var coords = {
     storage.set('coord.lng', v)
     updatedCoords()
   },
+  get tz() {
+    return storage.get('coord.tz', null)
+  },
+  set tz(v) {
+    storage.set('coord.tz', v)
+  },
   get name() {
     return storage.get('coord.name', '(unknown)')
   },
@@ -37,7 +43,7 @@ var coords = {
     storage.set('coord.source', v)
   },
   get sourceIsSet() {
-    return this.source !== 'not set'
+    return this.source === 'user';
   }
 }
 

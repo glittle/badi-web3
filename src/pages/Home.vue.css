@@ -25,6 +25,9 @@
 .Home .bold {
   font-weight: bold;
 }
+.Home .clickable {
+  cursor: pointer;
+}
 .Home #Listing {
   padding-top: 0;
 }

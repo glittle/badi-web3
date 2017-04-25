@@ -97,6 +97,8 @@ export default {
         this.addPrevious();
       }
 
+      vue.$ga.event('verse', 'previous');
+
       this.historyIndex++;
       this.showVerse();
     },
@@ -209,7 +211,7 @@ export default {
       msg.lang = 'en-US';
       msg.volume = volume;
       // msg.voiceURI = voice;
-      msg.rate = 0.85;
+      msg.rate = 1;
       msg.onend = function () {
         if (!vue.speakingNow) {
           return;
@@ -227,6 +229,8 @@ export default {
       };
       window.speechSynthesis.speak(msg);
       vue.speakingNow = true;
+
+      vue.$ga.event('verse', 'speak');
 
       // var P = talk.Player;
       // var x = new P()
