@@ -402,7 +402,7 @@ export default {
       shared.coords.tz = new Date().getTimezoneOffset();
     }
 
-    (adsbygoogle = window.adsbygoogle || []).push({});
+    // (adsbygoogle = window.adsbygoogle || []).push({});
 
     window.addEventListener('resize', this.handleResize)
     window.addEventListener('keyup', this.keyup)

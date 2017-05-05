@@ -119,12 +119,7 @@
         </p>
       </div>
     </div>
-    <!-- google_ad_1 -->
-    <ins class="adsbygoogle google_ad_1"
-         style="display:block"
-         data-ad-client="ca-pub-1303486522648633"
-         data-ad-slot="7213676280"
-         data-ad-format="auto"></ins>
+
   </article>
 </template>
 <style src="./Home.vue.css"></style>
