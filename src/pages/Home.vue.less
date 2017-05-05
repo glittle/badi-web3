@@ -26,7 +26,7 @@
     .bold {
         font-weight: bold;
     }
-    .clickable{
+    .clickable {
         cursor: pointer;
     }
     #Listing {
@@ -49,7 +49,6 @@ div.card {
 }
 
 .card article.Verse {
-    cursor: pointer;
     padding: 3px;
     >* {
         display: none;
@@ -179,9 +178,6 @@ div.line {
         padding: 3px 8px;
         min-height: 1rem;
     }
-    .heading {
-        // margin-right: 50px;
-    }
 }
 
 .tap95card {
@@ -271,6 +267,28 @@ div.line {
             &.five {
                 // margin-right: 3px;
             }
+        }
+    }
+}
+
+.card.prayer {
+    padding: 3px;
+    button {
+        margin: 1px 3px 0 0;
+        padding: 3px 8px;
+        min-height: 1rem;
+    }
+    .content {
+        margin: 5px 8px .5em 10px;
+        .firstLine {
+            font-size: 18px;
+            font-family: 'Gentium Book Basic', serif;
+        }
+        .by {
+            font-style: italic;
+            font-size: 90%;
+            padding: 0 1em;
+            font-family: Georgia, "Times New Roman", Times, serif;
         }
     }
 }

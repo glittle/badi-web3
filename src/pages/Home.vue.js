@@ -4,6 +4,8 @@ import sunCalc from '../scripts/sunCalc'
 import storage from '../scripts/storage'
 import Grid19 from '../components/Grid19';
 import Verse from './Verse';
+import prayerHelper from '../scripts/prayerLinkHelper'
+
 
 import * as shared from '../scripts/shared'
 require('../scripts/stringExt')
@@ -27,7 +29,8 @@ export default {
       tapAutoTimer: null,
       tapAutoDelay: storage.get('tapAutoDelay', 2000),
       tapAuto: storage.get('tapAuto', true),
-      tapSounds: storage.get('tapSounds', true)
+      tapSounds: storage.get('tapSounds', true),
+      prayer: prayerHelper.getRandom()
     }
   },
   components: {
@@ -211,6 +214,14 @@ export default {
       setTimeout(function () {
         drawChart(local.sun, vue.timeFormat, true)
       }, 0);
+    },
+    showPrayerOnline: function (link) {
+      // read 'prayers.json'; json created with:
+      // JSON.stringify($('.prayerlinks tr:not(.headingrow)').map(function(i,el){ var tr=$(el); var a = tr.find('a'); return { link: 'http://www.bahaiprayers.org/' + a.attr('href'), text: a.text(), by: tr.find('.cauthor').text() }}).get())
+      window.open(link, '_blank');
+    },
+    getNewPrayer: function () {
+      this.prayer = prayerHelper.getRandom()
     },
     // fillDayDisplay: function (di) {
     //   var answers = [];

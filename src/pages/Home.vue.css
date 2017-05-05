@@ -42,7 +42,6 @@ div.card {
   margin: 15px auto 20px auto;
 }
 .card article.Verse {
-  cursor: pointer;
   padding: 3px;
 }
 .card article.Verse > * {
@@ -240,6 +239,27 @@ div.line b {
 }
 .tap95card #tapBlocks span.tapped.five {
   background-color: #FFA726;
+}
+.card.prayer {
+  padding: 3px;
+}
+.card.prayer button {
+  margin: 1px 3px 0 0;
+  padding: 3px 8px;
+  min-height: 1rem;
+}
+.card.prayer .content {
+  margin: 5px 8px .5em 10px;
+}
+.card.prayer .content .firstLine {
+  font-size: 18px;
+  font-family: 'Gentium Book Basic', serif;
+}
+.card.prayer .content .by {
+  font-style: italic;
+  font-size: 90%;
+  padding: 0 1em;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 .card.share .heading button {
   margin: 1px 3px 0 0;
