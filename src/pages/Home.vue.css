@@ -254,11 +254,13 @@ div.line b {
 .card.prayer .content .firstLine {
   font-size: 18px;
   font-family: 'Gentium Book Basic', serif;
+  padding-right: 1em;
 }
 .card.prayer .content .by {
   font-style: italic;
   font-size: 90%;
-  padding: 0 1em;
+  padding-right: 1em;
+  white-space: nowrap;
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 .card.share .heading button {

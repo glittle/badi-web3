@@ -211,7 +211,7 @@ export default {
       msg.lang = 'en-US';
       msg.volume = volume;
       // msg.voiceURI = voice;
-      msg.rate = 1;
+      msg.rate = 0.9;
       msg.onend = function () {
         if (!vue.speakingNow) {
           return;
