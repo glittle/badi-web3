@@ -215,6 +215,9 @@ export default {
         drawChart(local.sun, vue.timeFormat, true)
       }, 0);
     },
+    refresh: function(){
+      window.doPulse();
+    },
     showPrayerOnline: function (link) {
       // read 'prayers.json'; json created with:
       // JSON.stringify($('.prayerlinks tr:not(.headingrow)').map(function(i,el){ var tr=$(el); var a = tr.find('a'); return { link: 'http://www.bahaiprayers.org/' + a.attr('href'), text: a.text(), by: tr.find('.cauthor').text() }}).get())
