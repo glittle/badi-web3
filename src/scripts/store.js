@@ -73,6 +73,7 @@ export function doPulse(newTestTime) {
     window._messageBus.$emit('changedDay');
   }
 
+  // store._vm.$ga.event('doPulse', 'doPulse');
 
   scheduleNextPulse();
 }

@@ -217,6 +217,9 @@ export default {
       if (year > vue.lastYear) {
         vue.lastYear = year
       }
+      if (year === vue.originalYear) {
+        vue.list.splice(0);
+      }
       // console.log('loading', year)
       var info = badi.buildSpecialDaysTable(year, this.suggestedStart);
 
