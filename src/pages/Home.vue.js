@@ -27,6 +27,7 @@ export default {
       tapLastTime: 0,
       tapAutoRunning: false,
       tapAutoTimer: null,
+      tapChimeAfter: false, // dev only - after or instead of regular sound?
       tapAutoDelay: storage.get('tapAutoDelay', 2000),
       tapAuto: storage.get('tapAuto', true),
       tapSounds: storage.get('tapSounds', true),
@@ -281,11 +282,11 @@ export default {
     },
     initializeSounds: function () {
       // only do once
-      if (!this.tapNum && this.tapSounds) {
-        this.playSound(this.tapSoundForSteps19, .1);
-        this.playSound(this.tapSoundForEnd, .1);
-        this.playSound(this.tapSoundForSteps, .1);
-      }
+      // if (!this.tapNum && this.tapSounds) {
+      // this.playSound(this.tapSoundForSteps19, .1);
+      // this.playSound(this.tapSoundForEnd, .1);
+      // this.playSound(this.tapSoundForSteps, .1);
+      // }
       if (!this.tapNum) {
         console.log('tap ga')
         this.$ga.event('tap95', 'started', this.tapAuto ? 'auto' : 'manual');
@@ -301,12 +302,22 @@ export default {
       this.tapNum++;
       document.getElementById('tap_' + this.tapNum).classList.add('tapped');
       if (this.tapSounds) {
-        if (this.tapNum === 95) {
-          this.playSound(this.tapSoundForEnd);
-        } else if (this.tapNum % 19 === 0) {
-          this.playSound(this.tapSoundForSteps19);
-        } else {
+        // if (this.tapNum === 95) {
+        //   this.playSound(this.tapSoundForEnd);
+        // } else if (this.tapNum % 19 === 0) {
+        //   this.playSound(this.tapSoundForSteps19);
+        // } else {
+        // }
+        if (this.tapChimeAfter) {
           this.playSound(this.tapSoundForSteps);
+        } else {
+          if (this.tapNum === 95) {
+            this.playSound(this.tapSoundForEnd);
+          } else if (this.tapNum % 19 === 0) {
+            this.playSound(this.tapSoundForSteps19);
+          } else {
+            this.playSound(this.tapSoundForSteps);
+          }
         }
       }
       if (this.tapNum >= 95) {
@@ -403,8 +414,14 @@ export default {
     this.updateTapDisplay();
     this.tapSoundForSteps.addEventListener("ended", function () {
       // console.log('sounded', vue.tapNum, vue.tapSounds)
-      if (vue.tapNum >= 95 && vue.tapSounds) {
-        vue.playSound(vue.tapSoundForEnd);
+      if (vue.tapChimeAfter) {
+        if (vue.tapNum === 95) {
+          // console.log('play 95');
+          vue.playSound(vue.tapSoundForEnd);
+        } else if (vue.tapNum % 19 === 0) {
+          // console.log('play', 19, vue.tapNum);
+          vue.playSound(vue.tapSoundForSteps19);
+        }
       }
     });
     // console.log(shared.coords.source)
@@ -441,8 +458,8 @@ export default {
       vue.setupDone = false;
     }
     drawChart(local.sun, this.timeFormat, true)
-    setTimeout(function(){
-        vue.$ga.event('stillOn', 'home');
+    setTimeout(function () {
+      vue.$ga.event('stillOn', 'home');
     }, 30000)
   },
   // doWorkOnPulse() {
