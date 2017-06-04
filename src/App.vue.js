@@ -59,17 +59,42 @@ export default {
   },
   methods: {
     prepareWorker() {
-      this.myWorker = new Worker('/ww.js'); // ?' + Math.random().toString().slice(2, 7));
-      this.myWorker.onmessage = function (ev) {
-        // console.log('received from ww', ev.data);
+      var vue = this;
 
-        switch (ev.data.msg) {
-          case 'callingBack':
-            console.log('called back at', new Date());
-            store.doPulse();
-            break;
+      this.myWorker = new Worker('/ww.js'); // ?' + Math.random().toString().slice(2, 7));
+      // this.myWorker.onmessage = function (ev) {
+      //   // console.log('received from ww', ev.data);
+
+      //   switch (ev.data.msg) {
+      //     case 'callingBack':
+      //       console.log('called back at', new Date());
+      //       store.doPulse();
+      //       break;
+      //   }
+      // }
+
+
+      prepareForMessagesFromWebWorker();
+      vue.myWorker.postMessage('start');
+
+      function prepareForMessagesFromWebWorker() {
+        vue.myWorker.onmessage = function (ev) {
+          switch (ev.data) {
+            case 'pulse':
+              console.log('ww requesting pulse');
+              store.doPulse();
+              break;
+            case 'checkVersion':
+              if (navigator.serviceWorker) {
+                console.log('checking version');
+                navigator.serviceWorker.controller.postMessage('checkVersion');
+              }
+              break;
+          }
         }
+
       }
+
       // console.log('worker loaded', this.myWorker)
     },
     scheduleNextNotification(di) {

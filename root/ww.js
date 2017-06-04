@@ -1,22 +1,29 @@
-var timerUpdate = null;
+var checkVersionFrequency = 1000 * 60 * 60 * 12; // 12 hours
 
-onmessage = function (ev) {
-    // console.log('received in ww', ev.data)
+var timer1 = null;
+var timer2 = setTimeout(checkVersion, checkVersionFrequency);
 
-    switch (ev.data.msg) {
-        case 'doCallback':
-            clearTimeout(timerUpdate);
-            timerUpdate = setTimeout(doCallback, ev.data.delay);
+onmessage = function(ev) {
+    switch (ev.data) {
+        case 'start':
+            doUpdate();
             break;
-
-        // default:
-        //     console.warn('unexpected msg to ww', ev.data);
-        //     break;
-    }
+        case 'stop':
+            clearTimeout(timer1);
+            break;
+    } 
 }
 
-function doCallback() {
-    postMessage({
-        msg: 'callingBack'
-    });
+function doUpdate(){
+  clearTimeout(timer1);
+  
+  timer1 = setTimeout(function(){
+      postMessage('pulse');
+      doUpdate();
+  }, 60 * 1000);
+}
+
+function checkVersion(){
+    postMessage('checkVersion');
+    setTimeout(checkVersion, checkVersionFrequency);
 }

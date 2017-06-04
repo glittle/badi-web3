@@ -16,7 +16,7 @@ const store = new Vuex.Store({
     pulsed(state) {
       state.pulseNum++;
       state.di = badiCalc.di; //TODO integrate into system
-      // console.log('dispatch starting');
+      console.log('pulsed');
       document.dispatchEvent(new Event('pulsed'));
       // console.log('dispatch done');
     }
