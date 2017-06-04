@@ -43,34 +43,34 @@
     </div>
     <div class="card prayer">
       <div class="heading">
-        <span class="desc">Random Prayer, from <span v-text="prayer.by"
+        <span class="desc">A prayer, by <span v-text="prayer.by"
                               class="by"></span>
         </span>
         <span>
-                                          <button 
-                                            v-on:click="getNewPrayer()"
-                                            class="small light round">Another</button> 
-                                          
-                                        </span>
+          <button 
+            v-on:click="getNewPrayer()"
+            class="small light round">Another</button> 
+          
+        </span>
       </div>
       <div class="content">
         <span class="firstLine"
               v-text="prayer.text"></span>
         <button v-on:click="showPrayerOnline(prayer.link)"
-                class="small light round">Continue Online</button>
+                class="small light round">Continue Online...</button>
       </div>
     </div>
     <div class="card tap95card">
       <div class="heading">
         <span class="desc">95 Alláh-u-Abhás</span>
         <span>
-                                                                                <label><input type=checkbox v-model="tapAuto">Auto</label>
-                                                                                <label><input type=checkbox v-model="tapSounds">Sound</label>
-                                                                                <button 
-                                                                                  v-on:click="reset95"
-                                                                                  class="reset small light round">Reset</button> 
-                                                                                  
-                                                                      </span>
+                <label><input type=checkbox v-model="tapAuto">Auto</label>
+                <label><input type=checkbox v-model="tapSounds">Sound</label>
+                <button 
+                  v-on:click="reset95"
+                  class="reset small light round">Reset</button> 
+                  
+      </span>
       </div>
       <div class="main95">
         <div>
@@ -107,18 +107,8 @@
     <audio id="tapSoundForEnd"
            preload="auto"
            autobuffer="autobuffer">
-      <source src="/statics/chime19.mp3">
+      <source src="/statics/gongLong.mp3">
     </audio>
-    <!--<div class="card">
-                                                                            <div class="card-content">
-                                                                              <p>Temporary page list...</p>
-                                                                              <div class="list no-border">
-                                                                                <router-link tag="button" class="item item-link" :class="'icon_' + page.group" v-for="page in pageList.filter(p=>p.to!=='Home')"
-                                                                                  :to="page.to">
-                                                                                  <i :title="page.text">{{page.icon}}</i>
-                                                                                </router-link>
-                                                                              </div>
-                                                                            </div>-->
     <div class="card share">
       <div class="heading">
         <span class="desc">Upcoming Dates</span>

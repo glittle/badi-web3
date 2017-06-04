@@ -27,7 +27,7 @@ export default {
       tapLastTime: 0,
       tapAutoRunning: false,
       tapAutoTimer: null,
-      tapChimeAfter: false, // dev only - after or instead of regular sound?
+      tapChimeAfter: true, // dev only - after or instead of regular sound?
       tapAutoDelay: storage.get('tapAutoDelay', 2000),
       tapAuto: storage.get('tapAuto', true),
       tapSounds: storage.get('tapSounds', true),
