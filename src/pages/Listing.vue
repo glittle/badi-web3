@@ -93,7 +93,7 @@
                v-if="day.Type[0]==='H'">
             <div class="col1">
               <!--<span class=dayType><i>star</i></span>-->
-              <img src="statics/star.png">
+              <img src="statics/star.png" alt="star">
             </div>
             <div class="col2">
               <div class=dayName

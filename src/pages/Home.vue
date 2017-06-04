@@ -141,7 +141,7 @@
                                                                               </span>
       </div>
       <div class="support">
-        <img class="qr"
+        <img class="qr" alt="QR Code"
              src="~statics/qr.png">
         <p>
           Share this site (https://wondrous-badi.today) with a friend! See the "About" page to support the developer and send suggestions! For more calendar tools, get the <a href="https://sites.google.com/site/badicalendartools/home/web-extension"
