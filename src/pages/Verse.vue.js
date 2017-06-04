@@ -44,9 +44,8 @@ export default {
   computed: {
     searchUrl: function () {
       return 'https://www.google.com/search?q=' +
-        "Bahá'u'lláh+" +
-        this.verse.replace(/ /g, '+') +
-        '+youtube' // hint to find at youtube
+        "Bahá'u'lláh+youtube+" + // hint to find at youtube
+        this.verse.replace(/ /g, '+').replace(/:/g, '') 
     },
     canShowNext: function () {
       return this.historyIndex > 0;
@@ -93,6 +92,7 @@ export default {
     //   }
     // },
     showPrevious() {
+      var vue = this;
       if (this.historyIndex + 1 >= this.historyStack.length) {
         this.addPrevious();
       }

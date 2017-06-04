@@ -1,3 +1,19 @@
+import Vue from 'vue'
+
+import router from 'router'
+import VueHead from 'vue-head'
+import Quasar from 'quasar'
+import VueHighcharts from 'vue-highcharts';
+
+import VueAnalytics from 'vue-analytics'
+
+import store from './scripts/store'
+import badiCalc from './scripts/badiCalc'
+
+import './scripts/swHandler';
+import './scripts/messages';
+import './components/msg-directive';
+
 // === DEFAULT / CUSTOM STYLE ===
 // WARNING! always comment out ONE of the two require() calls below.
 // 1. use next line to activate CUSTOM STYLE (./src/themes)
@@ -6,16 +22,7 @@
 require(`quasar/dist/quasar.${__THEME}.css`)
 // ==============================
 
-import Vue from 'vue'
-
 window._messageBus = new Vue();
-
-import router from 'router'
-import VueHead from 'vue-head'
-import Quasar from 'quasar'
-import VueHighcharts from 'vue-highcharts';
-
-import VueAnalytics from 'vue-analytics'
 
 // https://www.npmjs.com/package/vue-analytics
 Vue.use(VueAnalytics, {
@@ -25,13 +32,6 @@ Vue.use(VueAnalytics, {
     exception: true
   }
 })
-
-import store from './scripts/store'
-import badiCalc from './scripts/badiCalc'
-
-import './scripts/swHandler';
-import './scripts/messages';
-import './components/msg-directive';
 
 Vue.use(VueHead)
 Vue.use(Quasar) // Install Quasar Framework

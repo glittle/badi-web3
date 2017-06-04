@@ -28,7 +28,7 @@ module.exports = merge(baseWebpackConfig, {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/index.html',

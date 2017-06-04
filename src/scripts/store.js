@@ -1,9 +1,9 @@
 import Es6polyfill from 'es6-promise';
-Es6polyfill.polyfill();
-
 import Vue from 'vue'
 import Vuex from 'vuex'
 import badiCalc from './badiCalc'
+
+Es6polyfill.polyfill();
 
 Vue.use(Vuex)
 

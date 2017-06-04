@@ -11,9 +11,9 @@
           <q-toggle v-model="useArNames"
                     class="teal"></q-toggle>
           <div>
-            <div>Use Arabic month names first</div>
-            <span v-bind:class="{active: !useArNames }">Off: Splendor</span>
-            <span v-bind:class="{active: useArNames }">On: Bahá</span>
+            <div>Use Arabic month names first?</div>
+            <span v-bind:class="{active: useArNames }">Yes: Bahá</span>
+            <span v-bind:class="{active: !useArNames }">No: Splendor</span>
           </div>
         </label>
       </div>
@@ -25,9 +25,9 @@
           <q-toggle v-model="use24hour"
                     class="teal"></q-toggle>
           <div>
-            <div>Use 24 hour time</div>
-            <span v-bind:class="{active: !use24hour }">Off: 5:00 pm</span>
-            <span v-bind:class="{active: use24hour }">On: 17:00</span>
+            <div>Use 24 hour time?</div>
+            <span v-bind:class="{active: use24hour }">Yes: 17:00</span>
+            <span v-bind:class="{active: !use24hour }">No: 5:00 pm</span>
           </div>
         </label>
       </div>

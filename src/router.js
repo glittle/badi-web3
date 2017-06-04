@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import routeList from './pages/routes'
 
 Vue.use(VueRouter)
-
-import routeList from './pages/routes'
 
 export default new VueRouter({
   /*
