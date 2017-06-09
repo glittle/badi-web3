@@ -21,6 +21,11 @@ div.toolbar {
 div.toolbar .toolbar-title {
   text-align: center;
 }
+div.toolbar .driftHelp {
+  font-size: 25px;
+  align-self: center;
+  cursor: help;
+}
 body.desktop button.primary:not(.disabled):hover:not(.clear) {
   background: #2980b9;
 }
