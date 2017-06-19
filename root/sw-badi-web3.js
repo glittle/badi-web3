@@ -186,6 +186,15 @@ function clearCache() {
 var db;
 var dbName = 'swStorage'
 var dbStoreName = 'versions'
+var cvTimer = null;
+
+function checkVersionSoon() {
+  clearTimeout(cvTimer);
+  cvTimer = setTimeout(function () {
+    console.log('sw internal check version')
+    checkVersion();
+  }, 10000);
+}
 
 function checkVersion() {
   var dbRequest = indexedDB.open(dbName, 1);
@@ -277,6 +286,7 @@ self.addEventListener('fetch', function (event) {
       caches.match(event.request).then(function (response) {
         if (response) {
           console.log('fetched from cache')
+          checkVersionSoon();
           return response;
         }
 
