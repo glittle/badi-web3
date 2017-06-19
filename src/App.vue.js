@@ -85,9 +85,11 @@ export default {
               store.doPulse();
               break;
             case 'checkVersion':
-              if (navigator.serviceWorker) {
+              if (navigator.serviceWorker && navigator.serviceWorker.controller) {
                 console.log('checking version');
                 navigator.serviceWorker.controller.postMessage('checkVersion');
+              } else {
+                console.log('sw not active, cannot check version');
               }
               break;
           }
