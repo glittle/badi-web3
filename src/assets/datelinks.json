@@ -569,5 +569,11 @@
     "icon": "-badiMonthA",
     "type": "img",
     "desc": "Calendar Image"
+  }],
+  "M-174-06": [{
+    "url": "174-06.png",
+    "icon": "-badiMonthA",
+    "type": "img",
+    "desc": "Calendar Image"
   }]
 }
