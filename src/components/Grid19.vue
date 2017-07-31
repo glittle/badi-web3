@@ -7,9 +7,9 @@
         <div class="header">
           <span class="desc"
                 v-html="info.desc"></span>
-          <span class="mid"
+          <span class="type"
                 v-html="info.mid"></span>
-          <span class="type">
+          <span v-if="false" class="type">
                 <span v-html="info.type"></span>
                 <span v-if="info.type2">
                         (<span v-html="info.type2"></span>)

@@ -1,4 +1,4 @@
-☺@echo off
+@echo off
 rem robocopy c:\dev\badi-web3-live c:\dev\badi-web3-backup /mir 
 rem call npm version patch
 rem call quasar build
