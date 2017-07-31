@@ -7,15 +7,25 @@
 .Grid19 .title {
   text-align: right;
 }
-.Grid19 th {
+.Grid19 .header {
   font-weight: normal;
+  display: flex;
+}
+.Grid19 .header > * {
+  width: 0;
+  flex-grow: 1;
+}
+.Grid19 .header .desc {
   text-align: left;
 }
-.Grid19 th .type {
-  color: #999;
-  float: right;
+.Grid19 .header .mid {
+  text-align: center;
 }
-.Grid19 th .type2 {
+.Grid19 .header .type {
+  color: #999;
+  text-align: right;
+}
+.Grid19 .header .type2 {
   font-size: 80%;
 }
 .Grid19 td {
@@ -23,6 +33,7 @@
 }
 .Grid19 .cell {
   color: #ccc;
+  width: 5.263%;
   text-align: center;
 }
 .Grid19 .cell .a {
@@ -41,35 +52,59 @@
   opacity: 0.35;
   background-color: #fafafa;
 }
-.Grid19 .gridRow .cell.row1.past .a {
-  color: #f8d1cd;
-  background-color: #fef6f5;
+.Grid19 .elements .a {
+  width: 100%;
+  display: block;
+  text-align: center;
+  margin-top: -4px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
-.Grid19 .gridRow .cell.row1.now .a {
+.Grid19 .elements .row1.active .a {
   color: #75190f;
   background-color: #eb7265;
 }
-.Grid19 .gridRow .cell.row2.past .a {
-  color: #d5dde0;
-  background-color: #f5f7f7;
-}
-.Grid19 .gridRow .cell.row2.now .a {
+.Grid19 .elements .row2.active .a {
   color: #666;
   background-color: #ecf0f1;
 }
-.Grid19 .gridRow .cell.row3.past .a {
-  color: #b6daf2;
-  background-color: #eaf4fb;
-}
-.Grid19 .gridRow .cell.row3.now .a {
+.Grid19 .elements .row3.active .a {
   color: #0a2639;
   background-color: #3498db;
 }
-.Grid19 .gridRow .cell.row4.past .a {
+.Grid19 .elements .row4.active .a {
+  color: #1b7943;
+  background-color: #2ecc71;
+}
+.Grid19 .row1.past .a {
+  color: #f8d1cd;
+  background-color: #fef6f5;
+}
+.Grid19 .row1.now .a {
+  color: #75190f;
+  background-color: #eb7265;
+}
+.Grid19 .row2.past .a {
+  color: #d5dde0;
+  background-color: #f5f7f7;
+}
+.Grid19 .row2.now .a {
+  color: #666;
+  background-color: #ecf0f1;
+}
+.Grid19 .row3.past .a {
+  color: #b6daf2;
+  background-color: #eaf4fb;
+}
+.Grid19 .row3.now .a {
+  color: #0a2639;
+  background-color: #3498db;
+}
+.Grid19 .row4.past .a {
   color: #a8ebc4;
   background-color: #e2f8eb;
 }
-.Grid19 .gridRow .cell.row4.now .a {
+.Grid19 .row4.now .a {
   color: #1b7943;
   background-color: #2ecc71;
 }

@@ -13,7 +13,7 @@ export default {
             var vue = this;
             var dummy = this.$store.state.pulseNum;
             // console.log('grid', dummy);
-
+console.log(vue.info)
             setTimeout(function () {
                 var grid = vue.$el;
                 var info = vue.info;
@@ -37,11 +37,11 @@ export default {
 
                     if (c === info.num) {
                         cell.classList.add('now');
-                    } else if (c < info.num) {
-                        cell.classList.add('past');
+                    // } else if (c < info.num) {
+                    //     cell.classList.add('past');
                     } else {
-                        cell.classList.add('future');
-                        // cell.classList.remove('selectedCell');
+                        cell.classList.add('past');
+                        //cell.classList.add('future');
                     }
                 }
 

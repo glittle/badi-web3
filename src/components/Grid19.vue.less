@@ -25,12 +25,22 @@
     .title {
         text-align: right;
     }
-    th {
+    .header {
         font-weight: normal;
-        text-align: left;
+        display: flex;
+        >* {
+            width: 0;
+            flex-grow: 1;
+        } //justify-content: space-between;
+        .desc {
+            text-align: left;
+        }
+        .mid {
+            text-align: center;
+        }
         .type {
             color: #999;
-            float: right;
+            text-align: right;
         }
         .type2 {
             font-size: 80%;
@@ -41,6 +51,7 @@
     }
     .cell {
         color: #ccc;
+        width: 5.263%;
         text-align: center;
         .a {
             width: 100%;
@@ -62,72 +73,88 @@
             background-color: #fafafa;
         }
     }
-    .gridRow {
-        .cell {
-            &.row1 {
-                &.past {
-                    .a {
-                        color: @fire2;
-                        background-color: @fire1;
-                    }
-                }
-                &.now {
-                    .a {
-                        color: @fire3;
-                        background-color: @fire;
-                    }
-                }
+    .elements {
+        .a {
+            width: 100%;
+            display: block;
+            text-align: center;
+            margin-top: -4px;
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px
+        }
+        .row1.active .a {
+            color: @fire3;
+            background-color: @fire;
+        }
+        .row2.active .a {
+            color: @air3;
+            background-color: @air;
+        }
+        .row3.active .a {
+            color: @water3;
+            background-color: @water;
+        }
+        .row4.active .a {
+            color: @earth3;
+            background-color: @earth;
+        }
+    }
+    .row1 {
+        &.past {
+            .a {
+                color: @fire2;
+                background-color: @fire1;
             }
         }
-        .cell {
-            &.row2 {
-                // border-color: #ecf0f1;
-                &.past {
-                    .a {
-                        color: @air2;
-                        background-color: @air1;
-                    }
-                }
-                &.now {
-                    .a {
-                        color: @air3;
-                        background-color: @air;
-                    }
-                }
+        &.now {
+            .a {
+                color: @fire3;
+                background-color: @fire;
             }
         }
-        .cell {
-            &.row3 {
-                // border-color: #3498db;
-                &.past {
-                    .a {
-                        color: @water2;
-                        background-color: @water1;
-                    }
-                }
-                &.now {
-                    .a {
-                        color: @water3;
-                        background-color: @water;
-                    }
-                }
+    }
+    .row2 {
+        // border-color: #ecf0f1;
+        &.past {
+            .a {
+                color: @air2;
+                background-color: @air1;
             }
         }
-        .cell {
-            &.row4 {
-                // border-color: #2ecc71;
-                &.past {
-                    .a {
-                        color: @earth2;
-                        background-color: @earth1;
-                    }
-                }
-                &.now {
-                    .a {
-                        color: @earth3;
-                        background-color: @earth;
-                    }
-                }
+        &.now {
+            .a {
+                color: @air3;
+                background-color: @air;
+            }
+        }
+    }
+    .row3 {
+        // border-color: #3498db;
+        &.past {
+            .a {
+                color: @water2;
+                background-color: @water1;
+            }
+        }
+        &.now {
+            .a {
+                color: @water3;
+                background-color: @water;
+            }
+        }
+    }
+    .row4 {
+        // border-color: #2ecc71;
+        &.past {
+            .a {
+                color: @earth2;
+                background-color: @earth1;
+            }
+        }
+        &.now {
+            .a {
+                color: @earth3;
+                background-color: @earth;
             }
         }
     }

@@ -151,6 +151,7 @@ export default {
     info: function (mode) {
       var di = this.di;
       var type, type2, desc, num;
+      var mid = '';
       var ayyamiha = false;
       switch (mode) {
         // case 'week':
@@ -160,23 +161,23 @@ export default {
         //   break;
         case 'month':
           if (di.bMonth) {
+            desc = 'Day {bDay}'.filledWith(di);
+            mid = '<b>{bDayNamePri}</b> ({bDayNameSec})'.filledWith(di);
             type = '…in this Month';
-            desc = 'Day – <b>{bDay}</b> – {bDayNamePri} ({bDayNameSec})'.filledWith(di);
           } else {
             // ayyam-i-ha
             type = '…in the <b>{bMonthNamePri}</b> ({bMonthNameSec})'.filledWith(di);
             ayyamiha = di.numDaysInAyyamiHa;
-            desc = 'Day – <b>{bDay}</b>'.filledWith(di);
+            desc = 'Day <b>{bDay}</b>'.filledWith(di);
           }
           num = di.bDay;
           break;
         case 'year':
           type = '…in this Year';
-          // desc = '<b>{bMonthNamePri}</b> – {bMonthNameSec} – {bMonth}'.filledWith(di);
-          //  – {element}
           num = di.bMonth;
           if (num) {
-            desc = 'Month – {bMonth} – <b>{bMonthNamePri}</b> ({bMonthNameSec})'.filledWith(di);
+            desc = 'Month {bMonth}'.filledWith(di);
+            mid = '<b>{bMonthNamePri}</b> ({bMonthNameSec})'.filledWith(di);
           } else {
             desc = '<b>{bMonthNamePri}</b> ({bMonthNameSec})'.filledWith(di);
             num = 18.5;
@@ -185,8 +186,8 @@ export default {
         case 'vahid':
           type = '…in this ' + di.VahidLabelPri;
           type2 = di.VahidLabelSec;
-          // desc = '<b>{bYearInVahidNamePri}</b> - {bYearInVahidNameSec} - {bYearInVahid}'.filledWith(di)
-          desc = 'Year – {bYearInVahid} – {bYearInVahidNamePri} ({bYearInVahidNameSec}) – <b>{bYear} B.E.</b>'.filledWith(di)
+          desc = 'Year {bYearInVahid} ({bYear} BE)'.filledWith(di)
+          mid = '{bYearInVahidNamePri} ({bYearInVahidNameSec})'.filledWith(di)
           num = di.bYearInVahid;
           break;
         case 'kull':
@@ -205,6 +206,8 @@ export default {
         num: num,
         mode: mode,
         desc: desc,
+        mid: mid,
+        elementNum: di.elementNum,
         type: type,
         type2: type2,
         ayyamiha: ayyamiha
