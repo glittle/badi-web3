@@ -194,7 +194,8 @@ export default {
           type = '…in this ' + di.KullishayLabelPri;
           type2 = di.KullishayLabelSec;
           num = di.bVahid;
-          desc = '{VahidLabelPri} ({VahidLabelSec}) – {bVahid}'.filledWith(di)
+          // desc = '{VahidLabelPri} ({VahidLabelSec}) – {bVahid}'.filledWith(di)
+          desc = '{VahidLabelPri} {bVahid}'.filledWith(di)
           break;
         // case 'kull2':
         //   type = '??';

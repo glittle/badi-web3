@@ -58,7 +58,7 @@
   margin-top: -4px;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
-  border: 1px solid transparent;
+  border-top: 1px solid transparent;
 }
 .Grid19 .elements .row1.active .a {
   color: #75190f;
@@ -69,8 +69,8 @@
   border-color: #ecf0f1;
 }
 .Grid19 .elements .row3.active .a {
-  color: #0a2639;
-  border-color: #3498db;
+  color: #0d334c;
+  border-color: #72B8E6;
 }
 .Grid19 .elements .row4.active .a {
   color: #1b7943;
@@ -93,12 +93,12 @@
   background-color: #ecf0f1;
 }
 .Grid19 .row3.past .a {
-  color: #b6daf2;
-  background-color: #eaf4fb;
+  color: #c0dff4;
+  background-color: #f4f9fd;
 }
 .Grid19 .row3.now .a {
-  color: #0a2639;
-  background-color: #3498db;
+  color: #0d334c;
+  background-color: #72B8E6;
 }
 .Grid19 .row4.past .a {
   color: #a8ebc4;
