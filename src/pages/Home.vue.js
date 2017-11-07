@@ -112,7 +112,6 @@ export default {
             }
             var link = info[0].url;
             var url = link[0] === '/' ? link : '/images/' + link;
-            console.log(id, info, url)
             return url;
         }
     },
@@ -865,6 +864,7 @@ function drawChart(sun, timeFormat, redraw) {
             dataLabels: {
                 enabled: true,
                 useHTML: true,
+                allowOverlap: true,
                 verticalAlign: 'bottom',
                 formatter: function() {
                     var point = this.point;
