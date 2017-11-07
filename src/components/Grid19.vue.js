@@ -2,8 +2,7 @@
 
 export default {
     data() {
-        return {
-        }
+        return {}
     },
     props: {
         info: Object
@@ -13,8 +12,7 @@ export default {
             var vue = this;
             var dummy = this.$store.state.pulseNum;
             // console.log('grid', dummy);
-console.log(vue.info)
-            setTimeout(function () {
+            setTimeout(function() {
                 var grid = vue.$el;
                 var info = vue.info;
                 var numToShow = info.ayyamiha ? info.ayyamiha : 19;
@@ -37,8 +35,8 @@ console.log(vue.info)
 
                     if (c === info.num) {
                         cell.classList.add('now');
-                    // } else if (c < info.num) {
-                    //     cell.classList.add('past');
+                        // } else if (c < info.num) {
+                        //     cell.classList.add('past');
                     } else {
                         cell.classList.add('past');
                         //cell.classList.add('future');
@@ -50,10 +48,8 @@ console.log(vue.info)
             return dummy;
         }
     },
-    mounted: function () {
+    mounted: function() {
         // this.showMe;
     },
-    methods: {
-    }
+    methods: {}
 }
-

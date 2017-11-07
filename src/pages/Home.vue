@@ -6,7 +6,7 @@
         <location-setup></location-setup>
       </div>
     </div>
-  
+
     <div class="card">
       <div class="heading">
         <span class="desc">
@@ -34,9 +34,9 @@
         <span class="desc"
               v-html="verseTime"></span>
         <span>
-                                          <button 
+                                          <button
                                             v-on:click="$router.push('verse')"
-                                            class="small light round">More</button> 
+                                            class="small light round">More</button>
                                         </span>
       </div>
       <Verse v-bind:toggleVerseSpeech="toggleVerseSpeech"></Verse>
@@ -47,10 +47,10 @@
                               class="by"></span>
         </span>
         <span>
-          <button 
+          <button
             v-on:click="getNewPrayer()"
-            class="small light round">Another</button> 
-          
+            class="small light round">Another</button>
+
         </span>
       </div>
       <div class="content">
@@ -66,10 +66,10 @@
         <span>
                 <label><input type=checkbox v-model="tapAuto">Auto</label>
                 <label><input type=checkbox v-model="tapSounds">Sound</label>
-                <button 
+                <button
                   v-on:click="reset95"
-                  class="reset small light round">Reset</button> 
-                  
+                  class="reset small light round">Reset</button>
+
       </span>
       </div>
       <div class="main95">
@@ -79,7 +79,7 @@
           <div id="tapBlocks"></div>
           <div class="tapDelayArea"
                v-bind:style="{opacity: tapAuto ? 1 : 0.25}">
-            <span>Auto 
+            <span>Auto
                               <span v-html="(Math.round(tapAutoDelay/100)/10).toFixed(1) + ' s'"></span></span>
             <q-range v-model="tapAutoDelay"
                      :step="500"
@@ -109,26 +109,37 @@
            autobuffer="autobuffer">
       <source src="/statics/gongLong.mp3">
     </audio>
+    <div class="card calendar">
+      <div class="heading">
+        <span class="desc">Calendar for this month</span>
+      </div>
+      <div class="content">
+        <img :src="thisMonthImage" v-if="thisMonthImage">
+        <div v-else>
+          (Not available yet)
+        </div>
+      </div>
+    </div>
     <div class="card share">
       <div class="heading">
         <span class="desc">Upcoming Dates</span>
         <span>
-                                                          <button 
-                                                            v-on:click="$router.push('listing')"
-                                                            class="small light round">More</button> 
-                                                        </span>
+          <button
+            v-on:click="$router.push('listing')"
+            class="small light round">More</button>
+        </span>
       </div>
       <listing :onHome="true"></listing>
     </div>
-  
+
     <div class="card share">
       <div class="heading">
         <span class="desc">Share and Support</span>
         <span>
-                                                                                <button 
-                                                                                  v-on:click="$router.push('about')"
-                                                                                  class="small light round">About</button> 
-                                                                              </span>
+          <button
+            v-on:click="$router.push('about')"
+            class="small light round">About</button>
+        </span>
       </div>
       <div class="support">
         <img class="qr" alt="QR Code"
@@ -140,7 +151,7 @@
         </p>
       </div>
     </div>
-  
+
   </article>
 </template>
 <style src="./Home.vue.css"></style>

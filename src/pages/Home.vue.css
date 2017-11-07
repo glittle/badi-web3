@@ -268,6 +268,13 @@ div.line b {
   white-space: nowrap;
   font-family: Georgia, "Times New Roman", Times, serif;
 }
+.card.calendar .content img {
+  width: 100%;
+}
+.card.calendar .content div {
+  margin: 10px auto;
+  color: #ccc;
+}
 .card.share .heading button {
   margin: 1px 3px 0 0;
   padding: 3px 8px;
