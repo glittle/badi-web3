@@ -114,7 +114,7 @@
         <span class="desc">Calendar for this month</span>
       </div>
       <div class="content">
-        <img :src="thisMonthImage" v-if="thisMonthImage">
+        <a v-if="thisMonthImage" :href="thisMonthImage" target="calendar"><img :src="thisMonthImage" ></a>
         <div v-else>
           (Not available yet)
         </div>
