@@ -18,7 +18,7 @@ var routeList = require('./routes');
 export default {
     data() {
         return {
-            title: messages.get('HomePage', null, 'Daily'),
+            title: messages.get('HomePage', null, 'Today'),
             icon: '../statics/sunWhite.png',
             location: shared.coords.name,
             setupDone: false,
