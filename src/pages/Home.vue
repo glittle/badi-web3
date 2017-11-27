@@ -114,7 +114,7 @@
         <span class="desc">Calendar for this month</span>
       </div>
       <div class="content">
-        <a v-if="thisMonthImage" :href="thisMonthImage" target="calendar"><img :src="thisMonthImage" ></a>
+        <a v-if="thisMonthImage" :href="thisMonthImage" target="calendar"><img alt="Calendar Image" :src="thisMonthImage" ></a>
         <div v-else>
           (Not available yet)
         </div>
@@ -142,7 +142,7 @@
         </span>
       </div>
       <div class="support">
-        <img class="qr" alt="QR Code"
+        <img class="qr" alt="Scannable QR Code"
              src="~statics/qr.png">
         <p>
           Share this site (https://wondrous-badi.today) with a friend! See the "About" page to support the developer and send suggestions! For more calendar tools, get the <a href="https://sites.google.com/site/badicalendartools/home/web-extension"

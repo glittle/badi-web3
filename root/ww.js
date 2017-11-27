@@ -3,11 +3,11 @@ var checkVersionFrequency = 1000 * 60 * 60 * 12; // 12 hours
 var timer1 = null;
 var timer2 = setTimeout(checkVersion, checkVersionFrequency);
 
-onmessage = function (ev) {
+onmessage = function(ev) {
     switch (ev.data) {
         case 'start':
             checkVersion(true);
-            // doUpdate(); -- not helping... doesn't run in background on Android 
+            // doUpdate(); -- not helping... doesn't run in background on Android
             break;
         case 'stop':
             clearTimeout(timer1);
@@ -29,7 +29,7 @@ function checkVersion(delayed) {
 
     if (delayed === true) {
         console.log('will check version in a few seconds')
-        setTimeout(function () {
+        setTimeout(function() {
             postMessage('checkVersion');
         }, 4000);
 

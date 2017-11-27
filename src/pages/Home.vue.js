@@ -56,7 +56,7 @@ export default {
             return document.getElementById('tapSoundForEnd');
         },
         di() {
-            this.$store.state.pulseNum;
+            var dummy = this.$store.state.pulseNum;
             // this.$store.commit('newDate', badiCalc.di);
             return badiCalc.di;
         },
@@ -670,8 +670,8 @@ function setNextRefreshAt(refreshTime, midnightUpdate) {
 
 var _chart = null;
 var _lastChartDay = null;
-var _fontSize = '12px';
-var _fontColor = '#999';
+var _fontSize = '11px';
+var _fontColor = '#666';
 
 function drawChart(sun, timeFormat, redraw) {
     //   setStart: null,
@@ -694,12 +694,12 @@ function drawChart(sun, timeFormat, redraw) {
 
 
     // var weekDayInfo = '<span class="wk1">Weekday – <b>{bWeekday}</b> – {bWeekdayNamePri} ({bWeekdayNameSec})</span> &nbsp; <span class="wk2">…in this Week</span>'.filledWith(_nowDi);
-    var weekDayInfo = 'Weekday – {bWeekday} – {bWeekdayNamePri} ({bWeekdayNameSec})'.filledWith(_nowDi);
+    var weekDayInfo = 'Weekday {bWeekday}<br>{bWeekdayNamePri} ({bWeekdayNameSec})'.filledWith(_nowDi);
 
     var yFactor = 5;
     var twilight = yFactor * 2; // adjusted after
     var colorFullSun = '#ffff00';
-    var colorFullDark = '#000000';
+    var colorFullDark = '#444';
     var points = [];
     var chartMin = sun.setStart.valueOf();
     var chartMax = sun.setEnd.valueOf();
@@ -800,15 +800,16 @@ function drawChart(sun, timeFormat, redraw) {
             align: 'right',
             floating: true,
             style: {
-                color: '#212121',
-                fontSize: '13px',
-                fontWeight: 'normal'
+                fontWeight: 'normal',
+                color: _fontColor,
+                fontSize: _fontSize,
+                textAlign: 'right'
             },
             text: weekDayInfo,
             useHTML: true,
             verticalAlign: 'bottom',
             x: 0,
-            y: -18
+            y: -21
         },
         credits: {
             enabled: false
@@ -829,8 +830,11 @@ function drawChart(sun, timeFormat, redraw) {
             ],
             labels: {
                 useHTML: true,
-                y: 12,
+                y: 14,
                 x: 0,
+                style: {
+                    fontSize: _fontSize
+                },
                 formatter: function() {
                     var tickMs = this.value;
                     var before = tickMs < midnight;

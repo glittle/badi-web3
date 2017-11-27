@@ -126,7 +126,7 @@
                v-if="day.Type==='Fast'">
             <div class="col1">
               <!--<span class=dayType><i>date_range</i></span>-->
-              <img src="statics/sun.png">
+              <img src="statics/sun.png" alt="sun">
             </div>
             <div class="col2">
               <div class=dayName
@@ -205,13 +205,13 @@
                    v-html="day.di.gCombinedY">
               </div>
               <div class=sunsetStart>
-                <img src="statics/sunset.png">
+                <img src="statics/sunset.png" alt="sunset">
                 <span v-html="day.Sunset"></span>
               </div>
             </div>
           </div>
           <div class="links"
-               v-if="day.showingLinks">
+               v-if="day.showingLinks && day.links.length">
             <div class="col1"></div>
             <div class="col2">
               <div class="link"
@@ -235,7 +235,7 @@
               v-if="!onHome"
               class="light full-width">Reset to this year only</button>
     </div>
-  </article> 
+  </article>
 </template>
 <script src="./Listing.vue.js"></script>
 <style src="./Listing.vue.css"></style>
