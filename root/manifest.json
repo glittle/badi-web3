@@ -1,24 +1,23 @@
 {
-  "name": "Wondrous-Bad\u00ed Today",
-  "short_name": "Wondrous",
-  "description": "Helping us to live by the Wondrous-Bad\u00ed' calendar, the official calendar of the Baha'i Faith.",
-  "start_url": "/",
-  "lang": "en-US",
-  "icons": [
-    {
-      "src": "/statics/icons/android-chrome-192x192.png?v=v1",
-      "sizes": "192x192",
-      "type": "image/png"
-    },  
-    {  
-      "src": "/statics/icons/blank.png?v=v1",
-      "sizes": "512x512",  
-      "type": "image/png"  
-    }
-  ],
-	"theme_color": "#027be3",
-  "background_color": "#027be3",
-  "gcm_sender_id": "482941778795",
-  "display": "standalone",
-  "orientation": "any"
+    "name": "Wondrous-Bad\u00ed Today",
+    "short_name": "Wondrous Calendar",
+    "description": "Helping us to live by the Wondrous-Bad\u00ed' calendar, the official calendar of the Baha'i Faith.",
+    "start_url": "/",
+    "lang": "en-US",
+    "icons": [{
+            "src": "/statics/icons/android-chrome-192x192.png?v=v1",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/statics/icons/blank.png?v=v1",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#027be3",
+    "background_color": "#027be3",
+    "gcm_sender_id": "482941778795",
+    "display": "standalone",
+    "orientation": "any"
 }
