@@ -233,9 +233,10 @@ self.addEventListener('message', function(event) {
                 msg: 'echo'
             })))
             break;
-        case 'clearCache':
-            console.log('clearing cache')
+        case 'reloading':
+            console.log('sw clearing for reload')
             clearCache();
+            self.registration.unregister()
             break;
         case 'checkVersion':
             checkVersion();
@@ -321,7 +322,11 @@ self.addEventListener('fetch', function(event) {
 
                     if (shouldCache) {
                         return caches.open(getNameOfCurrentCache()).then(function(cache) {
-                            cache.put(event.request.clone(), response.clone());
+                            try {
+                                cache.put(event.request.clone(), response.clone());
+                            } catch (error) {
+                                console.log(`didn't cache when expected`, error)
+                            }
                             return response;
                         }).catch(function(err) {
                             console.log(err);

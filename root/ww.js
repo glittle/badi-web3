@@ -6,7 +6,7 @@ var timer2 = setTimeout(checkVersion, checkVersionFrequency);
 onmessage = function(ev) {
     switch (ev.data) {
         case 'start':
-            checkVersion(true);
+            // checkVersion(true);
             // doUpdate(); -- not helping... doesn't run in background on Android
             break;
         case 'stop':
