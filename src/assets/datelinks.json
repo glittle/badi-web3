@@ -722,5 +722,11 @@
         "icon": "-badiMonthA",
         "type": "img",
         "desc": "Calendar Image"
+    }],
+    "M-174-17": [{
+        "url": "174-17.png",
+        "icon": "-badiMonthA",
+        "type": "img",
+        "desc": "Calendar Image"
     }]
 }
