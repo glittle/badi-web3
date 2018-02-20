@@ -58,7 +58,7 @@
         },
         methods: {
             reload() {
-                // skip cache
+                // skip cache?
                 try {
                     navigator.serviceWorker.controller.postMessage('reloading');
                 } catch (error) {

@@ -76,10 +76,12 @@ export function doPulse(newTestTime) {
 
     store.commit('pulsed')
 
-    var newStamp = window._nowDi.stamp;
-    if (newStamp !== lastPulseStamp) {
-        lastPulseStamp = newStamp;
-        window._messageBus.$emit('changedDay');
+    if (window._nowDi) {
+        var newStamp = window._nowDi.stamp;
+        if (newStamp !== lastPulseStamp) {
+            lastPulseStamp = newStamp;
+            window._messageBus.$emit('changedDay');
+        }
     }
 
     // store._vm.$ga.event('doPulse', 'doPulse');

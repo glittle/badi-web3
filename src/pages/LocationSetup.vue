@@ -14,18 +14,18 @@
           <button @click="guessNo"
                   class="primary">No</button>
         </div>
-  
+
       </div>
       <div v-show="!guessing">
         <p>
-          Click "Lookup My Location" below, or manually adjust your location coordinates. They can be approximate, but must match the timezone!
+          Click "Lookup My Location" below, or manually set your location coordinates.
         </p>
         <div class="latlng">
           <div>
             <button @click="getLocation"
                     v-bind:class="{primary: name==='(unknown)'}"
                     class="small secondary">Lookup My Location
-  
+
             </button>
            <!--
             <button @click="openMap"
@@ -62,11 +62,14 @@
           <div>
             <span>Time zone:</span><span v-text="timezone"></span>
           </div>
+          <p>
+            The location can be approximate, but must be in the timezone to work correctly!
+          </p>
           <div>
             <button v-on:click="confirmLocation"
                     class="small primary">Yes! &nbsp; Use This Location</button>
           </div>
-  
+
         </div>
       </div>
     </div>

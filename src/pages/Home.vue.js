@@ -6,6 +6,7 @@ import Grid19 from '../components/Grid19';
 import Verse from './Verse';
 import prayerHelper from '../scripts/prayerLinkHelper'
 import dateLinksInfo from '../assets/datelinks.json'
+import * as notificationHelper from '../scripts/notificationHelper'
 
 
 import * as shared from '../scripts/shared'
@@ -22,6 +23,7 @@ export default {
             icon: '../statics/sunWhite.png',
             location: shared.coords.name,
             setupDone: false,
+            notificationStatus: shared.notifications.wanted,
             toggleVerseSpeech: false,
             tapNum: 0,
             tapBtnText: '',
@@ -41,7 +43,7 @@ export default {
     },
     computed: {
         verseTime() {
-            return (this.di.bNow.eve ? 'Evening' : 'Morning') + " <u>V</u>erse from Bahá'u'lláh";
+            return (this.di.bNow ? (this.di.bNow.eve ? 'Evening' : 'Daytime') : 'A') + " <u>V</u>erse from Bahá'u'lláh";
         },
         position() {
             return null;
@@ -74,10 +76,7 @@ export default {
         //   return html;
         // },
         sunDisplay() {
-            var di = this.di;
-            prepareSunDisplay(di, this.timeFormat);
-            drawChart(local.sun, this.timeFormat);
-            var now = moment(di.currentTime);
+            //var now = moment(di.currentTime);
             // var info = [
             //   di.bNow.eve ? 'Eve' : 'Day',
             //   now.format('H:mm')
@@ -234,6 +233,7 @@ export default {
         },
         refresh: function() {
             window.doPulse();
+            notificationHelper.showNow();
         },
         showPrayerOnline: function(link) {
             // read 'prayers.json'; json created with:
@@ -416,6 +416,18 @@ export default {
         changeLocation() {
             shared.coords.source = '?';
             this.setupDone = false;
+        },
+        afterSetupDone() {
+            var vue = this;
+
+            vue.setupDone = true;
+
+            vue.$store.state.pulseNum++;
+
+            prepareSunDisplay(vue.di, vue.timeFormat);
+            setTimeout(function() {
+                drawChart(local.sun, vue.timeFormat, true);
+            }, 10);
         }
     },
     beforeMount() {
@@ -424,8 +436,26 @@ export default {
         // this.pageList = routeList.default.menuPages;
     },
     mounted() {
-        // drawChart(local.sun)
         var vue = this;
+
+        _messageBus.$on('setupDone', function() {
+            vue.afterSetupDone();
+        });
+
+        if (shared.coords.sourceIsSet) {
+            console.log('emit setupDone 2')
+            _messageBus.$emit('setupDone');
+        }
+
+        if (!shared.coords.tz) {
+            shared.coords.tz = new Date().getTimezoneOffset();
+        }
+
+        // (adsbygoogle = window.adsbygoogle || []).push({});
+
+        window.addEventListener('resize', this.handleResize)
+        window.addEventListener('keyup', this.keyup)
+
         this.makeTapBlocks();
         this.updateTapDisplay();
         this.tapSoundForSteps.addEventListener("ended", function() {
@@ -440,29 +470,24 @@ export default {
                 }
             }
         });
-        // console.log(shared.coords.source)
-        if (!this.setupDone) {
-            if (shared.coords.sourceIsSet) {
-                this.setupDone = true;
-            }
-        }
-        if (!shared.coords.tz) {
-            shared.coords.tz = new Date().getTimezoneOffset();
-        }
 
-        // (adsbygoogle = window.adsbygoogle || []).push({});
-
-        window.addEventListener('resize', this.handleResize)
-        window.addEventListener('keyup', this.keyup)
+        _messageBus.$on('notificationPermissionChanged', function() {
+            vue.notificationStatus = shared.notifications.wanted;
+        });
 
         _messageBus.$on('locationChanged', function() {
+            vue.$store.state.pulseNum++;
+
+            prepareSunDisplay(vue.di, vue.timeFormat);
+
             vue.location = shared.coords.name
                 // console.log(shared.coords.source)
-            if (!vue.setupDone) {
-                if (shared.coords.sourceIsSet) {
-                    vue.setupDone = true;
-                }
-            }
+                // if (!vue.setupDone) {
+                //     if (shared.coords.sourceIsSet) {
+                //         console.log('emit setupDone 1')
+                //         _messageBus.$emit('setupDone');
+                //     }
+                // }
         });
 
 
@@ -679,7 +704,7 @@ function drawChart(sun, timeFormat, redraw) {
     //   setEnd: null,
     //   now: now
     if (!document.getElementById('sunChart')) {
-        // console.log('chart update not possible')
+        console.log('sunChart does not exist')
         return;
     }
 

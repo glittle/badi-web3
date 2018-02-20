@@ -1,16 +1,17 @@
 <template>
   <article class="layout-padding tightTop Home">
     <div v-if="!setupDone"
-         class="card">
+         class="card"
+         v-cloak>
       <div class="locationHolder">
         <location-setup></location-setup>
       </div>
     </div>
 
-    <div class="card">
+    <div v-if="setupDone" class="card">
       <div class="heading">
         <span class="desc">
-                                        <span v-html="sunDisplay"></span>
+        <span v-html="sunDisplay"></span>
         <span v-html="location"
               class="bold"></span>
         <button v-on:click="changeLocation"
@@ -18,7 +19,7 @@
           <i class="clickable">place</i></button>
         </span>
         <span class="type">
-                    <button v-on:click="refresh()" class="push small">
+                    <button v-on:click="refresh" class="push small">
                       <i class="clickable">autorenew</i></button>
                     …in this Day
                     </span>
@@ -29,15 +30,21 @@
       <Grid19 v-bind:info="info('vahid')"></Grid19>
       <Grid19 v-bind:info="info('kull')"></Grid19>
     </div>
-    <div class="card verse">
+    <div v-show="setupDone && notificationStatus==='default'"
+         class="card">
+      <div class="locationHolder">
+        <notifications></notifications>
+      </div>
+    </div>
+    <div v-show="setupDone" class="card verse">
       <div class="heading">
         <span class="desc"
               v-html="verseTime"></span>
         <span>
-                                          <button
-                                            v-on:click="$router.push('verse')"
-                                            class="small light round">More</button>
-                                        </span>
+          <button
+            v-on:click="$router.push('verse')"
+            class="small light round">More</button>
+        </span>
       </div>
       <Verse v-bind:toggleVerseSpeech="toggleVerseSpeech"></Verse>
     </div>
@@ -109,7 +116,7 @@
            autobuffer="autobuffer">
       <source src="/statics/gongLong.mp3">
     </audio>
-    <div class="card calendar">
+    <div v-show="setupDone" class="card calendar">
       <div class="heading">
         <span class="desc">Calendar for this month</span>
       </div>
@@ -120,7 +127,7 @@
         </div>
       </div>
     </div>
-    <div class="card share">
+    <div v-show="setupDone" class="card share">
       <div class="heading">
         <span class="desc">Upcoming Dates</span>
         <span>

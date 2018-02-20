@@ -22,4 +22,4 @@ See ["Status"](https://docs.google.com/document/d/1Q1RtnOocBjW917CHceBbJPSljlDSN
 - talkify - to read the verse aloud
 - axios - to retrieve google map api data
 - service worker - to enable local notifictions
-- OneSignal - to enable external push for notifications
+
