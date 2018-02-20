@@ -16,6 +16,9 @@
         }
     ],
     "theme_color": "#027be3",
+    "permissions": {
+        "desktop-notification": {}
+    },
     "background_color": "#027be3",
     "gcm_sender_id": "482941778795",
     "display": "standalone",

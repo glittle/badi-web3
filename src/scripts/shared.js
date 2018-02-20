@@ -9,6 +9,11 @@ var speech = {
         storage.set('volume', v);
     }
 }
+var notifications = {
+    get wanted() {
+        return Notification ? Notification.permission : 'denied';
+    }
+}
 var coords = {
     get lat() {
         return storage.get('coord.lat', 0)
@@ -79,9 +84,16 @@ function makeId(day) {
     return id;
 }
 
+function remoteSendTag(name, value) {
+    // was OneSignal.sendTag
+    console.log('want to send', name, value);
+}
+
 export {
     coords,
     formats,
     speech,
-    makeId
+    notifications,
+    makeId,
+    remoteSendTag
 }

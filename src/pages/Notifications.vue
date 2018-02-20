@@ -5,10 +5,19 @@
       <p>Unfortunately, we can't do notifications on this device.</p>
     </div>
     <div v-else>
-      <div v-if="permission==='default'"
+      <div v-if="notificationsWanted==='denied'">
+        <p>You have previously denied permission to show notifications. If you want to change that, you will need to use
+            your browser's settings and unblock notifications for this website.</p>
+            <p>
+                <span>If you do unblock notifications, click </span>
+                <button class="small primary"
+                        v-on:click="askForPush">Ask Again</button> to allow for notifications.
+              </p>
+      </div>
+      <div v-if="notificationsWanted==='default'"
            v-cloak>
         <p v-if="!embedded">
-          On most computer and phones, we can show you a notification with today's date. This is not required, but you should try it!
+          Your phone or computer can show today's date in a "notification". This is not required, but you should try it!
         </p>
         <p>
           <span>Click</span>
@@ -16,7 +25,7 @@
                   v-on:click="askForPush">Ask Now</button> to allow for notifications.
         </p>
       </div>
-      <div class="section">
+      <div v-if="notificationsWanted==='granted'">
         <p>
           Click
           <button class="small primary"

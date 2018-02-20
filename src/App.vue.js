@@ -1,6 +1,6 @@
 import routeList from './pages/routes'
 import badiCalc from './scripts/badiCalc'
-import * as notify from './scripts/notification'
+import * as notificationHelper from './scripts/notificationHelper'
 import * as shared from './scripts/shared'
 import * as store from './scripts/store'
 import storage from './scripts/storage'
@@ -36,8 +36,11 @@ export default {
         //         </h2>*/
         //     },
         topDate: function() {
-            var template = this.di.bNow.eve ? shared.formats.topTitleEve : shared.formats.topTitleDay;
-            return template.filledWith(this.di)
+            var di = this.di;
+            if (!di || !di.stamp) return '';
+
+            var template = di.bNow.eve ? shared.formats.topTitleEve : shared.formats.topTitleDay;
+            return template.filledWith(di)
         },
         version() {
             var age = moment(versionInfo.buildDate, "_ MMM D YYYY HH:mm:ss _Z").fromNow();
@@ -76,21 +79,21 @@ export default {
                             console.log('ww requesting pulse');
                             store.doPulse();
                             break;
-                        case 'checkVersion':
-                            if (navigator.serviceWorker && navigator.serviceWorker.controller) {
-                                console.log('checking version');
-                                navigator.serviceWorker.controller.postMessage('checkVersion');
-                            } else {
-                                console.log('sw not active, cannot check version');
-                            }
-                            break;
+                            // case 'checkVersion':
+                            //     if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+                            //         console.log('checking version');
+                            //         navigator.serviceWorker.controller.postMessage('checkVersion');
+                            //     } else {
+                            //         console.log('sw not active, cannot check version');
+                            //     }
+                            //     break;
                     }
                 }
 
             }
 
             if ('SharedWorker' in window) {
-                console.log('create shared worker')
+                // console.log('create shared worker')
                 vue.sharedWorker = new SharedWorker("shared-worker.js");
 
                 vue.sharedWorker.port.onmessage = function(e) {
@@ -116,6 +119,9 @@ export default {
         },
         scheduleNextNotification(di) {
             // at next midnight or sunset
+            if (!di || !di.stamp) {
+                return;
+            }
             var sunset = moment(di.frag2SunTimes.sunset);
             var midnight = moment().startOf('day').add(1, 'day');
             var next = moment.min(sunset, midnight);
@@ -155,12 +161,15 @@ export default {
                 }
             }
             var di = badiCalc.di;
+            if (!di) {
+                return;
+            }
             var key = di.stamp;
             // console.log(key, lastNotificationKey);
             if (key !== this.lastNotificationKey) {
                 // console.log('do notify, schedule next')
                 this.di = di;
-                notify.showNow(di);
+                notificationHelper.showNow(di);
 
                 this.scheduleNextNotification(di);
             }

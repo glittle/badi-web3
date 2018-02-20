@@ -1,7 +1,7 @@
-var checkVersionFrequency = 1000 * 60 * 60 * 12; // 12 hours
+// var checkVersionFrequency = 1000 * 60 * 60 * 12; // 12 hours
 
 var timer1 = null;
-var timer2 = setTimeout(checkVersion, checkVersionFrequency);
+// var timer2 = setTimeout(checkVersion, checkVersionFrequency);
 
 onmessage = function(ev) {
     switch (ev.data) {
@@ -24,18 +24,18 @@ onmessage = function(ev) {
 //     }, 60 * 1000);
 // }
 
-function checkVersion(delayed) {
-    clearTimeout(timer2);
+// function checkVersion(delayed) {
+//     clearTimeout(timer2);
 
-    if (delayed === true) {
-        console.log('will check version in a few seconds')
-        setTimeout(function() {
-            postMessage('checkVersion');
-        }, 4000);
+//     if (delayed === true) {
+//         console.log('will check version in a few seconds')
+//         setTimeout(function() {
+//             postMessage('checkVersion');
+//         }, 4000);
 
-    } else {
-        postMessage('checkVersion');
-    }
-    // set timer for next time
-    timer2 = setTimeout(checkVersion, checkVersionFrequency);
-}
+//     } else {
+//         postMessage('checkVersion');
+//     }
+//     // set timer for next time
+//     timer2 = setTimeout(checkVersion, checkVersionFrequency);
+// }

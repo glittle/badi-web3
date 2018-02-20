@@ -28,33 +28,7 @@ export default {
             makeId: shared.makeId
         }
     },
-    watch: {
-        includeHolyDays: function(v) {
-            storage.set('includeHolyDays', v)
-        },
-        includeFeasts: function(v) {
-            storage.set('includeFeasts', v)
-        },
-        includeOther: function(v) {
-            storage.set('includeOther', v)
-        },
-        includeFast: function(v) {
-            storage.set('includeFast', v)
-        },
-        suggestedStart: function(v) {
-            storage.set('suggestedStart', v)
-            var vue = this;
-            vue.list = [];
-            // TODO: does not redisplay if reusing previous year
-            for (var i = vue.firstYear; i <= vue.lastYear; i++) {
-                vue.loadDates(i);
-            }
-        },
-    },
-    created: function() {
-        this.prepare();
-        _messageBus.$on('changedDay', this.prepare);
-    },
+
     computed: {
         nextYear: function() {
             return this.lastYear + 1;
@@ -80,6 +54,43 @@ export default {
             }
             return this.list.filter(item => filter.includes(item.Type));
         },
+    },
+    watch: {
+        includeHolyDays: function(v) {
+            storage.set('includeHolyDays', v)
+        },
+        includeFeasts: function(v) {
+            storage.set('includeFeasts', v)
+        },
+        includeOther: function(v) {
+            storage.set('includeOther', v)
+        },
+        includeFast: function(v) {
+            storage.set('includeFast', v)
+        },
+        suggestedStart: function(v) {
+            storage.set('suggestedStart', v)
+            var vue = this;
+            vue.list = [];
+            // TODO: does not redisplay if reusing previous year
+            for (var i = vue.firstYear; i <= vue.lastYear; i++) {
+                vue.loadDates(i);
+            }
+        },
+    },
+    created: function() {
+        var vue = this;
+
+        _messageBus.$on('setupDone', function() {
+            vue.prepare();
+        })
+
+        if (!badi.di || !badi.di.stamp) {
+            vue.$router.push('/');
+            return;
+        }
+        this.prepare();
+        _messageBus.$on('changedDay', this.prepare);
     },
     methods: {
         prepare: function() {
@@ -200,6 +211,10 @@ export default {
         },
         loadDates: function(year) {
             var vue = this;
+            if (!window._nowDi) {
+                console.log('skip', year, ' not ready')
+                return;
+            }
             if (year < vue.firstYear) {
                 vue.firstYear = year
             }
