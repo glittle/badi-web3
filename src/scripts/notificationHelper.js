@@ -59,23 +59,14 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
         html.innerHTML = iconText;
         iconText = html.innerText;
 
-        // prepareImage(function () {
-        // var icon = generateOnImage(iconDayNum);
-
-        // if (navigator.serviceWorker) {
-        //     navigator.serviceWorker.ready.then(function(registration) {
         var options = {
             body: note2,
-            // icon: icon,
             icon: '/statics/images/d{0}.png'.filledWith(iconDayNum),
-            //image: '/images/badiIcon32.png',
-            //badge: '/images/19.png',
             badge: generateStatusIcon(iconText, iconDayNum, 'center', 128),
             tag: 'badi',
             data: {
                 url: location.origin
             },
-            //vibrate: makeSound ? [200, 100, 200, 100, 200, 100, 400] : null,
             silent: !makeSound,
             renotify: !makeSound,
             requireInteraction: true
@@ -84,20 +75,36 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
             options.vibrate = [200, 100, 200, 100, 200, 100, 400]
         }
 
-        var n = new Notification(note1, options);
-        // Remove the notification from Notification Center when clicked.
-        n.onclick = function() {
-            console.log('Notification clicked');
-            // registration.cl
-            this.close();
-        };
-        // Callback function when the notification is closed.
-        n.onclose = function() {
-            // console.log('Notification closed');
-        };
-        //     });
-        // }
-        // })
+        // prepareImage(function () {
+        // var icon = generateOnImage(iconDayNum);
+
+        if (navigator.serviceWorker) {
+            navigator.serviceWorker.ready.then(function(registration) {
+                var n = registration.showNotification(note1, options);
+                // Remove the notification from Notification Center when clicked.
+                n.onclick = function() {
+                    console.log('Notification clicked');
+                    // registration.cl
+                    this.close();
+                };
+                // Callback function when the notification is closed.
+                n.onclose = function() {
+                    // console.log('Notification closed');
+                };
+            });
+        } else {
+            var n = new Notification(note1, options);
+            // Remove the notification from Notification Center when clicked.
+            n.onclick = function() {
+                console.log('Notification clicked');
+                // registration.cl
+                this.close();
+            };
+            // Callback function when the notification is closed.
+            n.onclose = function() {
+                // console.log('Notification closed');
+            };
+        }
     }
     // If the user does not want notifications to come from this domain...
     else if (Notification.permission === 'denied') {
