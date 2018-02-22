@@ -11,6 +11,9 @@ var speech = {
 }
 var notifications = {
     get wanted() {
+        if (typeof Notification === 'undefined') {
+            return 'denied';
+        }
         return Notification ? Notification.permission : 'denied';
     }
 }
