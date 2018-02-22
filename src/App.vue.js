@@ -131,14 +131,16 @@ export default {
             console.log('scheduling pulse at', next.format(), 'in', moment.duration(delay, 'ms').humanize())
 
             var vue = this;
-            setTimeout(function() {
-                vue.sharedWorker.port.postMessage({
-                    code: 'doCallback',
-                    cbCode: 'pulse',
-                    delay: delay,
-                    key: di.stamp
-                });
-            }, 0)
+            if (vue.sharedWorker) {
+                setTimeout(function() {
+                    vue.sharedWorker.port.postMessage({
+                        code: 'doCallback',
+                        cbCode: 'pulse',
+                        delay: delay,
+                        key: di.stamp
+                    });
+                }, 0)
+            }
         },
         // goToNewSite() {
         //   var vue = this;

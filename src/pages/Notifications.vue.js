@@ -94,7 +94,7 @@ export default {
     },
     computed: {
         localPushSupported: function() {
-            return Notification ? true : false;
+            return typeof Notification === 'undefined' ? false : true;
             // return 'serviceWorker' in navigator && 'PushManager' in window;
         },
     },

@@ -229,6 +229,7 @@ div.line b {
 }
 .tap95card #tapBlocks div {
   height: 10px;
+  white-space: nowrap;
 }
 .tap95card #tapBlocks span {
   background-color: #eee;
