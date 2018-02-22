@@ -13,6 +13,8 @@ if (workbox) {
             workbox.strategies.staleWhileRevalidate()
         );
 
+        workbox.skipWaiting();
+
         workbox.googleAnalytics.initialize();
     }
 
