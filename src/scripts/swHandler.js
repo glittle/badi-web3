@@ -5,6 +5,21 @@ if ('serviceWorker' in navigator) {
                 scope: '/'
             }).then(function(registration) {
                 console.log("'sw-badi-web4.js' active with scope: ", registration.scope);
+
+                // var serviceWorker;
+                // if (registration.installing) {
+                //     serviceWorker = registration.installing;
+                // } else if (registration.waiting) {
+                //     serviceWorker = registration.waiting;
+                // } else if (registration.active) {
+                //     serviceWorker = registration.active;
+                // }
+
+                // if (serviceWorker) {
+                //     console.log(serviceWorker)
+                //     serviceWorker.skipWaiting();
+                // }
+
                 // return navigator.serviceWorker.ready;
             })
             .catch(function(error) {

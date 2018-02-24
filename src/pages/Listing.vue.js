@@ -320,9 +320,9 @@ function extendDayInfo(vue, d, diff) {
 function sortDates(a, b) {
     return a.GDate < b.GDate ? -1 :
         a.GDate > b.GDate ? 1 :
+        a.Type === 'Fast' ? 1 :
         a.Type === 'M' ? -1 :
         a.Type === 'HS' ? -1 :
         a.Type === 'HO' ? -1 :
-        a.Type === 'Fast' ? -1 :
         1;
 }

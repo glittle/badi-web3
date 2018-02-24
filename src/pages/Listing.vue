@@ -132,8 +132,6 @@
               <div class=dayName
                    v-html="day.NameEn"></div>
               <div>
-                <span v-html="day.D"></span>
-                <span>-</span>
                 <span v-html="day.FastDay"></span>
               </div>
             </div>
