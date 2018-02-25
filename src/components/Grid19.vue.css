@@ -51,6 +51,9 @@
   opacity: 0.35;
   background-color: #fafafa;
 }
+.Grid19 .cell.ayyamiha {
+  border-right: 3px double #333;
+}
 .Grid19 .elements .a {
   width: 100%;
   display: block;

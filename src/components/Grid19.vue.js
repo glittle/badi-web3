@@ -23,6 +23,9 @@ export default {
                         continue;
                     } else {
                         cell.style.visibility = 'visible'
+                        if (info.num === 0 && c === 18) {
+                            cell.classList.add("ayyamiha");
+                        }
                     }
 
                     var a = cell.getElementsByClassName('a')[0];

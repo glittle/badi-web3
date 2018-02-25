@@ -191,7 +191,7 @@ export default {
                         mid = '<b>{bMonthNamePri}</b> ({bMonthNameSec})'.filledWith(di);
                     } else {
                         desc = '<b>{bMonthNamePri}</b> ({bMonthNameSec})'.filledWith(di);
-                        num = 18.5;
+                        num = 0;
                     }
                     break;
                 case 'vahid':
