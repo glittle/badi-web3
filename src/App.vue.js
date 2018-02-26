@@ -128,10 +128,10 @@ export default {
 
             var delay = next.valueOf() - moment().valueOf();
 
-            console.log('scheduling pulse at', next.format(), 'in', moment.duration(delay, 'ms').humanize())
 
             var vue = this;
             if (vue.sharedWorker) {
+                console.log('scheduling sw pulse at', next.format(), 'in', moment.duration(delay, 'ms').humanize())
                 setTimeout(function() {
                     vue.sharedWorker.port.postMessage({
                         code: 'doCallback',

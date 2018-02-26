@@ -17,6 +17,13 @@ if (workbox) {
 
 
     workbox.googleAnalytics.initialize();
+
+    // Shows logs, warnings and errors.
+    // workbox.core.setLogLevel(workbox.core.LOG_LEVELS.log);
+
+    // Show warnings and errors.
+    workbox.core.setLogLevel(workbox.core.LOG_LEVELS.warn);
+
     // }
 
 } else {

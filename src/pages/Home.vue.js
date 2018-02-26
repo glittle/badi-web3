@@ -114,6 +114,101 @@ export default {
             return url;
         }
     },
+
+    beforeMount() {
+        // console.log('before mount', routeList)
+        // this.pages = routeList.default.named;
+        // this.pageList = routeList.default.menuPages;
+    },
+    mounted() {
+        var vue = this;
+
+        _messageBus.$on('setupDone', function() {
+            vue.afterSetupDone();
+        });
+
+        if (shared.coords.sourceIsSet) {
+            console.log('emit setupDone 2')
+            _messageBus.$emit('setupDone');
+        }
+
+        if (!shared.coords.tz) {
+            shared.coords.tz = new Date().getTimezoneOffset();
+        }
+
+        // (adsbygoogle = window.adsbygoogle || []).push({});
+
+        window.addEventListener('resize', this.handleResize)
+        window.addEventListener('keyup', this.keyup)
+
+        this.makeTapBlocks();
+        this.updateTapDisplay();
+        this.tapSoundForSteps.addEventListener("ended", function() {
+            // console.log('sounded', vue.tapNum, vue.tapSounds)
+            if (vue.tapChimeAfter) {
+                if (vue.tapNum === 95) {
+                    // console.log('play 95');
+                    vue.playSound(vue.tapSoundForEnd);
+                } else if (vue.tapNum % 19 === 0) {
+                    // console.log('play', 19, vue.tapNum);
+                    vue.playSound(vue.tapSoundForSteps19);
+                }
+            }
+        });
+
+        document.addEventListener('pulsed', vue.onPulse, false)
+
+        _messageBus.$on('notificationPermissionChanged', function() {
+            vue.notificationStatus = shared.notifications.wanted;
+        });
+
+        _messageBus.$on('locationChanged', function() {
+            vue.$store.state.pulseNum++;
+
+            prepareSunDisplay(vue.di, vue.timeFormat);
+
+            vue.location = shared.coords.name
+                // console.log(shared.coords.source)
+                // if (!vue.setupDone) {
+                //     if (shared.coords.sourceIsSet) {
+                //         console.log('emit setupDone 1')
+                //         _messageBus.$emit('setupDone');
+                //     }
+                // }
+        });
+
+
+    },
+    activated() {
+        var vue = this;
+        if (shared.coords.tz && shared.coords.tz !== new Date().getTimezoneOffset()) {
+            shared.coords.source = 'tz?';
+            vue.setupDone = false;
+        }
+        drawChart(local.sun, this.timeFormat, true)
+        setTimeout(function() {
+            vue.$ga.event('stillOn', 'home');
+        }, 30000)
+    },
+    // doWorkOnPulse() {
+    //   console.log('pulse in home');
+    //   drawChart(local.sun)
+    // },
+    // updated() {
+    // console.log('mounted', routeList)
+    // this.$nextTick(() => {
+    // })
+    // this.pulseNumber = pulse.pulseNumber
+    // fillDayDisplay(this)
+    // prepareSunDisplay(this)
+    //   drawChart(local.sun)
+    // },
+    beforeUpdate() {
+        // console.log('update', routeList)
+    },
+    beforeDestroy() {
+        window.removeEventListener('resize', this.handleResize)
+    },
     watch: {
         tapSounds: function(a) {
             storage.set('tapSounds', a);
@@ -134,31 +229,38 @@ export default {
             this.updateTapDisplay();
         },
         tapAutoDelay: function(a, b) {
-                if (isNaN(a)) {
-                    // not sure why, but sometimes get isNaN
-                    // reset it from last known good value
-                    console.log('bad delay', a, b)
-                    this.tapAutoDelay = storage.get('tapAutoDelay', 2000);
-                    return;
-                }
-                storage.set('tapAutoDelay', a);
-                clearTimeout(this.tapAutoTimer);
-                if (this.tapAutoRunning) {
-                    // determine time since last tap
-                    var elapsed = new Date().getTime() - this.tapLastTime;
-                    var timeTillNext = Math.max(0, this.tapAutoDelay - elapsed);
-                    // console.log('new delay', elapsed, timeTillNext, this.tapAutoDelay);
-
-                    this.tapAutoTimer = setTimeout(this.doTap, timeTillNext);
-                }
+            if (isNaN(a)) {
+                // not sure why, but sometimes get isNaN
+                // reset it from last known good value
+                console.log('bad delay', a, b)
+                this.tapAutoDelay = storage.get('tapAutoDelay', 2000);
+                return;
             }
-            //   di: function () {
-            //     console.log('di changed')
-            //     // fillDayDisplay(this)
-            //     // prepareSunDisplay(this)
-            //   }
+            storage.set('tapAutoDelay', a);
+            clearTimeout(this.tapAutoTimer);
+            if (this.tapAutoRunning) {
+                // determine time since last tap
+                var elapsed = new Date().getTime() - this.tapLastTime;
+                var timeTillNext = Math.max(0, this.tapAutoDelay - elapsed);
+                // console.log('new delay', elapsed, timeTillNext, this.tapAutoDelay);
+
+                this.tapAutoTimer = setTimeout(this.doTap, timeTillNext);
+            }
+        },
+        // di: function() {
+        //     console.log('di changed')
+        //     this.drawChart();
+        //     // fillDayDisplay(this)
+        //     // prepareSunDisplay(this)
+        // }
     },
     methods: {
+        onPulse: function() {
+            var vue = this;
+            vue.di = badiCalc.di;
+            prepareSunDisplay(vue.di, vue.timeFormat);
+            this.drawChart();
+        },
         info: function(mode) {
             var di = this.di;
             var type, type2, desc, num;
@@ -392,7 +494,7 @@ export default {
             host.innerHTML = html.join('');
         },
         drawChart: function() {
-            drawChart(local.sun, this.timeFormat, true);
+            drawChart(local.sun, this.timeFormat);
         },
         keyup: function(ev) {
             switch (ev.code) {
@@ -429,98 +531,6 @@ export default {
                 drawChart(local.sun, vue.timeFormat, true);
             }, 10);
         }
-    },
-    beforeMount() {
-        // console.log('before mount', routeList)
-        // this.pages = routeList.default.named;
-        // this.pageList = routeList.default.menuPages;
-    },
-    mounted() {
-        var vue = this;
-
-        _messageBus.$on('setupDone', function() {
-            vue.afterSetupDone();
-        });
-
-        if (shared.coords.sourceIsSet) {
-            console.log('emit setupDone 2')
-            _messageBus.$emit('setupDone');
-        }
-
-        if (!shared.coords.tz) {
-            shared.coords.tz = new Date().getTimezoneOffset();
-        }
-
-        // (adsbygoogle = window.adsbygoogle || []).push({});
-
-        window.addEventListener('resize', this.handleResize)
-        window.addEventListener('keyup', this.keyup)
-
-        this.makeTapBlocks();
-        this.updateTapDisplay();
-        this.tapSoundForSteps.addEventListener("ended", function() {
-            // console.log('sounded', vue.tapNum, vue.tapSounds)
-            if (vue.tapChimeAfter) {
-                if (vue.tapNum === 95) {
-                    // console.log('play 95');
-                    vue.playSound(vue.tapSoundForEnd);
-                } else if (vue.tapNum % 19 === 0) {
-                    // console.log('play', 19, vue.tapNum);
-                    vue.playSound(vue.tapSoundForSteps19);
-                }
-            }
-        });
-
-        _messageBus.$on('notificationPermissionChanged', function() {
-            vue.notificationStatus = shared.notifications.wanted;
-        });
-
-        _messageBus.$on('locationChanged', function() {
-            vue.$store.state.pulseNum++;
-
-            prepareSunDisplay(vue.di, vue.timeFormat);
-
-            vue.location = shared.coords.name
-                // console.log(shared.coords.source)
-                // if (!vue.setupDone) {
-                //     if (shared.coords.sourceIsSet) {
-                //         console.log('emit setupDone 1')
-                //         _messageBus.$emit('setupDone');
-                //     }
-                // }
-        });
-
-
-    },
-    activated() {
-        var vue = this;
-        if (shared.coords.tz && shared.coords.tz !== new Date().getTimezoneOffset()) {
-            shared.coords.source = 'tz?';
-            vue.setupDone = false;
-        }
-        drawChart(local.sun, this.timeFormat, true)
-        setTimeout(function() {
-            vue.$ga.event('stillOn', 'home');
-        }, 30000)
-    },
-    // doWorkOnPulse() {
-    //   console.log('pulse in home');
-    //   drawChart(local.sun)
-    // },
-    // updated() {
-    // console.log('mounted', routeList)
-    // this.$nextTick(() => {
-    // })
-    // this.pulseNumber = pulse.pulseNumber
-    // fillDayDisplay(this)
-    // prepareSunDisplay(this)
-    //   drawChart(local.sun)
-    // },
-    beforeUpdate() {
-        // console.log('update', routeList)
-    },
-    beforeDestroy() {
-        window.removeEventListener('resize', this.handleResize)
     },
 }
 

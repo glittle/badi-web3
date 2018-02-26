@@ -7,7 +7,7 @@ onmessage = function(ev) {
     switch (ev.data) {
         case 'start':
             // checkVersion(true);
-            // doUpdate(); -- not helping... doesn't run in background on Android
+            doUpdate();
             break;
         case 'stop':
             clearTimeout(timer1);
@@ -15,14 +15,15 @@ onmessage = function(ev) {
     }
 }
 
-// function doUpdate() {
-//     clearTimeout(timer1);
+function doUpdate() {
+    //-- not helping... doesn't run in background on Android?
+    // clearTimeout(timer1);
 
-//     timer1 = setTimeout(function () {
-//         postMessage('pulse');
-//         doUpdate();
-//     }, 60 * 1000);
-// }
+    // timer1 = setTimeout(function() {
+    //     postMessage('pulse');
+    //     doUpdate();
+    // }, 60 * 1000);
+}
 
 // function checkVersion(delayed) {
 //     clearTimeout(timer2);
