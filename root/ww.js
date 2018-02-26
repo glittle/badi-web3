@@ -40,3 +40,10 @@ function doUpdate() {
 //     // set timer for next time
 //     timer2 = setTimeout(checkVersion, checkVersionFrequency);
 // }
+
+function prepMessaging() {
+    console.log('prep messaging');
+
+
+
+}

@@ -111,7 +111,7 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
         // ...remain silent.
         console.log('permission to notify was denied')
     }
-};
+}
 
 // function prepareImage(cb) {
 //   image = new Image();

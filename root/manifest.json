@@ -20,7 +20,7 @@
         "desktop-notification": {}
     },
     "background_color": "#027be3",
-    "gcm_sender_id": "482941778795",
+    "gcm_sender_id": "103953800507",
     "display": "standalone",
     "orientation": "any"
 }
