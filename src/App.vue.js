@@ -4,6 +4,7 @@ import * as notificationHelper from './scripts/notificationHelper'
 import * as shared from './scripts/shared'
 import * as store from './scripts/store'
 import storage from './scripts/storage'
+import axios from 'axios'
 
 const moment = require('moment-timezone');
 var versionInfo = require('../root/version.json')
@@ -19,7 +20,9 @@ export default {
             routeName: this.$route.name,
             myWorker: null,
             sharedWorker: null,
-            lastNotificationKey: null
+            lastNotificationKey: null,
+            lastServerCall: moment(),
+            lastTimeout: null
 
             // oldRedirectCountdown: 20
         }
@@ -130,17 +133,53 @@ export default {
 
 
             var vue = this;
-            if (vue.sharedWorker) {
-                console.log('scheduling sw pulse at', next.format(), 'in', moment.duration(delay, 'ms').humanize())
-                setTimeout(function() {
-                    vue.sharedWorker.port.postMessage({
-                        code: 'doCallback',
-                        cbCode: 'pulse',
-                        delay: delay,
-                        key: di.stamp
-                    });
-                }, 0)
+
+            // if this window is still active, this may work
+            clearTimeout(vue.lastTimeout);
+
+            vue.lastTimeout = setTimeout(function() {
+                console.log('calling doPulse from local setTimeout')
+                window.doPulse();
+            }, delay);
+
+            if (vue.lastServerCall.format() === next.format()) {
+                //console.log('server callback already requested')
+
+            } else {
+                var firebaseToken = storage.get('firebaseToken', '')
+                if (firebaseToken) {
+                    console.log('asking server to call back in', moment.duration(delay, 'ms').humanize(), 'at', next.format());
+                    console.log('with token', firebaseToken.substring(0, 20) + '...')
+                    var host = window.location.hostname;
+                    var url = '{0}'.filledWith(host === 'localhost' ?
+                        'http://localhost:8003' :
+                        window.location.host + '/wc-notifier');
+
+                    axios.post(url, {
+                            token: firebaseToken,
+                            delay: delay
+                        })
+                        .then(function(response) {
+                            if (response.data.status === 'received') {
+                                vue.lastServerCall = next;
+                                console.log('server confirmed... will call back at', next.format());
+                            }
+                        }).catch(function(error) {
+                            console.log('axios error', error.message);
+                        });
+                }
             }
+            // if (vue.sharedWorker) {
+            //     console.log('scheduling sw pulse at', next.format(), 'in', moment.duration(delay, 'ms').humanize())
+            //     setTimeout(function() {
+            //         vue.sharedWorker.port.postMessage({
+            //             code: 'doCallback',
+            //             cbCode: 'pulse',
+            //             delay: delay,
+            //             key: di.stamp
+            //         });
+            //     }, 0)
+            // }
         },
         // goToNewSite() {
         //   var vue = this;

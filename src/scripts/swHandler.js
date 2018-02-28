@@ -1,3 +1,5 @@
+import storage from './storage'
+
 if ('serviceWorker' in navigator) {
     // console.log('service workers supported')
     window.addEventListener('load', function() {
@@ -37,25 +39,25 @@ if ('serviceWorker' in navigator) {
     console.log('service workers NOT supported')
 }
 
-function sendTokenToServer(token) {
-    console.log('send token', token)
-}
+// function sendTokenToServer(token) {
+//     console.log('send token', token)
+// }
 
-function setTokenSentToServer(wasSent) {
-    console.log('setToken', wasSent)
-}
+// function setTokenSentToServer(wasSent) {
+//     console.log('setToken', wasSent)
+// }
 
-function showToken(msg, err) {
-    console.log('showtoken', msg, err)
-}
+// function showToken(msg, err) {
+//     console.log('showtoken', msg, err)
+// }
 
-function updateUIForPushEnabled(token) {
-    console.log('updateUI token', token)
-}
+// function updateUIForPushEnabled(token) {
+//     console.log('updateUI token', token)
+// }
 
-function updateUIForPushPermissionRequired() {
-    console.log('updateUI req')
-}
+// function updateUIForPushPermissionRequired() {
+//     console.log('updateUI req')
+// }
 
 function setupMessaging(registration) {
     const messaging = window.firebase.messaging();
@@ -68,42 +70,45 @@ function setupMessaging(registration) {
 
             messaging.getToken()
                 .then(function(currentToken) {
-                    console.log('got token', currentToken)
                     if (currentToken) {
-                        sendTokenToServer(currentToken);
-                        updateUIForPushEnabled(currentToken);
+                        console.log('my token', currentToken.substring(0, 20) + '...')
+                        storage.set('firebaseToken', currentToken);
+                        // sendTokenToServer(currentToken);
+                        // updateUIForPushEnabled(currentToken);
                     } else {
                         // Show permission request.
                         console.log('No Instance ID token available. Request permission to generate one.');
                         // Show permission UI.
-                        updateUIForPushPermissionRequired();
-                        setTokenSentToServer(false);
+                        //  updateUIForPushPermissionRequired();
+                        // setTokenSentToServer(false);
                     }
                 })
                 .catch(function(err) {
                     console.log('An error occurred while retrieving token. ', err);
-                    showToken('Error retrieving Instance ID token. ', err);
-                    setTokenSentToServer(false);
+                    // showToken('Error retrieving Instance ID token. ', err);
+                    // setTokenSentToServer(false);
                 });
         })
         .catch(function(err) {
-            console.log('Unable to get permission to notify.', err);
+            console.log('Unable to get permission to notify. Notification is not supported in Incognito/Private tabs.');
+            console.log(err);
         });
 
     messaging.onTokenRefresh(function() {
         messaging.getToken()
             .then(function(refreshedToken) {
                 console.log('Token refreshed.');
+                storage.set('firebaseToken', refreshedToken);
                 // Indicate that the new Instance ID token has not yet been sent to the
                 // app server.
-                setTokenSentToServer(false);
+                // setTokenSentToServer(false);
                 // Send Instance ID token to app server.
-                sendTokenToServer(refreshedToken);
+                // sendTokenToServer(refreshedToken);
                 // ...
             })
             .catch(function(err) {
                 console.log('Unable to retrieve refreshed token ', err);
-                showToken('Unable to retrieve refreshed token ', err);
+                // showToken('Unable to retrieve refreshed token ', err);
             });
     });
 

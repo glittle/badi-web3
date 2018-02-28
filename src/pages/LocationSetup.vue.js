@@ -113,7 +113,7 @@ export default {
         },
         confirmLocation() {
             var vue = this;
-            console.trace();
+            // console.trace();
             setTimeout(function() {
                 vue.saveCoords('user');
                 vue.updateUiToNewLocation();
