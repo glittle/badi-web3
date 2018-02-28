@@ -151,9 +151,9 @@ export default {
                     console.log('asking server to call back in', moment.duration(delay, 'ms').humanize(), 'at', next.format());
                     console.log('with token', firebaseToken.substring(0, 20) + '...')
                     var host = window.location.hostname;
-                    var url = '{0}'.filledWith(host === 'localhost' ?
+                    var url = host === 'localhost' ?
                         'http://localhost:8003' :
-                        window.location.host + '/wc-notifier');
+                        (window.location.origin + '/wc-notifier');
 
                     axios.post(url, {
                             token: firebaseToken,
