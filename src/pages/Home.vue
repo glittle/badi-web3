@@ -154,7 +154,7 @@
         <p>
           Share this site (https://wondrous-badi.today) with a friend! See the "About" page to support the developer and send suggestions! For more calendar tools, get the <a href="https://sites.google.com/site/badicalendartools/home/web-extension"
              rel="noopener"
-             target='sites'>Badí' Calendar</a> web extension for Chrome (desktop only).
+             target='sites'>Badí‘ Calendar</a> web extension for Chrome (desktop only).
         </p>
       </div>
     </div>
