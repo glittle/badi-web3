@@ -1,4 +1,5 @@
 import storage from './storage'
+import { doPulse } from './store';
 
 if ('serviceWorker' in navigator) {
     // console.log('service workers supported')
@@ -73,8 +74,8 @@ function setupMessaging(registration) {
                     if (currentToken) {
                         console.log('my token', currentToken.substring(0, 20) + '...')
                         storage.set('firebaseToken', currentToken);
-                        // sendTokenToServer(currentToken);
-                        // updateUIForPushEnabled(currentToken);
+
+                        doPulse();
                     } else {
                         // Show permission request.
                         console.log('No Instance ID token available. Request permission to generate one.');
