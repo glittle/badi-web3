@@ -809,7 +809,8 @@ var getBDate = function(gSourceDate) {
     //      pmSunset.setHours(18,30,0,0);
     //    }
     var afterSunset = false;
-    if (sourceDate.getTime() >= pmSunset.getTime()) {
+    var sourceTime = sourceDate.getTime();
+    if (sourceTime >= pmSunset.getTime()) {
         afterSunset = true;
     }
     // strip off the time
@@ -818,6 +819,9 @@ var getBDate = function(gSourceDate) {
         // after sunset? do for following day
         sourceDate.setDate(sourceDate.getDate() + 1);
     }
+    var sunrise = sunCalc.getTimes(sourceDate).sunrise;
+    var afterSunrise = sourceTime >= sunrise.getTime();
+
     var gYear = sourceDate.getFullYear();
     var gDayOfNawRuz = getNawRuz(gYear, true);
     var gDayLoftiness1 = copyAndAddDays(gDayOfNawRuz, -19);
@@ -856,7 +860,8 @@ var getBDate = function(gSourceDate) {
         y: bYear,
         m: bMonth,
         d: bDay,
-        eve: afterSunset
+        eve: afterSunset,
+        daylight: afterSunrise
     };
 };
 

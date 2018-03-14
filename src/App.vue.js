@@ -131,8 +131,6 @@ export default {
 
             var delay = next.valueOf() - moment().valueOf();
 
-            delay = 1500;
-
             var vue = this;
 
             // if this window is still active, this may work
