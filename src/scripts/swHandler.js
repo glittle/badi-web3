@@ -114,7 +114,11 @@ function setupMessaging(registration) {
     });
 
     messaging.onMessage(function(payload) {
-        console.log("Message received! ", payload);
-        // ...
+        // console.log("Message received! ", payload);
+
+        if (payload.data.doPulse) {
+            console.log('calling doPulse due to server message')
+            doPulse();
+        }
     })
 }

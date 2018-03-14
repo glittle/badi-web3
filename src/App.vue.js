@@ -22,9 +22,9 @@ export default {
             sharedWorker: null,
             lastNotificationKey: null,
             lastServerCall: moment(),
-            lastTimeout: null
-
-            // oldRedirectCountdown: 20
+            lastTimeout: null,
+            callbackLog: []
+                // oldRedirectCountdown: 20
         }
     },
     computed: {
@@ -131,6 +131,7 @@ export default {
 
             var delay = next.valueOf() - moment().valueOf();
 
+            delay = 1500;
 
             var vue = this;
 
@@ -194,11 +195,12 @@ export default {
         //   }
         // },
         doWorkOnPulse() {
+            var vue = this;
             // console.log('app pulse')
             // notification icon
-            if (!this.setupDone) {
+            if (!vue.setupDone) {
                 if (shared.coords.sourceIsSet && shared.coords.lat) {
-                    this.setupDone = true;
+                    vue.setupDone = true;
                 }
             }
             var di = badiCalc.di;
@@ -207,12 +209,14 @@ export default {
             }
             var key = di.stamp;
             // console.log(key, lastNotificationKey);
-            if (key !== this.lastNotificationKey) {
+            if (key !== vue.lastNotificationKey) {
                 // console.log('do notify, schedule next')
-                this.di = di;
+                vue.di = di;
                 notificationHelper.showNow(di);
 
-                this.scheduleNextNotification(di);
+                vue.scheduleNextNotification(di);
+
+                vue.lastNotificationKey = key;
             }
         },
         swipePage(obj) {
@@ -293,6 +297,6 @@ function checkLocation(vue) {
     }
 }
 
-setTimeout(function() {
-    //(adsbygoogle = window.adsbygoogle || []).push({});
-}, 0);
+//setTimeout(function() {
+//(adsbygoogle = window.adsbygoogle || []).push({});
+//}, 0);
