@@ -285,15 +285,17 @@ div.line b {
 }
 .card.share .support {
   margin: 0 8px 4px 8px;
-  display: flex;
-  display: -webkit-flex;
+  position: relative;
 }
-.card.share .qr {
+.card.share .support img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 75px;
   height: 75px;
 }
-.card.share p {
-  margin: 0 8px 4px 8px;
+.card.share .support p {
+  margin: 0 8px 4px 80px;
 }
 .google_ad_1 {
   text-align: center;

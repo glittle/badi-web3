@@ -323,15 +323,17 @@ div.line {
     }
     .support {
         margin: 0 8px 4px 8px;
-        display: flex;
-        display: -webkit-flex;
-    }
-    .qr {
-        width: 75px;
-        height: 75px;
-    }
-    p {
-        margin: 0 8px 4px 8px;
+        position: relative;
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 75px;
+            height: 75px;
+        }
+        p {
+            margin: 0 8px 4px 80px;
+        }
     }
 }
 

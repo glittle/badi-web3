@@ -714,7 +714,7 @@ function drawChart(sun, timeFormat, redraw) {
     //   setEnd: null,
     //   now: now
     if (!document.getElementById('sunChart')) {
-        console.log('sunChart does not exist')
+        // console.log('sunChart does not exist')
         return;
     }
 

@@ -77,34 +77,34 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
 
         // prepareImage(function () {
         // var icon = generateOnImage(iconDayNum);
-
-        if (navigator.serviceWorker) {
-            navigator.serviceWorker.ready.then(function(registration) {
-                var n = registration.showNotification(note1, options);
-                // Remove the notification from Notification Center when clicked.
-                n.onclick = function() {
-                    console.log('Notification clicked');
-                    // registration.cl
-                    this.close();
-                };
-                // Callback function when the notification is closed.
-                n.onclose = function() {
-                    // console.log('Notification closed');
-                };
-            });
-        } else {
-            var n = new Notification(note1, options);
-            // Remove the notification from Notification Center when clicked.
-            n.onclick = function() {
-                console.log('Notification clicked');
-                // registration.cl
-                this.close();
-            };
-            // Callback function when the notification is closed.
-            n.onclose = function() {
-                // console.log('Notification closed');
-            };
-        }
+        // if (navigator.serviceWorker) {
+        //     navigator.serviceWorker.ready.then(function(registration) {
+        //         var n = registration.showNotification(note1, options);
+        //         // Remove the notification from Notification Center when clicked.
+        //         n.onclick = function() {
+        //             console.log('Notification clicked');
+        //             // registration.cl
+        //             this.close();
+        //         };
+        //         // Callback function when the notification is closed.
+        //         n.onclose = function() {
+        //             // console.log('Notification closed');
+        //         };
+        //     });
+        // } else
+        //{}
+        var n = new Notification(note1, options);
+        // Remove the notification from Notification Center when clicked.
+        n.onclick = function() {
+            console.log('Notification clicked');
+            // registration.cl
+            this.close();
+        };
+        // Callback function when the notification is closed.
+        n.onclose = function() {
+            // console.log('Notification closed');
+        };
+        // }
     }
     // If the user does not want notifications to come from this domain...
     else if (Notification.permission === 'denied') {

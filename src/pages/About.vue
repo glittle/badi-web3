@@ -33,7 +33,11 @@
     </article>
     <iframe class="statusDoc"
             src="https://docs.google.com/document/d/1Q1RtnOocBjW917CHceBbJPSljlDSN5GaZLBp5pu2inA/pub?embedded=false"></iframe>
-  </div>
+    <div class="callbackLog">
+        <p><strong>Debug log</strong></p>
+        <div v-html="callbackLog || 'No server callback yet'"></div>
+    </div>
+</div>
 </template>
 <style src="./About.vue.css"></style>
 <script>
@@ -54,7 +58,11 @@
             versionAge() {
                 var age = moment(versionInfo.buildDate, "_ MMM D YYYY HH:mm:ss _Z").fromNow();
                 return age;
+            },
+            callbackLog() {
+                return window._messageBus.serverCallbackLog.join('<br>');
             }
+
         },
         methods: {
             reload() {

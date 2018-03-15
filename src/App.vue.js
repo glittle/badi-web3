@@ -23,7 +23,7 @@ export default {
             lastNotificationKey: null,
             lastServerCall: moment(),
             lastTimeout: null,
-            callbackLog: []
+            _serverCallbackLog: []
                 // oldRedirectCountdown: 20
         }
     },
@@ -57,6 +57,10 @@ export default {
     created() {
         document.addEventListener('pulsed', this.doWorkOnPulse, false);
         store.doPulse();
+
+        // _messageBus.$on('serverPulse', function() {
+        //     console.log('server pulse')
+        // });
 
         this.prepareWorker();
     },
@@ -131,6 +135,8 @@ export default {
 
             var delay = next.valueOf() - moment().valueOf();
 
+            delay = 5000;
+
             var vue = this;
 
             // if this window is still active, this may work
@@ -153,18 +159,23 @@ export default {
                     var url = host === 'localhost' ?
                         'http://localhost:8003' :
                         (window.location.origin + '/wc-notifier');
-
                     axios.post(url, {
                             token: firebaseToken,
-                            delay: delay
+                            delay: delay,
+                            where: shared.coords.name,
+                            geo: '@{1},{2},10z'.filledWith(shared.coords.name, shared.coords.lat, shared.coords.lng)
+                                //place/Castleridge/@51.1052703,-113.9671456
                         })
                         .then(function(response) {
                             if (response.data.status === 'received') {
                                 vue.lastServerCall = next;
                                 console.log('server confirmed... will call back at', next.format());
+                                window._messageBus.serverCallbackLog.push('At ' + new Date());
+                                window._messageBus.serverCallbackLog.push('...requested for ' + next.toDate());
                             }
                         }).catch(function(error) {
                             console.log('axios error', error.message);
+                            window._messageBus.serverCallbackLog.push(error.message);
                         });
                 }
             }

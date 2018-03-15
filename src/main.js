@@ -25,7 +25,13 @@ require("firebase/messaging");
 require(`quasar/dist/quasar.${__THEME}.css`)
     // ==============================
 
-window._messageBus = new Vue();
+window._messageBus = new Vue({
+    data() {
+        return {
+            serverCallbackLog: []
+        }
+    },
+});
 
 // https://www.npmjs.com/package/vue-analytics
 Vue.use(VueAnalytics, {

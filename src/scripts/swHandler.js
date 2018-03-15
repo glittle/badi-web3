@@ -119,6 +119,8 @@ function setupMessaging(registration) {
         if (payload.data.doPulse) {
             console.log('calling doPulse due to server message')
             doPulse();
+            //window._messageBus.$emit('serverPulse');
+            window._messageBus.serverCallbackLog.push('Received at ' + new Date());
         }
     })
 }
