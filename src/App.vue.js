@@ -115,6 +115,7 @@ export default {
                             break;
                         case 'pulseRequested':
                             console.log('*** shared worker set lastNotificationKey', e.data.key);
+                            window._messageBus.serverCallbackLog.push('shared worker set lastNotificationKey');
                             vue.lastNotificationKey = e.data.key;
                             break;
                     }
@@ -127,6 +128,7 @@ export default {
         scheduleNextNotification(di) {
             // at next midnight or sunset
             if (!di || !di.stamp) {
+                window._messageBus.serverCallbackLog.push('No di - cannot call');
                 return;
             }
             var sunset = moment(di.frag2SunTimes.sunset);
@@ -135,7 +137,7 @@ export default {
 
             var delay = next.valueOf() - moment().valueOf();
 
-            delay = 5000;
+            // delay = 5000;
 
             var vue = this;
 
@@ -149,6 +151,7 @@ export default {
 
             if (vue.lastServerCall.format() === next.format()) {
                 //console.log('server callback already requested')
+                window._messageBus.serverCallbackLog.push('Callback already requested');
 
             } else {
                 var firebaseToken = storage.get('firebaseToken', '')
