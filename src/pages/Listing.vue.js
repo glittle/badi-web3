@@ -95,6 +95,7 @@ export default {
     methods: {
         prepare: function() {
             this.originalYear = badi.di.bYear;
+            this.lastYear = -1;
             this.loadDates(this.originalYear);
 
             if (badi.di.bMonth > 17 || badi.di.bMonth === 0) {
@@ -211,6 +212,8 @@ export default {
         },
         loadDates: function(year) {
             var vue = this;
+            // debugger;
+            console.log('load dates', year)
             if (!window._nowDi) {
                 console.log('skip', year, ' not ready')
                 return;
