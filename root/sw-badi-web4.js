@@ -1,6 +1,10 @@
 console.log('loading workbox')
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.0.0-beta.0/workbox-sw.js');
 
+const matchCb = ({ url, event }) => {
+    return (url.pathname === '/special/url');
+};
+
 if (workbox) {
     workbox.setConfig({ debug: false });
     workbox.core.setLogLevel(workbox.core.LOG_LEVELS.warn);
@@ -13,6 +17,10 @@ if (workbox) {
     //     console.log('Not caching on localhost')
     // } else {
 
+    workbox.routing.registerRoute(
+        new RegExp('/images/.*\.png'),
+        workbox.strategies.networkOnly()
+    );
     workbox.routing.registerRoute(
         new RegExp('.*'),
         workbox.strategies.networkFirst()
