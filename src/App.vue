@@ -25,7 +25,6 @@
              :alt="page.text"></span>
         <span v-html="page.text"></span>
       </div>
-      <i class="driftHelp">live_help</i>
       <button ref="target"
               class="primary">
         <i>more_vert</i>

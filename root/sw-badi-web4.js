@@ -1,15 +1,21 @@
 console.log('loading workbox')
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.0.0-beta.0/workbox-sw.js');
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.3.1/workbox-sw.js');
 
-const matchCb = ({ url, event }) => {
+const matchCb = ({
+    url,
+    event
+}) => {
     return (url.pathname === '/special/url');
 };
 
 if (workbox) {
-    workbox.setConfig({ debug: false });
+    workbox.setConfig({
+        debug: false
+    });
     workbox.core.setLogLevel(workbox.core.LOG_LEVELS.warn);
 
     workbox.skipWaiting();
+    workbox.clientsClaim();
 
     console.log(`Yay! Workbox is loaded 🎉`);
 
@@ -19,11 +25,11 @@ if (workbox) {
 
     workbox.routing.registerRoute(
         new RegExp('/images/.*\.png'),
-        workbox.strategies.networkOnly()
+        workbox.strategies.staleWhileRevalidate()
     );
     workbox.routing.registerRoute(
         new RegExp('.*'),
-        workbox.strategies.networkFirst()
+        workbox.strategies.staleWhileRevalidate()
     );
 
 
