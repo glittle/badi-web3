@@ -212,8 +212,8 @@ div.line b {
   display: block;
 }
 .tap95card .tapDelayArea {
-  margin-top: 20px;
   display: flex;
+  padding: 0 10px 0 5px;
   justify-content: space-between;
   align-items: center;
   display: -webkit-flex;
@@ -245,6 +245,12 @@ div.line b {
 }
 .tap95card #tapBlocks span.tapped.five {
   background-color: #FFA726;
+}
+.tap95card .tapControl {
+  padding: 0 0 0 10px;
+  align-self: flex-start;
+  width: 100%;
+  box-sizing: border-box;
 }
 .card.prayer {
   padding: 3px;

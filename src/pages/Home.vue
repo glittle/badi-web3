@@ -73,9 +73,7 @@
         <span>
                 <label><input type=checkbox v-model="tapAuto">Auto</label>
                 <label><input type=checkbox v-model="tapSounds">Sound</label>
-                <button
-                  v-on:click="reset95"
-                  class="reset small light round">Reset</button>
+
 
       </span>
       </div>
@@ -84,21 +82,30 @@
           <span class=tapNum
                 v-html="tapNum"></span>
           <div id="tapBlocks"></div>
-          <div class="tapDelayArea"
-               v-bind:style="{opacity: tapAuto ? 1 : 0.25}">
-            <span>Auto
-                              <span v-html="(Math.round(tapAutoDelay/100)/10).toFixed(1) + ' s'"></span></span>
-            <q-range v-model="tapAutoDelay"
-                     :step="500"
-                     :min="1000"
-                     :max="15000"></q-range>
-          </div>
         </div>
         <button v-on:click="tap95"
                 v-bind:disabled="tapNum == 95"
                 v-html="tapBtnText"
                 title="Tap here. In Auto mode, tap to Start or Stop"
                 class="primary circular big"></button>
+      </div>
+      <div class="tapControl">
+        <div>
+            <button
+            v-on:click="reset95"
+            class="reset small light round">Reset</button>
+
+        </div>
+        <div class="tapDelayArea"
+        v-bind:style="{opacity: tapAuto ? 1 : 0.25}">
+     <span>Auto
+         <span v-html="(Math.round(tapAutoDelay/100)/10).toFixed(1) + ' s'"></span></span>
+     <q-range v-model="tapAutoDelay"
+              :step="500"
+              :min="1000"
+              :max="15000"></q-range>
+   </div>
+
       </div>
     </div>
     <audio id="tapSoundForSteps"

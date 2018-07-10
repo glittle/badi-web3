@@ -25,12 +25,12 @@ export default {
             setupDone: false,
             notificationStatus: shared.notifications.wanted,
             toggleVerseSpeech: false,
-            tapNum: 0,
+            tapNum: storage.get('tapNum', 0),
             tapBtnText: '',
             tapLastTime: 0,
             tapAutoRunning: false,
             tapAutoTimer: null,
-            tapChimeAfter: true, // dev only - after or instead of regular sound?
+            tapChimeAfter: false, // dev only - after or instead of regular sound?
             tapAutoDelay: storage.get('tapAutoDelay', 2000),
             tapAuto: storage.get('tapAuto', true),
             tapSounds: storage.get('tapSounds', true),
@@ -143,6 +143,7 @@ export default {
 
         this.makeTapBlocks();
         this.updateTapDisplay();
+        this.syncTapDots();
         this.tapSoundForSteps.addEventListener("ended", function() {
             // console.log('sounded', vue.tapNum, vue.tapSounds)
             if (vue.tapChimeAfter) {
@@ -410,14 +411,27 @@ export default {
                 this.$ga.event('tap95', 'started', this.tapAuto ? 'auto' : 'manual');
             }
         },
+        syncTapDots: function() {
+            // call to update dots if may be out of sync
+            var blocks = document.getElementsByClassName('tapped');
+            for (var b = blocks.length; b--; b > 0) {
+                blocks[b].classList.remove('tapped');
+            }
+
+            for (let i = 1; i <= this.tapNum; i++) {
+                document.getElementById('tap_' + i).classList.add('tapped');
+            }
+        },
         doTap: function() {
             clearTimeout(this.tapAutoTimer);
             if (this.tapNum >= 95) {
                 this.tapAutoRunning = false;
+                storage.set('tapNum', 0);
                 this.updateTapDisplay();
                 return;
             }
             this.tapNum++;
+            storage.set('tapNum', this.tapNum);
             document.getElementById('tap_' + this.tapNum).classList.add('tapped');
             if (this.tapSounds) {
                 // if (this.tapNum === 95) {
@@ -761,7 +775,9 @@ function drawChart(sun, timeFormat, redraw) {
         }
         if (underAxis) {
             o.name = '<br>' + o.name;
-            o.dataLabels = { verticalAlign: 'bottom' };
+            o.dataLabels = {
+                verticalAlign: 'bottom'
+            };
             o.color = colorFullSun; // hack for solar noon
         }
         if (o.y > maxY) maxY = o.y;
