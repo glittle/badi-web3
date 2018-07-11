@@ -77,7 +77,9 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
 
         // prepareImage(function () {
         //var icon = generateOnImage(iconDayNum);
-        if (navigator.serviceWorker) {
+        var test = false;
+        if (test && navigator.serviceWorker) {
+            console.log('notification via registration 1')
             navigator.serviceWorker.ready.then(function(registration) {
                 registration.showNotification(note1, options)
                     // .then(function(n) {
@@ -97,6 +99,8 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
                     // });
             })
         } else {
+            console.log('notification via Notificaion 2')
+
             var n = new Notification(note1, options);
             // Remove the notification from Notification Center when clicked.
             n.onclick = function() {

@@ -213,7 +213,7 @@ export default {
         loadDates: function(year) {
             var vue = this;
             // debugger;
-            console.log('load dates', year)
+            // console.log('load dates', year)
             if (!window._nowDi) {
                 console.log('skip', year, ' not ready')
                 return;

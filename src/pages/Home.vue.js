@@ -128,7 +128,7 @@ export default {
         });
 
         if (shared.coords.sourceIsSet) {
-            console.log('emit setupDone 2')
+            // console.log('emit setupDone 2')
             _messageBus.$emit('setupDone');
         }
 
