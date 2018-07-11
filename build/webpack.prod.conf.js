@@ -6,8 +6,8 @@ var
     merge = require('webpack-merge'),
     baseWebpackConfig = require('./webpack.base.conf'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
-    HtmlWebpackPlugin = require('html-webpack-plugin'),
-    workbox = require('workbox-webpack-plugin')
+    HtmlWebpackPlugin = require('html-webpack-plugin');
+// workbox = require('workbox-webpack-plugin')
 
 var webpackConfig = merge(baseWebpackConfig, {
     module: {
