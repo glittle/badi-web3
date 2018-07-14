@@ -77,8 +77,7 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
 
         // prepareImage(function () {
         //var icon = generateOnImage(iconDayNum);
-        var test = false;
-        if (test && navigator.serviceWorker) {
+        if (navigator.serviceWorker) {
             console.log('notification via registration 1')
             navigator.serviceWorker.ready.then(function(registration) {
                 registration.showNotification(note1, options)
