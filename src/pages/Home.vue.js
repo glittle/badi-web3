@@ -480,6 +480,7 @@ export default {
         },
         reset95: function() {
             this.tapNum = 0;
+            storage.set('tapNum', this.tapNum);
             clearTimeout(this.tapAutoTimer);
             this.tapAutoRunning = false;
             var blocks = document.getElementsByClassName('tapped');
