@@ -195,7 +195,7 @@ div.line {
     align-items: center;
     width: 100%;
     .heading {
-        width: 100%;
+        width: 99%;
         .type {
             margin-left: 3px;
         }
@@ -234,6 +234,7 @@ div.line {
     }
     .tapDelayArea {
         display: flex;
+        margin: 15px 0 2px;
         padding: 0 10px 0 5px;
         justify-content: space-between;
         align-items: center;
@@ -249,8 +250,12 @@ div.line {
         span {
             white-space: nowrap;
         }
+        >span {
+            display: inline-block;
+            margin-right: 20px;
+        }
     }
-    #tapBlocks {
+    #tapDots {
         div {
             height: 10px;
             white-space: nowrap;
@@ -273,11 +278,42 @@ div.line {
             // }
         }
     }
-    .tapControl{
+    #groupDots {
+        div {
+            height: 10px;
+            white-space: nowrap;
+            margin: 5px 0 0 0;
+        }
+        span {
+            display: inline-block;
+            height: 13px;
+            width: 19px;
+            margin: 0 5px 0 0;
+            border-radius: 2px;
+            text-align: center;
+            padding: 2px 1px 0 2px;
+            font-family: Arial;
+            font-size: 9px;
+            background-color: #eee;
+            transition: all 1.5s;
+            cursor: default;
+            color: #eee;
+            &.tapped {
+                color: #000;
+            }
+            &.future{
+                background-color: #fafafa;
+            }
+        }
+    }
+    .tapControl {
         padding: 0 0 0 10px;
         align-self: flex-start;
         width: 100%;
         box-sizing: border-box;
+        .continue {
+            font-size: 0.9rem;
+        }
     }
 }
 

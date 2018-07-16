@@ -81,10 +81,11 @@
         <div>
           <span class=tapNum
                 v-html="tapNum"></span>
-          <div id="tapBlocks"></div>
+          <div id="tapDots"></div>
+          <div id="groupDots" v-show="tapContinue"></div>
         </div>
         <button v-on:click="tap95"
-                v-bind:disabled="tapNum == 95"
+                v-bind:disabled="tapBtnDisabled"
                 v-html="tapBtnText"
                 title="Tap here. In Auto mode, tap to Start or Stop"
                 class="primary circular big"></button>
@@ -94,6 +95,11 @@
             <button
             v-on:click="reset95"
             class="reset small light round">Reset</button>
+
+            <span class="continue">
+              Continue past 95?
+            </span>
+            <q-toggle v-model="tapContinue" />
 
         </div>
         <div class="tapDelayArea"

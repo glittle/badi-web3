@@ -3,18 +3,55 @@ console.log('loading workbox')
 //importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.3.1/workbox-sw.js');
 var workbox = function() {
     "use strict";
-    try { self.workbox.v["workbox:sw:3.3.1"] = 1 } catch (t) {}
+    try {
+        self.workbox.v["workbox:sw:3.3.1"] = 1
+    } catch (t) {}
     const t = "https://storage.googleapis.com/workbox-cdn/releases/3.3.1",
-        e = { backgroundSync: "background-sync", broadcastUpdate: "broadcast-cache-update", cacheableResponse: "cacheable-response", core: "core", expiration: "cache-expiration", googleAnalytics: "google-analytics", precaching: "precaching", rangeRequests: "range-requests", routing: "routing", strategies: "strategies", streams: "streams" };
+        e = {
+            backgroundSync: "background-sync",
+            broadcastUpdate: "broadcast-cache-update",
+            cacheableResponse: "cacheable-response",
+            core: "core",
+            expiration: "cache-expiration",
+            googleAnalytics: "google-analytics",
+            precaching: "precaching",
+            rangeRequests: "range-requests",
+            routing: "routing",
+            strategies: "strategies",
+            streams: "streams"
+        };
     return new class {
-        constructor() { return this.v = {}, this.t = { debug: "localhost" === self.location.hostname, modulePathPrefix: null, modulePathCb: null }, this.e = this.t.debug ? "dev" : "prod", this.s = !1, new Proxy(this, {get(t, s) { if (t[s]) return t[s]; const o = e[s]; return o && t.loadModule(`workbox-${o}`), t[s] } }) }
+        constructor() {
+            return this.v = {}, this.t = {
+                debug: "localhost" === self.location.hostname,
+                modulePathPrefix: null,
+                modulePathCb: null
+            }, this.e = this.t.debug ? "dev" : "prod", this.s = !1, new Proxy(this, {
+                get(t, s) {
+                    if (t[s]) return t[s];
+                    const o = e[s];
+                    return o && t.loadModule(`workbox-${o}`), t[s]
+                }
+            })
+        }
         setConfig(t = {}) {
             if (this.s) throw new Error("Config must be set before accessing workbox.* modules");
             Object.assign(this.t, t), this.e = this.t.debug ? "dev" : "prod"
         }
-        skipWaiting() { self.addEventListener("install", () => self.skipWaiting()) }
-        clientsClaim() { self.addEventListener("activate", () => self.clients.claim()) }
-        loadModule(t) { const e = this.o(t); try { importScripts(e), this.s = !0 } catch (s) { throw console.error(`Unable to import module '${t}' from '${e}'.`), s } }
+        skipWaiting() {
+            self.addEventListener("install", () => self.skipWaiting())
+        }
+        clientsClaim() {
+            self.addEventListener("activate", () => self.clients.claim())
+        }
+        loadModule(t) {
+            const e = this.o(t);
+            try {
+                importScripts(e), this.s = !0
+            } catch (s) {
+                throw console.error(`Unable to import module '${t}' from '${e}'.`), s
+            }
+        }
         o(e) {
             if (this.t.modulePathCb) return this.t.modulePathCb(e, this.t.debug);
             let s = [t];
@@ -46,30 +83,30 @@ if (workbox) {
 
     console.log(`Yay! Workbox is loaded 🎉`);
 
-    // if (location.hostname === 'localhost') {
-    //     console.log('Not caching on localhost')
-    // } else {
+    if (location.hostname === 'localhost') {
+        console.log('Not caching on localhost')
+    } else {
 
-    workbox.routing.registerRoute(
-        new RegExp('/images/.*\.png'),
-        workbox.strategies.staleWhileRevalidate()
-    );
-    workbox.routing.registerRoute(
-        new RegExp('.*'),
-        workbox.strategies.staleWhileRevalidate()
-    );
-
-
-    workbox.googleAnalytics.initialize();
-
-    // Shows logs, warnings and errors.
-    // workbox.core.setLogLevel(workbox.core.LOG_LEVELS.log);
-
-    // Show warnings and errors.
-    //workbox.core.setLogLevel(workbox.core.LOG_LEVELS.warn);
+        workbox.routing.registerRoute(
+            new RegExp('/images/.*\.png'),
+            workbox.strategies.staleWhileRevalidate()
+        );
+        workbox.routing.registerRoute(
+            new RegExp('.*'),
+            workbox.strategies.staleWhileRevalidate()
+        );
 
 
-    // }
+        workbox.googleAnalytics.initialize();
+
+        // Shows logs, warnings and errors.
+        // workbox.core.setLogLevel(workbox.core.LOG_LEVELS.log);
+
+        // Show warnings and errors.
+        //workbox.core.setLogLevel(workbox.core.LOG_LEVELS.warn);
+
+
+    }
 
 } else {
     console.log(`Boo! Workbox didn't load 😬`);
