@@ -142,7 +142,7 @@ export default {
 
             var delay = next.valueOf() - moment().valueOf();
 
-            // delay = 5000;
+            // delay = 5000; // for testing
 
             var vue = this;
 

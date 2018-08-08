@@ -1,5 +1,8 @@
 console.log('loading workbox')
 
+self.addEventListener('push', function(event) {
+    console.log('push event', event);
+});
 
 self.addEventListener('notificationclose', function(event) {
     console.log('notification closed', event)
