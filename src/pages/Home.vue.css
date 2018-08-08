@@ -41,6 +41,11 @@ div.card {
   padding: 3px;
   margin: 15px auto 20px auto;
 }
+div.cardBtn {
+  padding: 3px;
+  margin: 15px auto 20px auto;
+  text-align: center;
+}
 .card article.Verse {
   padding: 3px;
 }

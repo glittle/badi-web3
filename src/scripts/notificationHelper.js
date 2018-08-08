@@ -69,7 +69,10 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
             },
             silent: !makeSound,
             renotify: !makeSound,
-            requireInteraction: true
+            requireInteraction: true,
+            onclick: function(e) {
+                console.log('clicked', e)
+            }
         };
         if (makeSound) {
             options.vibrate = [200, 100, 200, 100, 200, 100, 400]
@@ -78,24 +81,25 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
         // prepareImage(function () {
         //var icon = generateOnImage(iconDayNum);
         if (navigator.serviceWorker) {
-            console.log('notification via registration 1')
             navigator.serviceWorker.ready.then(function(registration) {
                 registration.showNotification(note1, options)
-                    .then(function(n) {
-                        // Remove the notification from Notification Center when clicked.
-                        if (n) {
-                            n.onclick = function() {
-                                console.log('Notification clicked');
-                                // registration.cl
-                                //this.close();
-                            };
-                            // Callback function when the notification is closed.
-                            n.onclose = function() {
-                                console.log('Notification closed');
-                            };
-                        }
-                    });
-            })
+                    // .then(function(n) {
+                    //     //--> n is null
+                    //     // console.log('after showNotification', n)
+                    //     //     // Remove the notification from Notification Center when clicked.
+                    //     // if (n) {
+                    //     //     n.onclick = function() {
+                    //     //         console.log('Notification clicked');
+                    //     //         // registration.cl
+                    //     //         //this.close();
+                    //     //     };
+                    //     //     // Callback function when the notification is closed.
+                    //     //     n.onclose = function() {
+                    //     //         console.log('Notification closed');
+                    //     //     };
+                    //     // }
+                    // });
+            });
         } else {
             console.log('notification via Notificaion 2')
 

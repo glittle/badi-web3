@@ -1,5 +1,28 @@
 console.log('loading workbox')
 
+
+self.addEventListener('notificationclose', function(event) {
+    console.log('notification closed', event)
+});
+self.addEventListener('notificationclick', function(event) {
+    // console.log('On notification click: ', event.notification.tag);
+
+    // This looks to see if the current is already open and
+    // focuses if it is
+    event.waitUntil(clients.matchAll({
+        type: "window"
+    }).then(function(clientList) {
+        for (var i = 0; i < clientList.length; i++) {
+            var client = clientList[i];
+            if ('focus' in client)
+                return client.focus();
+        }
+        if (clients.openWindow)
+            return clients.openWindow('/');
+    }));
+});
+
+
 //importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.3.1/workbox-sw.js');
 var workbox = function() {
     "use strict";
@@ -36,7 +59,8 @@ var workbox = function() {
         }
         setConfig(t = {}) {
             if (this.s) throw new Error("Config must be set before accessing workbox.* modules");
-            Object.assign(this.t, t), this.e = this.t.debug ? "dev" : "prod"
+            Object.assign(this.t, t);
+            this.e = this.t.debug ? "dev" : "prod";
         }
         skipWaiting() {
             self.addEventListener("install", () => self.skipWaiting())
@@ -47,9 +71,10 @@ var workbox = function() {
         loadModule(t) {
             const e = this.o(t);
             try {
-                importScripts(e), this.s = !0
+                importScripts(e);
+                this.s = !0
             } catch (s) {
-                throw console.error(`Unable to import module '${t}' from '${e}'.`), s
+                throw console.error(`Unable to import module '${t}' from '${e}'.`)
             }
         }
         o(e) {
