@@ -36,6 +36,12 @@
         <notifications></notifications>
       </div>
     </div>
+    <div v-if="addToHomeScreenEvent" class="card">
+      <button v-on:click="addToHomeScreen" class="push">
+        Add Icon to Home Screen
+      </button>
+
+    </div>
     <div v-show="setupDone" class="card verse">
       <div class="heading">
         <span class="desc"

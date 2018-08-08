@@ -92,7 +92,7 @@ if (workbox) {
             workbox.strategies.staleWhileRevalidate()
         );
         workbox.routing.registerRoute(
-            new RegExp('.*'),
+            new RegExp('/.*'),
             workbox.strategies.staleWhileRevalidate()
         );
 

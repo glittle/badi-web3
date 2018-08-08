@@ -37,7 +37,8 @@ export default {
             tapAutoDelay: storage.get('tapAutoDelay', 2000),
             tapAuto: storage.get('tapAuto', true),
             tapSounds: storage.get('tapSounds', true),
-            prayer: prayerHelper.getRandom()
+            prayer: prayerHelper.getRandom(),
+            addToHomeScreenEvent: null
         }
     },
     components: {
@@ -128,6 +129,13 @@ export default {
 
         _messageBus.$on('setupDone', function() {
             vue.afterSetupDone();
+        });
+
+        window.addEventListener('beforeinstallprompt', (event) => {
+            // Prevent Chrome <= 67 from automatically showing the prompt
+            event.preventDefault();
+            // Stash the event so it can be triggered later.
+            vue.addToHomeScreenEvent = event;
         });
 
         if (shared.coords.sourceIsSet) {
@@ -271,6 +279,25 @@ export default {
         // }
     },
     methods: {
+        addToHomeScreen() {
+            var vue = this;
+            console.log('show add to home')
+            var deferredPrompt = vue.addToHomeScreenEvent;
+            if (deferredPrompt) {
+                console.log('show add to home prompt')
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                deferredPrompt.userChoice
+                    .then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('User accepted the A2HS prompt');
+                        } else {
+                            console.log('User dismissed the A2HS prompt');
+                        }
+                        vue.addToHomeScreenEvent = null;
+                    });
+            }
+        },
         onPulse: function() {
             var vue = this;
             vue.di = badiCalc.di;

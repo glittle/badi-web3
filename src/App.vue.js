@@ -23,8 +23,8 @@ export default {
             lastNotificationKey: null,
             lastServerCall: moment(),
             lastTimeout: null,
-            _serverCallbackLog: []
-                // oldRedirectCountdown: 20
+            _serverCallbackLog: [],
+            // oldRedirectCountdown: 20
         }
     },
     computed: {
@@ -55,7 +55,10 @@ export default {
         // }
     },
     created() {
+        var vue = this;
+
         document.addEventListener('pulsed', this.doWorkOnPulse, false);
+
         store.doPulse();
 
         // _messageBus.$on('serverPulse', function() {
@@ -121,7 +124,9 @@ export default {
                     }
                 }
 
-                vue.sharedWorker.port.postMessage({ code: 'hello' });
+                vue.sharedWorker.port.postMessage({
+                    code: 'hello'
+                });
             }
             // console.log('worker loaded', this.myWorker)
         },
