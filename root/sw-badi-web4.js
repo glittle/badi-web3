@@ -49,7 +49,7 @@ var workbox = function() {
     return new class {
         constructor() {
             return this.v = {}, this.t = {
-                debug: "localhost" === self.location.hostname,
+                debug: true, // "localhost" === self.location.hostname,
                 modulePathPrefix: null,
                 modulePathCb: null
             }, this.e = this.t.debug ? "dev" : "prod", this.s = !1, new Proxy(this, {
@@ -102,7 +102,7 @@ const matchCb = ({
 
 if (workbox) {
     workbox.setConfig({
-        debug: false
+        debug: true // false
     });
     workbox.core.setLogLevel(workbox.core.LOG_LEVELS.warn);
 
