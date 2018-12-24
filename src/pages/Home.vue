@@ -123,17 +123,17 @@
     <audio id="tapSoundForSteps"
            preload="auto"
            autobuffer="autobuffer">
-      <source src="/statics/gong2.mp3">
+      <source src="/statics/each.mp3">
     </audio>
     <audio id="tapSoundForSteps19"
            preload="auto"
            autobuffer="autobuffer">
-      <source src="/statics/gong1.mp3">
+      <source src="/statics/each19.mp3">
     </audio>
     <audio id="tapSoundForEnd"
            preload="auto"
            autobuffer="autobuffer">
-      <source src="/statics/gongLong.mp3">
+      <source src="/statics/each95.mp3">
     </audio>
     <div v-show="setupDone" class="card calendar">
       <div class="heading">
