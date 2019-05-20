@@ -157,7 +157,7 @@ div.line.now {
   color: #aaa;
 }
 div.line b {
-  border: 1px solid #027be3;
+  border: 1px solid #2980b9;
   background-color: rgba(2, 123, 227, 0.06);
   border-radius: 2px;
   padding: 0 2px;
@@ -251,7 +251,7 @@ div.line b {
 }
 .tap95card #tapDots span.tapped {
   border-radius: 50%;
-  background-color: #027be3;
+  background-color: #2980b9;
 }
 .tap95card #tapDots span.tapped.five {
   background-color: #FFA726;

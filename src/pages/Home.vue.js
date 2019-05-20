@@ -1120,7 +1120,7 @@ function showNowLine(chart, sun, timeFormat) {
 
     chart.xAxis[0].addPlotLine({
         value: now.toDate(),
-        color: '#027be3',
+        color: '#2980b9',
         width: 1,
         id: 'now',
         zIndex: 5, //    zIndex: 0,

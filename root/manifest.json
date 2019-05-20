@@ -15,11 +15,11 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#027be3",
+    "theme_color": "#2980b9",
     "permissions": {
         "desktop-notification": {}
     },
-    "background_color": "#027be3",
+    "background_color": "#2980b9",
     "gcm_sender_id": "103953800507",
     "display": "standalone",
     "orientation": "any"
