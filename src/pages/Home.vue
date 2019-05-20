@@ -51,7 +51,6 @@
                 <span class="desc">A prayer, by <span v-text="prayer.by" class="by"></span>
                 </span>
                 <span>
-
                     <button v-on:click="showPrayerOnline(prayer.link)" class="small light round">Continue Online</button>
                 </span>
             </div>

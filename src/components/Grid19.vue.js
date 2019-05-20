@@ -35,6 +35,7 @@ export default {
                     cell.classList.remove('past');
                     cell.classList.remove('now');
                     cell.classList.remove('future');
+                    cell.classList.remove('hd');
 
                     if (c === info.num) {
                         cell.classList.add('now');
@@ -44,6 +45,16 @@ export default {
                         cell.classList.add('past');
                         //cell.classList.add('future');
                     }
+
+                    if (info.mode === 'month') {
+                        var thisBDateCode = info.num + '.' + c;
+                        var hdInfo = window._days.find(d => d.Type[0] === 'H' && d.BDateCode === thisBDateCode);
+                        if (hdInfo) {
+                            console.log(hdInfo);
+                            cell.classList.add('hd');
+                        }
+                    }
+
                 }
 
             }, 0);
