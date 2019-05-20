@@ -4,6 +4,7 @@ import sunCalc from '../scripts/sunCalc'
 import storage from '../scripts/storage'
 import Grid19 from '../components/Grid19';
 import Verse from './Verse';
+import Listing from './Listing';
 import prayerHelper from '../scripts/prayerLinkHelper'
 import dateLinksInfo from '../assets/datelinks.json'
 import * as notificationHelper from '../scripts/notificationHelper'
@@ -43,6 +44,7 @@ export default {
     },
     components: {
         Grid19,
+        Listing,
         Verse
     },
     computed: {

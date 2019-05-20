@@ -299,6 +299,10 @@ div.line b {
   padding: 3px 8px;
   min-height: 1rem;
 }
+.card.prayer button.right {
+  float: right;
+  margin: 6px 0 4px 0;
+}
 .card.prayer .content {
   margin: 5px 8px .5em 10px;
 }
