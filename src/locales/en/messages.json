@@ -23,10 +23,10 @@
     },
     "ayyamIs0": {
         "message": "(Y M D) 0={0}",
-        "description": "(updated) in Badi date picker area"
+        "description": "(updated) in Badíʿ date picker area"
     },
     "bDatePickerTitle": {
-        "message": "Go to <u>B</u>adí' Date",
+        "message": "Go to <u>B</u>adíʿ Date",
         "description": "added <u></u> - should have one letter between <u> and </u>"
     },
     "beforeSunset": {
@@ -137,7 +137,7 @@
         "description": "Vahid names, with leading , "
     },
     "bYearInVahidNameAr": {
-        "message": ",Alif,Bá’,Ab,Dál,Báb,Váv,Abad,Jád,Bahá',Ḥubb,Bahháj,Javáb,Aḥad,Vahháb,Vidád,Badí‘,Bahí,Abhá,Váḥid",
+        "message": ",Alif,Bá’,Ab,Dál,Báb,Váv,Abad,Jád,Bahá',Ḥubb,Bahháj,Javáb,Aḥad,Vahháb,Vidád,Badíʿ,Bahí,Abhá,Váḥid",
         "description": "Arabic names of years in a Vahid, with leading , "
     },
     "Chrome_History": {
@@ -283,13 +283,13 @@
         "message": "60 minutes before"
     },
     "exportBadiYear0": {
-        "message": "Badí‘ year - {0} B.E."
+        "message": "Badíʿ year - {0} B.E."
     },
     "exportBadiYear1": {
-        "message": "Badí‘ year - {0} B.E."
+        "message": "Badíʿ year - {0} B.E."
     },
     "exportCalendarDescription": {
-        "message": "Dates in the Badí‘ Calendar for {location}",
+        "message": "Dates in the Badíʿ Calendar for {location}",
         "description": "title on page"
     },
     "exportDayFromSunset": {
@@ -310,7 +310,7 @@
         "message": "Fast until {endingSunsetDesc}"
     },
     "exporterItemDescDay": {
-        "message": "A day in the Badí‘ calendar.",
+        "message": "A day in the Badíʿ calendar.",
         "description": "Included as the description in every calendar entry"
     },
     "exporterItemDescFast": {
@@ -318,7 +318,7 @@
         "description": "Included as the description in every calendar entry"
     },
     "exporterItemDescGeneralTime": {
-        "message": "Gathering may start at any time on this Badí‘ day.",
+        "message": "Gathering may start at any time on this Badíʿ day.",
         "description": "For when a Holy Day as a particular time"
     },
     "exporterItemDescShared": {
@@ -330,7 +330,7 @@
         "description": "For when a Holy Day as a particular time"
     },
     "exporterTitle": {
-        "message": "Badí‘ Calendar Exporter",
+        "message": "Badíʿ Calendar Exporter",
         "description": "title on page"
     },
     "exportFile": {
@@ -368,7 +368,7 @@
         "message": "At beginning sunset only"
     },
     "exportOption_Date": {
-        "message": "Badí‘ Days <em>(365/366 days)</em>"
+        "message": "Badíʿ Days <em>(365/366 days)</em>"
     },
     "exportOption_Fast": {
         "message": "Fast Days <em>(19 days)</em>"
@@ -407,7 +407,7 @@
         "message": "1. Full Calendar"
     },
     "exportQuickPick1Text": {
-        "message": "Display each Badí‘ day, along with Holy Days and Feast times. No alerts."
+        "message": "Display each Badíʿ day, along with Holy Days and Feast times. No alerts."
     },
     "exportQuickPick2": {
         "message": "2. Fast Time - Morning"
@@ -795,11 +795,11 @@
         "description": "another input"
     },
     "planFromWhenNextYear": {
-        "message": "Start of next Badí‘ year",
+        "message": "Start of next Badíʿ year",
         "description": "answer for planFromWhen"
     },
     "planFromWhenThisYear": {
-        "message": "Start of this Badí‘ year",
+        "message": "Start of this Badíʿ year",
         "description": "answer for planFromWhen"
     },
     "planFromWhenToday": {
@@ -920,8 +920,8 @@
         "description": "used when showing list of alarms scheduled today"
     },
     "reminderBDay": {
-        "message": "Day {num} of the Badí‘ month",
-        "description": "what this reminder is triggered on (left out the the apostrophe after Badí‘ since it breaks when displayed)"
+        "message": "Day {num} of the Badíʿ month",
+        "description": "what this reminder is triggered on (left out the the apostrophe after Badíʿ since it breaks when displayed)"
     },
     "reminderBefore": {
         "message": "before"
@@ -945,7 +945,7 @@
         "message": "{eventTime} on {eventMonthShort} {eventDay}"
     },
     "reminderDayOfMonth": {
-        "message": "On day {num} of the Badí‘ month",
+        "message": "On day {num} of the Badíʿ month",
         "description": "in list of defined reminders"
     },
     "reminderDayWhen": {
@@ -1049,7 +1049,7 @@
         "description": "a group of triggers - sunset sunrise noon midnight"
     },
     "reminderTrigger_bday": {
-        "message": "Badí‘ Day",
+        "message": "Badíʿ Day",
         "description": "what this reminder is triggered on"
     },
     "reminderTrigger_feast": {
@@ -1199,7 +1199,7 @@
         "description": "heading in Fast days listing"
     },
     "sunsetHeading": {
-        "message": "Start of Badí‘ Day",
+        "message": "Start of Badíʿ Day",
         "description": "heading in Events listing"
     },
     "suspendWorkHeading": {
@@ -1224,11 +1224,11 @@
         "message": "Press PgUp/PgDn keys to select panels.\nPress Right/Left arrow keys to change days.\nPress / to switch before/after sunset.\nPress Home to return to today!\nPress Ctrl+Shift+A to change language."
     },
     "title": {
-        "message": "Badí‘ Calendar",
+        "message": "Badíʿ Calendar",
         "description": "The title of the extension. Shown in a number of locations."
     },
     "titleDesc": {
-        "message": "Shows today's date in the Badí‘ (Wondrous) calendar, the official calendar of the Bahá'í Faith.",
+        "message": "Shows today's date in the Badíʿ (Wondrous) calendar, the official calendar of the Bahá'í Faith.",
         "description": "Used in the manifest"
     },
     "Tonight": {
@@ -1312,7 +1312,7 @@
         "description": "title for the About section"
     },
     "setupAboutPara": {
-        "message": "<p>This Web Extension is designed to provide current information about the Badí‘ calendar, local to where you are.</p><p>For more information, please click below on the 'Version' link, or any of the icons!</p><p></p>",
+        "message": "<p>This Web Extension is designed to provide current information about the Badíʿ calendar, local to where you are.</p><p>For more information, please click below on the 'Version' link, or any of the icons!</p><p></p>",
         "description": "explanation of "
     },
     "cal2ShowTimes": {

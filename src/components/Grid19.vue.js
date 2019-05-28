@@ -46,11 +46,11 @@ export default {
                         //cell.classList.add('future');
                     }
 
-                    if (info.mode === 'month') {
-                        var thisBDateCode = info.num + '.' + c;
+                    if (info.mode === 'month' && info.month) {
+                        var thisBDateCode = info.month + '.' + c;
                         var hdInfo = window._days.find(d => d.Type[0] === 'H' && d.BDateCode === thisBDateCode);
+                        // console.log(info, hdInfo, thisBDateCode);
                         if (hdInfo) {
-                            console.log(hdInfo);
                             cell.classList.add('hd');
                         }
                     }

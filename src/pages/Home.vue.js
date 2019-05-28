@@ -308,7 +308,7 @@ export default {
         },
         info: function(mode) {
             var di = this.di;
-            var type, type2, desc, num;
+            var type, type2, desc, num, month;
             var mid = '';
             var ayyamiha = false;
             switch (mode) {
@@ -329,6 +329,7 @@ export default {
                         desc = 'Day <b>{bDay}</b>'.filledWith(di);
                     }
                     num = di.bDay;
+                    month = di.bMonth;
                     break;
                 case 'year':
                     type = '…in this Year';
@@ -369,7 +370,8 @@ export default {
                 elementNum: di.elementNum,
                 type: type,
                 type2: type2,
-                ayyamiha: ayyamiha
+                ayyamiha: ayyamiha,
+                month: month
             };
         },
         handleResize: function(event) {
@@ -457,7 +459,7 @@ export default {
         },
         syncTapDots: function() {
             // call to update dots if may be out of sync
-            console.log('sync dots')
+            // console.log('sync dots')
             var dot;
             for (var i = 1; i <= 95; i++) {
                 dot = document.getElementById('tap_' + i);
@@ -662,6 +664,13 @@ export default {
             }, 10);
         }
     },
+    head: {
+        title: function() {
+            return {
+                inner: 'Today'
+            }
+        }
+    }
 }
 
 var local = {

@@ -19,7 +19,7 @@
         "description": "(updated) in Badi date picker area"
     },
     "bDatePickerTitle": {
-        "message": "Escolher Data <u>B</u>adí",
+        "message": "Escolher Data <u>B</u>adíʿ",
         "description": "added <u></u> - should have one letter between <u> and </u>"
     },
     "beforeSunset": {
@@ -748,7 +748,7 @@
         "description": "The title of the extension. Shown in a number of locations."
     },
     "titleDesc": {
-        "message": "Mostrar a data de hoje no calendário Badí‘, o calendário official da Fé Bahá'í.",
+        "message": "Mostrar a data de hoje no calendário Badíʿ, o calendário official da Fé Bahá'í.",
         "description": "Used in the manifest"
     },
     "Tonight": {
