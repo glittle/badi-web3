@@ -14,6 +14,9 @@ import './scripts/swHandler';
 import './scripts/messages';
 import './components/msg-directive';
 
+var firebase = require("firebase/app");
+require("firebase/messaging");
+
 // === DEFAULT / CUSTOM STYLE ===
 // WARNING! always comment out ONE of the two require() calls below.
 // 1. use next line to activate CUSTOM STYLE (./src/themes)
@@ -22,7 +25,13 @@ import './components/msg-directive';
 require(`quasar/dist/quasar.${__THEME}.css`)
     // ==============================
 
-window._messageBus = new Vue();
+window._messageBus = new Vue({
+    data() {
+        return {
+            serverCallbackLog: []
+        }
+    },
+});
 
 // https://www.npmjs.com/package/vue-analytics
 Vue.use(VueAnalytics, {
@@ -96,3 +105,20 @@ body.classList.add(badiCalc.languageDir, badiCalc.languageCode, badiCalc.languag
 // })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 // ga('create', 'UA-1312528-11', 'auto');
 // ga('send', 'pageview');
+
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyAWmZePN5vVblr3dww7HIpII398vwaGMiE",
+    authDomain: "wondrous-badi-today.firebaseapp.com",
+    databaseURL: "https://wondrous-badi-today.firebaseio.com",
+    projectId: "wondrous-badi-today",
+    storageBucket: "wondrous-badi-today.appspot.com",
+    messagingSenderId: "201027632116"
+};
+firebase.initializeApp(config);
+
+const messaging = firebase.messaging();
+
+messaging.usePublicVapidKey("BOMJLq-GqaVDos-u3e7bexzHGf23ZADEVs03tpunmrPuox4vh0Lo6lOC8awEBK34IS09-OVJF8V2sRgqowqMsT0");
+
+window.firebase = firebase;

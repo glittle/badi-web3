@@ -69,30 +69,40 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
             },
             silent: !makeSound,
             renotify: !makeSound,
-            requireInteraction: true
+            requireInteraction: true,
+            onclick: function(e) {
+                console.log('clicked', e)
+            }
         };
         if (makeSound) {
             options.vibrate = [200, 100, 200, 100, 200, 100, 400]
         }
 
         // prepareImage(function () {
-        // var icon = generateOnImage(iconDayNum);
-
+        //var icon = generateOnImage(iconDayNum);
         if (navigator.serviceWorker) {
             navigator.serviceWorker.ready.then(function(registration) {
-                var n = registration.showNotification(note1, options);
-                // Remove the notification from Notification Center when clicked.
-                n.onclick = function() {
-                    console.log('Notification clicked');
-                    // registration.cl
-                    this.close();
-                };
-                // Callback function when the notification is closed.
-                n.onclose = function() {
-                    // console.log('Notification closed');
-                };
+                registration.showNotification(note1, options)
+                    // .then(function(n) {
+                    //     //--> n is null
+                    //     // console.log('after showNotification', n)
+                    //     //     // Remove the notification from Notification Center when clicked.
+                    //     // if (n) {
+                    //     //     n.onclick = function() {
+                    //     //         console.log('Notification clicked');
+                    //     //         // registration.cl
+                    //     //         //this.close();
+                    //     //     };
+                    //     //     // Callback function when the notification is closed.
+                    //     //     n.onclose = function() {
+                    //     //         console.log('Notification closed');
+                    //     //     };
+                    //     // }
+                    // });
             });
         } else {
+            console.log('notification via Notificaion 2')
+
             var n = new Notification(note1, options);
             // Remove the notification from Notification Center when clicked.
             n.onclick = function() {
@@ -111,7 +121,7 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
         // ...remain silent.
         console.log('permission to notify was denied')
     }
-};
+}
 
 // function prepareImage(cb) {
 //   image = new Image();

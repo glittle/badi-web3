@@ -1,5 +1,5 @@
 import storage from './storage'
-import store from './store'
+import { doPulse } from './store'
 
 var speech = {
     get volume() {
@@ -9,6 +9,7 @@ var speech = {
         storage.set('volume', v);
     }
 }
+
 var notifications = {
     get wanted() {
         if (typeof Notification === 'undefined') {
@@ -60,7 +61,7 @@ var timer = null;
 function updatedCoords() {
     clearTimeout(timer);
     timer = setTimeout(function() {
-        store.commit('pulsed')
+        doPulse();
     }, 500);
 }
 

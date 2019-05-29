@@ -95,6 +95,7 @@ export default {
     methods: {
         prepare: function() {
             this.originalYear = badi.di.bYear;
+            this.lastYear = -1;
             this.loadDates(this.originalYear);
 
             if (badi.di.bMonth > 17 || badi.di.bMonth === 0) {
@@ -211,6 +212,8 @@ export default {
         },
         loadDates: function(year) {
             var vue = this;
+            // debugger;
+            // console.log('load dates', year)
             if (!window._nowDi) {
                 console.log('skip', year, ' not ready')
                 return;
@@ -227,7 +230,7 @@ export default {
             // console.log('loading', year)
             var info = badi.buildSpecialDaysTable(year, this.suggestedStart);
 
-            window._days = cloneDeep(info); // for developer access in console
+            window._days = cloneDeep(info); // for use in Grid and for developer access in console
             vue.list = vue.list.concat(info.map(function(d) {
                 return extendDayInfo(vue, d, year - vue.originalYear)
             }));

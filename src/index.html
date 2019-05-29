@@ -5,14 +5,14 @@
         <meta charset="utf-8">
         <meta http-equiv='X-UA-Compatible' content='IE=edge'>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Wondrous-Badí Today</title>
+        <title>Wondrous-Badíʿ Today</title>
         <link rel="manifest" href="/manifest.json" />
         <link rel="canonical" href="https://wondrous-badi.today/" />
         <link rel='shortlink' href='https://wondrous-badi.today/' />
         <meta name="viewport" content="user-scalable=yes, width=device-width">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
-        <meta name="description" content="Tools for the Wondrous-Badí calendar, the official calendar of the Bahá'í Faith.">
+        <meta name="description" content="Tools for the Badíʿ calendar, the official calendar of the Bahá'í Faith.">
         <meta name='mobile-web-app-capable' content='yes'>
         <meta name='apple-mobile-web-app-capable' content='yes'>
         <!--icons -->
@@ -33,15 +33,15 @@
         <meta name='twitter:url' content='https://wondrous-badi.today/'>
         <meta name='twitter:creator' content='@glenlittle'>
         <meta name="twitter:site" content="@glenlittle" />
-        <meta name="twitter:title" content="Wondrous-Badí Today" />
-        <meta name="twitter:description" content="Tools for the Wondrous-Badí Calendar.
-    With special features when viewed on your Android phone!" />
+        <meta name="twitter:title" content="Wondrous-Badíʿ Today" />
+        <meta name="twitter:description" content="Tools for the Wondrous-Badíʿ Calendar.
+    With special features when viewed on your Android phone or tablet!" />
         <meta name="twitter:image" content="/statics/icons/android-chrome-192x192.png" />
         <script type="application/ld+json">
             {
                 "@context": "http://schema.org",
                 "@type": "WebSite",
-                "name": "Wondrous-Badí' Today",
+                "name": "Wondrous-Badíʿ Today",
                 "url": "https://wondrous-badi.today",
                 "author": {
                     "@type": "Person",
@@ -59,76 +59,7 @@
         <noscript>
     Hi. Please enable JavaScript so that we can show you the Wondrous calendar!
   </noscript>
-        <script>
-            ! function() {
-                var t;
-                if (t = window.driftt = window.drift = window.driftt || [], !t.init) return t.invoked ? void(window.console && console.error && console.error("Drift snippet included twice.")) : (t.invoked = !0,
-                    t.methods = ["identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on"],
-                    t.factory = function(e) {
-                        return function() {
-                            var n;
-                            return n = Array.prototype.slice.call(arguments), n.unshift(e), t.push(n), t;
-                        };
-                    }, t.methods.forEach(function(e) {
-                        t[e] = t.factory(e);
-                    }), t.load = function(t) {
-                        var e, n, o, i;
-                        e = 3e5, i = Math.ceil(new Date() / e) * e, o = document.createElement("script"),
-                            o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + i + "/" + t + ".js",
-                            n = document.getElementsByTagName("script")[0], n.parentNode.insertBefore(o, n);
-                    });
-            }();
-            drift.SNIPPET_VERSION = '0.3.1';
-            drift.load('mbgy2ag247dd');
 
-            (function() {
-                /* Add this class to any elements you want to use to open Drift.
-                 *
-                 * Examples:
-                 * - <a class="drift-open-chat">Questions? We're here to help!</a>
-                 * - <button class="drift-open-chat">Chat now!</button>
-                 *
-                 * You can have any additional classes on those elements that you
-                 * would ilke.
-                 */
-                var DRIFT_CHAT_SELECTOR = '.driftHelp'
-                    /* http://youmightnotneedjquery.com/#ready */
-                function ready(fn) {
-                    if (document.readyState != 'loading') {
-                        fn();
-                    } else if (document.addEventListener) {
-                        document.addEventListener('DOMContentLoaded', fn);
-                    } else {
-                        document.attachEvent('onreadystatechange', function() {
-                            if (document.readyState != 'loading')
-                                fn();
-                        });
-                    }
-                }
-                /* http://youmightnotneedjquery.com/#each */
-                function forEachElement(selector, fn) {
-                    var elements = document.querySelectorAll(selector);
-                    for (var i = 0; i < elements.length; i++)
-                        fn(elements[i], i);
-                }
-
-                function openSidebar(driftApi, event) {
-                    event.preventDefault();
-                    driftApi.sidebar.open();
-                    return false;
-                }
-                ready(function() {
-                    drift.on('ready', function(api) {
-                        api.widget.hide();
-                        var handleClick = openSidebar.bind(this, api)
-                        forEachElement(DRIFT_CHAT_SELECTOR, function(el) {
-                            el.addEventListener('click', handleClick);
-                        });
-                    });
-                });
-            })();
-
-        </script>
     </body>
 
 </html>

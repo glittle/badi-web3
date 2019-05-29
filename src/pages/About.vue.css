@@ -48,3 +48,10 @@
   text-decoration: underline;
   cursor: pointer;
 }
+.About .callbackLog {
+  margin: 10px 0 20px 0;
+  font-size: 75%;
+  max-height: 200px;
+  overflow: auto;
+  white-space: nowrap;
+}

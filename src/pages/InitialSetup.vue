@@ -12,7 +12,7 @@
         <div class="card-content">
           <div>
             <h4>1. Set your Location <span v-show="locationSet" class="Done">(Done)</span></h4>
-            <p>Why? &nbsp; Days in the Wondrous calendar start at sunset where you are!</p>
+            <p>Why? &nbsp; Days in the Badíʿ calendar start at sunset where you are!</p>
             <!--<p>Click here:
                   <q-drawer-link v-for="page in pages.filter(p=>p.name==='LocationSetup')" :icon="page.icon" :to="page.to">{{page.text}}</q-drawer-link>
                 </p>-->

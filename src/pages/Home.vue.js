@@ -4,6 +4,7 @@ import sunCalc from '../scripts/sunCalc'
 import storage from '../scripts/storage'
 import Grid19 from '../components/Grid19';
 import Verse from './Verse';
+import Listing from './Listing';
 import prayerHelper from '../scripts/prayerLinkHelper'
 import dateLinksInfo from '../assets/datelinks.json'
 import * as notificationHelper from '../scripts/notificationHelper'
@@ -25,20 +26,25 @@ export default {
             setupDone: false,
             notificationStatus: shared.notifications.wanted,
             toggleVerseSpeech: false,
-            tapNum: 0,
+            tapNum: storage.get('tapNum', 0),
+            tapGroup95: storage.get('tapGroup95', 1),
+            tapContinue: storage.get('tapContinue', false),
+            tapBtnDisabled: false,
             tapBtnText: '',
             tapLastTime: 0,
             tapAutoRunning: false,
             tapAutoTimer: null,
-            tapChimeAfter: true, // dev only - after or instead of regular sound?
+            tapChimeAfter: false, // dev only - after or instead of regular sound?
             tapAutoDelay: storage.get('tapAutoDelay', 2000),
             tapAuto: storage.get('tapAuto', true),
             tapSounds: storage.get('tapSounds', true),
-            prayer: prayerHelper.getRandom()
+            prayer: prayerHelper.getRandom(),
+            addToHomeScreenEvent: null
         }
     },
     components: {
         Grid19,
+        Listing,
         Verse
     },
     computed: {
@@ -127,8 +133,15 @@ export default {
             vue.afterSetupDone();
         });
 
+        window.addEventListener('beforeinstallprompt', (event) => {
+            // Prevent Chrome <= 67 from automatically showing the prompt
+            event.preventDefault();
+            // Stash the event so it can be triggered later.
+            vue.addToHomeScreenEvent = event;
+        });
+
         if (shared.coords.sourceIsSet) {
-            console.log('emit setupDone 2')
+            // console.log('emit setupDone 2')
             _messageBus.$emit('setupDone');
         }
 
@@ -141,8 +154,9 @@ export default {
         window.addEventListener('resize', this.handleResize)
         window.addEventListener('keyup', this.keyup)
 
-        this.makeTapBlocks();
+        this.makeTapDots();
         this.updateTapDisplay();
+        this.syncTapDots();
         this.tapSoundForSteps.addEventListener("ended", function() {
             // console.log('sounded', vue.tapNum, vue.tapSounds)
             if (vue.tapChimeAfter) {
@@ -210,6 +224,18 @@ export default {
         window.removeEventListener('resize', this.handleResize)
     },
     watch: {
+        tapContinue: function(a) {
+            console.log('continue', a)
+            if (a) {
+                this.tapBtnDisabled = false;
+            } else {
+                this.tapGroup95 = 1;
+                storage.set('tapGroup95', this.tapGroup95);
+            }
+            storage.set('tapContinue', a);
+            this.syncTapDots();
+            this.updateTapDisplay();
+        },
         tapSounds: function(a) {
             storage.set('tapSounds', a);
         },
@@ -255,6 +281,25 @@ export default {
         // }
     },
     methods: {
+        addToHomeScreen() {
+            var vue = this;
+            console.log('show add to home')
+            var deferredPrompt = vue.addToHomeScreenEvent;
+            if (deferredPrompt) {
+                console.log('show add to home prompt')
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                deferredPrompt.userChoice
+                    .then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('User accepted the A2HS prompt');
+                        } else {
+                            console.log('User dismissed the A2HS prompt');
+                        }
+                        vue.addToHomeScreenEvent = null;
+                    });
+            }
+        },
         onPulse: function() {
             var vue = this;
             vue.di = badiCalc.di;
@@ -263,7 +308,7 @@ export default {
         },
         info: function(mode) {
             var di = this.di;
-            var type, type2, desc, num;
+            var type, type2, desc, num, month;
             var mid = '';
             var ayyamiha = false;
             switch (mode) {
@@ -284,6 +329,7 @@ export default {
                         desc = 'Day <b>{bDay}</b>'.filledWith(di);
                     }
                     num = di.bDay;
+                    month = di.bMonth;
                     break;
                 case 'year':
                     type = '…in this Year';
@@ -324,7 +370,8 @@ export default {
                 elementNum: di.elementNum,
                 type: type,
                 type2: type2,
-                ayyamiha: ayyamiha
+                ayyamiha: ayyamiha,
+                month: month
             };
         },
         handleResize: function(event) {
@@ -410,15 +457,48 @@ export default {
                 this.$ga.event('tap95', 'started', this.tapAuto ? 'auto' : 'manual');
             }
         },
+        syncTapDots: function() {
+            // call to update dots if may be out of sync
+            // console.log('sync dots')
+            var dot;
+            for (var i = 1; i <= 95; i++) {
+                dot = document.getElementById('tap_' + i);
+                if (i <= this.tapNum) {
+                    dot.classList.add('tapped');
+                } else {
+                    dot.classList.remove('tapped');
+                }
+            }
+
+            this.makeGroupDots();
+        },
         doTap: function() {
             clearTimeout(this.tapAutoTimer);
-            if (this.tapNum >= 95) {
+            if (this.tapNum === 95 && !this.tapContinue) {
                 this.tapAutoRunning = false;
+                this.tapBtnDisabled = true;
+
+                // don't change visible, but set the storage so that they are
+                // reset on next load.
+                storage.set('tapNum', 0);
+                storage.set('tapGroup95', 1);
                 this.updateTapDisplay();
                 return;
             }
+
             this.tapNum++;
+
+            if (this.tapNum > 95) {
+                this.tapNum = 1;
+                this.tapGroup95++;
+                this.syncTapDots();
+            }
+
+            storage.set('tapNum', this.tapNum);
+            storage.set('tapGroup95', this.tapGroup95);
+
             document.getElementById('tap_' + this.tapNum).classList.add('tapped');
+            this.makeGroupDots();
             if (this.tapSounds) {
                 // if (this.tapNum === 95) {
                 //   this.playSound(this.tapSoundForEnd);
@@ -438,7 +518,7 @@ export default {
                     }
                 }
             }
-            if (this.tapNum >= 95) {
+            if (this.tapNum === 95 && !this.tapContinue) {
                 this.tapAutoRunning = false;
             }
             if (this.tapAutoRunning) {
@@ -465,16 +545,19 @@ export default {
             }
         },
         reset95: function() {
-            this.tapNum = 0;
-            clearTimeout(this.tapAutoTimer);
+            this.tapNum = 0; // testing
+            this.tapGroup95 = 1;
+
+            storage.set('tapNum', this.tapNum);
+            storage.set('tapGroup95', this.tapGroup95);
+
             this.tapAutoRunning = false;
-            var blocks = document.getElementsByClassName('tapped');
-            for (var b = blocks.length; b--; b > 0) {
-                blocks[b].classList.remove('tapped');
-            }
+            this.tapBtnDisabled = false;
+            clearTimeout(this.tapAutoTimer);
+            this.syncTapDots();
             this.updateTapDisplay();
         },
-        makeTapBlocks: function() {
+        makeTapDots: function() {
             var html = [];
             var perRow = 19;
             for (var r = 0; r < 5; r++) {
@@ -490,7 +573,56 @@ export default {
                 }
                 html.push('</div>');
             }
-            var host = document.getElementById('tapBlocks');
+            var host = document.getElementById('tapDots');
+            host.innerHTML = html.join('');
+        },
+        makeGroupDots: function() {
+            var host = document.getElementById('groupDots');
+            if (!this.tapContinue) {
+                host.innerHTML = '';
+                return;
+            }
+
+            var html = [];
+            var maxDots = 9; // max for this tool
+            var currentGroup = this.tapGroup95;
+            // only show one more than we need
+            html.push('<div>');
+            for (var num = 1; num <= maxDots; num++) {
+                var classes, text, pct, style;
+                if (num < currentGroup) {
+                    classes = ' class=tapped';
+                    text = '95';
+                    pct = 100;
+                    style = 'background: linear-gradient(to top, #FFA726 {0}%, #eee {0}%);'.filledWith(pct);
+                } else if (num === currentGroup) {
+                    classes = '';
+                    text = this.tapNum;
+                    pct = (1 + this.tapNum * 0.95);
+                    style = 'background: linear-gradient(to top, #FFA726 {0}%, #eee {0}%);'.filledWith(pct);
+                } else {
+                    classes = ' class=future';
+                    text = '&nbsp;';
+                    style = '';
+                }
+                html.push('<span{0} style="{2}">{1}</span>'.filledWith(classes, text, style));
+
+                // for (i = 1; i <= this.tapGroup95 + 1; i++) {
+                //     dot = document.getElementById('group_' + i);
+                //     if (dot) {
+                //         if (i <= this.tapGroup95) {
+                //             dot.classList.add('tapped');
+                //             dot.innerText = '95';
+                //         } else {
+                //             dot.classList.remove('tapped');
+                //             dot.innerText = this.tapNum;
+                //         }
+                //     } else {
+                //         console.log('group dot?', i, this.tapGroup95 + 1)
+                //     }
+                // }
+            }
+            html.push('</div>');
             host.innerHTML = html.join('');
         },
         drawChart: function() {
@@ -532,6 +664,13 @@ export default {
             }, 10);
         }
     },
+    head: {
+        title: function() {
+            return {
+                inner: 'Today'
+            }
+        }
+    }
 }
 
 var local = {
@@ -714,7 +853,7 @@ function drawChart(sun, timeFormat, redraw) {
     //   setEnd: null,
     //   now: now
     if (!document.getElementById('sunChart')) {
-        console.log('sunChart does not exist')
+        // console.log('sunChart does not exist')
         return;
     }
 
@@ -761,7 +900,9 @@ function drawChart(sun, timeFormat, redraw) {
         }
         if (underAxis) {
             o.name = '<br>' + o.name;
-            o.dataLabels = { verticalAlign: 'bottom' };
+            o.dataLabels = {
+                verticalAlign: 'bottom'
+            };
             o.color = colorFullSun; // hack for solar noon
         }
         if (o.y > maxY) maxY = o.y;
@@ -988,7 +1129,7 @@ function showNowLine(chart, sun, timeFormat) {
 
     chart.xAxis[0].addPlotLine({
         value: now.toDate(),
-        color: '#027be3',
+        color: '#2980b9',
         width: 1,
         id: 'now',
         zIndex: 5, //    zIndex: 0,

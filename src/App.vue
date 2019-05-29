@@ -4,7 +4,7 @@
     <div slot="header"
          class="toolbar">
       <q-toolbar-title>
-        <h1 itemprop="name">Wondrous-Badí' Today</h1>
+        <h1 itemprop="name">Wondrous-Badíʿ Today</h1>
         <h2 v-show="setupDone"
             v-html="topDate"></h2>
       </q-toolbar-title>
@@ -25,7 +25,6 @@
              :alt="page.text"></span>
         <span v-html="page.text"></span>
       </div>
-      <i class="driftHelp">live_help</i>
       <button ref="target"
               class="primary">
         <i>more_vert</i>

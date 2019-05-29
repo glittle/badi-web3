@@ -164,8 +164,8 @@ function prepareDateInfos(bYear) {
         }
 
         dateInfo.gYear = 1843 +
-            +bYear +
-            +(dateInfo.GYearOffset || 0);
+            (+bYear) +
+            (+(dateInfo.GYearOffset || 0));
 
         if (!dateInfo.GDate) {
             dateInfo.GDate = getGDateYBDate(bYear, dateInfo.BMonthDay);
@@ -694,7 +694,7 @@ function dateInfosRaw() {
             NameEn: 'Start of Gregorian Year '
         }
     ];
-};
+}
 
 // date utilities //////////////////////////////////////////
 function splitToBMonthDay(code) {
@@ -712,14 +712,14 @@ function makeBMonthDay(month, day) {
         m: +month,
         d: +day
     };
-};
+}
 
 function getGDateYBDate(bYear, bMonthDay) {
     if (!bMonthDay || !bMonthDay.d) {
         return '?3?';
     }
     return getGregorianDate(bYear, bMonthDay.m, bMonthDay.d);
-};
+}
 
 function getGregorianDate(bYear, bMonth, bDay, autoFix) {
     // convert bDate to gDate
@@ -788,7 +788,7 @@ function getGregorianDate(bYear, bMonth, bDay, autoFix) {
     // answer has no time, and is for the frag2 part of the Badi day
 
     return answer;
-};
+}
 
 
 function daysInAyyamiHa(bYear) {
@@ -809,7 +809,8 @@ var getBDate = function(gSourceDate) {
     //      pmSunset.setHours(18,30,0,0);
     //    }
     var afterSunset = false;
-    if (sourceDate.getTime() >= pmSunset.getTime()) {
+    var sourceTime = sourceDate.getTime();
+    if (sourceTime >= pmSunset.getTime()) {
         afterSunset = true;
     }
     // strip off the time
@@ -818,6 +819,9 @@ var getBDate = function(gSourceDate) {
         // after sunset? do for following day
         sourceDate.setDate(sourceDate.getDate() + 1);
     }
+    var sunrise = sunCalc.getTimes(sourceDate).sunrise;
+    var afterSunrise = sourceTime >= sunrise.getTime();
+
     var gYear = sourceDate.getFullYear();
     var gDayOfNawRuz = getNawRuz(gYear, true);
     var gDayLoftiness1 = copyAndAddDays(gDayOfNawRuz, -19);
@@ -856,7 +860,8 @@ var getBDate = function(gSourceDate) {
         y: bYear,
         m: bMonth,
         d: bDay,
-        eve: afterSunset
+        eve: afterSunset,
+        daylight: afterSunrise
     };
 };
 
@@ -2565,11 +2570,11 @@ function getNawRuz(gYear, frag2DateOnly) {
         eveSunset.setHours(18, 30, 0, 0);
     }
     return nawRuz;
-};
+}
 
 function isAfterNawRuz(d) {
     return d.getTime() >= getNawRuz(d.getFullYear()).getTime();
-};
+}
 
 // };
 
@@ -2583,7 +2588,7 @@ function isAfterNawRuz(d) {
 function inStandardTime(d) {
     var jan = new Date(d.getFullYear(), 0, 1);
     return jan.getTimezoneOffset() === d.getTimezoneOffset();
-};
+}
 
 function copyAndAddDays(oldDate, daysOffset) {
     var d = new Date(oldDate);
@@ -2593,7 +2598,7 @@ function copyAndAddDays(oldDate, daysOffset) {
 
 function daysBetween(d1, d2) {
     return 1 + Math.round(Math.abs((d1.getTime() - d2.getTime()) / 864e5));
-};
+}
 
 // function addDays(d, days) {
 //   d.setDate(d.getDate() + days);
@@ -2632,7 +2637,7 @@ function showTime(d, use24) {
         }
     }
     return time;
-};
+}
 
 
 var splitSeparator = /[,?]+/;

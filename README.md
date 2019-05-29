@@ -1,10 +1,9 @@
-# Wondrous-Badí' Calendar Tools
+# Badíʿ Calendar Tools
 
-> A web site with multiple tools for the Wondrous Calendar.
-
+> A web site with multiple tools for the Badíʿ Calendar.
 > Currently hosted at <https://www.wondrous-badi.today/>
 
-Developed by Glen Little. Many features are modelled after the ["Badí' Calendar"](https://chrome.google.com/webstore/detail/bad%C3%AD-calendar/egekinjjpolponbbfjimifpgfdmphomp) Chrome Extension.
+Developed by Glen Little. Many features are modelled after the ["Badíʿ Calendar"](https://chrome.google.com/webstore/detail/bad%C3%AD-calendar/egekinjjpolponbbfjimifpgfdmphomp) Chrome Extension.
 
 ## Features
 
@@ -22,4 +21,3 @@ See ["Status"](https://docs.google.com/document/d/1Q1RtnOocBjW917CHceBbJPSljlDSN
 - talkify - to read the verse aloud
 - axios - to retrieve google map api data
 - service worker - to enable local notifictions
-

@@ -4,6 +4,7 @@ import * as notificationHelper from './scripts/notificationHelper'
 import * as shared from './scripts/shared'
 import * as store from './scripts/store'
 import storage from './scripts/storage'
+import axios from 'axios'
 
 const moment = require('moment-timezone');
 var versionInfo = require('../root/version.json')
@@ -19,8 +20,10 @@ export default {
             routeName: this.$route.name,
             myWorker: null,
             sharedWorker: null,
-            lastNotificationKey: null
-
+            lastNotificationKey: null,
+            lastServerCall: moment(),
+            lastTimeout: null,
+            _serverCallbackLog: [],
             // oldRedirectCountdown: 20
         }
     },
@@ -52,8 +55,15 @@ export default {
         // }
     },
     created() {
+        var vue = this;
+
         document.addEventListener('pulsed', this.doWorkOnPulse, false);
+
         store.doPulse();
+
+        // _messageBus.$on('serverPulse', function() {
+        //     console.log('server pulse')
+        // });
 
         this.prepareWorker();
     },
@@ -108,18 +118,22 @@ export default {
                             break;
                         case 'pulseRequested':
                             console.log('*** shared worker set lastNotificationKey', e.data.key);
+                            window._messageBus.serverCallbackLog.push('shared worker set lastNotificationKey');
                             vue.lastNotificationKey = e.data.key;
                             break;
                     }
                 }
 
-                vue.sharedWorker.port.postMessage({ code: 'hello' });
+                vue.sharedWorker.port.postMessage({
+                    code: 'hello'
+                });
             }
             // console.log('worker loaded', this.myWorker)
         },
         scheduleNextNotification(di) {
             // at next midnight or sunset
             if (!di || !di.stamp) {
+                window._messageBus.serverCallbackLog.push('No di - cannot call');
                 return;
             }
             var sunset = moment(di.frag2SunTimes.sunset);
@@ -128,19 +142,62 @@ export default {
 
             var delay = next.valueOf() - moment().valueOf();
 
+            // delay = 5000; // for testing
 
             var vue = this;
-            if (vue.sharedWorker) {
-                console.log('scheduling sw pulse at', next.format(), 'in', moment.duration(delay, 'ms').humanize())
-                setTimeout(function() {
-                    vue.sharedWorker.port.postMessage({
-                        code: 'doCallback',
-                        cbCode: 'pulse',
-                        delay: delay,
-                        key: di.stamp
-                    });
-                }, 0)
+
+            // if this window is still active, this may work
+            clearTimeout(vue.lastTimeout);
+
+            vue.lastTimeout = setTimeout(function() {
+                console.log('calling doPulse from local setTimeout')
+                window.doPulse();
+            }, delay);
+
+            if (vue.lastServerCall.format() === next.format()) {
+                //console.log('server callback already requested')
+                window._messageBus.serverCallbackLog.push('Callback already requested');
+
+            } else {
+                var firebaseToken = storage.get('firebaseToken', '')
+                if (firebaseToken) {
+                    console.log('asking server to call back in', moment.duration(delay, 'ms').humanize(), 'at', next.format());
+                    console.log('with token', firebaseToken.substring(0, 20) + '...')
+                    var host = window.location.hostname;
+                    var url = host === 'localhost' ?
+                        'http://localhost:8003' :
+                        (window.location.origin + '/wc-notifier');
+                    axios.post(url, {
+                            token: firebaseToken,
+                            delay: delay,
+                            where: shared.coords.name,
+                            geo: '@{1},{2},10z'.filledWith(shared.coords.name, shared.coords.lat, shared.coords.lng)
+                                //place/Castleridge/@51.1052703,-113.9671456
+                        })
+                        .then(function(response) {
+                            if (response.data.status === 'received') {
+                                vue.lastServerCall = next;
+                                console.log('server confirmed... will call back at', next.format());
+                                window._messageBus.serverCallbackLog.push('At ' + new Date());
+                                window._messageBus.serverCallbackLog.push('...requested for ' + next.toDate());
+                            }
+                        }).catch(function(error) {
+                            console.log('axios error', error.message);
+                            window._messageBus.serverCallbackLog.push(error.message);
+                        });
+                }
             }
+            // if (vue.sharedWorker) {
+            //     console.log('scheduling sw pulse at', next.format(), 'in', moment.duration(delay, 'ms').humanize())
+            //     setTimeout(function() {
+            //         vue.sharedWorker.port.postMessage({
+            //             code: 'doCallback',
+            //             cbCode: 'pulse',
+            //             delay: delay,
+            //             key: di.stamp
+            //         });
+            //     }, 0)
+            // }
         },
         // goToNewSite() {
         //   var vue = this;
@@ -155,11 +212,12 @@ export default {
         //   }
         // },
         doWorkOnPulse() {
+            var vue = this;
             // console.log('app pulse')
             // notification icon
-            if (!this.setupDone) {
+            if (!vue.setupDone) {
                 if (shared.coords.sourceIsSet && shared.coords.lat) {
-                    this.setupDone = true;
+                    vue.setupDone = true;
                 }
             }
             var di = badiCalc.di;
@@ -168,12 +226,14 @@ export default {
             }
             var key = di.stamp;
             // console.log(key, lastNotificationKey);
-            if (key !== this.lastNotificationKey) {
+            if (key !== vue.lastNotificationKey) {
                 // console.log('do notify, schedule next')
-                this.di = di;
+                vue.di = di;
                 notificationHelper.showNow(di);
 
-                this.scheduleNextNotification(di);
+                vue.scheduleNextNotification(di);
+
+                vue.lastNotificationKey = key;
             }
         },
         swipePage(obj) {
@@ -254,6 +314,6 @@ function checkLocation(vue) {
     }
 }
 
-setTimeout(function() {
-    //(adsbygoogle = window.adsbygoogle || []).push({});
-}, 0);
+//setTimeout(function() {
+//(adsbygoogle = window.adsbygoogle || []).push({});
+//}, 0);

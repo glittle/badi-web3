@@ -113,7 +113,7 @@ export default {
         },
         confirmLocation() {
             var vue = this;
-            console.trace();
+            // console.trace();
             setTimeout(function() {
                 vue.saveCoords('user');
                 vue.updateUiToNewLocation();
@@ -247,16 +247,16 @@ export default {
             }
             this.$ga.event('location', 'lookup');
         },
-        openMap() {
-            var url = `https://www.google.ca/maps/place/${this.name}/@${this.lat},${this.lng},10z`;
-            window.open(url, 'map');
-        },
+        // openMap() {
+        //     var url = `https://www.google.ca/maps/place/${this.name}/@${this.lat},${this.lng},10z`;
+        //     window.open(url, 'map');
+        // },
         getLocationName() {
             clearLog = true;
             var vue = this;
             vue.gettingName = true;
 
-            var url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${vue.lat},${vue.lng}`;
+            var url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${vue.lat},${vue.lng}&key=AIzaSyDVTMtKstmup60RDf5LrpWGcDt3G6bLCxA`;
             vue.addToLog('Determining name')
 
             axios.get(url)

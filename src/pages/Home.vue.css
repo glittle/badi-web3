@@ -41,6 +41,11 @@ div.card {
   padding: 3px;
   margin: 15px auto 20px auto;
 }
+div.cardBtn {
+  padding: 3px;
+  margin: 15px auto 20px auto;
+  text-align: center;
+}
 .card article.Verse {
   padding: 3px;
 }
@@ -152,7 +157,7 @@ div.line.now {
   color: #aaa;
 }
 div.line b {
-  border: 1px solid #027be3;
+  border: 1px solid #2980b9;
   background-color: rgba(2, 123, 227, 0.06);
   border-radius: 2px;
   padding: 0 2px;
@@ -174,7 +179,7 @@ div.line b {
   width: 100%;
 }
 .tap95card .heading {
-  width: 100%;
+  width: 99%;
 }
 .tap95card .heading .type {
   margin-left: 3px;
@@ -187,7 +192,7 @@ div.line b {
   margin-right: 2px;
 }
 .tap95card button.reset {
-  margin: 1px 10px 0 0;
+  margin: 0 10px 0 0;
   padding: 3px 8px;
   min-height: 1rem;
 }
@@ -212,8 +217,9 @@ div.line b {
   display: block;
 }
 .tap95card .tapDelayArea {
-  margin-top: 20px;
   display: flex;
+  margin: 15px 0 2px;
+  padding: 0 10px 0 5px;
   justify-content: space-between;
   align-items: center;
   display: -webkit-flex;
@@ -227,11 +233,15 @@ div.line b {
 .tap95card .tapDelayArea span {
   white-space: nowrap;
 }
-.tap95card #tapBlocks div {
+.tap95card .tapDelayArea > span {
+  display: inline-block;
+  margin-right: 20px;
+}
+.tap95card #tapDots div {
   height: 10px;
   white-space: nowrap;
 }
-.tap95card #tapBlocks span {
+.tap95card #tapDots span {
   background-color: #eee;
   display: inline-block;
   height: 7px;
@@ -239,12 +249,47 @@ div.line b {
   margin: 2px;
   transition: all 1.5s;
 }
-.tap95card #tapBlocks span.tapped {
+.tap95card #tapDots span.tapped {
   border-radius: 50%;
-  background-color: #027be3;
+  background-color: #2980b9;
 }
-.tap95card #tapBlocks span.tapped.five {
+.tap95card #tapDots span.tapped.five {
   background-color: #FFA726;
+}
+.tap95card #groupDots div {
+  height: 10px;
+  white-space: nowrap;
+  margin: 5px 0 0 0;
+}
+.tap95card #groupDots span {
+  display: inline-block;
+  height: 13px;
+  width: 19px;
+  margin: 0 5px 0 0;
+  border-radius: 2px;
+  text-align: center;
+  padding: 2px 1px 0 2px;
+  font-family: Arial;
+  font-size: 9px;
+  background-color: #eee;
+  transition: all 1.5s;
+  cursor: default;
+  color: #eee;
+}
+.tap95card #groupDots span.tapped {
+  color: #000;
+}
+.tap95card #groupDots span.future {
+  background-color: #fafafa;
+}
+.tap95card .tapControl {
+  padding: 0 0 0 10px;
+  align-self: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+}
+.tap95card .tapControl .continue {
+  font-size: 0.9rem;
 }
 .card.prayer {
   padding: 3px;
@@ -253,6 +298,10 @@ div.line b {
   margin: 1px 3px 0 0;
   padding: 3px 8px;
   min-height: 1rem;
+}
+.card.prayer button.right {
+  float: right;
+  margin: 6px 0 4px 0;
 }
 .card.prayer .content {
   margin: 5px 8px .5em 10px;
@@ -285,15 +334,17 @@ div.line b {
 }
 .card.share .support {
   margin: 0 8px 4px 8px;
-  display: flex;
-  display: -webkit-flex;
+  position: relative;
 }
-.card.share .qr {
+.card.share .support img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 75px;
   height: 75px;
 }
-.card.share p {
-  margin: 0 8px 4px 8px;
+.card.share .support p {
+  margin: 0 8px 4px 80px;
 }
 .google_ad_1 {
   text-align: center;
