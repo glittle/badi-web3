@@ -154,6 +154,10 @@ export default {
                         item.icon = '../statics/divider.png';
                         item.class = 'iconDivider'
                         break;
+                    case '-pdf':
+                        item.icon = '../statics/pdf.png';
+                        item.class = 'pdf'
+                        break;
                     case '-readingsDoc':
                         item.icon = '../statics/doc.gif';
                         item.class = 'icon20'

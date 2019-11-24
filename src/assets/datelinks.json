@@ -141,6 +141,11 @@
         }
     ],
     "M01": [{
+            "url": "https://wondrous-badi.today/files/FeastBook-01.pdf",
+            "icon": "-pdf",
+            "type": "collection",
+            "desc": "Feast Devotions (bfb)"
+        }, {
             "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/01baha.doc",
             "icon": "-readingsDoc",
             "type": "collection",
@@ -160,6 +165,11 @@
         }
     ],
     "M02": [{
+            "url": "https://wondrous-badi.today/files/FeastBook-02.pdf",
+            "icon": "-pdf",
+            "type": "collection",
+            "desc": "Feast Devotions (bfb)"
+        }, {
             "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/02jalal.doc",
             "icon": "-readingsDoc",
             "type": "collection",
@@ -185,6 +195,11 @@
         }
     ],
     "M03": [{
+            "url": "https://wondrous-badi.today/files/FeastBook-03.pdf",
+            "icon": "-pdf",
+            "type": "collection",
+            "desc": "Feast Devotions (bfb)"
+        }, {
             "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/03jamal.doc",
             "icon": "-readingsDoc",
             "type": "collection",
@@ -204,6 +219,11 @@
         }
     ],
     "M04": [{
+            "url": "https://wondrous-badi.today/files/FeastBook-04.pdf",
+            "icon": "-pdf",
+            "type": "collection",
+            "desc": "Feast Devotions (bfb)"
+        }, {
             "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/04azamat.doc",
             "icon": "-readingsDoc",
             "type": "collection",
@@ -223,6 +243,11 @@
         }
     ],
     "M05": [{
+            "url": "https://wondrous-badi.today/files/FeastBook-05.pdf",
+            "icon": "-pdf",
+            "type": "collection",
+            "desc": "Feast Devotions (bfb)"
+        }, {
             "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/05nur.doc",
             "icon": "-readingsDoc",
             "type": "collection",
@@ -248,6 +273,11 @@
         }
     ],
     "M06": [{
+            "url": "https://wondrous-badi.today/files/FeastBook-06.pdf",
+            "icon": "-pdf",
+            "type": "collection",
+            "desc": "Feast Devotions (bfb)"
+        }, {
             "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/06rahmat.doc",
             "icon": "-readingsDoc",
             "type": "collection",
@@ -267,6 +297,11 @@
         }
     ],
     "M07": [{
+            "url": "https://wondrous-badi.today/files/FeastBook-07.pdf",
+            "icon": "-pdf",
+            "type": "collection",
+            "desc": "Feast Devotions (bfb)"
+        }, {
             "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/07kalimat.doc",
             "icon": "-readingsDoc",
             "type": "collection",
@@ -286,6 +321,11 @@
         }
     ],
     "M08": [{
+            "url": "https://wondrous-badi.today/files/FeastBook-08.pdf",
+            "icon": "-pdf",
+            "type": "collection",
+            "desc": "Feast Devotions (bfb)"
+        }, {
             "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/08kamal.doc",
             "icon": "-readingsDoc",
             "type": "collection",
@@ -311,6 +351,11 @@
         }
     ],
     "M09": [{
+            "url": "https://wondrous-badi.today/files/FeastBook-09.pdf",
+            "icon": "-pdf",
+            "type": "collection",
+            "desc": "Feast Devotions (bfb)"
+        }, {
             "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/09asma.doc",
             "icon": "-readingsDoc",
             "type": "collection",
@@ -336,6 +381,11 @@
         }
     ],
     "M10": [{
+            "url": "https://wondrous-badi.today/files/FeastBook-10.pdf",
+            "icon": "-pdf",
+            "type": "collection",
+            "desc": "Feast Devotions (bfb)"
+        }, {
             "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/10izzat.doc",
             "icon": "-readingsDoc",
             "type": "collection",
@@ -355,6 +405,11 @@
         }
     ],
     "M11": [{
+            "url": "https://wondrous-badi.today/files/FeastBook-11.pdf",
+            "icon": "-pdf",
+            "type": "collection",
+            "desc": "Feast Devotions (bfb)"
+        }, {
             "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/11mashiyyat.doc",
             "icon": "-readingsDoc",
             "type": "collection",
@@ -374,6 +429,11 @@
         }
     ],
     "M12": [{
+            "url": "https://wondrous-badi.today/files/FeastBook-12.pdf",
+            "icon": "-pdf",
+            "type": "collection",
+            "desc": "Feast Devotions (bfb)"
+        }, {
             "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/12ilm.doc",
             "icon": "-readingsDoc",
             "type": "collection",
@@ -399,6 +459,11 @@
         }
     ],
     "M13": [{
+            "url": "https://wondrous-badi.today/files/FeastBook-13.pdf",
+            "icon": "-pdf",
+            "type": "collection",
+            "desc": "Feast Devotions (bfb)"
+        }, {
             "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/13qudrat.doc",
             "icon": "-readingsDoc",
             "type": "collection",
@@ -424,6 +489,12 @@
         }
     ],
     "M14": [{
+            "url": "https://wondrous-badi.today/files/FeastBook-14.pdf",
+            "icon": "-pdf",
+            "type": "collection",
+            "desc": "Feast Devotions (bfb)"
+        },
+        {
             "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/14qawl.doc",
             "icon": "-readingsDoc",
             "type": "collection",
@@ -443,6 +514,11 @@
         }
     ],
     "M15": [{
+            "url": "https://wondrous-badi.today/files/FeastBook-15.pdf",
+            "icon": "-pdf",
+            "type": "collection",
+            "desc": "Feast Devotions (bfb)"
+        }, {
             "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/15masail.doc",
             "icon": "-readingsDoc",
             "type": "collection",
@@ -462,6 +538,11 @@
         }
     ],
     "M16": [{
+            "url": "https://wondrous-badi.today/files/FeastBook-16.pdf",
+            "icon": "-pdf",
+            "type": "collection",
+            "desc": "Feast Devotions (bfb)"
+        }, {
             "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/16sharaf.doc",
             "icon": "-readingsDoc",
             "type": "collection",
@@ -481,6 +562,11 @@
         }
     ],
     "M17": [{
+            "url": "https://wondrous-badi.today/files/FeastBook-17.pdf",
+            "icon": "-pdf",
+            "type": "collection",
+            "desc": "Feast Devotions (bfb)"
+        }, {
             "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/17sultan.doc",
             "icon": "-readingsDoc",
             "type": "collection",
@@ -500,6 +586,11 @@
         }
     ],
     "M18": [{
+            "url": "https://wondrous-badi.today/files/FeastBook-18.pdf",
+            "icon": "-pdf",
+            "type": "collection",
+            "desc": "Feast Devotions (bfb)"
+        }, {
             "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/18mulk.doc",
             "icon": "-readingsDoc",
             "type": "collection",
@@ -525,6 +616,11 @@
         }
     ],
     "M19": [{
+            "url": "https://wondrous-badi.today/files/FeastBook-19.pdf",
+            "icon": "-pdf",
+            "type": "collection",
+            "desc": "Feast Devotions (bfb)"
+        }, {
             "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/19ala.doc",
             "icon": "-readingsDoc",
             "type": "collection",

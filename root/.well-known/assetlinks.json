@@ -1,5 +1,8 @@
 [{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target" : { "namespace": "android_app", "package_name": "wondrousbadi.today.pwa",
-               "sha256_cert_fingerprints": ["FA:2E:13:94:BF:55:08:DB:83:86:CF:27:70:72:C1:C1:8F:45:AD:08:E1:97:3D:D9:9D:63:9C:E3:A1:BF:0B:C8"] }
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+        "namespace": "android_app",
+        "package_name": "pwa.today.wondrousbadi",
+        "sha256_cert_fingerprints": ["FA:2E:13:94:BF:55:08:DB:83:86:CF:27:70:72:C1:C1:8F:45:AD:08:E1:97:3D:D9:9D:63:9C:E3:A1:BF:0B:C8"]
+    }
 }]
