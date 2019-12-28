@@ -127,7 +127,8 @@ export default {
         },
         guessLocation() {
             var vue = this;
-            var url = "https://ipinfo.io/geo?json";
+            var token = '2eeafe6953a046';
+            var url = "https://ipinfo.io/geo?json&token=" + token;
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (xhr.readyState !== 4) {

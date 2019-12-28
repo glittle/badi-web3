@@ -10,7 +10,6 @@ require('../scripts/stringExt')
 
 export function showNow(di) {
     di = di || badiCalc.di;
-
     if (!di || !di.stamp) {
         return;
     }
@@ -81,23 +80,25 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
         // prepareImage(function () {
         //var icon = generateOnImage(iconDayNum);
         if (navigator.serviceWorker) {
+            console.log('notification via serviceWorker')
             navigator.serviceWorker.ready.then(function(registration) {
                 registration.showNotification(note1, options)
-                    // .then(function(n) {
-                    //     //--> n is null
-                    //     // console.log('after showNotification', n)
-                    //     //     // Remove the notification from Notification Center when clicked.
-                    //     // if (n) {
-                    //     //     n.onclick = function() {
-                    //     //         console.log('Notification clicked');
-                    //     //         // registration.cl
-                    //     //         //this.close();
-                    //     //     };
-                    //     //     // Callback function when the notification is closed.
-                    //     //     n.onclose = function() {
-                    //     //         console.log('Notification closed');
-                    //     //     };
-                    //     // }
+                    // .then(function(n, a, b) {
+                    // debugger;
+                    //--> n is null
+                    // console.log('after showNotification', n)
+                    //     // Remove the notification from Notification Center when clicked.
+                    // if (n) {
+                    //     n.onclick = function() {
+                    //         console.log('Notification clicked');
+                    //         // registration.cl
+                    //         //this.close();
+                    //     };
+                    //     // Callback function when the notification is closed.
+                    //     n.onclose = function() {
+                    //         console.log('Notification closed');
+                    //     };
+                    // }
                     // });
             });
         } else {
