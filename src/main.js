@@ -17,6 +17,13 @@ import './components/msg-directive';
 var firebase = require("firebase/app");
 require("firebase/messaging");
 
+if (window.location.port === '8080') {
+    // in dev
+} else if (window.location.protocol === 'http:') {
+    console.log('redirect to https://')
+    window.location.href = window.location.href.replace('http:', 'https:');
+}
+
 // === DEFAULT / CUSTOM STYLE ===
 // WARNING! always comment out ONE of the two require() calls below.
 // 1. use next line to activate CUSTOM STYLE (./src/themes)
