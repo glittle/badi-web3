@@ -24,6 +24,7 @@
         "moment-timezone": "^0.5.10",
         "postcss-loader": "^1.2.2",
         "progress-bar-webpack-plugin": "^1.9.2",
+        "quasar-cli": "^0.17.26",
         "quasar-framework": "^0.13.10",
         "roboto-fontface": "^0.7.0",
         "shelljs": "^0.7.6",
