@@ -1,82 +1,40 @@
 {
     "NawRuz": [{
-            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f3",
-            "icon": "-DOR",
-            "type": "auth",
-            "desc": "Days of Remembrance"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fhd01.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Devotional Program (bi)"
-        }
-    ],
+        "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f3",
+        "icon": "-DOR",
+        "type": "auth",
+        "desc": "Days of Remembrance"
+    }],
     "Ridvan1": [{
-            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f4",
-            "icon": "-DOR",
-            "type": "auth",
-            "desc": "Days of Remembrance - Ridván"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fhd0234.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Devotional Program - Ridván (bi)"
-        }
-    ],
+        "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f4",
+        "icon": "-DOR",
+        "type": "auth",
+        "desc": "Days of Remembrance - Ridván"
+    }],
     "Ridvan9": [{
-            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f4",
-            "icon": "-DOR",
-            "type": "auth",
-            "desc": "Days of Remembrance - Ridván"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fhd0234.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Devotional Program - Ridván (bi)"
-        }
-    ],
+        "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f4",
+        "icon": "-DOR",
+        "type": "auth",
+        "desc": "Days of Remembrance - Ridván"
+    }],
     "Ridvan12": [{
-            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f4",
-            "icon": "-DOR",
-            "type": "auth",
-            "desc": "Days of Remembrance - Ridván"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fhd0234.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Devotional Program - Ridván (bi)"
-        }
-    ],
+        "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f4",
+        "icon": "-DOR",
+        "type": "auth",
+        "desc": "Days of Remembrance - Ridván"
+    }],
     "DeclBab": [{
-            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f5",
-            "icon": "-DOR",
-            "type": "auth",
-            "desc": "Days of Remembrance"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fhd05.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Devotional Program (bi)"
-        }
-    ],
+        "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f5",
+        "icon": "-DOR",
+        "type": "auth",
+        "desc": "Days of Remembrance"
+    }],
     "AscBaha": [{
-            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f6",
-            "icon": "-DOR",
-            "type": "auth",
-            "desc": "Days of Remembrance"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fhd06.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Devotional Program (bi)"
-        }
-    ],
+        "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f6",
+        "icon": "-DOR",
+        "type": "auth",
+        "desc": "Days of Remembrance"
+    }],
     "Martyrdom": [{
             "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f7",
             "icon": "-DOR",
@@ -88,12 +46,6 @@
             "icon": "-readingsWeb",
             "type": "collection",
             "desc": "Program (sg)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fhd08.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Devotional Program (bi)"
         },
         {
             "url": "http://susangammage.com/midsummer-noon-a-play-about-the-martyrdom-of-the-bab",
@@ -115,12 +67,6 @@
             "desc": "Program (sg)"
         },
         {
-            "url": "http://bahai-invitation.com/feast/fhd08.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Devotional Program (bi)"
-        },
-        {
             "url": "http://susangammage.com/a-dramatic-reading-in-commemoration-of-the-birth-of-the-bab",
             "icon": "-readingsWeb",
             "type": "collection",
@@ -128,18 +74,11 @@
         }
     ],
     "BirthBaha": [{
-            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f9",
-            "icon": "-DOR",
-            "type": "auth",
-            "desc": "Days of Remembrance"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fhd09.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Devotional Program (bi)"
-        }
-    ],
+        "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f9",
+        "icon": "-DOR",
+        "type": "auth",
+        "desc": "Days of Remembrance"
+    }],
     "M01": [{
             "url": "https://wondrous-badi.today/files/FeastBook-01.pdf",
             "icon": "-pdf",
@@ -156,12 +95,6 @@
             "icon": "-readingsDoc",
             "type": "collection",
             "desc": "Feast Devotions (bis-WH)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fm01.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (bi)"
         }
     ],
     "M02": [{
@@ -186,12 +119,6 @@
             "icon": "-readingsWeb",
             "type": "collection",
             "desc": "Feast Devotions (sg)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fm02.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (bi)"
         }
     ],
     "M03": [{
@@ -210,12 +137,6 @@
             "icon": "-readingsDoc",
             "type": "collection",
             "desc": "Feast Devotions (bis-WH)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fm03.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (bi)"
         }
     ],
     "M04": [{
@@ -234,12 +155,6 @@
             "icon": "-readingsDoc",
             "type": "collection",
             "desc": "Feast Devotions (bis-WH)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fm04.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (bi)"
         }
     ],
     "M05": [{
@@ -264,12 +179,6 @@
             "icon": "-readingsWeb",
             "type": "collection",
             "desc": "Feast Devotions (sg)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fm05.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (bi)"
         }
     ],
     "M06": [{
@@ -288,12 +197,6 @@
             "icon": "-readingsDoc",
             "type": "collection",
             "desc": "Feast Devotions (bis-WH)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fm06.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (bi)"
         }
     ],
     "M07": [{
@@ -312,12 +215,6 @@
             "icon": "-readingsDoc",
             "type": "collection",
             "desc": "Feast Devotions (bis-WH)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fm07.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (bi)"
         }
     ],
     "M08": [{
@@ -342,12 +239,6 @@
             "icon": "-readingsWeb",
             "type": "collection",
             "desc": "Feast Devotions (sg)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fm08.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (bi)"
         }
     ],
     "M09": [{
@@ -372,12 +263,6 @@
             "icon": "-readingsWeb",
             "type": "collection",
             "desc": "Feast Devotions (sg)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fm09.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (bi)"
         }
     ],
     "M10": [{
@@ -396,12 +281,6 @@
             "icon": "-readingsDoc",
             "type": "collection",
             "desc": "Feast Devotions (bis-WH)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fm10.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (bi)"
         }
     ],
     "M11": [{
@@ -420,12 +299,6 @@
             "icon": "-readingsDoc",
             "type": "collection",
             "desc": "Feast Devotions (bis-WH)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fm11.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (bi)"
         }
     ],
     "M12": [{
@@ -450,12 +323,6 @@
             "icon": "-readingsWeb",
             "type": "collection",
             "desc": "Feast Devotions (sg)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fm12.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (bi)"
         }
     ],
     "M13": [{
@@ -480,12 +347,6 @@
             "icon": "-readingsWeb",
             "type": "collection",
             "desc": "Feast Devotions (sg)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fm13.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (bi)"
         }
     ],
     "M14": [{
@@ -505,12 +366,6 @@
             "icon": "-readingsDoc",
             "type": "collection",
             "desc": "Feast Devotions (bis-WH)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fm14.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (bi)"
         }
     ],
     "M15": [{
@@ -529,12 +384,6 @@
             "icon": "-readingsDoc",
             "type": "collection",
             "desc": "Feast Devotions (bis-WH)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fm15.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (bi)"
         }
     ],
     "M16": [{
@@ -553,12 +402,6 @@
             "icon": "-readingsDoc",
             "type": "collection",
             "desc": "Feast Devotions (bis-WH)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fm16.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (bi)"
         }
     ],
     "M17": [{
@@ -577,12 +420,6 @@
             "icon": "-readingsDoc",
             "type": "collection",
             "desc": "Feast Devotions (bis-WH)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fm17.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (bi)"
         }
     ],
     "M18": [{
@@ -607,12 +444,6 @@
             "icon": "-readingsWeb",
             "type": "collection",
             "desc": "Feast Devotions (sg)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fm18.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (bi)"
         }
     ],
     "M19": [{
@@ -637,12 +468,6 @@
             "icon": "-readingsWeb",
             "type": "collection",
             "desc": "Feast Devotions (sg)"
-        },
-        {
-            "url": "http://bahai-invitation.com/feast/fm19.html",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (bi)"
         }
     ],
     "M-173-07": [{
