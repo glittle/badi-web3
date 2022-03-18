@@ -63,7 +63,7 @@ div.cardBtn {
   display: block;
   font-size: 18px;
   min-height: auto;
-  padding-bottom: .5em;
+  padding-bottom: 0.5em;
 }
 .card article.Verse .verseHost .speakButtons {
   display: block;
@@ -140,6 +140,12 @@ button.item-link.icon_setup {
 }
 #sunChart .wk1 {
   color: #212121;
+}
+#sunChart span.highcharts-title {
+  top: auto !important;
+  left: auto !important;
+  bottom: 21px;
+  right: 10px;
 }
 div.line {
   margin: 3px 0;
@@ -304,7 +310,7 @@ div.line b {
   margin: 6px 0 4px 0;
 }
 .card.prayer .content {
-  margin: 5px 8px .5em 10px;
+  margin: 5px 8px 0.5em 10px;
 }
 .card.prayer .content .firstLine {
   font-size: 18px;

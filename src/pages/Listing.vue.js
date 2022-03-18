@@ -81,7 +81,7 @@ export default {
     created: function() {
         var vue = this;
 
-        _messageBus.$on('setupDone', function() {
+        window._messageBus.$on('setupDone', function() {
             vue.prepare();
         })
 
@@ -90,7 +90,7 @@ export default {
             return;
         }
         this.prepare();
-        _messageBus.$on('changedDay', this.prepare);
+        window._messageBus.$on('changedDay', this.prepare);
     },
     methods: {
         prepare: function() {

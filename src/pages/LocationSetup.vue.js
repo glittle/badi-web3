@@ -118,7 +118,7 @@ export default {
                 vue.saveCoords('user');
                 vue.updateUiToNewLocation();
                 console.log('emit setupDone 3')
-                _messageBus.$emit('setupDone');
+                window._messageBus.$emit('setupDone');
                 vue.$router.push('/');
             }, 0)
         },
@@ -307,7 +307,7 @@ export default {
             badiCalc.reset();
             store.doPulse();
             console.log('emit locationChanged 1')
-            _messageBus.$emit('locationChanged');
+            window._messageBus.$emit('locationChanged');
         },
         addToLog(msg) {
             var vue = this;

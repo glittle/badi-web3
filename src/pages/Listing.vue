@@ -1,16 +1,122 @@
-{ "name": "badi-web3", "version": "1.20.9", "description": "Tools for the Badíʿ Calendar", "author": "Glen Little
-<glen.little@gmail.com>", "scripts": { "clean": "node build/script.clean.js", "dev": "node build/script.dev.js", "build": "node build/script.build.js", "lint": "eslint --ext .js,.vue src" }, "dependencies": { "autoprefixer": "^6.6.1", "axios": "^0.18.1", "babel-runtime": "^6.0.0",
-    "eslint-friendly-formatter": "^2.0.7", "extract-text-webpack-plugin": "^2.0.0-beta.5", "fastclick": "^1.0.6", "firebase": "^7.2.1", "highcharts": "^7.2.0", "html-webpack-plugin": "^2.26.0", "material-design-icons": "^3.0.1", "moment": "^2.24.0", "moment-timezone":
-    "^0.5.10", "postcss-loader": "^1.2.2", "progress-bar-webpack-plugin": "^1.9.2", "quasar-framework": "^0.13.10", "roboto-fontface": "^0.7.0", "shelljs": "^0.7.6", "simple-vue-validator": "^0.13.2", "velocity-animate": "^1.2.3", "vue": "^2.1.10", "vue-analytics":
-    "^4.1.0", "vue-head": "^2.0.10", "vue-highcharts": "^0.0.10", "vue-router": "^2.1.2", "vue-template-compiler": "^2.1.10", "vuex": "^2.1.1", "webpack": "^2.2.0", "webpack-hot-middleware": "^2.15.0" }, "devDependencies": { "autoprefixer": "^6", "babel-core":
-    "^6.0.0", "babel-eslint": "^7.0.0", "babel-loader": "^7.0.0", "babel-plugin-transform-runtime": "^6.0.0", "babel-preset-es2015": "^6.0.0", "babel-preset-stage-2": "^6.0.0", "colors": "^1.1.2", "connect-history-api-fallback": "^1.1.0", "copy-webpack-plugin":
-    "^4.0.1", "css-loader": "^3.2.0", "eslint": "^3.0.1", "eslint-config-standard": "^10.2.1", "eslint-friendly-formatter": "^2.0.7", "eslint-loader": "^1.3.0", "eslint-plugin-html": "^2.0.1", "eslint-plugin-import": "*", "eslint-plugin-node": "*", "eslint-plugin-promise":
-    "^3.3.0", "eslint-plugin-standard": "^3.0.1", "eventsource-polyfill": "^0.9.6", "express": "^4.17.1", "extract-text-webpack-plugin": "^2.0.0-beta.4", "file-loader": "^0.11.1", "html-webpack-plugin": "^2.8.1", "http-proxy-middleware": "^0.20.0", "json-loader":
-    "^0.5.4", "less": "^2.7.1", "less-loader": "^4.0.2", "opn": "^5.0.0", "postcss-loader": "^1.3.3", "progress-bar-webpack-plugin": "^1.9.0", "serviceworker-webpack-plugin": "^0.2.1", "shelljs": "^0.7.0", "stylus": "^0.54.5", "stylus-loader": "^3.0.1",
-    "url-loader": "^2.2.0", "vue-loader": "^12.2.1", "vue-style-loader": "^3.0.1", "vue-template-compiler": "^2.1.6", "webpack": "^2.1.0-beta.27", "webpack-dev-middleware": "^1.8.4", "webpack-hot-middleware": "^2.13.2", "webpack-merge": "^4.1.0", "webpack-version-file-plugin":
-    "^0.2.2" } }
-    <div class="linkToggle" v-if="day.links.length">
-        <q-toggle icon="format_list_bulleted" v-model="day.showingLinks"></q-toggle>
+<template>
+  <article class="layout-padding"
+           id="Listing">
+    <div>
+      <div v-if="!onHome">
+        <button v-on:click="loadDates(prevYear)"
+                class="small light btnPrev">Previous year ({{prevYear}} BE)</button>
+        <h3>{{this.title}}</h3>
+        <div class=location>Times for <span v-html="location"></span></div>
+        <div class="switches">
+          <div class="toggles">
+            <label>
+              <q-toggle v-model="includeHolyDays"
+                        class="teal"
+                        id="includeHolyDays"></q-toggle>
+              <span v-msg="'includeHolyDays,extractAccessKeyFor:includeHolyDays'"></span>
+            </label>
+            <label>
+              <q-toggle v-model="includeFeasts"
+                        class="teal"
+                        id="includeFeasts"></q-toggle>
+              <span v-msg="'includeFeasts,extractAccessKeyFor:includeFeasts'"></span>
+            </label>
+            <label>
+              <q-toggle v-model="includeOther"
+                        class="teal"
+                        id="includeOther"></q-toggle>
+              <span v-msg="'includeOther,extractAccessKeyFor:includeOther'"></span>
+            </label>
+            <label>
+              <q-toggle v-model="includeFast"
+                        class="teal"
+                        id="includeFast"></q-toggle>
+              <span v-msg="'includeFast,extractAccessKeyFor:includeFast'"></span>
+            </label>
+          </div>
+          <div class="suggestedStart">
+            <span>Suggested start at </span>
+            <select v-model=suggestedStart>
+              <option value="">none</option>
+              <option value=1800>6:00 pm</option>
+              <option value=1830>6:30 pm</option>
+              <option value=1900>7:00 pm</option>
+              <option value=1930>7:30 pm</option>
+              <option value=2000>8:00 pm</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="dayList">
+        <div class="item"
+             v-for="day in (onHome ? list : filteredList)"
+             :id="makeId(day)">
+          <div class="item-content dayContent Feast"
+               :class="day.RowClass"
+               v-if="day.Type==='M'">
+            <div class="col1">
+              <!--<span class=dayType><i>date_range</i></span>-->
+              <img alt="Calendar icon" :class="day.di.element"
+                   src="statics/calendar.png">
+              <div>{{day.di.bMonth}}</div>
+            </div>
+            <div class="col2">
+              <!--<input type="checkbox" class=toggleInfo></div>-->
+              <div class=dayName
+                   v-html="day.Month"></div>
+              <div v-html="day.A"></div>
+              <div :class="getSpecialTime(day).classes"
+                   v-html="getSpecialTime(day).html"></div>
+              <div v-html="day.A2"></div>
+              <!--<div class=toggleInfoTarget>
+                    More Info!
+                  </div>-->
+            </div>
+            <div class="col3">
+              <div class=gDate
+                   v-html="day.di.gCombinedY">
+              </div>
+              <div class=sunsetStart title="Starting sunset">
+                <img alt="starting sunset" src="statics/sunset.png">
+                <span v-html="day.Sunset"></span>
+              </div>
+              <div class="linkToggle"
+                   v-if="day.links.length">
+                <q-toggle icon="format_list_bulleted"
+                          v-model="day.showingLinks"></q-toggle>
+                <span v-html="day.links.length"></span>
+              </div>
+            </div>
+          </div>
+          <div class="item-content dayContent HolyDay"
+               :class="day.RowClass"
+               v-if="day.Type[0]==='H'">
+            <div class="col1">
+              <!--<span class=dayType><i>star</i></span>-->
+              <img src="statics/star.png" alt="star">
+            </div>
+            <div class="col2">
+              <div class=dayName
+                   v-html="day.A"></div>
+              <div v-html="day.D"></div>
+              <div v-html="day.A2"></div>
+              <div :class="getNoWorkClass(day.di.frag2Weekday)"
+                   v-html="getNoWork(day.NoWork)"></div>
+              <div :class="getSpecialTime(day).classes"
+                   v-html="getSpecialTime(day).html"></div>
+            </div>
+            <div class="col3">
+              <div class=gDate
+                   v-html="day.di.gCombinedY">
+              </div>
+              <div class=sunsetStart title="Starting sunset">
+                <img alt="starting sunset" src="statics/sunset.png">
+                <span v-html="day.Sunset"></span>
+              </div>
+              <div class="linkToggle"
+                   v-if="day.links.length">
+                <q-toggle icon="format_list_bulleted"
+                          v-model="day.showingLinks"></q-toggle>
         <span v-html="day.links.length"></span>
     </div>
     </div>
@@ -110,5 +216,5 @@
     </div>
     </article>
     </template>
-    <script src="./Listing.vue.js"></script>
-    <style src="./Listing.vue.css"></style>
+<script src="./Listing.vue.js"></script>
+<style src="./Listing.vue.css"></style>
