@@ -1,6 +1,6 @@
 {
     "name": "badi-web3",
-    "version": "1.20.10",
+    "version": "1.20.9",
     "description": "Tools for the Badíʿ Calendar",
     "author": "Glen Little <glen.little@gmail.com>",
     "scripts": {
@@ -24,7 +24,7 @@
         "moment-timezone": "^0.5.10",
         "postcss-loader": "^1.2.2",
         "progress-bar-webpack-plugin": "^1.9.2",
-        "quasar-cli": "^0.17.26",
+        "quasar-cli": "^0.6.5",
         "quasar-framework": "^0.13.10",
         "roboto-fontface": "^0.7.0",
         "shelljs": "^0.7.6",
