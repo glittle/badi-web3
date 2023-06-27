@@ -1,779 +1,410 @@
 {
-    "NawRuz": [{
-        "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f3",
-        "icon": "-DOR",
-        "type": "auth",
-        "desc": "Days of Remembrance"
-    }],
-    "Ridvan1": [{
-        "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f4",
-        "icon": "-DOR",
-        "type": "auth",
-        "desc": "Days of Remembrance - Ridván"
-    }],
-    "Ridvan9": [{
-        "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f4",
-        "icon": "-DOR",
-        "type": "auth",
-        "desc": "Days of Remembrance - Ridván"
-    }],
-    "Ridvan12": [{
-        "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f4",
-        "icon": "-DOR",
-        "type": "auth",
-        "desc": "Days of Remembrance - Ridván"
-    }],
-    "DeclBab": [{
-        "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f5",
-        "icon": "-DOR",
-        "type": "auth",
-        "desc": "Days of Remembrance"
-    }],
-    "AscBaha": [{
-        "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f6",
-        "icon": "-DOR",
-        "type": "auth",
-        "desc": "Days of Remembrance"
-    }],
-    "Martyrdom": [{
+    "NawRuz": [
+        {
+            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f3",
+            "icon": "-DOR",
+            "type": "auth",
+            "desc": "Days of Remembrance"
+        },
+        {
+            "url": "https://www.upliftingwords.org/post/naw-ruz-holy-day-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words"
+        }
+    ],
+    "Ridvan1": [
+        {
+            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f4",
+            "icon": "-DOR",
+            "type": "auth",
+            "desc": "Days of Remembrance - Ridván"
+        },
+        {
+            "url": "https://www.upliftingwords.org/post/the-festival-of-ridvan",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words 1"
+        },
+        {
+            "url": "https://www.upliftingwords.org/post/ridvan-holy-day-devotional-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words 2"
+        }
+    ],
+    "Ridvan9": [
+        {
+            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f4",
+            "icon": "-DOR",
+            "type": "auth",
+            "desc": "Days of Remembrance - Ridván"
+        },
+        {
+            "url": "https://www.upliftingwords.org/post/9th-day-of-ridvan-holy-day-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words"
+        }
+    ],
+    "Ridvan12": [
+        {
+            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f4",
+            "icon": "-DOR",
+            "type": "auth",
+            "desc": "Days of Remembrance - Ridván"
+        },
+        {
+            "url": "https://www.upliftingwords.org/post/12th-day-of-ridvan-holy-day-devotional-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words"
+        }
+    ],
+    "DeclBab": [
+        {
+            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f5",
+            "icon": "-DOR",
+            "type": "auth",
+            "desc": "Days of Remembrance"
+        },
+        {
+            "url": "https://www.upliftingwords.org/post/the-declaration-of-the-bab",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words"
+        }
+    ],
+    "AscBaha": [
+        {
+            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f6",
+            "icon": "-DOR",
+            "type": "auth",
+            "desc": "Days of Remembrance"
+        },
+        {
+            "url": "https://www.upliftingwords.org/post/ascension-of-bahaullah",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words"
+        }
+    ],
+    "Martyrdom": [
+        {
             "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f7",
             "icon": "-DOR",
             "type": "auth",
             "desc": "Days of Remembrance"
         },
         {
-            "url": "http://susangammage.com/holy-day-celebration-for-the-martyrdom-of-the-bab",
+            "url": "https://www.upliftingwords.org/post/the-martyrdom-of-the-bab-devotional-program",
             "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Program (sg)"
-        },
-        {
-            "url": "http://susangammage.com/midsummer-noon-a-play-about-the-martyrdom-of-the-bab",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "'Midsummer Noon' Play (sg)"
+            "desc": "Uplifting Words"
         }
     ],
-    "BirthBab": [{
+    "BirthBab": [
+        {
             "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f8",
             "icon": "-DOR",
             "type": "auth",
             "desc": "Days of Remembrance"
         },
         {
-            "url": "http://susangammage.com/the-birth-of-the-bab-holy-day-program",
+            "url": "https://www.upliftingwords.org/post/birth-of-the-bab-devotional-program",
             "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Program (sg)"
-        },
-        {
-            "url": "http://susangammage.com/a-dramatic-reading-in-commemoration-of-the-birth-of-the-bab",
-            "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Dramatic Reading (sg)"
+            "desc": "Uplifting Words"
         }
     ],
-    "BirthBaha": [{
-        "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f9",
-        "icon": "-DOR",
-        "type": "auth",
-        "desc": "Days of Remembrance"
-    }],
-    "M01": [{
+    "BirthBaha": [
+        {
+            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f9",
+            "icon": "-DOR",
+            "type": "auth",
+            "desc": "Days of Remembrance"
+        },
+        {
+            "url": "https://www.upliftingwords.org/post/birth-of-bahaullah-devotional-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words 1"
+        },
+        {
+            "url": "https://www.upliftingwords.org/post/birth-of-bahaullah-holy-day-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words 2"
+        }
+    ],
+    "AscAbdul": [
+        {
+            "url": "https://www.upliftingwords.org/post/ascension-of-abdul-baha-devotional-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words 1"
+        },
+        {
+            "url": "https://www.upliftingwords.org/post/the-passing-of-abdu-l-baha",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words 2"
+        }
+    ],
+    "Covenant": [
+        {
+            "url": "https://www.upliftingwords.org/post/day-of-the-covenant-devotional-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words"
+        }
+    ],
+    "Ayyam": [
+        {
+            "url": "https://www.upliftingwords.org/post/ayyam-i-ha-holy-day-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words"
+        }
+    ],
+    "M01": [
+        {
             "url": "https://wondrous-badi.today/files/FeastBook-01.pdf",
             "icon": "-pdf",
             "type": "collection",
             "desc": "Feast Devotions (bfb)"
-        }, {
-            "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/01baha.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-SV)"
         },
         {
-            "url": "http://www.bahai-internet-services.org/devotions/william_huitt/01baha.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-WH)"
+            "url": "https://www.upliftingwords.org/post/baha-splendor-bahai-feast-devotional-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words"
         }
     ],
-    "M02": [{
+    "M02": [
+        {
             "url": "https://wondrous-badi.today/files/FeastBook-02.pdf",
             "icon": "-pdf",
             "type": "collection",
             "desc": "Feast Devotions (bfb)"
-        }, {
-            "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/02jalal.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-SV)"
         },
         {
-            "url": "http://www.bahai-internet-services.org/devotions/william_huitt/02jalal.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-WH)"
-        },
-        {
-            "url": "http://susangammage.com/a-program-for-the-feast-of-jalal-glory",
+            "url": "https://www.upliftingwords.org/post/jalal-glory-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (sg)"
+            "desc": "Uplifting Words"
         }
     ],
-    "M03": [{
+    "M03": [
+        {
             "url": "https://wondrous-badi.today/files/FeastBook-03.pdf",
             "icon": "-pdf",
             "type": "collection",
             "desc": "Feast Devotions (bfb)"
-        }, {
-            "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/03jamal.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-SV)"
         },
         {
-            "url": "http://www.bahai-internet-services.org/devotions/william_huitt/03jamal.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-WH)"
+            "url": "https://www.upliftingwords.org/post/jamal-beauty-bahai-feast-devotional-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words"
         }
     ],
-    "M04": [{
+    "M04": [
+        {
             "url": "https://wondrous-badi.today/files/FeastBook-04.pdf",
             "icon": "-pdf",
             "type": "collection",
             "desc": "Feast Devotions (bfb)"
-        }, {
-            "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/04azamat.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-SV)"
         },
         {
-            "url": "http://www.bahai-internet-services.org/devotions/william_huitt/04azamat.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-WH)"
+            "url": "https://www.upliftingwords.org/post/azamat-grandeur-bahai-feast-devotional-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words"
         }
     ],
-    "M05": [{
+    "M05": [
+        {
             "url": "https://wondrous-badi.today/files/FeastBook-05.pdf",
             "icon": "-pdf",
             "type": "collection",
             "desc": "Feast Devotions (bfb)"
-        }, {
-            "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/05nur.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-SV)"
         },
         {
-            "url": "http://www.bahai-internet-services.org/devotions/william_huitt/05nur.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-WH)"
-        },
-        {
-            "url": "http://susangammage.com/a-program-for-the-feast-of-light",
+            "url": "https://www.upliftingwords.org/post/nur-light-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (sg)"
+            "desc": "Uplifting Words"
         }
     ],
-    "M06": [{
+    "M06": [
+        {
             "url": "https://wondrous-badi.today/files/FeastBook-06.pdf",
             "icon": "-pdf",
             "type": "collection",
             "desc": "Feast Devotions (bfb)"
-        }, {
-            "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/06rahmat.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-SV)"
         },
         {
-            "url": "http://www.bahai-internet-services.org/devotions/william_huitt/06rahmat.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-WH)"
+            "url": "https://www.upliftingwords.org/post/rahmat-mercy-baha-i-feast-devotional-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words"
         }
     ],
-    "M07": [{
+    "M07": [
+        {
             "url": "https://wondrous-badi.today/files/FeastBook-07.pdf",
             "icon": "-pdf",
             "type": "collection",
             "desc": "Feast Devotions (bfb)"
-        }, {
-            "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/07kalimat.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-SV)"
         },
         {
-            "url": "http://www.bahai-internet-services.org/devotions/william_huitt/07kalimat.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-WH)"
+            "url": "https://www.upliftingwords.org/post/kalimat-words-bahai-feast-devotional-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words"
         }
     ],
-    "M08": [{
+    "M08": [
+        {
             "url": "https://wondrous-badi.today/files/FeastBook-08.pdf",
             "icon": "-pdf",
             "type": "collection",
             "desc": "Feast Devotions (bfb)"
-        }, {
-            "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/08kamal.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-SV)"
         },
         {
-            "url": "http://www.bahai-internet-services.org/devotions/william_huitt/08kamal.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-WH)"
-        },
-        {
-            "url": "http://susangammage.com/a-program-for-the-feast-of-perfection",
+            "url": "https://www.upliftingwords.org/post/kamal-perfection-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (sg)"
+            "desc": "Uplifting Words"
         }
     ],
-    "M09": [{
+    "M09": [
+        {
             "url": "https://wondrous-badi.today/files/FeastBook-09.pdf",
             "icon": "-pdf",
             "type": "collection",
             "desc": "Feast Devotions (bfb)"
-        }, {
-            "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/09asma.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-SV)"
         },
         {
-            "url": "http://www.bahai-internet-services.org/devotions/william_huitt/09asma.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-WH)"
-        },
-        {
-            "url": "http://susangammage.com/bahai-program-for-the-feast-of-names",
+            "url": "https://www.upliftingwords.org/post/asma-names-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (sg)"
+            "desc": "Uplifting Words"
         }
     ],
-    "M10": [{
+    "M10": [
+        {
             "url": "https://wondrous-badi.today/files/FeastBook-10.pdf",
             "icon": "-pdf",
             "type": "collection",
             "desc": "Feast Devotions (bfb)"
-        }, {
-            "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/10izzat.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-SV)"
         },
         {
-            "url": "http://www.bahai-internet-services.org/devotions/william_huitt/10izzat.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-WH)"
+            "url": "https://www.upliftingwords.org/post/izzat-might-bahai-feast-devotional-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words"
         }
     ],
-    "M11": [{
+    "M11": [
+        {
             "url": "https://wondrous-badi.today/files/FeastBook-11.pdf",
             "icon": "-pdf",
             "type": "collection",
             "desc": "Feast Devotions (bfb)"
-        }, {
-            "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/11mashiyyat.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-SV)"
         },
         {
-            "url": "http://www.bahai-internet-services.org/devotions/william_huitt/11mashiyyat.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-WH)"
+            "url": "https://www.upliftingwords.org/post/mashiyyat-will-bahai-feast-devotional-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words"
         }
     ],
-    "M12": [{
+    "M12": [
+        {
             "url": "https://wondrous-badi.today/files/FeastBook-12.pdf",
             "icon": "-pdf",
             "type": "collection",
             "desc": "Feast Devotions (bfb)"
-        }, {
-            "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/12ilm.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-SV)"
         },
         {
-            "url": "http://www.bahai-internet-services.org/devotions/william_huitt/12ilm.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-WH)"
-        },
-        {
-            "url": "http://susangammage.com/program-for-the-feast-of-knowledge",
+            "url": "https://www.upliftingwords.org/post/ilm-knowledge-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (sg)"
+            "desc": "Uplifting Words"
         }
     ],
-    "M13": [{
+    "M13": [
+        {
             "url": "https://wondrous-badi.today/files/FeastBook-13.pdf",
             "icon": "-pdf",
             "type": "collection",
             "desc": "Feast Devotions (bfb)"
-        }, {
-            "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/13qudrat.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-SV)"
         },
         {
-            "url": "http://www.bahai-internet-services.org/devotions/william_huitt/13qudrat.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-WH)"
-        },
-        {
-            "url": "http://susangammage.com/program-for-the-feast-of-power",
+            "url": "https://www.upliftingwords.org/post/qudrat-power-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (sg)"
+            "desc": "Uplifting Words"
         }
     ],
-    "M14": [{
+    "M14": [
+        {
             "url": "https://wondrous-badi.today/files/FeastBook-14.pdf",
             "icon": "-pdf",
             "type": "collection",
             "desc": "Feast Devotions (bfb)"
         },
         {
-            "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/14qawl.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-SV)"
-        },
-        {
-            "url": "http://www.bahai-internet-services.org/devotions/william_huitt/14qawl.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-WH)"
+            "url": "https://www.upliftingwords.org/post/qawl-speech-bahai-feast-devotional-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words"
         }
     ],
-    "M15": [{
+    "M15": [
+        {
             "url": "https://wondrous-badi.today/files/FeastBook-15.pdf",
             "icon": "-pdf",
             "type": "collection",
             "desc": "Feast Devotions (bfb)"
-        }, {
-            "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/15masail.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-SV)"
         },
         {
-            "url": "http://www.bahai-internet-services.org/devotions/william_huitt/15masail.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-WH)"
+            "url": "https://www.upliftingwords.org/post/masail-questions-bahai-feast-devotional-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words"
         }
     ],
-    "M16": [{
+    "M16": [
+        {
             "url": "https://wondrous-badi.today/files/FeastBook-16.pdf",
             "icon": "-pdf",
             "type": "collection",
             "desc": "Feast Devotions (bfb)"
-        }, {
-            "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/16sharaf.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-SV)"
         },
         {
-            "url": "http://www.bahai-internet-services.org/devotions/william_huitt/16sharaf.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-WH)"
+            "url": "https://www.upliftingwords.org/post/sharaf-honor-bahai-feast-devotional-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words"
         }
     ],
-    "M17": [{
+    "M17": [
+        {
             "url": "https://wondrous-badi.today/files/FeastBook-17.pdf",
             "icon": "-pdf",
             "type": "collection",
             "desc": "Feast Devotions (bfb)"
-        }, {
-            "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/17sultan.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-SV)"
         },
         {
-            "url": "http://www.bahai-internet-services.org/devotions/william_huitt/17sultan.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-WH)"
+            "url": "https://www.upliftingwords.org/post/sultan-sovereignty-bahai-feast-devotional-program",
+            "icon": "-readingsWeb",
+            "desc": "Uplifting Words"
         }
     ],
-    "M18": [{
+    "M18": [
+        {
             "url": "https://wondrous-badi.today/files/FeastBook-18.pdf",
             "icon": "-pdf",
             "type": "collection",
             "desc": "Feast Devotions (bfb)"
-        }, {
-            "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/18mulk.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-SV)"
         },
         {
-            "url": "http://www.bahai-internet-services.org/devotions/william_huitt/18mulk.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-WH)"
-        },
-        {
-            "url": "http://susangammage.com/a-program-for-the-feast-of-dominion",
+            "url": "https://www.upliftingwords.org/post/mulk-dominion-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (sg)"
+            "desc": "Uplifting Words"
         }
     ],
-    "M19": [{
+    "M19": [
+        {
             "url": "https://wondrous-badi.today/files/FeastBook-19.pdf",
             "icon": "-pdf",
             "type": "collection",
             "desc": "Feast Devotions (bfb)"
-        }, {
-            "url": "http://www.bahai-internet-services.org/devotions/stephen_vaccaro/19ala.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-SV)"
         },
         {
-            "url": "http://www.bahai-internet-services.org/devotions/william_huitt/19ala.doc",
-            "icon": "-readingsDoc",
-            "type": "collection",
-            "desc": "Feast Devotions (bis-WH)"
-        },
-        {
-            "url": "http://susangammage.com/a-program-for-the-feast-of-loftiness-ala",
+            "url": "https://www.upliftingwords.org/post/ala-loftiness-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
-            "type": "collection",
-            "desc": "Feast Devotions (sg)"
+            "desc": "Uplifting Words"
         }
     ],
-    "M-173-07": [{
-        "url": "173-07.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-173-08": [{
-        "url": "173-08.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-173-09": [{
-        "url": "173-09.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-173-10": [{
-        "url": "173-10.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-173-11": [{
-        "url": "173-11.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-173-12": [{
-        "url": "173-12.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-173-13": [{
-        "url": "173-13.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-173-14": [{
-        "url": "173-14.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-173-15": [{
-        "url": "173-15.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-173-16": [{
-        "url": "173-16.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-173-17": [{
-        "url": "173-17.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-173-18": [{
-        "url": "173-18.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-173-19": [{
-        "url": "173-19.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-174-01": [{
-        "url": "174-01.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-174-02": [{
-        "url": "174-02.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-174-03": [{
-        "url": "174-03.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-174-04": [{
-        "url": "174-04.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-174-05": [{
-        "url": "174-05.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-174-06": [{
-        "url": "174-06.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-174-07": [{
-        "url": "174-07.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-174-08": [{
-        "url": "174-08.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-174-09": [{
-        "url": "174-09.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-174-10": [{
-        "url": "174-10.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-174-11": [{
-        "url": "174-11.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-174-12": [{
-        "url": "174-12.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-174-13": [{
-        "url": "174-13.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-174-14": [{
-        "url": "174-14.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-174-15": [{
-        "url": "174-15.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-174-16": [{
-        "url": "174-16.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-174-17": [{
-        "url": "174-17.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-174-18": [{
-        "url": "174-18.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-174-19": [{
-        "url": "174-19.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-175-01": [{
-        "url": "175-01.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-175-02": [{
-        "url": "175-02.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-175-03": [{
-        "url": "175-03.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-175-04": [{
-        "url": "175-04.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-175-05": [{
-        "url": "175-05.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-175-06": [{
-        "url": "175-06.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-175-07": [{
-        "url": "175-07.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-175-08": [{
-        "url": "175-08.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-175-09": [{
-        "url": "175-09.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-175-10": [{
-        "url": "175-10.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-175-11": [{
-        "url": "175-11.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-175-12": [{
-        "url": "175-12.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-175-13": [{
-        "url": "175-13.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-175-14": [{
-        "url": "175-14.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-175-15": [{
-        "url": "175-15.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-175-16": [{
-        "url": "175-16.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-175-17": [{
-        "url": "175-17.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-175-18": [{
-        "url": "175-18.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }],
-    "M-175-19": [{
-        "url": "175-19.png",
-        "icon": "-badiMonthA",
-        "type": "img",
-        "desc": "Calendar Image"
-    }]
+    "M-175-19": [
+        {
+            "url": "175-19.png",
+            "icon": "-badiMonthA",
+            "type": "img",
+            "desc": "Calendar Image"
+        }
+    ]
 }

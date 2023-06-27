@@ -115,7 +115,7 @@
 #Listing .dayContent .col3 .sunsetStart span {
   margin: 0 3px;
 }
-#Listing .dayContent .col3 .gDate {
+#Listing .gDate {
   font-size: 0.72em;
   color: #7f8c8d;
   font-weight: 400;
@@ -146,6 +146,9 @@
 }
 #Listing .Today .col2 {
   padding-top: 4px;
+}
+#Listing .Today .Today2 {
+  margin-bottom: 0.5em;
 }
 #Listing .q-collapsible {
   position: relative;

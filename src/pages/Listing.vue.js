@@ -10,7 +10,7 @@ export default {
     props: {
         onHome: Boolean
     },
-    data() {
+    data () {
         return {
             title: "Dates",
             icon: '../statics/calendarWhite.png',
@@ -30,13 +30,13 @@ export default {
     },
 
     computed: {
-        nextYear: function() {
+        nextYear: function () {
             return this.lastYear + 1;
         },
-        prevYear: function() {
+        prevYear: function () {
             return this.firstYear - 1;
         },
-        filteredList: function() {
+        filteredList: function () {
             var filter = ['Today'];
             if (this.includeHolyDays) {
                 filter.push('HS');
@@ -56,19 +56,19 @@ export default {
         },
     },
     watch: {
-        includeHolyDays: function(v) {
+        includeHolyDays: function (v) {
             storage.set('includeHolyDays', v)
         },
-        includeFeasts: function(v) {
+        includeFeasts: function (v) {
             storage.set('includeFeasts', v)
         },
-        includeOther: function(v) {
+        includeOther: function (v) {
             storage.set('includeOther', v)
         },
-        includeFast: function(v) {
+        includeFast: function (v) {
             storage.set('includeFast', v)
         },
-        suggestedStart: function(v) {
+        suggestedStart: function (v) {
             storage.set('suggestedStart', v)
             var vue = this;
             vue.list = [];
@@ -78,10 +78,10 @@ export default {
             }
         },
     },
-    created: function() {
+    created: function () {
         var vue = this;
 
-        window._messageBus.$on('setupDone', function() {
+        window._messageBus.$on('setupDone', function () {
             vue.prepare();
         })
 
@@ -92,8 +92,19 @@ export default {
         this.prepare();
         window._messageBus.$on('changedDay', this.prepare);
     },
+    mounted: function () {
+        this.showToday();
+    },
     methods: {
-        prepare: function() {
+        showToday: function () {
+            setTimeout(function () {
+                var el = document.getElementsByClassName('item-content dayContent Today');
+                if (el.length) {
+                    el[0].scrollIntoView({ block: "center" });
+                }
+            }, 0)
+        },
+        prepare: function () {
             this.originalYear = badi.di.bYear;
             this.lastYear = -1;
             this.loadDates(this.originalYear);
@@ -102,18 +113,18 @@ export default {
                 this.loadDates(this.nextYear);
             }
         },
-        ayyam2: function(day) {
+        ayyam2: function (day) {
             // console.log(day)
             return day.lastDayDi.gCombinedY
         },
-        resetToFirstYear: function() {
+        resetToFirstYear: function () {
             var vue = this;
             vue.list = [];
             this.firstYear = this.originalYear;
             this.lastYear = this.originalYear;
             vue.loadDates(this.originalYear);
         },
-        getDateLinks: function(day) {
+        getDateLinks: function (day) {
             if (day.links) {
                 // console.log('reused links')
                 return day.links;
@@ -137,11 +148,11 @@ export default {
                 if (info) {
                     this.getLinks(links, info);
                 }
-            } else {}
+            } else { }
             day.links = links;
             return day.links;
         },
-        getLinks: function(links, info) {
+        getLinks: function (links, info) {
             for (var i = 0; i < info.length; i++) {
                 var item = info[i];
                 switch (item.icon) {
@@ -170,7 +181,7 @@ export default {
                 links.push(item);
             }
         },
-        getSpecialTime: function(day) {
+        getSpecialTime: function (day) {
             var prefix = 'Suggested start at';
             var list = ['SpecialTime'];
 
@@ -201,12 +212,12 @@ export default {
                 html: prefix + ' ' + day.EventTime
             }
         },
-        getNoWork: function(v) {
+        getNoWork: function (v) {
             if (v) {
                 return 'Suspend work on ' + v
             }
         },
-        getNoWorkClass: function(weekday) {
+        getNoWorkClass: function (weekday) {
             var list = ['NoWork'];
             if (weekday > 0 && weekday < 6) {
                 // very simple M - F. Should be settable by user!
@@ -214,7 +225,7 @@ export default {
             }
             return list;
         },
-        loadDates: function(year) {
+        loadDates: function (year) {
             var vue = this;
             // debugger;
             // console.log('load dates', year)
@@ -235,7 +246,7 @@ export default {
             var info = badi.buildSpecialDaysTable(year, this.suggestedStart);
 
             window._days = cloneDeep(info); // for use in Grid and for developer access in console
-            vue.list = vue.list.concat(info.map(function(d) {
+            vue.list = vue.list.concat(info.map(function (d) {
                 return extendDayInfo(vue, d, year - vue.originalYear)
             }));
             vue.list.sort(sortDates)
@@ -248,7 +259,7 @@ export default {
                 var numShown = 0;
                 var toShow = 4;
                 var today = window._nowDi.frag1SunTimes.sunset;
-                var newList = vue.list.filter(function(day) {
+                var newList = vue.list.filter(function (day) {
                     if (numShown >= toShow) {
                         return false;
                     }
@@ -272,19 +283,19 @@ export default {
             //   this.scrollDone = true;
             // }
         },
-        moveToThisMonth: function() {
+        moveToThisMonth: function () {
             var target = shared.makeId({
                 Type: 'M',
                 di: badi.di
             });
-            setTimeout(function() {
+            setTimeout(function () {
                 var el = document.getElementById(target);
                 if (el) {
                     el.scrollIntoView(true);
                 }
             }, 0)
         },
-        test: function(cell) {
+        test: function (cell) {
             switch (cell.data) {
                 case 'M':
                     return "Feast"
@@ -297,7 +308,7 @@ export default {
         }
     },
     head: {
-        title: function() {
+        title: function () {
             return {
                 inner: this.title
             }
@@ -314,7 +325,7 @@ export default {
 
 }
 
-function extendDayInfo(vue, d, diff) {
+function extendDayInfo (vue, d, diff) {
     d.showingLinks = false;
     d.Month = '{bMonthNamePri} {bYear}'.filledWith(d.di)
     if (Math.abs(diff) % 2 === 1) {
@@ -324,12 +335,12 @@ function extendDayInfo(vue, d, diff) {
     return d;
 }
 
-function sortDates(a, b) {
+function sortDates (a, b) {
     return a.GDate < b.GDate ? -1 :
         a.GDate > b.GDate ? 1 :
-        a.Type === 'Fast' ? 1 :
-        a.Type === 'M' ? -1 :
-        a.Type === 'HS' ? -1 :
-        a.Type === 'HO' ? -1 :
-        1;
+            a.Type === 'Fast' ? 1 :
+                a.Type === 'M' ? -1 :
+                    a.Type === 'HS' ? -1 :
+                        a.Type === 'HO' ? -1 :
+                            1;
 }

@@ -42,6 +42,7 @@ module.exports = {
         'quotes': 0,
         'no-multiple-empty-lines': 0,
         'spaced-comment': 0,
+        'eol-last': 1,
 
     }
 };
