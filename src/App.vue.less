@@ -21,14 +21,18 @@ body {
     pointer-events: none;
 }
 
-.layout-footer, .layout-header{
+.layout-footer,
+.layout-header {
     background-color: #2980b9;
 }
+
 div.toolbar {
     background-color: #2980b9;
+
     .toolbar-title {
         text-align: center;
     }
+
     .driftHelp {
         font-size: 25px;
         align-self: center;
@@ -69,24 +73,30 @@ article {
     h1 {
         margin: 15px 0 5px 0;
         font-size: 1.8rem;
+
         &:first-of-type {
             margin: 0;
         }
     }
+
     h2 {
         margin: 15px 0 5px 0;
         font-size: 1.6rem;
+
         &:first-of-type {
             margin: 0;
         }
     }
+
     h3 {
         margin: 15px 0 0 0;
         font-size: 1.5rem;
+
         &:first-of-type {
             margin: 0;
         }
     }
+
     h4 {
         margin: 15px 0 0 0;
         font-size: 1.4rem;
@@ -109,6 +119,10 @@ p {
     box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.24);
 }
 
+a {
+    color: #2379c2;
+}
+
 .toolbar-title {
     h1 {
         font-size: 1.2rem;
@@ -116,20 +130,24 @@ p {
         letter-spacing: normal;
         margin: 0 0 3px 0;
     }
+
     h2 {
         font-size: 1rem;
         font-weight: 300;
         letter-spacing: normal;
         margin: 0;
+
         span {
             margin-left: 1em;
             font-size: .85em;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.85);
         }
+
         &.alert {
             white-space: normal;
             font-weight: bold;
             color: #ffbfbf;
+
             a {
                 color: #ffbfbf;
                 text-decoration: underline;
@@ -152,6 +170,7 @@ p {
 }
 
 .drawer-content.left-side {
+
     .menu-main_setup,
     .menu-main {
         background-color: #fff;
@@ -167,29 +186,35 @@ p {
         display: flex;
         justify-content: space-between;
         align-items: stretch;
+
         >button {
             width: 2rem;
         }
     }
+
     .tbLink {
         text-align: center;
         cursor: pointer;
         flex-grow: 1;
         height: 100%;
+
         div {
             display: flex;
             flex-direction: column;
             padding: 4px 0 8px 0;
         }
+
         img {
             height: 65%;
             max-height: 64px;
         }
+
         span {
             display: block;
             font-size: 13px;
             font-weight: 300;
         }
+
         &.active {
             span {
                 font-weight: 500;
