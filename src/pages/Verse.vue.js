@@ -31,7 +31,7 @@ export default {
     },
     created() {
         var vue = this;
-        _messageBus.$on('setupDone', function() {
+        window._messageBus.$on('setupDone', function() {
             vue.showVerse()
             vue.addPrevious()
         })
@@ -45,14 +45,12 @@ export default {
         var vue = this;
         if (!badiCalc.di || !badiCalc.di.stamp) {
             vue.$router.push('/');
-            return;
         }
 
         // window.speechSynthesis.onvoiceschanged = function () {
         //   vue.fillVoicesList();
         //   window.speechSynthesis.onvoiceschanged = null;
         // }
-
     },
     computed: {
         searchUrl: function() {

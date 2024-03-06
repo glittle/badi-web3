@@ -3,34 +3,44 @@
         width: 100%;
         max-width: 480px;
         margin: -10px auto 10px auto;
+
         .LocationSetup {
             padding: 5px;
+
             h1 {
                 display: none;
             }
+
             .confirmGuess {
                 padding: 0.3rem 10% 1rem;
                 background: none;
             }
+
             .section {
                 margin: 0;
+
                 button {
                     min-height: 2rem;
                 }
+
                 >p {
                     display: none;
                 }
             }
         }
     }
+
     .bold {
         font-weight: bold;
     }
+
     .clickable {
         cursor: pointer;
     }
+
     #Listing {
         padding-top: 0;
+
         .dayContent.HolyDay {
             padding-left: 0;
         }
@@ -56,33 +66,41 @@ div.cardBtn {
 
 .card article.Verse {
     padding: 3px;
+
     >* {
         display: none;
     }
+
     .verseHost {
         display: block;
         margin: 5px 8px 0px 10px;
+
         >* {
             display: none;
         }
+
         .verseText {
             display: block;
             font-size: 18px;
             min-height: auto;
             padding-bottom: .5em;
         }
+
         .speakButtons {
             display: block;
             position: absolute;
             margin: 0;
             top: 4px;
             right: 73px;
+
             .volume {
                 display: none;
             }
+
             button {
                 padding: 1px 8px;
             }
+
             >span {
                 display: none;
             }
@@ -103,6 +121,7 @@ button.item-link {
     height: auto;
     padding: 0px 10px;
     margin: 3px 8px 0 0;
+
     &.icon_setup {
         background: rgba(0, 0, 255, 0.06);
     }
@@ -113,11 +132,13 @@ button.item-link {
     justify-content: space-between;
     margin: 3px 3px 3px 3px;
     position: relative;
+
     .desc {
         color: #333; // span {
         //     font-size: 13px;
         // }
     }
+
     .mid {
         text-align: center;
         position: absolute;
@@ -125,6 +146,7 @@ button.item-link {
         right: 0;
         font-weight: bold;
     }
+
     .type {
         color: #999;
         display: block;
@@ -138,42 +160,58 @@ button.item-link {
     height: 140px;
     margin: 0 auto;
     box-sizing: border-box;
+
     .highcharts-data-label {
         text-align: center;
     }
+
     .highcharts-xaxis-labels {
         >span {
             span {
                 display: block;
                 position: absolute;
+
                 &.before {
                     text-align: right;
                 }
+
                 &.after {
                     text-align: left;
                 }
             }
         }
     }
+
     .wk1 {
         color: #212121;
+    }
+
+    span.highcharts-title {
+        top: auto !important;
+        left: auto !important;
+        bottom: 21px;
+        right: 10px;
     }
 }
 
 div.line {
     margin: 3px 0;
     overflow: auto;
+
     label {
         display: inline; //float: left;
         margin: 0;
         font-size: 90%;
     }
+
     span {
         float: right;
     }
+
     &.now {
         color: #aaa;
     }
+
     b {
         border: 1px solid #2980b9; //theme color
         background-color: rgba(2, 123, 227, 0.06);
@@ -200,24 +238,30 @@ div.line {
     -webkit-align-items: center;
     align-items: center;
     width: 100%;
+
     .heading {
         width: 99%;
+
         .type {
             margin-left: 3px;
         }
+
         label {
             margin-right: 5px;
+
             input {
                 vertical-align: text-bottom;
                 margin-right: 2px;
             }
         }
     }
+
     button.reset {
         margin: 0 10px 0 0;
         padding: 3px 8px;
         min-height: 1rem;
     }
+
     .main95 {
         display: flex;
         height: 180px;
@@ -227,10 +271,12 @@ div.line {
         display: -webkit-flex;
         -webkit-align-items: center;
         -webkit-justify-content: space-around;
+
         button.circular.big {
             height: 95px;
             width: 95px;
         }
+
         span.tapNum {
             font-size: 40px;
             width: 100%;
@@ -238,6 +284,7 @@ div.line {
             display: block;
         }
     }
+
     .tapDelayArea {
         display: flex;
         margin: 15px 0 2px;
@@ -248,24 +295,29 @@ div.line {
         -webkit-justify-content: space-between;
         -webkit-align-items: center;
         font-size: 85%;
+
         .q-range {
             .q-range-handle-container {
                 margin: 0 10px;
             }
         }
+
         span {
             white-space: nowrap;
         }
+
         >span {
             display: inline-block;
             margin-right: 20px;
         }
     }
+
     #tapDots {
         div {
             height: 10px;
             white-space: nowrap;
         }
+
         span {
             background-color: #eee;
             display: inline-block;
@@ -273,23 +325,29 @@ div.line {
             width: 7px;
             margin: 2px;
             transition: all 1.5s;
+
             &.tapped {
                 border-radius: 50%;
                 background-color: #2980b9;
+
                 &.five {
                     background-color: #FFA726;
                 }
-            } // &.five {
+            }
+
+            // &.five {
             // margin-right: 3px;
             // }
         }
     }
+
     #groupDots {
         div {
             height: 10px;
             white-space: nowrap;
             margin: 5px 0 0 0;
         }
+
         span {
             display: inline-block;
             height: 13px;
@@ -304,19 +362,23 @@ div.line {
             transition: all 1.5s;
             cursor: default;
             color: #eee;
+
             &.tapped {
                 color: #000;
             }
+
             &.future {
                 background-color: #fafafa;
             }
         }
     }
+
     .tapControl {
         padding: 0 0 0 10px;
         align-self: flex-start;
         width: 100%;
         box-sizing: border-box;
+
         .continue {
             font-size: 0.9rem;
         }
@@ -325,22 +387,27 @@ div.line {
 
 .card.prayer {
     padding: 3px;
+
     button {
         margin: 1px 3px 0 0;
         padding: 3px 8px;
         min-height: 1rem;
+
         &.right {
             float: right;
             margin: 6px 0 4px 0;
         }
     }
+
     .content {
         margin: 5px 8px .5em 10px;
+
         .firstLine {
             font-size: 18px;
             font-family: 'Gentium Book Basic', serif;
             padding-right: 1em;
         }
+
         .by {
             font-style: italic;
             font-size: 90%;
@@ -358,6 +425,7 @@ div.line {
             width: 97%;
             margin: 7px auto 6px;
         }
+
         div {
             margin: 10px auto;
             color: #ccc;
@@ -373,9 +441,11 @@ div.line {
             min-height: 1rem;
         }
     }
+
     .support {
         margin: 0 8px 4px 8px;
         position: relative;
+
         img {
             position: absolute;
             top: 0;
@@ -383,6 +453,7 @@ div.line {
             width: 75px;
             height: 75px;
         }
+
         p {
             margin: 0 8px 4px 80px;
         }

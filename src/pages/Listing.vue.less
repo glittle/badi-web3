@@ -1,51 +1,62 @@
 #Listing {
     // max-width: 700px;
     width: 100%;
+
     >div {
         max-width: 700px;
         margin: 0 auto;
     }
+
     .location {
         color: #2980b9;
         margin: 4px 0 8px 0;
         clear: both;
     }
+
     .btnPrev {
         float: right;
     }
+
     .switches {
         margin: 0 0 24px 0;
         display: flex;
         justify-content: space-between;
     }
+
     .toggles {
         >label {
             display: inline-block;
             margin: 8px 4px 0 0;
             white-space: nowrap;
+
             span {
                 vertical-align: middle;
             }
         }
     }
+
     .suggestedStart {
         float: right;
         color: #7f8c8d;
         font-size: .8em;
         text-align: center;
+
         span {
             display: block;
             padding-bottom: 1px;
         }
     }
+
     .dayList {
         clear: both;
         margin-top: 1em;
     }
+
     .item {
         height: auto;
         line-height: normal;
     }
+
     .dayContent {
         padding: 8px 0;
         box-sizing: border-box;
@@ -53,6 +64,7 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
+
         // &:hover {
         //     background-color: #eaf5dd;
         // }
@@ -65,90 +77,113 @@
         &.HolyDay {
             padding-left: 25px;
         }
+
         &.oddYear {
             background-color: #eaf5ff;
+
             &:hover {
                 background-color: #eaf5dd;
             }
         }
+
         .col1 {
             width: 40px;
             text-align: center;
             flex-shrink: 0;
+
             img {
                 margin-top: 2px;
                 width: 24px;
             }
         }
+
         .col2 {
             text-align: left;
             flex-grow: 1;
             white-space: normal;
+
             .dayName {
                 font-variant: small-caps;
                 font-weight: bolder;
             }
+
             div {
                 margin-bottom: 4px;
+
                 span {
                     white-space: nowrap;
                 }
             }
+
             .NoWork {
                 color: #7f8c8d;
                 font-size: .8em;
+
                 &.Workday {
                     color: darkred;
                 }
             }
+
             .SpecialTime {
                 color: #7f8c8d;
                 font-size: .8em;
+
                 &.setTime {
                     color: #d35400;
                 }
             }
         }
+
         .col3 {
             padding: 3px 10px 0 10px;
             text-align: right;
             flex-shrink: 0;
+
             .sunsetStart {
                 font-size: .8em;
                 color: #d35400;
+
                 img {
                     width: 24px;
                     vertical-align: middle;
                 }
+
                 span {
                     // color: #7f8c8d;
                     margin: 0 3px;
                 }
             }
-            .gDate {
-                font-size: .72em;
-                color: #7f8c8d;
-                font-weight: 400;
-            }
         }
     }
+
+    .gDate {
+        font-size: .72em;
+        color: #7f8c8d;
+        font-weight: 400;
+    }
+
     .Feast {
         .col1 {
             img {
                 border-radius: 3px;
+
                 &.Fire {
                     background-color: #eb7265;
                 }
+
                 &.Air {
                     background-color: #ecf0f1;
                 }
+
                 &.Water {
                     background-color: #3498db;
                 }
+
                 &.Earth {
                     background-color: #2ecc71;
                 }
             }
+
             div {
                 font-size: 0.7rem;
                 font-weight: 400;
@@ -156,15 +191,23 @@
             }
         }
     }
+
     .Today {
         background-color: #eafff5;
         padding: 4px 0;
+
         .col2 {
             padding-top: 4px;
         }
+
+        .Today2 {
+            margin-bottom: .5em;
+        }
     }
+
     .q-collapsible {
         position: relative;
+
         .item-collapsible {
             height: 0;
             // .item-secondary {
@@ -173,13 +216,16 @@
             // }
         }
     }
+
     .links {
         display: flex;
         margin: -4px 0 24px 0;
         transition: all .3s;
+
         .col1 {
             width: 40px;
         }
+
         .col2 {
             // border: 1px solid #666;
             // border-radius: 8px;
@@ -190,27 +236,39 @@
             text-align: left;
             background-color: #f9f1f9;
         }
+
         .iconDivider {
             height: 13px;
             width: 22px;
             vertical-align: middle;
             margin: 5px 3px 7px 3px;
         }
+
         .monthImage {
             height: 24px;
             vertical-align: middle;
             margin: 5px 3px 7px 3px;
         }
+
         .icon20 {
             height: 20px;
             width: 20px;
             vertical-align: middle;
             margin: 5px 3px 7px 3px;
         }
+
+        .pdf {
+            height: 20px;
+            width: 20px;
+            vertical-align: middle;
+            margin: 5px 3px 7px 3px;
+        }
     }
+
     .linkToggle {
         height: 25px;
         margin: 4px 0 0 4px;
+
         >span {
             font-size: .72em;
             color: #7f8c8d;

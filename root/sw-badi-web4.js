@@ -1,12 +1,13 @@
 console.log('loading workbox')
 
-self.addEventListener('push', function(event) {
-    console.log('push event', event);
-});
+// self.addEventListener('push', function(event) {
+//     console.log('push event', event);
+// });
 
 self.addEventListener('notificationclose', function(event) {
     console.log('notification closed', event)
 });
+
 self.addEventListener('notificationclick', function(event) {
     // console.log('On notification click: ', event.notification.tag);
 
@@ -17,17 +18,19 @@ self.addEventListener('notificationclick', function(event) {
     }).then(function(clientList) {
         for (var i = 0; i < clientList.length; i++) {
             var client = clientList[i];
-            if ('focus' in client)
+            if ('focus' in client) {
                 return client.focus();
+            }
         }
-        if (clients.openWindow)
+        if (clients.openWindow) {
             return clients.openWindow('/');
+        }
     }));
 });
 
 
 //importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.3.1/workbox-sw.js');
-var workbox = function() {
+var workbox = (function() {
     "use strict";
     try {
         self.workbox.v["workbox:sw:3.3.1"] = 1
@@ -85,10 +88,10 @@ var workbox = function() {
             let s = [t];
             const o = `${e}.${this.e}.js`,
                 r = this.t.modulePathPrefix;
-            return r && "" === (s = r.split("/"))[s.length - 1] && s.splice(s.length - 1, 1), s.push(o), s.join("/")
+            return r && (s = r.split("/"))[s.length - 1] === "" && s.splice(s.length - 1, 1), s.push(o), s.join("/")
         }
-    }
-}();
+    }()
+}());
 //# sourceMappingURL=workbox-sw.js.map
 
 
@@ -114,7 +117,6 @@ if (workbox) {
     if (location.hostname === 'localhost') {
         console.log('Not caching on localhost')
     } else {
-
         workbox.routing.registerRoute(
             new RegExp('/images/.*\.png'),
             workbox.strategies.staleWhileRevalidate()
@@ -132,10 +134,7 @@ if (workbox) {
 
         // Show warnings and errors.
         //workbox.core.setLogLevel(workbox.core.LOG_LEVELS.warn);
-
-
     }
-
 } else {
     console.log(`Boo! Workbox didn't load 😬`);
 }
@@ -143,20 +142,20 @@ if (workbox) {
 // Give the service worker access to Firebase Messaging.
 // Note that you can only use Firebase Messaging here, other Firebase libraries
 // are not available in the service worker.
-importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
+// importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
+// importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
 
 // Initialize the Firebase app in the service worker by passing in the
 // messagingSenderId.
-firebase.initializeApp({
-    'messagingSenderId': '201027632116'
-});
+// firebase.initializeApp({
+//     'messagingSenderId': '201027632116'
+// });
 
 // Retrieve an instance of Firebase Messaging so that it can handle background
 // messages.
-const messaging = firebase.messaging();
+// const messaging = firebase.messaging();
 
-messaging.setBackgroundMessageHandler(function(payload) {
-    console.log('Received background message ', payload);
-    // Customize notification here
-});
+// messaging.setBackgroundMessageHandler(function(payload) {
+//     console.log('Received background message ', payload);
+//     // Customize notification here
+// });

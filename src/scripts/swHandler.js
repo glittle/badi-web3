@@ -1,5 +1,7 @@
-import storage from './storage'
-import { doPulse } from './store';
+// import storage from './storage'
+// import {
+//     doPulse
+// } from './store';
 
 if ('serviceWorker' in navigator) {
     // console.log('service workers supported')
@@ -9,7 +11,7 @@ if ('serviceWorker' in navigator) {
             }).then(function(registration) {
                 console.log("'sw-badi-web4.js' active with scope: ", registration.scope);
 
-                setupMessaging(registration);
+                // setupMessaging(registration);
 
 
 
@@ -60,67 +62,69 @@ if ('serviceWorker' in navigator) {
 //     console.log('updateUI req')
 // }
 
-function setupMessaging(registration) {
-    const messaging = window.firebase.messaging();
 
-    messaging.useServiceWorker(registration);
 
-    messaging.requestPermission()
-        .then(function() {
-            console.log('Notification permission granted.');
+// function setupMessaging(registration) {
+//     const messaging = window.firebase.messaging();
 
-            messaging.getToken()
-                .then(function(currentToken) {
-                    if (currentToken) {
-                        console.log('my token', currentToken.substring(0, 20) + '...')
-                        storage.set('firebaseToken', currentToken);
+//     messaging.useServiceWorker(registration);
 
-                        doPulse();
-                    } else {
-                        // Show permission request.
-                        console.log('No Instance ID token available. Request permission to generate one.');
-                        // Show permission UI.
-                        //  updateUIForPushPermissionRequired();
-                        // setTokenSentToServer(false);
-                    }
-                })
-                .catch(function(err) {
-                    console.log('An error occurred while retrieving token. ', err);
-                    // showToken('Error retrieving Instance ID token. ', err);
-                    // setTokenSentToServer(false);
-                });
-        })
-        .catch(function(err) {
-            console.log('Unable to get permission to notify. Notification is not supported in Incognito/Private tabs.');
-            console.log(err);
-        });
+//     messaging.requestPermission()
+//         .then(function() {
+//             console.log('Notification permission granted.');
 
-    messaging.onTokenRefresh(function() {
-        messaging.getToken()
-            .then(function(refreshedToken) {
-                console.log('Token refreshed.');
-                storage.set('firebaseToken', refreshedToken);
-                // Indicate that the new Instance ID token has not yet been sent to the
-                // app server.
-                // setTokenSentToServer(false);
-                // Send Instance ID token to app server.
-                // sendTokenToServer(refreshedToken);
-                // ...
-            })
-            .catch(function(err) {
-                console.log('Unable to retrieve refreshed token ', err);
-                // showToken('Unable to retrieve refreshed token ', err);
-            });
-    });
+//             messaging.getToken()
+//                 .then(function(currentToken) {
+//                     if (currentToken) {
+//                         console.log('my token', currentToken.substring(0, 20) + '...')
+//                         storage.set('firebaseToken', currentToken);
 
-    messaging.onMessage(function(payload) {
-        console.log("Message received! ", payload);
+//                         doPulse();
+//                     } else {
+//                         // Show permission request.
+//                         console.log('No Instance ID token available. Request permission to generate one.');
+//                         // Show permission UI.
+//                         //  updateUIForPushPermissionRequired();
+//                         // setTokenSentToServer(false);
+//                     }
+//                 })
+//                 .catch(function(err) {
+//                     console.log('An error occurred while retrieving token. ', err);
+//                     // showToken('Error retrieving Instance ID token. ', err);
+//                     // setTokenSentToServer(false);
+//                 });
+//         })
+//         .catch(function(err) {
+//             console.log('Unable to get permission to notify. Notification is not supported in Incognito/Private tabs.');
+//             console.log(err);
+//         });
 
-        if (payload.data.doPulse) {
-            console.log('calling doPulse due to server message')
-            doPulse();
-            //window._messageBus.$emit('serverPulse');
-            window._messageBus.serverCallbackLog.push('Received at ' + new Date());
-        }
-    })
-}
+//     messaging.onTokenRefresh(function() {
+//         messaging.getToken()
+//             .then(function(refreshedToken) {
+//                 console.log('Token refreshed.');
+//                 storage.set('firebaseToken', refreshedToken);
+//                 // Indicate that the new Instance ID token has not yet been sent to the
+//                 // app server.
+//                 // setTokenSentToServer(false);
+//                 // Send Instance ID token to app server.
+//                 // sendTokenToServer(refreshedToken);
+//                 // ...
+//             })
+//             .catch(function(err) {
+//                 console.log('Unable to retrieve refreshed token ', err);
+//                 // showToken('Unable to retrieve refreshed token ', err);
+//             });
+//     });
+
+//     messaging.onMessage(function(payload) {
+//         console.log("Message received! ", payload);
+
+//         if (payload.data.doPulse) {
+//             console.log('calling doPulse due to server message')
+//             doPulse();
+//             //window._messageBus.$emit('serverPulse');
+//             window._messageBus.serverCallbackLog.push('Received at ' + new Date());
+//         }
+//     })
+// }

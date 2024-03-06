@@ -17,19 +17,25 @@
                     <span itemprop="name"><a href="mailto:glen.little@gmail.com">Glen Little</a></span>.</span>
             </p>
             <p>
-                To financially support ongoing development, please find Glen at <a target="_blank" href="https://patreon.com/GlenLittle">Patreon</a>.
+                To financially support ongoing development, please find Glen at <a target="_blank"
+                    href="https://patreon.com/GlenLittle">Patreon</a>.
                 <br>
-                <a href="https://patreon.com/GlenLittle" title="Support Glen at Patreon" target="_blank"><img alt="patreon" src="~statics/patreon.png"></a>
+                <a href="https://patreon.com/GlenLittle" title="Support Glen at Patreon" target="_blank"><img
+                        alt="patreon" src="~statics/patreon.png"></a>
             </p>
             <p>
-                <span>Version <span itemprop="softwareVersion">{{version}}</span> ({{versionAge}} - <span class="reload" v-on:click="reload">force a reload now</span>)</span>
+                <span>Version <span itemprop="softwareVersion">{{version}}</span> ({{versionAge}} - <span class="reload"
+                        v-on:click="reload">force a reload now</span>)</span>
             </p>
+            <ul>
+                <li>ver 1.21 - remove old links; improve date listing</li>
+            </ul>
         </article>
-        <iframe class="statusDoc" src="https://docs.google.com/document/d/1Q1RtnOocBjW917CHceBbJPSljlDSN5GaZLBp5pu2inA/pub?embedded=false"></iframe>
+        <!-- <iframe class="statusDoc" src="https://docs.google.com/document/d/1Q1RtnOocBjW917CHceBbJPSljlDSN5GaZLBp5pu2inA/pub?embedded=false"></iframe>
         <div class="callbackLog">
             <p><strong>Debug log</strong></p>
             <div v-html="callbackLog || 'No server callback yet'"></div>
-        </div>
+        </div> -->
     </div>
 </template>
 <style src="./About.vue.css"></style>
@@ -38,27 +44,27 @@
     var versionInfo = require('../../root/version.json')
 
     export default {
-        data() {
+        data () {
             return {
                 title: 'About',
                 icon: 'info'
             }
         },
         computed: {
-            version() {
+            version () {
                 return versionInfo.version;
             },
-            versionAge() {
+            versionAge () {
                 var age = moment(versionInfo.buildDate, "_ MMM D YYYY HH:mm:ss _Z").fromNow();
                 return age;
             },
-            callbackLog() {
+            callbackLog () {
                 return window._messageBus.serverCallbackLog.join('<br>');
             }
 
         },
         methods: {
-            reload() {
+            reload () {
                 // skip cache?
                 try {
                     navigator.serviceWorker.controller.postMessage('reloading');

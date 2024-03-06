@@ -4,10 +4,12 @@
     "description": "Helping us to live by the Bad\u00ed\u02bf calendar, the official calendar of the Bah\u00e1'\u00ed Faith.",
     "start_url": "/",
     "lang": "en-US",
-    "icons": [{
+    "icons": [
+        {
             "src": "/statics/icons/android-chrome-192x192.png?v=v1",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
         },
         {
             "src": "/statics/icons/blank.png?v=v1",

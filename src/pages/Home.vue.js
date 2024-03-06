@@ -129,7 +129,7 @@ export default {
     mounted() {
         var vue = this;
 
-        _messageBus.$on('setupDone', function() {
+        window._messageBus.$on('setupDone', function() {
             vue.afterSetupDone();
         });
 
@@ -142,7 +142,7 @@ export default {
 
         if (shared.coords.sourceIsSet) {
             // console.log('emit setupDone 2')
-            _messageBus.$emit('setupDone');
+            window._messageBus.$emit('setupDone');
         }
 
         if (!shared.coords.tz) {
@@ -172,11 +172,11 @@ export default {
 
         document.addEventListener('pulsed', vue.onPulse, false)
 
-        _messageBus.$on('notificationPermissionChanged', function() {
+        window._messageBus.$on('notificationPermissionChanged', function() {
             vue.notificationStatus = shared.notifications.wanted;
         });
 
-        _messageBus.$on('locationChanged', function() {
+        window._messageBus.$on('locationChanged', function() {
             vue.$store.state.pulseNum++;
 
             prepareSunDisplay(vue.di, vue.timeFormat);
@@ -190,8 +190,6 @@ export default {
                 //     }
                 // }
         });
-
-
     },
     activated() {
         var vue = this;

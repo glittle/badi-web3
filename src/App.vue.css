@@ -91,6 +91,9 @@ p {
   box-sizing: border-box;
   box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.24);
 }
+a {
+  color: #2379c2;
+}
 .toolbar-title h1 {
   font-size: 1.2rem;
   font-weight: normal;
@@ -105,8 +108,8 @@ p {
 }
 .toolbar-title h2 span {
   margin-left: 1em;
-  font-size: .85em;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85em;
+  color: rgba(255, 255, 255, 0.85);
 }
 .toolbar-title h2.alert {
   white-space: normal;

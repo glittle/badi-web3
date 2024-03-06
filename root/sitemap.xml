@@ -7,20 +7,18 @@
     <changefreq>daily</changefreq>
   </url>
   <url>
-    <loc>https://wondrous-badi.today/#/</loc>
-    <lastmod>2017-04-10</lastmod>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://wondrous-badi.today/#/verse</loc>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://wondrous-badi.today/#/listing</loc>
+    <loc>https://wondrous-badi.today/feasts</loc>
+    <lastmod>2024-01-28</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://wondrous-badi.today/#/about</loc>
+    <loc>https://wondrous-badi.today/images</loc>
+    <lastmod>2024-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://wondrous-badi.today/badiService</loc>
+    <lastmod>2024-01-28</lastmod>
     <changefreq>monthly</changefreq>
   </url>
 </urlset>

@@ -29,7 +29,7 @@
 #Listing .suggestedStart {
   float: right;
   color: #7f8c8d;
-  font-size: .8em;
+  font-size: 0.8em;
   text-align: center;
 }
 #Listing .suggestedStart span {
@@ -87,14 +87,14 @@
 }
 #Listing .dayContent .col2 .NoWork {
   color: #7f8c8d;
-  font-size: .8em;
+  font-size: 0.8em;
 }
 #Listing .dayContent .col2 .NoWork.Workday {
   color: darkred;
 }
 #Listing .dayContent .col2 .SpecialTime {
   color: #7f8c8d;
-  font-size: .8em;
+  font-size: 0.8em;
 }
 #Listing .dayContent .col2 .SpecialTime.setTime {
   color: #d35400;
@@ -105,7 +105,7 @@
   flex-shrink: 0;
 }
 #Listing .dayContent .col3 .sunsetStart {
-  font-size: .8em;
+  font-size: 0.8em;
   color: #d35400;
 }
 #Listing .dayContent .col3 .sunsetStart img {
@@ -115,8 +115,8 @@
 #Listing .dayContent .col3 .sunsetStart span {
   margin: 0 3px;
 }
-#Listing .dayContent .col3 .gDate {
-  font-size: .72em;
+#Listing .gDate {
+  font-size: 0.72em;
   color: #7f8c8d;
   font-weight: 400;
 }
@@ -147,6 +147,9 @@
 #Listing .Today .col2 {
   padding-top: 4px;
 }
+#Listing .Today .Today2 {
+  margin-bottom: 0.5em;
+}
 #Listing .q-collapsible {
   position: relative;
 }
@@ -156,7 +159,7 @@
 #Listing .links {
   display: flex;
   margin: -4px 0 24px 0;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 #Listing .links .col1 {
   width: 40px;
@@ -183,12 +186,18 @@
   vertical-align: middle;
   margin: 5px 3px 7px 3px;
 }
+#Listing .links .pdf {
+  height: 20px;
+  width: 20px;
+  vertical-align: middle;
+  margin: 5px 3px 7px 3px;
+}
 #Listing .linkToggle {
   height: 25px;
   margin: 4px 0 0 4px;
 }
 #Listing .linkToggle > span {
-  font-size: .72em;
+  font-size: 0.72em;
   color: #7f8c8d;
   font-weight: 400;
 }

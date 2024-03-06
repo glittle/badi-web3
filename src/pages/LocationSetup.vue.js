@@ -118,7 +118,7 @@ export default {
                 vue.saveCoords('user');
                 vue.updateUiToNewLocation();
                 console.log('emit setupDone 3')
-                _messageBus.$emit('setupDone');
+                window._messageBus.$emit('setupDone');
                 vue.$router.push('/');
             }, 0)
         },
@@ -127,7 +127,8 @@ export default {
         },
         guessLocation() {
             var vue = this;
-            var url = "https://ipinfo.io/geo?json";
+            var token = '2eeafe6953a046';
+            var url = "https://ipinfo.io/geo?json&token=" + token;
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (xhr.readyState !== 4) {
@@ -306,7 +307,7 @@ export default {
             badiCalc.reset();
             store.doPulse();
             console.log('emit locationChanged 1')
-            _messageBus.$emit('locationChanged');
+            window._messageBus.$emit('locationChanged');
         },
         addToLog(msg) {
             var vue = this;

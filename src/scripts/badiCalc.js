@@ -17,7 +17,7 @@ var _dateInfos = null;
 var _dateInfosForYear = 0;
 var _msInDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
 
-function reset() {
+function reset () {
     _cachedDateInfos = {};
     _cachedSpecialDays = {};
     _dateInfos = null;
@@ -25,7 +25,7 @@ function reset() {
 
 loadDatePresets();
 
-function prepareDateInfos(bYear) {
+function prepareDateInfos (bYear) {
     _dateInfos = dateInfosRaw();
     _dateInfosForYear = bYear;
 
@@ -182,7 +182,7 @@ function prepareDateInfos(bYear) {
         dateInfo.Sort = (dateInfo.BMonthDay.m === 0 ? 1850 : dateInfo.BMonthDay.m * 100) + dateInfo.BMonthDay.d;
     }
 
-    _dateInfos.sort(function(a, b) {
+    _dateInfos.sort(function (a, b) {
         // try{
         // if(a.BMonthDay.m == 19){
         // }
@@ -227,7 +227,7 @@ function prepareDateInfos(bYear) {
 }
 
 
-function buildSpecialDaysTable(year, defaultEventStart) {
+function buildSpecialDaysTable (year, defaultEventStart) {
     var cacheKey = year + '_' + defaultEventStart;
     var cached = _cachedSpecialDays[cacheKey]
     if (cached) {
@@ -250,7 +250,7 @@ function buildSpecialDaysTable(year, defaultEventStart) {
 
     // var defaultEventStart = $('#eventStart').val() || getStorage('eventStart');
 
-    dayInfos.forEach(function(dayInfo, i) {
+    dayInfos.forEach(function (dayInfo, i) {
         var targetDi = {}
         var tempDate = null;
         generateDateInfo(targetDi, dayInfo.GDate);
@@ -258,6 +258,7 @@ function buildSpecialDaysTable(year, defaultEventStart) {
         dayInfo.D = '{bDay} {bMonthNamePri} {bYear}'.filledWith(targetDi);
         dayInfo.G = messages.get('evePartOfDay', targetDi);
         dayInfo.Sunset = targetDi.startingSunsetDesc;
+        dayInfo.SunsetEnding = targetDi.endingSunsetDesc;
         dayInfo.StartTime = null;
         dayInfo.EventTime = null;
         dayInfo.ST = null;
@@ -268,6 +269,11 @@ function buildSpecialDaysTable(year, defaultEventStart) {
         dayInfo.RowClass = [];
         var targetTime = dayInfo.Time || defaultEventStart;
 
+        if (dayInfo.Type === 'Today') {
+            dayInfo.Sunrise = targetDi.sunriseDesc;
+            dayInfo.g1 = `${targetDi.frag1MonthLong} ${targetDi.frag1Day}`;
+            dayInfo.g2 = `${targetDi.frag2MonthLong} ${targetDi.frag2Day}`;
+        }
         if (dayInfo.Type === 'M') {
             dayInfo.A = messages.get('FeastOf').filledWith(targetDi.bMonthNameSec);
         }
@@ -391,7 +397,7 @@ function buildSpecialDaysTable(year, defaultEventStart) {
     return dayInfos;
 }
 
-function addEventTime(obj) {
+function addEventTime (obj) {
     var eventTime = obj.time;
 
     obj.eventYear = eventTime.getFullYear();
@@ -408,7 +414,7 @@ function addEventTime(obj) {
 }
 
 
-function getUpcomingRaw(di, numToAdd) {
+function getUpcomingRaw (di, numToAdd) {
     var targetDate = moment(moment(di.frag1).format('YYYY-MM-DD')).toDate(); // clone and lose timezone
     if (_dateInfosForYear !== di.bYear) {
         prepareDateInfos(di.bYear);
@@ -451,7 +457,7 @@ function getUpcomingRaw(di, numToAdd) {
     return upcoming;
 }
 
-function dateInfosRaw() {
+function dateInfosRaw () {
     return [
         /* fields
            Type - M (Month),HS (Holy Day standard),HO (Holy Day other),OtherDay,OtherRange
@@ -697,7 +703,7 @@ function dateInfosRaw() {
 }
 
 // date utilities //////////////////////////////////////////
-function splitToBMonthDay(code) {
+function splitToBMonthDay (code) {
     // split code to {m: d:}
     var split = code.split('.');
     return {
@@ -706,7 +712,7 @@ function splitToBMonthDay(code) {
     };
 }
 
-function makeBMonthDay(month, day) {
+function makeBMonthDay (month, day) {
     // combine numbers into object
     return {
         m: +month,
@@ -714,14 +720,14 @@ function makeBMonthDay(month, day) {
     };
 }
 
-function getGDateYBDate(bYear, bMonthDay) {
+function getGDateYBDate (bYear, bMonthDay) {
     if (!bMonthDay || !bMonthDay.d) {
         return '?3?';
     }
     return getGregorianDate(bYear, bMonthDay.m, bMonthDay.d);
 }
 
-function getGregorianDate(bYear, bMonth, bDay, autoFix) {
+function getGregorianDate (bYear, bMonth, bDay, autoFix) {
     // convert bDate to gDate
     if (bMonth < 0 || typeof bMonth === 'undefined') {
         if (autoFix) {
@@ -791,7 +797,7 @@ function getGregorianDate(bYear, bMonth, bDay, autoFix) {
 }
 
 
-function daysInAyyamiHa(bYear) {
+function daysInAyyamiHa (bYear) {
     var firstDayOfAyyamiHa = copyAndAddDays(getGregorianDate(bYear, 18, 19), 1);
     var lastDayOfAyyamiHa = copyAndAddDays(getGregorianDate(bYear, 19, 1), -1);
 
@@ -799,7 +805,7 @@ function daysInAyyamiHa(bYear) {
 }
 
 
-var getBDate = function(gSourceDate) {
+var getBDate = function (gSourceDate) {
     var sourceDate = new Date(gSourceDate);
     var pmSunset = new Date(sourceDate);
     pmSunset.setHours(12);
@@ -868,7 +874,7 @@ var getBDate = function(gSourceDate) {
 
 // =============================================================
 // table of Naw Ruz dates
-function loadDatePresets() {
+function loadDatePresets () {
     _nawRuzOffsetFrom21 = {
         // by default and historically, on March 21. If not, year is listed here with the offset... 173 is March 20
         // can be 0, -1, -2? and will never change by more than 1 day between years
@@ -2546,7 +2552,7 @@ function loadDatePresets() {
 
 // =============================================================
 
-function getNawRuz(gYear, frag2DateOnly) {
+function getNawRuz (gYear, frag2DateOnly) {
     // get NawRuz for this gregorian year
     var nawRuz = new Date(
         gYear,
@@ -2572,7 +2578,7 @@ function getNawRuz(gYear, frag2DateOnly) {
     return nawRuz;
 }
 
-function isAfterNawRuz(d) {
+function isAfterNawRuz (d) {
     return d.getTime() >= getNawRuz(d.getFullYear()).getTime();
 }
 
@@ -2585,18 +2591,18 @@ function isAfterNawRuz(d) {
 //   return Math.round((d - j1) / 8.64e7);
 // };
 
-function inStandardTime(d) {
+function inStandardTime (d) {
     var jan = new Date(d.getFullYear(), 0, 1);
     return jan.getTimezoneOffset() === d.getTimezoneOffset();
 }
 
-function copyAndAddDays(oldDate, daysOffset) {
+function copyAndAddDays (oldDate, daysOffset) {
     var d = new Date(oldDate);
     d.setDate(d.getDate() + daysOffset);
     return d;
 }
 
-function daysBetween(d1, d2) {
+function daysBetween (d1, d2) {
     return 1 + Math.round(Math.abs((d1.getTime() - d2.getTime()) / 864e5));
 }
 
@@ -2604,12 +2610,12 @@ function daysBetween(d1, d2) {
 //   d.setDate(d.getDate() + days);
 // }
 
-function BadiException(message) {
+function BadiException (message) {
     this.message = message;
     this.name = "BadiCalcException";
 }
 
-function showTime(d, use24) {
+function showTime (d, use24) {
     var hoursType = use24HourClock || (use24 === 24) ? 24 : 0;
     var show24Hour = hoursType === 24;
     var hours24 = d.getHours();
@@ -2617,10 +2623,10 @@ function showTime(d, use24) {
     var hours = show24Hour ?
         hours24 :
         hours24 > 12 ?
-        hours24 - 12 :
-        hours24 === 0 ?
-        12 :
-        hours24;
+            hours24 - 12 :
+            hours24 === 0 ?
+                12 :
+                hours24;
     var minutes = d.getMinutes();
     var time = hours + ':' + ('0' + minutes).slice(-2);
     if (!show24Hour) {
@@ -2662,7 +2668,7 @@ var use24HourClock = storage.get('use24hour', false);
 
 onLocaleLoaded();
 
-function onLocaleLoaded() {
+function onLocaleLoaded () {
     _languageCode = messages.get('translation');
     _languageDir = ',fa'.search(_languageCode) !== -1 ? 'rtl' : 'ltr';
     // use24HourClock = messages.get('use24HourClock') === 'true';
@@ -2693,7 +2699,7 @@ function onLocaleLoaded() {
     //   }
 }
 
-function setupLanguageChoice() {
+function setupLanguageChoice () {
     lists.bMonthNamePri = settings.useArNames ? lists.bMonthNameAr : lists.bMonthMeaning;
     lists.bMonthNameSec = !settings.useArNames ? lists.bMonthNameAr : lists.bMonthMeaning;
     lists.bWeekdayNamePri = settings.useArNames ? lists.bWeekdayNameAr : lists.bWeekdayMeaning;
@@ -2702,7 +2708,7 @@ function setupLanguageChoice() {
     lists.bYearInVahidNameSec = !settings.useArNames ? lists.bYearInVahidNameAr : lists.bYearInVahidMeaning;
 }
 
-function refreshDateInfo() {
+function refreshDateInfo () {
     // console.log(shared)
     if (!shared.coords.sourceIsSet) {
         return;
@@ -2714,7 +2720,7 @@ function refreshDateInfo() {
     }
 }
 
-function generateDateInfo(di, currentTime, onlyStamp, updateWindowsNowDi) {
+function generateDateInfo (di, currentTime, onlyStamp, updateWindowsNowDi) {
     // hard code limits
     var minDate = new Date(1844, 2, 21, 0, 0, 0, 0);
     if (currentTime < minDate) {
@@ -2915,7 +2921,7 @@ function generateDateInfo(di, currentTime, onlyStamp, updateWindowsNowDi) {
     }
 }
 
-function getElementNum(num) {
+function getElementNum (num) {
     // the Bab's designations, found in 'https://books.google.ca/books?id=XTfoaK15t64C&pg=PA394&lpg=PA394&dq=get+of+the+heart+nader+bab&source=bl&ots=vyF-pWLAr8&sig=ruiuoE48sGWWgaB_AFKcSfkHvqw&hl=en&sa=X&ei=hbp0VfGwIon6oQSTk4Mg&ved=0CDAQ6AEwAw#v=snippet&q=%22air%20of%20eternity%22&f=false'
 
     //  1, 2, 3
@@ -2949,14 +2955,14 @@ function getElementNum(num) {
 //   return _focusTime;
 // }
 
-function setFocusTime(t) {
+function setFocusTime (t) {
     _focusTime = t || (t = new Date());
     if (isNaN(_focusTime)) {
         log('unexpected 2: ', _focusTime);
     }
 }
 
-function log() {
+function log () {
     // add a timestamp to console log entries
     //  var a = ['%c'];
     //  a.push('display: block; text-align: right;');
@@ -3017,20 +3023,20 @@ function log() {
 //   }
 //   return defaultValue;
 // }
-function digitPad2(num) {
+function digitPad2 (num) {
     return ('00' + num).slice(-2);
 }
 
-function getOrdinal(num) {
+function getOrdinal (num) {
     return lists.ordinal[num] || lists.ordinal[0] || num;
 }
 
-function getOrdinalName(num) {
+function getOrdinalName (num) {
     return lists.ordinalNames[num] || num;
 }
 
 
-function getUpcoming(di) {
+function getUpcoming (di) {
     if (di.upcomingHtml) {
         return; // already done
     }
@@ -3040,7 +3046,7 @@ function getUpcoming(di) {
     di.special1 = null;
     di.special2 = null;
 
-    dayInfos.forEach(function(dayInfo, i) {
+    dayInfos.forEach(function (dayInfo, i) {
         var targetDi = {};
         generateDateInfo(targetDi, dayInfo.GDate);
         if (dayInfo.Type === 'M') {
@@ -3069,7 +3075,7 @@ function getUpcoming(di) {
     di.upcomingHtml = '<tr class={Type}><td>{away}</td><td>{^A}</td><td>{^date}</td></tr>'.filledWithEach(dayInfos);
 }
 
-function determineDaysAway(_di, moment1, moment2, sameDay) {
+function determineDaysAway (_di, moment1, moment2, sameDay) {
     var days = moment2.diff(moment1, 'days');
     if (days === 1 && !_di.bNow.eve) {
         return messages.get('Tonight');
@@ -3101,10 +3107,10 @@ export default {
     buildSpecialDaysTable: buildSpecialDaysTable,
     isAfterNawRuz: isAfterNawRuz,
     // extras
-    getNawRuzFromDate: function(d) {
+    getNawRuzFromDate: function (d) {
         return getNawRuz(d.getFullYear());
     },
-    getBadiYear: function(d) {
+    getBadiYear: function (d) {
         return d.getFullYear() - 1843 - (isAfterNawRuz(d) ? 0 : 1);
     }
 };
