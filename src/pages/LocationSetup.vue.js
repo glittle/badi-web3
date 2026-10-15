@@ -5,8 +5,7 @@ import badiCalc from '../scripts/badiCalc'
 import * as store from '../scripts/store'
 import storage from '../scripts/storage'
 
-var Vue = require('vue');
-var versionInfo = require('../../root/version.json');
+import versionInfo from '../../root/version.json'
 
 //--> after updates, SimpleVueValidation is failing
 // var SimpleVueValidation = require('simple-vue-validator');

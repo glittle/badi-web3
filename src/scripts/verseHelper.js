@@ -1,5 +1,5 @@
 import verses from '../assets/verses.json'
-require('../scripts/stringExt')
+import './stringExt'
 
 function forDi(thisDi) {
   var key = '{currentMonth1}.{currentDay}'.filledWith(thisDi);

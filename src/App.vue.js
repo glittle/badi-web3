@@ -6,10 +6,9 @@ import * as store from './scripts/store'
 // import storage from './scripts/storage'
 // import axios from 'axios'
 
-const moment = require('moment-timezone');
-var versionInfo = require('../root/version.json')
-
-require('./scripts/stringExt')
+import moment from 'moment-timezone'
+import versionInfo from '../root/version.json'
+import './scripts/stringExt'
 
 export default {
     data() {
@@ -51,7 +50,7 @@ export default {
             return template.filledWith(di)
         },
         version() {
-            var age = moment(versionInfo.buildDate, "_ MMM D YYYY HH:mm:ss _Z").fromNow();
+            var age = versionAge(versionInfo.buildDate);
             return '{0} ({1})'.filledWith(versionInfo.version, age)
         },
         // routeName() {
@@ -247,6 +246,12 @@ export default {
                 vue.lastNotificationKey = key;
             }
         },
+        openPage(page) {
+            var to = !page.to || page.to === '/' ? '/' : (page.to.charAt(0) === '/' ? page.to : '/' + page.to)
+            if (this.$route.path !== to) {
+                this.$router.replace(to)
+            }
+        },
         swipePage(obj) {
             // console.log(obj)
             var delta;
@@ -267,9 +272,10 @@ export default {
                 return doNormalAction;
             }
 
-            var goto = routeList.getNext(delta, this.$router.currentRoute);
+            var goto = routeList.getNext(delta, this.$route);
             if (goto) {
-                this.$router.push(goto);
+                var to = goto.charAt(0) === '/' ? goto : '/' + goto
+                this.$router.push(to);
                 return;
             }
             return doNormalAction;
@@ -296,6 +302,12 @@ export default {
     }
 }
 
+
+function versionAge(buildDate) {
+    var parsed = moment(buildDate, '_ MMM D YYYY HH:mm:ss _Z')
+    if (!parsed.isValid()) parsed = moment(new Date(buildDate))
+    return parsed.fromNow()
+}
 
 function checkLocation(vue) {
     //TODO: don't send robots to the setup pages

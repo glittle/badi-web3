@@ -1,5 +1,7 @@
-require('./stringExt')
-var has = require('lodash/has');
+import './stringExt'
+import has from 'lodash/has'
+import enMessages from '../locales/en/messages.json'
+import enWeb3 from '../locales/en/messages.web3.json'
 
 // var locale = 'fr';
 const messageFiles = [];
@@ -53,8 +55,8 @@ function getRawMessage(key) {
   return answer;
 }
 
-messageFiles.push(require('../locales/en/messages.json'))
-messageFiles.push(require('../locales/en/messages.web3.json'));
+messageFiles.push(enMessages)
+messageFiles.push(enWeb3)
 
 // NOT WORKING - require seems to require hardcoded string
 // if (locale !== 'en') {
