@@ -45,5 +45,5 @@
     </div>
   </q-layout>
 </template>
-<script src="app.vue.js"></script>
+<script src="App.vue.js"></script>
 <style src="App.vue.css"></style>
