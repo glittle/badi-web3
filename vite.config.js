@@ -75,7 +75,11 @@ function extrasPlugin() {
     },
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
-        const urlPath = (req.url || '/').split('?')[0]
+        const raw = req.url || '/'
+        // Vite rewrites template asset urls to ?import and must answer those
+        // itself. Serving the raw file here makes the module fail to load.
+        if (/[?&](import|url)(&|$)/.test(raw)) return next()
+        const urlPath = raw.split('?')[0]
         const file = urlPath.startsWith('/statics/')
           ? serveFile(path.join(root, 'src'), urlPath)
           : serveFile(path.join(root, 'root'), urlPath)
@@ -103,7 +107,15 @@ function extrasPlugin() {
 }
 
 export default defineConfig({
-  plugins: [vue(), extrasPlugin()],
+  plugins: [vue({
+    template: {
+      compilerOptions: {
+        // Vue 2 kept the spaces between inline buttons, icons, and switches.
+        // The Vite default ('condense') deletes those text nodes.
+        whitespace: 'preserve'
+      }
+    }
+  }), extrasPlugin()],
   resolve: {
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
     alias: {

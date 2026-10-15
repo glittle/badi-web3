@@ -1,8 +1,7 @@
 <template>
   <table class="Grid19"
          v-bind:class="{ayyamiha: info.ayyamiha}"
-         v-bind:data-dummy="showDelayed">
-    <tr>
+         v-bind:data-dummy="showDelayed"><tr>
       <th colspan=19>
         <div class="header">
           <span class="desc"
@@ -17,8 +16,7 @@
           </span>
         </div>
       </th>
-    </tr>
-    <tr class="gridRow">
+    </tr><tr class="gridRow">
       <td class="cell row1 cell1"><span class=a></span><span class=b></span></td>
       <td class="cell row1 cell2"><span class=a></span><span class=b></span></td>
       <td class="cell row1 cell3"><span class=a></span><span class=b></span></td>
@@ -38,14 +36,12 @@
       <td class="cell row4 cell17"><span class=a></span><span class=b></span></td>
       <td class="cell row4 cell18"><span class=a></span><span class=b></span></td>
       <td class="cell row4 cell19"><span class=a></span><span class=b></span></td>
-    </tr>
-    <tr class="elements" v-if="info.mode==='year'">
+    </tr><tr class="elements" v-if="info.mode==='year'">
       <td class="row1 past" v-bind:class="{active: info.elementNum===1}" colspan="3"><span class=a>Fire</span></td>
       <td class="row2 past" v-bind:class="{active: info.elementNum===2}" colspan="4"><span class=a>Air</span></td>
       <td class="row3 past" v-bind:class="{active: info.elementNum===3}" colspan="6"><span class=a>Water</span></td>
       <td class="row4 past" v-bind:class="{active: info.elementNum===4}" colspan="6"><span class=a>Earth</span></td>
-    </tr>
-  </table>
+    </tr></table>
 </template>
 <style src="./Grid19.vue.css"></style>
 <script src="./Grid19.vue.js"></script>
