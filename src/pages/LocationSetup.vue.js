@@ -304,7 +304,10 @@ export default {
         },
         updateUiToNewLocation() {
             badiCalc.reset();
-            store.doPulse();
+            // saveCoords() already pulsed. That pulse is inside the 250ms guard,
+            // and reset() just cleared the cache it filled. Force a new one so
+            // window._nowDi matches the location before anyone rebuilds lists.
+            store.doPulse(undefined, true);
             console.log('emit locationChanged 1')
             window._messageBus.$emit('locationChanged');
         },

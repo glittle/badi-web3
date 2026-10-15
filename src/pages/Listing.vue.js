@@ -84,13 +84,21 @@ export default {
         window._messageBus.$on('setupDone', function () {
             vue.prepare();
         })
+        // Subscribe even when the page is created before a location exists.
+        // Otherwise the later pulse (changedDay) and a later move (locationChanged)
+        // never refill a list that loadDates skipped.
+        window._messageBus.$on('changedDay', function () {
+            vue.prepare();
+        })
+        window._messageBus.$on('locationChanged', function () {
+            vue.prepare();
+        })
 
         if (!badi.di || !badi.di.stamp) {
             vue.$router.push('/');
             return;
         }
         this.prepare();
-        window._messageBus.$on('changedDay', this.prepare);
     },
     mounted: function () {
         this.showToday();
@@ -105,6 +113,9 @@ export default {
             }, 0)
         },
         prepare: function () {
+            if (!window._nowDi || !badi.di || !badi.di.bYear) {
+                return;
+            }
             this.originalYear = badi.di.bYear;
             this.lastYear = -1;
             this.loadDates(this.originalYear);
