@@ -67,6 +67,54 @@ function copyTree(src, dest) {
   }
 }
 
+function collectPrecacheUrls(viteManifest) {
+  const urls = new Set(['/index.html', '/manifest.json'])
+  for (const item of Object.values(viteManifest)) {
+    if (item.file) urls.add('/' + item.file)
+    for (const css of item.css || []) urls.add('/' + css)
+    for (const asset of item.assets || []) urls.add('/' + asset)
+  }
+  return [...urls].sort()
+}
+
+function stampServiceWorker() {
+  const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'))
+  const manifestPath = path.join(root, 'dist/.vite/manifest.json')
+  if (!fs.existsSync(manifestPath)) {
+    throw new Error('Vite asset manifest is missing; cannot precache the build')
+  }
+  const urls = collectPrecacheUrls(JSON.parse(fs.readFileSync(manifestPath, 'utf8')))
+  const swPath = path.join(root, 'dist/sw-badi-web4.js')
+  let sw = fs.readFileSync(swPath, 'utf8')
+  const versionLine = "const CACHE_VERSION = '0.0.0-dev'"
+  const listLine = 'const PRECACHE_URLS = []'
+  if (!sw.includes(versionLine) || !sw.includes(listLine)) {
+    throw new Error('service worker stamp markers are missing')
+  }
+  sw = sw.replace(versionLine, "const CACHE_VERSION = " + JSON.stringify(pkg.version))
+  sw = sw.replace(listLine, 'const PRECACHE_URLS = ' + JSON.stringify(urls))
+  fs.writeFileSync(swPath, sw)
+}
+
+function previewHeaders(req, res, next) {
+  const urlPath = (req.url || '/').split('?')[0]
+  if (urlPath !== '/manifest.json' && urlPath !== '/sw-badi-web4.js' && urlPath !== '/version.json') {
+    return next()
+  }
+  const file = path.join(root, 'dist', urlPath.slice(1))
+  if (!fs.existsSync(file)) return next()
+  if (urlPath === '/manifest.json') {
+    res.setHeader('Content-Type', 'application/manifest+json')
+  } else if (urlPath.endsWith('.js')) {
+    res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
+    res.setHeader('Cache-Control', 'no-cache')
+  } else {
+    res.setHeader('Content-Type', 'application/json; charset=utf-8')
+    res.setHeader('Cache-Control', 'no-cache')
+  }
+  fs.createReadStream(file).pipe(res)
+}
+
 function extrasPlugin() {
   return {
     name: 'badi-extras',
@@ -84,9 +132,18 @@ function extrasPlugin() {
           ? serveFile(path.join(root, 'src'), urlPath)
           : serveFile(path.join(root, 'root'), urlPath)
         if (!file) return next()
-        res.setHeader('Content-Type', types[path.extname(file).toLowerCase()] || 'application/octet-stream')
+        const type = urlPath === '/manifest.json'
+          ? 'application/manifest+json'
+          : (types[path.extname(file).toLowerCase()] || 'application/octet-stream')
+        res.setHeader('Content-Type', type)
+        if (urlPath === '/sw-badi-web4.js' || urlPath === '/version.json') {
+          res.setHeader('Cache-Control', 'no-cache')
+        }
         fs.createReadStream(file).pipe(res)
       })
+    },
+    configurePreviewServer(server) {
+      server.middlewares.use(previewHeaders)
     },
     closeBundle() {
       const dist = path.join(root, 'dist')
@@ -102,6 +159,7 @@ function extrasPlugin() {
       if (!from.equals(shipped)) {
         throw new Error('dist/' + assetName + ' is not byte-identical to root/' + assetName)
       }
+      stampServiceWorker()
     }
   }
 }
@@ -126,6 +184,7 @@ export default defineConfig({
     outDir: 'dist',
     emptyOutDir: true,
     assetsDir: 'assets',
+    manifest: true,
     chunkSizeWarningLimit: 2200
   },
   server: {
