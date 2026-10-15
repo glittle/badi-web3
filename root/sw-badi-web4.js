@@ -1,161 +1,137 @@
-console.log('loading workbox')
+/*
+ * Wondrous-Badíʿ Today service worker.
+ * The filename stays sw-badi-web4.js so browsers that already registered it
+ * (including the v1 Workbox worker) update this registration instead of
+ * keeping an orphaned one. localStorage is never touched.
+ *
+ * The build replaces CACHE_VERSION and PRECACHE_URLS from package.json and
+ * the Vite asset manifest. Do not hand-maintain that list.
+ */
+const CACHE_VERSION = '0.0.0-dev'
+const PRECACHE_URLS = []
+const PRECACHE = 'badi-precache-' + CACHE_VERSION
+const RUNTIME = 'badi-runtime-' + CACHE_VERSION
 
-// self.addEventListener('push', function(event) {
-//     console.log('push event', event);
-// });
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(PRECACHE)
+      .then((cache) => cache.addAll(PRECACHE_URLS))
+      .then(() => {
+        // Take over as soon as this worker is installed so a v1 client, which
+        // has no update listener, is not left on the old worker until every
+        // tab is closed. The page reloads itself once it is already controlled.
+        return self.skipWaiting()
+      })
+  )
+})
 
-self.addEventListener('notificationclose', function(event) {
-    console.log('notification closed', event)
-});
-
-self.addEventListener('notificationclick', function(event) {
-    // console.log('On notification click: ', event.notification.tag);
-
-    // This looks to see if the current is already open and
-    // focuses if it is
-    event.waitUntil(clients.matchAll({
-        type: "window"
-    }).then(function(clientList) {
-        for (var i = 0; i < clientList.length; i++) {
-            var client = clientList[i];
-            if ('focus' in client) {
-                return client.focus();
-            }
-        }
-        if (clients.openWindow) {
-            return clients.openWindow('/');
-        }
-    }));
-});
-
-
-//importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.3.1/workbox-sw.js');
-var workbox = (function() {
-    "use strict";
-    try {
-        self.workbox.v["workbox:sw:3.3.1"] = 1
-    } catch (t) {}
-    const t = "https://storage.googleapis.com/workbox-cdn/releases/3.3.1",
-        e = {
-            backgroundSync: "background-sync",
-            broadcastUpdate: "broadcast-cache-update",
-            cacheableResponse: "cacheable-response",
-            core: "core",
-            expiration: "cache-expiration",
-            googleAnalytics: "google-analytics",
-            precaching: "precaching",
-            rangeRequests: "range-requests",
-            routing: "routing",
-            strategies: "strategies",
-            streams: "streams"
-        };
-    return new class {
-        constructor() {
-            return this.v = {}, this.t = {
-                debug: true, // "localhost" === self.location.hostname,
-                modulePathPrefix: null,
-                modulePathCb: null
-            }, this.e = this.t.debug ? "dev" : "prod", this.s = !1, new Proxy(this, {
-                get(t, s) {
-                    if (t[s]) return t[s];
-                    const o = e[s];
-                    return o && t.loadModule(`workbox-${o}`), t[s]
-                }
-            })
-        }
-        setConfig(t = {}) {
-            if (this.s) throw new Error("Config must be set before accessing workbox.* modules");
-            Object.assign(this.t, t);
-            this.e = this.t.debug ? "dev" : "prod";
-        }
-        skipWaiting() {
-            self.addEventListener("install", () => self.skipWaiting())
-        }
-        clientsClaim() {
-            self.addEventListener("activate", () => self.clients.claim())
-        }
-        loadModule(t) {
-            const e = this.o(t);
-            try {
-                importScripts(e);
-                this.s = !0
-            } catch (s) {
-                throw console.error(`Unable to import module '${t}' from '${e}'.`)
-            }
-        }
-        o(e) {
-            if (this.t.modulePathCb) return this.t.modulePathCb(e, this.t.debug);
-            let s = [t];
-            const o = `${e}.${this.e}.js`,
-                r = this.t.modulePathPrefix;
-            return r && (s = r.split("/"))[s.length - 1] === "" && s.splice(s.length - 1, 1), s.push(o), s.join("/")
-        }
-    }()
-}());
-//# sourceMappingURL=workbox-sw.js.map
-
-
-
-const matchCb = ({
-    url,
-    event
-}) => {
-    return (url.pathname === '/special/url');
-};
-
-if (workbox) {
-    workbox.setConfig({
-        debug: true // false
-    });
-    workbox.core.setLogLevel(workbox.core.LOG_LEVELS.warn);
-
-    workbox.skipWaiting();
-    workbox.clientsClaim();
-
-    console.log(`Yay! Workbox is loaded 🎉`);
-
-    if (location.hostname === 'localhost') {
-        console.log('Not caching on localhost')
-    } else {
-        workbox.routing.registerRoute(
-            new RegExp('/images/.*\.png'),
-            workbox.strategies.staleWhileRevalidate()
-        );
-        workbox.routing.registerRoute(
-            new RegExp('/.*'),
-            workbox.strategies.staleWhileRevalidate()
-        );
-
-
-        workbox.googleAnalytics.initialize();
-
-        // Shows logs, warnings and errors.
-        // workbox.core.setLogLevel(workbox.core.LOG_LEVELS.log);
-
-        // Show warnings and errors.
-        //workbox.core.setLogLevel(workbox.core.LOG_LEVELS.warn);
+self.addEventListener('activate', (event) => {
+  event.waitUntil((async () => {
+    const keys = await caches.keys()
+    const fromLegacy = keys.some((name) => name.indexOf('workbox') !== -1)
+    await Promise.all(
+      keys
+        .filter((name) => name !== PRECACHE && name !== RUNTIME)
+        .map((name) => caches.delete(name))
+    )
+    const precache = await caches.open(PRECACHE)
+    const cached = await precache.keys()
+    await Promise.all(cached.map((request) => {
+      const pathname = new URL(request.url).pathname
+      if (PRECACHE_URLS.indexOf(pathname) === -1) return precache.delete(request)
+    }))
+    await self.clients.claim()
+    // Pages still running the v1 script do not listen for controllerchange.
+    // Reload them once. Later updates reload from the page instead, so this
+    // does not fire twice.
+    if (fromLegacy) {
+      const clients = await self.clients.matchAll({ type: 'window', includeUncontrolled: true })
+      await Promise.all(clients.map((client) => client.navigate ? client.navigate(client.url) : Promise.resolve()))
     }
-} else {
-    console.log(`Boo! Workbox didn't load 😬`);
+  })())
+})
+
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting()
+  }
+})
+
+self.addEventListener('notificationclick', (event) => {
+  event.waitUntil(clients.matchAll({ type: 'window' }).then((list) => {
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].focus) return list[i].focus()
+    }
+    if (clients.openWindow) return clients.openWindow('/')
+  }))
+})
+
+function sameOrigin(url) {
+  return url.origin === self.location.origin
 }
 
-// Give the service worker access to Firebase Messaging.
-// Note that you can only use Firebase Messaging here, other Firebase libraries
-// are not available in the service worker.
-// importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
-// importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
+function leaveToNetwork(url, request) {
+  if (request.method !== 'GET') return true
+  if (request.headers.has('range')) return true
+  if (!sameOrigin(url)) return true
+  if (url.pathname === '/sw-badi-web4.js') return true
+  if (url.pathname === '/version.json') return true
+  if (url.pathname === '/badiService' || url.pathname.indexOf('/badiService/') === 0) return true
+  return false
+}
 
-// Initialize the Firebase app in the service worker by passing in the
-// messagingSenderId.
-// firebase.initializeApp({
-//     'messagingSenderId': '201027632116'
-// });
+function cacheable(response) {
+  return response && response.ok && response.type === 'basic' && !response.redirected
+}
 
-// Retrieve an instance of Firebase Messaging so that it can handle background
-// messages.
-// const messaging = firebase.messaging();
+self.addEventListener('fetch', (event) => {
+  const request = event.request
+  let url
+  try {
+    url = new URL(request.url)
+  } catch (e) {
+    return
+  }
+  if (leaveToNetwork(url, request)) return
 
-// messaging.setBackgroundMessageHandler(function(payload) {
-//     console.log('Received background message ', payload);
-//     // Customize notification here
-// });
+  if (request.mode === 'navigate') {
+    event.respondWith((async () => {
+      const cache = await caches.open(PRECACHE)
+      try {
+        // Bypass the browser HTTP cache so a long-lived index.html cannot
+        // pin an open install to the previous build.
+        const fresh = await fetch(request, { cache: 'no-store' })
+        if (cacheable(fresh)) {
+          await cache.put('/index.html', fresh.clone())
+        }
+        return fresh
+      } catch (err) {
+        const cached = await cache.match('/index.html')
+        return cached || Response.error()
+      }
+    })())
+    return
+  }
+
+  if (url.pathname.indexOf('/assets/') === 0) {
+    event.respondWith((async () => {
+      const cache = await caches.open(PRECACHE)
+      const hit = await cache.match(request)
+      if (hit) return hit
+      const response = await fetch(request)
+      if (cacheable(response)) await cache.put(request, response.clone())
+      return response
+    })())
+    return
+  }
+
+  event.respondWith((async () => {
+    const cache = await caches.open(RUNTIME)
+    const hit = await cache.match(request)
+    const network = fetch(request).then(async (response) => {
+      if (cacheable(response)) await cache.put(request, response.clone())
+      return response
+    }).catch(() => hit || Response.error())
+    return hit || network
+  })())
+})
