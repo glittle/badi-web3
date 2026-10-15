@@ -3,8 +3,18 @@ import badiCalc from '../scripts/badiCalc'
 
 const splitSeparator = /[,،]+/
 
+function directiveSource(binding) {
+  // Vue 2 exposed the raw template text as binding.expression. Vue 3 only
+  // provides the evaluated result on binding.value. The listing filters are
+  // string literals, so value is the text the old expression held after the
+  // quotes were stripped.
+  if (binding.value != null && binding.value !== '') return String(binding.value)
+  if (binding.expression) return String(binding.expression).replace(/'/g, '')
+  return ''
+}
+
 function localize(el, binding) {
-  var info = String(binding.expression || '').replace(/'/g, '')
+  var info = directiveSource(binding)
   var useDateInfo = binding.modifiers.di
   var children = el.children
   var accessKeyFor = null

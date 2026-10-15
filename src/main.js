@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, nextTick } from 'vue'
 import './styles/quasar.mat.css'
 import './styles/zoom.css'
 import router from './router'
@@ -53,19 +53,36 @@ app.component('q-popover', QPopover)
 app.component('q-drawer-link', QDrawerLink)
 registerPages(app)
 
+// vue-head (the 1.x app) set document.title from each component's `head`
+// option on mounted: inner + separator + the original <title>. The default
+// separator is "|". App.vue passes separator "-", so a direct load ends as
+// "Home - Wondrous-Badíʿ Today" because the root is the last to mount.
+const initialDocumentTitle = document.title
+
+function applyHead(vm) {
+  if (!vm || !vm.$options || !vm.$options.head) return
+  const headOpt = vm.$options.head
+  const head = typeof headOpt === 'function' ? headOpt.call(vm) : headOpt
+  if (!head || !head.title) return
+  let spec = head.title
+  if (typeof spec === 'function') spec = spec.call(vm)
+  if (!spec || spec.inner == null || spec.inner === '') return
+  const separator = spec.separator || '|'
+  const complement = spec.complement || initialDocumentTitle
+  document.title = (spec.inner + ' ' + separator + ' ' + complement).trim()
+}
+
 app.mixin({
-  created() {
-    const head = this.$options.head
-    if (!head || !head.title) return
-    const spec = typeof head.title === 'function' ? head.title.call(this) : head.title
-    if (!spec || !spec.inner) return
-    document.title = spec.separator
-      ? spec.inner + ' ' + spec.separator + ' Wondrous-Badíʿ Today'
-      : spec.inner
+  mounted() {
+    applyHead(this)
   }
 })
 
-app.mount('#q-app')
+const root = app.mount('#q-app')
+// Vue Router 4 inserts the first view after the root has mounted. vue-head on
+// Vue 2 left the root title in place on a direct load, so put it back once
+// the first view has mounted. Later navigations set their own title.
+router.isReady().then(() => nextTick(() => applyHead(root)))
 
 const html = document.documentElement
 html.setAttribute('dir', badiCalc.languageDir)

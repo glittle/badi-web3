@@ -50,6 +50,23 @@ function serveFile(dir, urlPath) {
   return file
 }
 
+function copyTree(src, dest) {
+  const existing = fs.lstatSync(dest, { throwIfNoEntry: false })
+  if (existing && existing.isSymbolicLink()) fs.unlinkSync(dest)
+  fs.mkdirSync(dest, { recursive: true })
+  for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
+    const from = path.join(src, entry.name)
+    const to = path.join(dest, entry.name)
+    if (entry.isDirectory()) {
+      copyTree(from, to)
+    } else if (entry.isFile()) {
+      const link = fs.lstatSync(to, { throwIfNoEntry: false })
+      if (link && link.isSymbolicLink()) fs.unlinkSync(to)
+      fs.copyFileSync(from, to)
+    }
+  }
+}
+
 function extrasPlugin() {
   return {
     name: 'badi-extras',
@@ -70,8 +87,17 @@ function extrasPlugin() {
     closeBundle() {
       const dist = path.join(root, 'dist')
       fs.mkdirSync(dist, { recursive: true })
-      fs.cpSync(path.join(root, 'root'), dist, { recursive: true })
-      fs.cpSync(path.join(root, 'src/statics'), path.join(dist, 'statics'), { recursive: true })
+      // Copy file bytes. A symlink left in dist/ by the public-dir pass
+      // (public/.well-known → ../root/.well-known) must be replaced, not
+      // written through, or a deploy can ship a link instead of the file.
+      copyTree(path.join(root, 'root'), dist)
+      copyTree(path.join(root, 'src/statics'), path.join(dist, 'statics'))
+      const assetName = '.well-known/assetlinks.json'
+      const from = fs.readFileSync(path.join(root, 'root', assetName))
+      const shipped = fs.readFileSync(path.join(dist, assetName))
+      if (!from.equals(shipped)) {
+        throw new Error('dist/' + assetName + ' is not byte-identical to root/' + assetName)
+      }
     }
   }
 }
