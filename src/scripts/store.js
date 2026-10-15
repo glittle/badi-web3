@@ -32,9 +32,11 @@ function scheduleNextPulse() {
   }, delay)
 }
 
-export function doPulse(newTestTime) {
+export function doPulse(newTestTime, force) {
   var pulseTime = new Date().getTime()
-  if (lastPulseTime && pulseTime - lastPulseTime < 250) {
+  // Location setup pulses, then reset() throws that result away and pulses
+  // again immediately. The second call has to run or sunset data stays empty.
+  if (!force && lastPulseTime && pulseTime - lastPulseTime < 250) {
     console.log('ignore attempted rapid pulse')
     return
   }
