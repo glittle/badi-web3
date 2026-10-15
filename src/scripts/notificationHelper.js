@@ -3,7 +3,7 @@ import storage from './storage'
 import * as shared from './shared'
 import verseHelper from './verseHelper'
 import messages from './messages'
-require('../scripts/stringExt')
+import './stringExt'
     // const moment = require('moment-timezone');
 
 // var image = null;

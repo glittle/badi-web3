@@ -1,131 +1,116 @@
-import Vue from 'vue'
-
-import router from 'router'
-import VueHead from 'vue-head'
-import Quasar from 'quasar'
-import VueHighcharts from 'vue-highcharts';
-
-import VueAnalytics from 'vue-analytics'
-
+import { createApp, nextTick } from 'vue'
+import './styles/quasar.mat.css'
+import './styles/zoom.css'
+import router from './router'
 import store from './scripts/store'
 import badiCalc from './scripts/badiCalc'
+import createBus from './scripts/bus'
+import { installAnalytics, gaHelper } from './scripts/analytics'
+import touchSwipe from './directives/touch-swipe'
+import { registerPages } from './pages/routes'
 
-import './scripts/swHandler';
-import './scripts/messages';
-import './components/msg-directive';
+import QLayout from './components/ui/QLayout.vue'
+import QToolbarTitle from './components/ui/QToolbarTitle.vue'
+import QToggle from './components/ui/QToggle.vue'
+import QRange from './components/ui/QRange.vue'
+import QPopover from './components/ui/QPopover.vue'
+import QDrawerLink from './components/ui/QDrawerLink.vue'
 
-var firebase = require("firebase/app");
-require("firebase/messaging");
+import msgDirective from './components/msg-directive'
+import App from './App.vue'
 
-if (window.location.port === '8080') {
-    // in dev
-} else if (window.location.protocol === 'http:') {
-    console.log('redirect to https://')
-    window.location.href = window.location.href.replace('http:', 'https:');
+import './scripts/swHandler'
+import './scripts/stringExt'
+
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/database'
+import 'firebase/compat/messaging'
+
+if (window.location.protocol === 'http:' &&
+    window.location.hostname !== 'localhost' &&
+    window.location.hostname !== '127.0.0.1') {
+  window.location.href = window.location.href.replace('http:', 'https:')
 }
 
-// === DEFAULT / CUSTOM STYLE ===
-// WARNING! always comment out ONE of the two require() calls below.
-// 1. use next line to activate CUSTOM STYLE (./src/themes)
-// require(`./themes/app.${__THEME}.styl`)
-// 2. or, use next line to activate DEFAULT QUASAR STYLE
-require(`quasar/dist/quasar.${__THEME}.css`)
-    // ==============================
+window._messageBus = createBus()
 
-window._messageBus = new Vue({
-    data() {
-        return {
-            serverCallbackLog: []
-        }
-    },
-});
+const touch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0)
+document.body.classList.add(touch ? 'mobile' : 'desktop', 'mat')
 
-// https://www.npmjs.com/package/vue-analytics
-Vue.use(VueAnalytics, {
-    id: 'UA-1312528-11',
-    router,
-    autoTracking: {
-        exception: true
-    }
+installAnalytics(router)
+
+const app = createApp(App)
+app.use(router)
+app.use(store)
+app.config.globalProperties.$ga = gaHelper
+app.directive('touch-swipe', touchSwipe)
+app.directive('msg', msgDirective)
+app.component('q-layout', QLayout)
+app.component('q-toolbar-title', QToolbarTitle)
+app.component('q-toggle', QToggle)
+app.component('q-range', QRange)
+app.component('q-popover', QPopover)
+app.component('q-drawer-link', QDrawerLink)
+registerPages(app)
+
+// vue-head (the 1.x app) set document.title from each component's `head`
+// option on mounted: inner + separator + the original <title>. The default
+// separator is "|". App.vue passes separator "-", so a direct load ends as
+// "Home - Wondrous-Badíʿ Today" because the root is the last to mount.
+const initialDocumentTitle = document.title
+
+function applyHead(vm) {
+  if (!vm || !vm.$options || !vm.$options.head) return
+  const headOpt = vm.$options.head
+  const head = typeof headOpt === 'function' ? headOpt.call(vm) : headOpt
+  if (!head || !head.title) return
+  let spec = head.title
+  if (typeof spec === 'function') spec = spec.call(vm)
+  if (!spec || spec.inner == null || spec.inner === '') return
+  const separator = spec.separator || '|'
+  const complement = spec.complement || initialDocumentTitle
+  document.title = (spec.inner + ' ' + separator + ' ' + complement).trim()
+}
+
+app.mixin({
+  mounted() {
+    applyHead(this)
+  }
 })
 
-Vue.use(VueHead)
-Vue.use(Quasar) // Install Quasar Framework
-Vue.use(VueHighcharts);
+const root = app.mount('#q-app')
+// Vue Router 4 inserts the first view after the root has mounted. vue-head on
+// Vue 2 left the root title in place on a direct load, so put it back once
+// the first view has mounted. Later navigations set their own title.
+router.isReady().then(() => nextTick(() => applyHead(root)))
 
-Quasar.start(() => {
-    /* eslint-disable no-new */
-    new Vue({
-        el: '#q-app',
-        router,
-        store,
-        render: h => h(require('./App'))
-    })
-})
-
-
-// custom
-
-var html = document.getElementsByTagName('html')[0];
+const html = document.documentElement
 html.setAttribute('dir', badiCalc.languageDir)
 html.setAttribute('lang', badiCalc.languageCode)
-var body = document.getElementsByTagName('body')[0];
-body.classList.add(badiCalc.languageDir, badiCalc.languageCode, badiCalc.languageCode.slice(0, 2))
+document.body.classList.add(badiCalc.languageDir, badiCalc.languageCode, (badiCalc.languageCode || 'en').slice(0, 2))
 
-// // onesignal
-// var OneSignal = window.OneSignal || [];
-// var onesignalOptions = {
-//   appId: "2b535ce7-1ca1-4950-813f-2d89c9f281c2", // get an ID at OneSignal.com
-//   autoRegister: false,
-//   notifyButton: {
-//     enable: false
-//   },
-//   welcomeNotification: {
-//     message: 'You are ready for remote notifications!'
-//   },
-//   safari_web_id: 'web.onesignal.auto.2c31ff0c-1624-4aec-8f89-a4f0b1da0ea1'
-// };
-// if (location.hostname === 'localhost') {
-//   onesignalOptions.allowLocalhostAsSecureOrigin = true;
-// }
-// OneSignal.push(["init", onesignalOptions]);
+const firebaseConfig = {
+  apiKey: 'AIzaSyAWmZePN5vVblr3dww7HIpII398vwaGMiE',
+  authDomain: 'wondrous-badi-today.firebaseapp.com',
+  databaseURL: 'https://wondrous-badi-today.firebaseio.com',
+  projectId: 'wondrous-badi-today',
+  storageBucket: 'wondrous-badi-today.appspot.com',
+  messagingSenderId: '201027632116'
+}
 
-// var OneSignal = {
-//   sendTag: function () {
-//     // dummy while disabled
-//   }
-// };
-// shared.remoteSendTag(null);
-
-// analytics
-/* eslint-disable no-sequences, no-undef, no-unused-expressions */
-// (function (i, s, o, g, r, a, m) {
-//   i['GoogleAnalyticsObject'] = r;
-//   i[r] = i[r] || function () {
-//     (i[r].q = i[r].q || []).push(arguments)
-//   }, i[r].l = 1 * new Date();
-//   a = s.createElement(o),
-//     m = s.getElementsByTagName(o)[0];
-//   a.async = 1;
-//   a.src = g;
-//   m.parentNode.insertBefore(a, m)
-// })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-// ga('create', 'UA-1312528-11', 'auto');
-// ga('send', 'pageview');
-
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyAWmZePN5vVblr3dww7HIpII398vwaGMiE",
-    authDomain: "wondrous-badi-today.firebaseapp.com",
-    databaseURL: "https://wondrous-badi-today.firebaseio.com",
-    projectId: "wondrous-badi-today",
-    storageBucket: "wondrous-badi-today.appspot.com",
-    messagingSenderId: "201027632116"
-};
-firebase.initializeApp(config);
-
-const messaging = firebase.messaging();
-
-messaging.usePublicVapidKey("BOMJLq-GqaVDos-u3e7bexzHGf23ZADEVs03tpunmrPuox4vh0Lo6lOC8awEBK34IS09-OVJF8V2sRgqowqMsT0");
-
-window.firebase = firebase;
+try {
+  firebase.initializeApp(firebaseConfig)
+  // firebase/compat/database is imported above so window.firebase.database()
+  // talks to wondrous-badi-today (databaseURL in the config). The 1.x app
+  // initialized this project and used messaging; it did not open a database
+  // listener on startup, so we don't either.
+  try {
+    const messaging = firebase.messaging()
+    messaging.usePublicVapidKey('BOMJLq-GqaVDos-u3e7bexzHGf23ZADEVs03tpunmrPuox4vh0Lo6lOC8awEBK34IS09-OVJF8V2sRgqowqMsT0')
+  } catch (err) {
+    // Some browsers (and http://localhost) cannot start messaging. The page still runs.
+  }
+  window.firebase = firebase
+} catch (err) {
+  console.log('Firebase init failed', err && err.message ? err.message : err)
+}

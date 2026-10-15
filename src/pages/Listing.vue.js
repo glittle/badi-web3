@@ -3,7 +3,7 @@ import * as shared from '../scripts/shared'
 import storage from '../scripts/storage'
 import dateLinksInfo from '../assets/datelinks.json'
 
-var cloneDeep = require('lodash/cloneDeep');
+import cloneDeep from 'lodash/cloneDeep'
 
 export default {
     name: 'listing', // for Vue debugger
@@ -13,7 +13,7 @@ export default {
     data () {
         return {
             title: "Dates",
-            icon: '../statics/calendarWhite.png',
+            icon: '/statics/calendarWhite.png',
             includeHolyDays: storage.get('includeHolyDays', true),
             includeFeasts: storage.get('includeFeasts', true),
             includeOther: storage.get('includeOther', true),
@@ -162,19 +162,19 @@ export default {
                         item.class = 'monthImage'
                         break;
                     case '-DOR':
-                        item.icon = '../statics/divider.png';
+                        item.icon = '/statics/divider.png';
                         item.class = 'iconDivider'
                         break;
                     case '-pdf':
-                        item.icon = '../statics/pdf.png';
+                        item.icon = '/statics/pdf.png';
                         item.class = 'pdf'
                         break;
                     case '-readingsDoc':
-                        item.icon = '../statics/doc.gif';
+                        item.icon = '/statics/DOC.gif';
                         item.class = 'icon20'
                         break;
                     case '-readingsWeb':
-                        item.icon = '../statics/web.png';
+                        item.icon = '/statics/web.png';
                         item.class = 'icon20'
                         break;
                 }

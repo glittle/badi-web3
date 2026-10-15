@@ -1,0 +1,1 @@
+../root/sw-badi-web4.js

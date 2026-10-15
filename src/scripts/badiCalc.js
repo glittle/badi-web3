@@ -5,8 +5,8 @@ import storage from './storage'
 // import store from './store'
 import messages from './messages'
 import sunCalc from './sunCalc'
-const moment = require('moment-timezone');
-const cloneDeep = require('lodash/cloneDeep');
+import moment from 'moment-timezone'
+import cloneDeep from 'lodash/cloneDeep'
 
 var _cachedDateInfos = {};
 var _cachedSpecialDays = {};

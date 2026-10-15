@@ -1,0 +1,33 @@
+/*
+ * Pinch-zoom and browser zoom.
+ * The Quasar 0.13 shell is a viewport-sized flex column. That layout can stay,
+ * but the viewport must not cap scale and touch handlers must not cancel a
+ * two-finger gesture. min-height: 0 lets the page column scroll inside the shell
+ * on current browsers (the 2017 flex default did this implicitly).
+ */
+html,
+body {
+  touch-action: pan-x pan-y pinch-zoom;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+.layout-content {
+  min-height: 0;
+}
+
+.layout-view {
+  min-height: 0;
+  flex: 1 1 auto;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y pinch-zoom;
+}
+
+.q-popover {
+  min-width: 200px;
+  max-width: 280px;
+}

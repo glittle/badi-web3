@@ -3,7 +3,7 @@
         <article class="layout-padding">
             <div class=ShareThis>
                 <h2>Share this App!</h2>
-                <img class=qr alt="Scannable QR Code" src="~statics/qr.png">
+                <img class=qr alt="Scannable QR Code" src="/statics/qr.png">
                 <a href="https://www.wondrous-badi.today/" itemprop="url">
                     <span>Open in any web browser:</span>
                     <span class=underline>Wondrous-Badi.Today</span>
@@ -21,13 +21,14 @@
                     href="https://patreon.com/GlenLittle">Patreon</a>.
                 <br>
                 <a href="https://patreon.com/GlenLittle" title="Support Glen at Patreon" target="_blank"><img
-                        alt="patreon" src="~statics/patreon.png"></a>
+                        alt="patreon" src="/statics/patreon.png"></a>
             </p>
             <p>
                 <span>Version <span itemprop="softwareVersion">{{version}}</span> ({{versionAge}} - <span class="reload"
                         v-on:click="reload">force a reload now</span>)</span>
             </p>
             <ul>
+                <li>ver 2.0 - rebuilt on Vue 3 and Vite; pinch-zoom and browser zoom work</li>
                 <li>ver 1.21 - remove old links; improve date listing</li>
             </ul>
         </article>
@@ -40,8 +41,14 @@
 </template>
 <style src="./About.vue.css"></style>
 <script>
-    const moment = require('moment-timezone');
-    var versionInfo = require('../../root/version.json')
+    import moment from 'moment-timezone'
+    import versionInfo from '../../root/version.json'
+
+    function versionAge(buildDate) {
+        var parsed = moment(buildDate, '_ MMM D YYYY HH:mm:ss _Z')
+        if (!parsed.isValid()) parsed = moment(new Date(buildDate))
+        return parsed.fromNow()
+    }
 
     export default {
         data () {
@@ -55,8 +62,7 @@
                 return versionInfo.version;
             },
             versionAge () {
-                var age = moment(versionInfo.buildDate, "_ MMM D YYYY HH:mm:ss _Z").fromNow();
-                return age;
+                return versionAge(versionInfo.buildDate);
             },
             callbackLog () {
                 return window._messageBus.serverCallbackLog.join('<br>');

@@ -26,6 +26,7 @@
 
 <script>
 export default {
+  name: 'Error404',
   data () {
     return {
       name: 'Not found',
@@ -40,22 +41,24 @@ export default {
 }
 </script>
 
-<style lang="stylus">
-.error-page
-  .error-code
-    height 100vh
-    width 100%
-    padding-top 15vh
-    font-size 30vmax
-    color rgba(255, 255, 255, .2)
-    overflow hidden
-    position absolute
-  .error-card
-    margin-top -25px
-    width 90vw
-    max-width 600px
-    padding 50px
-    box-shadow none
-    i
-      font-size 5rem
+<style>
+.error-page .error-code {
+  height: 100vh;
+  width: 100%;
+  padding-top: 15vh;
+  font-size: 30vmax;
+  color: rgba(255, 255, 255, .2);
+  overflow: hidden;
+  position: absolute;
+}
+.error-page .error-card {
+  margin-top: -25px;
+  width: 90vw;
+  max-width: 600px;
+  padding: 50px;
+  box-shadow: none;
+}
+.error-page .error-card i {
+  font-size: 5rem;
+}
 </style>

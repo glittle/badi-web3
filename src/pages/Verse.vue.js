@@ -12,7 +12,7 @@ export default {
     data() {
         return {
             title: "Verse",
-            icon: '../statics/verseWhite.png',
+            icon: '/statics/verseWhite.png',
             verse: '',
             suffix: '',
             timeOfDay: '',

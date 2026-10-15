@@ -2,26 +2,26 @@ import messages from '../scripts/messages'
 import badiCalc from '../scripts/badiCalc'
 import sunCalc from '../scripts/sunCalc'
 import storage from '../scripts/storage'
-import Grid19 from '../components/Grid19';
-import Verse from './Verse';
-import Listing from './Listing';
+import Grid19 from '../components/Grid19.vue'
+import Verse from './Verse.vue'
+import Listing from './Listing.vue'
 import prayerHelper from '../scripts/prayerLinkHelper'
 import dateLinksInfo from '../assets/datelinks.json'
 import * as notificationHelper from '../scripts/notificationHelper'
 
 
 import * as shared from '../scripts/shared'
-require('../scripts/stringExt')
-const moment = require('moment-timezone');
-const Highcharts = require('highcharts');
-
-var routeList = require('./routes');
+import '../scripts/stringExt'
+import moment from 'moment-timezone'
+import Highcharts from 'highcharts'
+import routeList from './routes'
 
 export default {
     data() {
         return {
+            name: 'Home',
             title: messages.get('HomePage', null, 'Today'),
-            icon: '../statics/sunWhite.png',
+            icon: '/statics/sunWhite.png',
             location: shared.coords.name,
             setupDone: false,
             notificationStatus: shared.notifications.wanted,
@@ -101,7 +101,7 @@ export default {
             return 'Time in'; // in <strong>' + this.location + '</strong>';
         },
         pageList() {
-            return routeList.default.menuPages.filter(function(p) {
+            return routeList.menuPages.filter(function(p) {
                 return p.to !== '/'
             });
         },
@@ -218,7 +218,7 @@ export default {
     beforeUpdate() {
         // console.log('update', routeList)
     },
-    beforeDestroy() {
+    beforeUnmount() {
         window.removeEventListener('resize', this.handleResize)
     },
     watch: {
@@ -985,6 +985,9 @@ function drawChart(sun, timeFormat, redraw) {
             x: 0,
             y: -21
         },
+        accessibility: {
+            enabled: false
+        },
         credits: {
             enabled: false
         },
@@ -1015,7 +1018,7 @@ function drawChart(sun, timeFormat, redraw) {
                     var tickTime = moment(tickMs);
                     var html = '{0}<br>{1}'.filledWith(tickTime.format('MMM D'), tickTime.format('ddd'));
                     // return '<span class="XLabel {0}" data-text="{^1}" data-before={0}>{^1}</span>'.filledWith(before ? "before" : "after", html);
-                    return '<span class="XLabel {0}" data-before={0}>{^1}</span>'.filledWith(before ? "before" : "after", html);
+                    return '<span class="XLabel {0}">{^1}</span>'.filledWith(before ? "before" : "after", html);
                 }
             },
         },
@@ -1101,8 +1104,8 @@ function alignLabels() {
     for (var i = 0; i < labels.length; i++) {
         var label = labels[i];
         // label.innerHTML = label.dataset.text;
-        var before = label.dataset.before;
-        if (before === 'before') {
+        var before = label.classList.contains('before');
+        if (before) {
             label.style.right = '5px';
         } else {
             label.style.left = '6px';
