@@ -11,6 +11,7 @@ function dateLinkText(item) {
     return String(item && item.desc || '').replace(/<[^>]*>/g, '').trim()
 }
 
+// Group order: Days of Remembrance, documents, PDFs, other icons, videos last.
 function dateLinkGroup(item) {
     var icon = String(item && item.icon || '')
     var url = String(item && item.url || '')
@@ -25,9 +26,9 @@ function dateLinkGroup(item) {
         return [2, '']
     }
     if (icon === '-video' || icon.indexOf('video.png') !== -1 || type === 'video' || /(?:youtube\.com|youtu\.be)/i.test(url)) {
-        return [3, '']
+        return [4, '']
     }
-    return [4, icon]
+    return [3, icon]
 }
 
 function sortDateLinks(links) {
