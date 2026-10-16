@@ -6,6 +6,7 @@ import {
     selectVerse,
     rememberCounter,
     verseById,
+    linkedSourceName,
     LEGACY_VERSE_ID
 } from '../scripts/counterVerses'
 
@@ -73,6 +74,9 @@ export default {
         autoSeconds() {
             return (Math.round(this.tapAutoDelay / 100) / 10).toFixed(1) + ' s'
         },
+        sourceLabel() {
+            return linkedSourceName(this.verse)
+        },
         // Continue-past is the shared Alláh-u-Abhá setting. Other verses always stop at their target.
         allowContinue() {
             return this.verse.id === LEGACY_VERSE_ID
@@ -138,11 +142,6 @@ export default {
         this.stopAuto()
     },
     methods: {
-        goBack() {
-            const state = window.history.state
-            if (state && state.back) this.$router.back()
-            else this.$router.push('/')
-        },
         select(id) {
             if (id === this.verse.id) return
             this.stopAuto()

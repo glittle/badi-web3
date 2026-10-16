@@ -49,25 +49,29 @@ const expected = [
     id: 'allah-u-abha-95',
     file: 'verse-allah-u-abha.png',
     text: 'Alláh-u-Abhá',
-    source: 'Kitáb-i-Aqdas ¶18'
+    source: 'Bahá’u’lláh, Kitáb-i-Aqdas',
+    url: 'https://www.bahai.org/library/authoritative-texts/bahaullah/kitab-i-aqdas/5#589705584'
   },
   {
     id: 'guidance-decision-19',
     file: 'verse-guidance.png',
     text: 'Guide me, then, in all mine affairs',
-    source: 'Additional Prayers'
+    source: 'Bahá’u’lláh, Additional Prayers Revealed by Bahá’u’lláh',
+    url: 'https://www.bahai.org/library/authoritative-texts/bahaullah/additional-prayers-revealed-bahaullah/418930760/1#884624320'
   },
   {
     id: 'women-courses-95',
     file: 'verse-women.png',
     text: 'Glorified be God, the Lord of Splendor and Beauty.',
-    source: 'Kitáb-i-Aqdas ¶13'
+    source: 'Bahá’u’lláh, Kitáb-i-Aqdas',
+    url: 'https://www.bahai.org/library/authoritative-texts/bahaullah/kitab-i-aqdas/5#218902736'
   },
   {
     id: 'missed-prayers-18',
     file: 'verse-travel.png',
     text: 'Glorified be God, the Lord of the kingdoms of earth and heaven.',
-    source: 'Kitáb-i-Aqdas ¶14'
+    source: 'Bahá’u’lláh, Kitáb-i-Aqdas',
+    url: 'https://www.bahai.org/library/authoritative-texts/bahaullah/kitab-i-aqdas/5#433941746'
   }
 ]
 
@@ -113,10 +117,11 @@ async function layoutOf() {
       }
     }
     return {
-      heading: box(q('article.CounterVerses .heading')),
       title: box(q('article.CounterVerses h2')),
+      box: box(q('article.CounterVerses .cvTextBox')),
       button: box(q('article.CounterVerses button.primary.circular')),
-      count: box(q('article.CounterVerses .tapNum')),
+      dots: box(q('article.CounterVerses .cvTapDots')),
+      prefs: box(q('article.CounterVerses .cvPrefs')),
       actions: box(q('article.CounterVerses .cvActions')),
       delay: box(q('article.CounterVerses .tapDelayArea')),
       footer: box(q('.layout-footer')),
@@ -127,15 +132,17 @@ async function layoutOf() {
 }
 
 function assertLayout(layout, label) {
-  const mid = layout.vw / 2
   const buttonMid = layout.button.y + layout.button.h / 2
-  assert.ok(buttonMid > layout.vh * 0.5, label + ' tap button is above the lower half: ' + buttonMid)
-  assert.ok(layout.button.b < layout.footer.y, label + ' tap button overlaps the bottom bar')
-  assert.ok(layout.delay.b <= layout.footer.y + 1, label + ' controls are behind the bottom bar')
-  assert.ok(layout.delay.b <= layout.vh + 1, label + ' controls are off the screen')
-  assert.ok(Math.abs(layout.button.x + layout.button.w / 2 - mid) <= 8, label + ' tap button is off center')
-  assert.ok(Math.abs(layout.count.x + layout.count.w / 2 - mid) <= 8, label + ' count is off center')
-  assert.ok(Math.abs(layout.actions.x + layout.actions.w / 2 - mid) <= 16, label + ' reset row is off center')
+  assert.ok(buttonMid > layout.vh * 0.45, label + ' tap button is not in the lower half: ' + buttonMid)
+  assert.ok(layout.button.x > layout.dots.x, label + ' tap button is not beside the dots')
+  assert.ok(layout.button.y < layout.dots.b && layout.button.b > layout.dots.y, label + ' tap button does not line up with the dots')
+  assert.ok(layout.prefs.y >= layout.dots.b - 4, label + ' Auto and Sound are not under the dots')
+  assert.ok(layout.prefs.x + layout.prefs.w <= layout.button.x + 8, label + ' Auto and Sound are not kept under the dots')
+  assert.ok(layout.box.y >= layout.title.b - 12, label + ' verse box is not under the title')
+  assert.ok(layout.button.b <= layout.footer.y, label + ' tap button overlaps the bottom bar')
+  assert.ok(layout.delay.b <= layout.footer.y + 1, label + ' slider is behind the bottom bar')
+  assert.ok(layout.actions.b <= layout.footer.y + 1, label + ' reset row is behind the bottom bar')
+  assert.equal(layout.heading, undefined)
 }
 
 const tops = []
@@ -146,8 +153,18 @@ for (let i = 0; i < expected.length; i++) {
   await page.locator('article.CounterVerses .cvText').getByText(verse.text, { exact: false }).waitFor()
   const shown = await page.locator('article.CounterVerses').getAttribute('data-verse')
   assert.equal(shown, verse.id)
-  const source = await page.locator('.cvSource').innerText()
-  assert.match(source, new RegExp(verse.source.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))
+  assert.equal(await page.locator('article.CounterVerses button.back').count(), 0)
+  assert.equal(await page.locator('article.CounterVerses .heading').count(), 0)
+  const sourceLink = page.locator('.cvSource a')
+  assert.equal((await sourceLink.innerText()).replace(/\s+/g, ' ').trim(), verse.source)
+  assert.equal(await sourceLink.getAttribute('href'), verse.url)
+  assert.doesNotMatch(await sourceLink.innerText(), /Notes|Synopsis|Q&A|¶|UHJ|background|authorized/)
+  const boxStyle = await page.locator('.cvTextBox').evaluate((el) => {
+    const style = getComputedStyle(el)
+    return { border: parseFloat(style.borderTopWidth), pad: parseFloat(style.paddingTop) }
+  })
+  assert.ok(boxStyle.border >= 1, 'verse text has no border')
+  assert.ok(boxStyle.pad >= 16, 'verse text padding is tight')
   const layout = await layoutOf()
   assertLayout(layout, verse.id + ' @390')
   tops.push(layout)
@@ -169,7 +186,7 @@ for (let i = 0; i < expected.length; i++) {
   await page.screenshot({ path: outDir + '/' + verse.file })
 }
 
-for (const key of ['heading', 'title', 'button']) {
+for (const key of ['title', 'box', 'button']) {
   const ys = tops.map((item) => item[key].y)
   assert.equal(Math.max(...ys), Math.min(...ys), key + ' y changes between verses: ' + ys.join(','))
 }
@@ -205,16 +222,16 @@ await page.locator('.cvPager button[aria-label="After the compensating prostrati
 assert.equal((await page.locator('article.CounterVerses .tapNum').innerText()).trim(), '2')
 assert.equal(await page.locator('article.CounterVerses .continue').count(), 0)
 
-await page.getByRole('button', { name: 'Back' }).click()
-await page.locator('.tap95card .tapNum').waitFor()
+await page.locator('.layout-footer .tbLink', { hasText: 'Today' }).click()
+await page.locator('article.Home .tap95card .tapNum').waitFor()
 assert.match(page.url(), /#\/?$/)
 assert.equal((await page.locator('.tap95card .tapNum').innerText()).trim(), '18')
-const homeContinue = page.locator('.tap95card .continue')
+const homeContinue = page.locator('article.Home .tap95card .continue')
 await homeContinue.waitFor({ state: 'visible' })
 assert.match(await homeContinue.innerText(), /Continue past 95/)
-assert.equal(await page.locator('.tap95card .q-toggle').count(), 1)
+assert.equal(await page.locator('article.Home .tap95card .q-toggle').count(), 1)
 
-await page.locator('.tap95card button.more').click()
+await page.locator('article.Home .tap95card button.more').click()
 await page.locator('article.CounterVerses').waitFor()
 assert.equal(await page.locator('article.CounterVerses').getAttribute('data-verse'), 'missed-prayers-18')
 assert.equal(await page.locator('article.CounterVerses .continue').count(), 0)
@@ -259,8 +276,8 @@ await page.locator('.cvPager button').nth(1).click()
 assert.equal(await page.locator('article.CounterVerses').getAttribute('data-verse'), 'guidance-decision-19')
 assert.equal(await page.locator('article.CounterVerses .continue').count(), 0)
 
-await page.getByRole('button', { name: 'Back' }).click()
-await page.locator('.tap95card .tapNum').waitFor()
+await page.locator('.layout-footer .tbLink', { hasText: 'Today' }).click()
+await page.locator('article.Home .tap95card .tapNum').waitFor()
 assert.equal((await page.locator('.tap95card .tapNum').innerText()).trim(), '1')
 assert.match(await homeContinue.innerText(), /Continue past 95/)
 assert.equal(await page.locator('.layout-footer .tbLink', { hasText: 'Today' }).evaluate((el) => el.classList.contains('active')), true)
@@ -283,11 +300,11 @@ for (const vp of [
     assertLayout(layout, expected[i].id + ' @' + vp.width)
     seen.push(layout)
   }
-  for (const key of ['heading', 'title', 'button']) {
+  for (const key of ['title', 'box', 'button']) {
     const ys = seen.map((item) => item[key].y)
     assert.equal(Math.max(...ys), Math.min(...ys), vp.width + ' ' + key + ' y changes: ' + ys.join(','))
   }
-  await page.locator('.cvPager button').nth(1).click()
+  await page.locator('.cvPager button').first().click()
   await page.screenshot({ path: outDir + '/' + vp.shot })
 }
 

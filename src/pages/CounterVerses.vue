@@ -1,10 +1,5 @@
 <template>
     <article class="CounterVerses" :data-verse="verse.id">
-        <div class="heading">
-            <button type="button" class="small light round back" v-on:click="goBack">Back</button>
-            <span class="desc">Count</span>
-            <span class="index">{{ index + 1 }} / {{ verses.length }}</span>
-        </div>
         <div class="cvTop">
             <div class="cvCarousel"
                  ref="carousel"
@@ -21,9 +16,11 @@
                 </button>
                 <div class="cvSlide" aria-live="polite">
                     <h2>{{ verse.title }}</h2>
-                    <p class="cvText">{{ verse.text }}</p>
+                    <div class="cvTextBox">
+                        <p class="cvText">{{ verse.text }}</p>
+                    </div>
                     <p class="cvSource">
-                        <a v-bind:href="verse.url" target="_blank" rel="noopener">{{ verse.source }}</a>
+                        <a v-bind:href="verse.url" target="_blank" rel="noopener">{{ sourceLabel }}</a>
                     </p>
                 </div>
                 <button type="button"
@@ -46,13 +43,7 @@
             </div>
         </div>
         <div class="cvDock tap95card">
-            <button type="button"
-                    class="primary circular big"
-                    v-on:click="tap"
-                    v-bind:disabled="tapBtnDisabled"
-                    v-html="tapBtnText"
-                    v-bind:title="'Tap to count ' + verse.title"></button>
-            <div class="cvBelow">
+            <div class="cvArrange">
                 <div class="cvCount">
                     <span class="tapNum">{{ count }}</span>
                     <p class="cvTimes">{{ verse.target }} times</p>
@@ -74,25 +65,31 @@
                         </div>
                     </div>
                 </div>
-                <div class="tapControl">
-                    <div class="cvActions">
-                        <button type="button" class="reset small light round" v-on:click="resetCount">Reset</button>
-                        <template v-if="allowContinue">
-                            <span class="continue">
-                                Continue past {{ verse.target }}?
-                            </span>
-                            <q-toggle v-model="tapContinue" />
-                        </template>
-                    </div>
-                    <div class="cvPrefs">
-                        <label><input type="checkbox" v-model="tapAuto">Auto</label>
-                        <label><input type="checkbox" v-model="tapSounds">Sound</label>
-                    </div>
-                    <div class="tapDelayArea" v-bind:style="{ opacity: tapAuto ? 1 : 0.25 }">
-                        <span>Auto
-                            <span>{{ autoSeconds }}</span></span>
-                        <q-range v-model="tapAutoDelay" v-bind:step="500" v-bind:min="1000" v-bind:max="15000"></q-range>
-                    </div>
+                <button type="button"
+                        class="primary circular big"
+                        v-on:click="tap"
+                        v-bind:disabled="tapBtnDisabled"
+                        v-html="tapBtnText"
+                        v-bind:title="'Tap to count ' + verse.title"></button>
+                <div class="cvPrefs">
+                    <label><input type="checkbox" v-model="tapAuto">Auto</label>
+                    <label><input type="checkbox" v-model="tapSounds">Sound</label>
+                </div>
+            </div>
+            <div class="tapControl">
+                <div class="cvActions">
+                    <button type="button" class="reset small light round" v-on:click="resetCount">Reset</button>
+                    <template v-if="allowContinue">
+                        <span class="continue">
+                            Continue past {{ verse.target }}?
+                        </span>
+                        <q-toggle v-model="tapContinue" />
+                    </template>
+                </div>
+                <div class="tapDelayArea" v-bind:style="{ opacity: tapAuto ? 1 : 0.25 }">
+                    <span>Auto
+                        <span>{{ autoSeconds }}</span></span>
+                    <q-range v-model="tapAutoDelay" v-bind:step="500" v-bind:min="1000" v-bind:max="15000"></q-range>
                 </div>
             </div>
         </div>
