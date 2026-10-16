@@ -71,10 +71,6 @@
                         v-bind:disabled="tapBtnDisabled"
                         v-html="tapBtnText"
                         v-bind:title="'Tap to count ' + verse.title"></button>
-                <div class="cvPrefs">
-                    <label><input type="checkbox" v-model="tapAuto">Auto</label>
-                    <label><input type="checkbox" v-model="tapSounds">Sound</label>
-                </div>
             </div>
             <div class="tapControl">
                 <div class="cvActions">
@@ -85,6 +81,10 @@
                         </span>
                         <q-toggle v-model="tapContinue" />
                     </template>
+                </div>
+                <div class="cvPrefs">
+                    <label><input type="checkbox" v-model="tapAuto">Auto</label>
+                    <label><input type="checkbox" v-model="tapSounds">Sound</label>
                 </div>
                 <div class="tapDelayArea" v-bind:style="{ opacity: tapAuto ? 1 : 0.25 }">
                     <span>Auto
