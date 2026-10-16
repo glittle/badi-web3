@@ -1,7 +1,8 @@
 /*
  * Repeatable verses for the counter page. The list is src/assets/repetition-verses.json.
- * Add another by appending one object. Required: id, title, text, source, url, target.
- * Optional, kept for later and not shown on the page: group, caveat.
+ * Add another by appending one object from the research list.
+ * Required: id, title, text, source, url, and count (or target).
+ * Optional fields such as group, caveat, and context are kept and not shown.
  *
  * Wording is the authorized English on https://www.bahai.org/library.
  * Guidance is Bahá’u’lláh’s, in Additional Prayers, not a verse of the Báb.
@@ -20,22 +21,18 @@ import storage from './storage.js'
 import rawVerses from '../assets/repetition-verses.json' with { type: 'json' }
 
 function asVerse(raw) {
-  return {
-    id: raw.id,
-    title: raw.title,
-    text: raw.text,
-    source: raw.source,
+  return Object.assign({}, raw, {
     url: raw.url || raw.sourceUrl || '',
-    target: raw.target,
-    group: raw.group,
-    caveat: raw.caveat
-  }
+    target: raw.target != null ? raw.target : raw.count
+  })
 }
 
 export const verses = rawVerses.map(asVerse)
 
 export const LEGACY_VERSE_ID = (verses.find(function (verse) {
-  return verse.text === 'Alláh-u-Abhá'
+  return verse.id === 'allah-u-abha-95'
+}) || verses.find(function (verse) {
+  return verse.text === 'Alláh-u-Abhá' && verse.target === 95
 }) || verses[0]).id
 
 export const COUNTER_STORAGE_KEY = 'counterVerses'

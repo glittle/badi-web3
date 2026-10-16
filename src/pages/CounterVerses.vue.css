@@ -93,6 +93,7 @@ article.CounterVerses {
 }
 .CounterVerses .cvSource a {
   color: #2980b9;
+  overflow-wrap: anywhere;
 }
 .CounterVerses .cvPager {
   flex: 0 0 auto;

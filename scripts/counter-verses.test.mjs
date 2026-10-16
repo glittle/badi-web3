@@ -39,19 +39,27 @@ test.beforeEach(() => {
   resetCounterSession()
 })
 
-test('verse list is the four corrected texts', () => {
+test('verse list matches the four research entries', () => {
+  assert.deepEqual(verses.map((verse) => verse.id), [
+    'allah-u-abha-95',
+    'guidance-decision-19',
+    'women-courses-95',
+    'missed-prayers-18'
+  ])
   assert.deepEqual(verses.map((verse) => verse.target), [95, 19, 95, 18])
+  assert.equal(LEGACY_VERSE_ID, 'allah-u-abha-95')
   assert.equal(verses[0].text, 'Alláh-u-Abhá')
-  assert.equal(LEGACY_VERSE_ID, verses[0].id)
-  assert.match(verses[1].text, /Guide me, then/)
-  assert.match(verses[1].source, /Bahá’u’lláh/)
-  assert.match(verses[1].url, /additional-prayers-revealed-bahaullah/)
+  assert.equal(verses[0].source, 'Bahá’u’lláh, Kitáb-i-Aqdas ¶18; Notes 33–34; Q&A 77; Synopsis IV.D.1.q')
+  assert.equal(verses[0].url, 'https://www.bahai.org/library/authoritative-texts/bahaullah/kitab-i-aqdas/5#589705584')
+  assert.equal(verses[0].group, 'daily')
+  assert.equal(verses[1].text, 'Thou seest me, O my God, detached from all save Thee and cleaving unto Thee. Guide me, then, in all mine affairs unto that which profiteth me for the glory of Thy Cause and the loftiness of the station of Thy loved ones.')
+  assert.equal(verses[1].url, 'https://www.bahai.org/library/authoritative-texts/bahaullah/additional-prayers-revealed-bahaullah/418930760/1#884624320')
   assert.equal(verses[2].text, 'Glorified be God, the Lord of Splendor and Beauty.')
-  assert.match(verses[2].source, /¶13/)
+  assert.equal(verses[2].url, 'https://www.bahai.org/library/authoritative-texts/bahaullah/kitab-i-aqdas/5#218902736')
   assert.equal(verses[3].text, 'Glorified be God, the Lord of the kingdoms of earth and heaven.')
-  assert.match(verses[3].source, /¶14/)
-  assert.equal(Object.hasOwn(verses[0], 'caveat'), true)
-  assert.equal(Object.hasOwn(verses[0], 'group'), true)
+  assert.equal(verses[3].source, 'Bahá’u’lláh, Kitáb-i-Aqdas ¶14; Q&A 60')
+  assert.equal(verses[3].url, 'https://www.bahai.org/library/authoritative-texts/bahaullah/kitab-i-aqdas/5#433941746')
+  assert.equal(verses[3].group, 'aqdas-substitutes')
 })
 
 test('migrates the saved 95 once and leaves the other verses at zero', () => {

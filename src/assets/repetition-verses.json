@@ -1,34 +1,47 @@
 [
   {
-    "id": "allah-u-abha",
-    "title": "Daily 95",
+    "id": "allah-u-abha-95",
+    "title": "Alláh-u-Abhá (daily)",
     "text": "Alláh-u-Abhá",
-    "source": "Bahá’u’lláh, The Kitáb-i-Aqdas, ¶18",
-    "url": "https://www.bahai.org/library/authoritative-texts/bahaullah/kitab-i-aqdas/5",
-    "target": 95
+    "count": 95,
+    "context": "Daily, for every believer. First wash the hands and then the face, then sit facing God and repeat it 95 times. The ablutions for the Obligatory Prayer also count for this (Q&A 77).",
+    "source": "Bahá’u’lláh, Kitáb-i-Aqdas ¶18; Notes 33–34; Q&A 77; Synopsis IV.D.1.q",
+    "url": "https://www.bahai.org/library/authoritative-texts/bahaullah/kitab-i-aqdas/5#589705584",
+    "tier": "A",
+    "translit": "Alláh-u-Abhá (“God is Most Glorious”)",
+    "group": "daily"
   },
   {
-    "id": "guide-me-then",
-    "title": "Guidance",
+    "id": "guidance-decision-19",
+    "title": "Prayer for guidance in one’s affairs",
     "text": "Thou seest me, O my God, detached from all save Thee and cleaving unto Thee. Guide me, then, in all mine affairs unto that which profiteth me for the glory of Thy Cause and the loftiness of the station of Thy loved ones.",
-    "source": "Bahá’u’lláh, Additional Prayers Revealed by Bahá’u’lláh",
-    "url": "https://www.bahai.org/library/authoritative-texts/bahaullah/additional-prayers-revealed-bahaullah/418930760/1",
-    "target": 19
+    "count": 19,
+    "context": "Revealed by Bahá’u’lláh (not the Báb) for Shaykh Kázim Samandar when he faced a hard decision. Repeat it 19 times, then reflect on the matter and do whatever comes to mind. The UHJ Research Department (1997) says such recommendations are not binding on all, so it is optional.",
+    "source": "Bahá’u’lláh, Additional Prayers Revealed by Bahá’u’lláh (authorized translation); background: UHJ Research Dept letter 2001 (bahai-library)",
+    "url": "https://www.bahai.org/library/authoritative-texts/bahaullah/additional-prayers-revealed-bahaullah/418930760/1#884624320",
+    "tier": "A",
+    "group": "guidance"
   },
   {
-    "id": "splendor-and-beauty",
-    "title": "Women",
+    "id": "women-courses-95",
+    "title": "Women in their courses",
     "text": "Glorified be God, the Lord of Splendor and Beauty.",
-    "source": "Bahá’u’lláh, The Kitáb-i-Aqdas, ¶13",
-    "url": "https://www.bahai.org/library/authoritative-texts/bahaullah/kitab-i-aqdas/5",
-    "target": 95
+    "count": 95,
+    "context": "Women in their courses are exempt from obligatory prayer and fasting. Instead, after performing their ablutions, they repeat this verse 95 times between the noon of one day and the next. (The current bahai.org edition uses US spelling, “Splendor”; older printings have “Splendour”.)",
+    "source": "Bahá’u’lláh, Kitáb-i-Aqdas ¶13; Note 20; Synopsis IV.A.4.c and IV.B.5.f",
+    "url": "https://www.bahai.org/library/authoritative-texts/bahaullah/kitab-i-aqdas/5#218902736",
+    "tier": "A",
+    "group": "aqdas-substitutes"
   },
   {
-    "id": "kingdoms-of-earth-and-heaven",
-    "title": "Travel",
+    "id": "missed-prayers-18",
+    "title": "After the compensating prostrations",
     "text": "Glorified be God, the Lord of the kingdoms of earth and heaven.",
-    "source": "Bahá’u’lláh, The Kitáb-i-Aqdas, ¶14; Questions and Answers, no. 60",
-    "url": "https://www.bahai.org/library/authoritative-texts/bahaullah/kitab-i-aqdas/5",
-    "target": 18
+    "count": 18,
+    "context": "After finishing all the compensating prostrations, sit cross-legged (men and women alike) and repeat this 18 times. Per Q&A 60 it is said once, after the last prostration, not after each one.",
+    "source": "Bahá’u’lláh, Kitáb-i-Aqdas ¶14; Q&A 60",
+    "url": "https://www.bahai.org/library/authoritative-texts/bahaullah/kitab-i-aqdas/5#433941746",
+    "tier": "A",
+    "group": "aqdas-substitutes"
   }
 ]
