@@ -352,6 +352,45 @@ div.line b {
 .card.share .support p {
   margin: 0 8px 4px 80px;
 }
+.card.share .site-url,
+.card.share .share-btn {
+  display: inline;
+  background: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+  font: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  text-transform: none;
+  letter-spacing: inherit;
+  color: inherit;
+  border-radius: 0;
+  vertical-align: baseline;
+  white-space: normal;
+}
+.card.share .site-url {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.card.share .share-btn {
+  margin-left: 4px;
+  color: #2980b9;
+  cursor: pointer;
+  line-height: 0;
+  vertical-align: middle;
+}
+.card.share .share-btn svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+.card.share .copied {
+  margin-left: 6px;
+  color: #2980b9;
+  font-weight: 700;
+}
 .google_ad_1 {
   text-align: center;
   max-width: 480px;

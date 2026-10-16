@@ -1,7 +1,7 @@
 {
     "NawRuz": [
         {
-            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f3",
+            "url": "https://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f3",
             "icon": "-DOR",
             "type": "auth",
             "desc": "Days of Remembrance"
@@ -10,11 +10,51 @@
             "url": "https://www.upliftingwords.org/post/naw-ruz-holy-day-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=1d3ADtAe6Gg",
+            "icon": "-video",
+            "type": "video",
+            "desc": "“Thou Hast Ordained Naw-Rúz as a Festival” – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o3i-42FEUKn4mhFoL0Sq0nf",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Naw-Rúz songs playlist (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=143pZrzWaz8",
+            "icon": "-video",
+            "type": "video",
+            "desc": "What is Naw-Rúz? (Bahá’í Blog)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=PnazulaziRA",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Naw-Rúz celebration at the House of Worship, Wilmette"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/prayers/bahai-prayers/4#533216502",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "Naw-Rúz prayer (Bahá’í Prayers)"
+        },
+        {
+            "url": "https://www.bahai.org/action/devotional-life/calendar",
+            "icon": "-readingsWeb",
+            "desc": "The Bahá’í Calendar (bahai.org)"
+        },
+        {
+            "url": "https://bahaiteachings.org/bahai-festival-naw-ruz-explained/",
+            "icon": "-readingsWeb",
+            "desc": "The Bahá’í Festival of Naw-Rúz, Explained"
         }
     ],
     "Ridvan1": [
         {
-            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f4",
+            "url": "https://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f4",
             "icon": "-DOR",
             "type": "auth",
             "desc": "Days of Remembrance - Ridván"
@@ -28,11 +68,46 @@
             "url": "https://www.upliftingwords.org/post/ridvan-holy-day-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words 2"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=5X39YB_j3uo",
+            "icon": "-video",
+            "type": "video",
+            "desc": "“The Divine Springtime is Come!” – Riḍván song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=PXFvq6SxwUA",
+            "icon": "-video",
+            "type": "video",
+            "desc": "What is Riḍván? (Bahá’í Blog)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=k9qvik2YYLU",
+            "icon": "-video",
+            "type": "video",
+            "desc": "The Festival of Riḍván: Day 1 (BahaiTeachings.org)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=SaHUnkiDdYA",
+            "icon": "-video",
+            "type": "video",
+            "desc": "The Garden of Riḍván (Nightingales of Bahá)"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/shoghi-effendi/god-passes-by/11#165111088",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "God Passes By, ch. IX – The Declaration of Bahá’u’lláh’s Mission"
+        },
+        {
+            "url": "https://bahaiteachings.org/bahai-definition-paradise-first-day-ridvan/",
+            "icon": "-readingsWeb",
+            "desc": "The Bahá’í Definition of Paradise: The First Day of Riḍván"
         }
     ],
     "Ridvan9": [
         {
-            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f4",
+            "url": "https://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f4",
             "icon": "-DOR",
             "type": "auth",
             "desc": "Days of Remembrance - Ridván"
@@ -41,11 +116,34 @@
             "url": "https://www.upliftingwords.org/post/9th-day-of-ridvan-holy-day-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=Ym8rPI88Kk0",
+            "icon": "-video",
+            "type": "video",
+            "desc": "In the Garden of Riḍván: Day 9 (BahaiTeachings.org)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=DqO1aGEkLKw",
+            "icon": "-video",
+            "type": "video",
+            "desc": "The Riḍván Garden – Words of Bahá’u’lláh (Bahá’í Blog)"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/shoghi-effendi/god-passes-by/11#165111088",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "God Passes By, ch. IX – The Declaration of Bahá’u’lláh’s Mission"
+        },
+        {
+            "url": "https://bahaiteachings.org/ninth-day-ridvan-unity-human-family/",
+            "icon": "-readingsWeb",
+            "desc": "The Ninth Day of Riḍván: Proclaiming the Unity of the Human Family"
         }
     ],
     "Ridvan12": [
         {
-            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f4",
+            "url": "https://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f4",
             "icon": "-DOR",
             "type": "auth",
             "desc": "Days of Remembrance - Ridván"
@@ -54,11 +152,46 @@
             "url": "https://www.upliftingwords.org/post/12th-day-of-ridvan-holy-day-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=C70g9KGDYVs",
+            "icon": "-video",
+            "type": "video",
+            "desc": "The Bahá’í Festival of Riḍván: Day 12 (BahaiTeachings.org)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=Y0636r7Et1Y",
+            "icon": "-video",
+            "type": "video",
+            "desc": "12th Day of Riḍván – song (Jack Lenz)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=ciOyoqv1HXY",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Twelfth Day of Riḍván – celebration from the House of Worship, Wilmette"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=Ih3QNQ26ZsI",
+            "icon": "-video",
+            "type": "video",
+            "desc": "12th Day of Riḍván: “Garden of Paradise” concert with Luke Slott"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/shoghi-effendi/god-passes-by/11#165111088",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "God Passes By, ch. IX – The Declaration of Bahá’u’lláh’s Mission"
+        },
+        {
+            "url": "https://bahaiteachings.org/bahaullahs-triumph-on-the-twelfth-day-of-ridvan/",
+            "icon": "-readingsWeb",
+            "desc": "Bahá’u’lláh’s Triumph on the Twelfth Day of Riḍván"
         }
     ],
     "DeclBab": [
         {
-            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f5",
+            "url": "https://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f5",
             "icon": "-DOR",
             "type": "auth",
             "desc": "Days of Remembrance"
@@ -67,11 +200,51 @@
             "url": "https://www.upliftingwords.org/post/the-declaration-of-the-bab",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=mZLtBrqCe3c",
+            "icon": "-video",
+            "type": "video",
+            "desc": "The Declaration of the Báb – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o2CT-bgulRL6p-509-pvjoc",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Declaration of the Báb 183 BE – songs playlist (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=OUL28zXD5XE",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Dawn of the Light (official film)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=r13Ln0bZdLc",
+            "icon": "-video",
+            "type": "video",
+            "desc": "The Other Witnesses: Khadíjih Bagum and Ḥájí Mubárak (Bahá’í Blog)"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/shoghi-effendi/god-passes-by/3#362238029",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "God Passes By, ch. I – The Birth of the Bábí Revelation"
+        },
+        {
+            "url": "https://www.bahai.org/the-bab",
+            "icon": "-readingsWeb",
+            "desc": "The Báb (bahai.org)"
+        },
+        {
+            "url": "https://bahaiteachings.org/religions-born-declaration-bab/",
+            "icon": "-readingsWeb",
+            "desc": "How Religions are Born: The Declaration of the Báb"
         }
     ],
     "AscBaha": [
         {
-            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f6",
+            "url": "https://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f6",
             "icon": "-DOR",
             "type": "auth",
             "desc": "Days of Remembrance"
@@ -80,11 +253,40 @@
             "url": "https://www.upliftingwords.org/post/ascension-of-bahaullah",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=NLa6Vsb3JTU",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Ascension of Bahá’u’lláh (bahaivideos)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=7jknHfrVF30",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Be Not Dismayed – Words regarding the Ascension (Bahá’í Blog)"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/prayers/bahai-prayers/5#612032353",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "Tablet of Visitation (Bahá’u’lláh and the Báb)"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/shoghi-effendi/god-passes-by/15#348529881",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "God Passes By, ch. XIII – Ascension of Bahá’u’lláh"
+        },
+        {
+            "url": "https://bahaiteachings.org/when-a-prophet-dies-the-ascension-of-bahaullah/",
+            "icon": "-readingsWeb",
+            "desc": "Observing the Ascension of Bahá’u’lláh"
         }
     ],
     "Martyrdom": [
         {
-            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f7",
+            "url": "https://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f7",
             "icon": "-DOR",
             "type": "auth",
             "desc": "Days of Remembrance"
@@ -93,11 +295,46 @@
             "url": "https://www.upliftingwords.org/post/the-martyrdom-of-the-bab-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o0wk-hlODhip8QelBUR-Brm",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Martyrdom of the Báb 182 BE – songs playlist (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=2rP82DiMyZ8",
+            "icon": "-video",
+            "type": "video",
+            "desc": "“No One But Thee” – prayer of the Báb (Nightingales of Bahá)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=UXfUyaFknGA",
+            "icon": "-video",
+            "type": "video",
+            "desc": "The Martyrdom of the Báb (Globetown Media)"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/prayers/bahai-prayers/5#612032353",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "Tablet of Visitation (Bahá’u’lláh and the Báb)"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/shoghi-effendi/god-passes-by/6#458969624",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "God Passes By, ch. IV – The Execution of the Báb"
+        },
+        {
+            "url": "https://bahaiteachings.org/observing-the-martyrdom-of-the-bab/",
+            "icon": "-readingsWeb",
+            "desc": "Observing the Martyrdom of the Báb"
         }
     ],
     "BirthBab": [
         {
-            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f8",
+            "url": "https://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f8",
             "icon": "-DOR",
             "type": "auth",
             "desc": "Days of Remembrance"
@@ -106,11 +343,51 @@
             "url": "https://www.upliftingwords.org/post/birth-of-the-bab-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=4kyTcJCKaSU",
+            "icon": "-video",
+            "type": "video",
+            "desc": "The Birth of the Báb – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=mCUAYn8lsms",
+            "icon": "-video",
+            "type": "video",
+            "desc": "The Gate Has Unlocked (Birth of the Báb) – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o14YVkNlq6vHxLV-b47t0zW",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Birth of the Báb 182 BE – songs playlist (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=OUL28zXD5XE",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Dawn of the Light (official film)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=oQObS0NPqaY",
+            "icon": "-video",
+            "type": "video",
+            "desc": "The Birth of the Báb – celebration from the House of Worship, Wilmette"
+        },
+        {
+            "url": "https://bicentenary.bahai.org/the-bab/",
+            "icon": "-readingsWeb",
+            "desc": "Bicentenary of the Birth of the Báb (bahai.org)"
+        },
+        {
+            "url": "https://bahaiteachings.org/bahais-celebrating-youre-invited/",
+            "icon": "-readingsWeb",
+            "desc": "The Bahá’ís are Celebrating, and You’re Invited (Birth of the Báb)"
         }
     ],
     "BirthBaha": [
         {
-            "url": "http://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f9",
+            "url": "https://www.bahai.org/library/authoritative-texts/bahaullah/days-remembrance/#f=f9",
             "icon": "-DOR",
             "type": "auth",
             "desc": "Days of Remembrance"
@@ -124,6 +401,39 @@
             "url": "https://www.upliftingwords.org/post/birth-of-bahaullah-holy-day-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words 2"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=xfmTMCjXm1g",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Light to the World (official film)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=f0fcBw3wnAU",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Birth of Bahá’u’lláh – song (Jack Lenz)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=MzQogs8kLCg",
+            "icon": "-video",
+            "type": "video",
+            "desc": "The Birth of Bahá’u’lláh – celebration from the House of Worship, Wilmette"
+        },
+        {
+            "url": "https://bicentenary.bahai.org/",
+            "icon": "-readingsWeb",
+            "desc": "Bicentenary of the Birth of Bahá’u’lláh (bahai.org)"
+        },
+        {
+            "url": "https://www.bahai.org/bahaullah",
+            "icon": "-readingsWeb",
+            "desc": "Bahá’u’lláh (bahai.org)"
+        },
+        {
+            "url": "https://bahaiteachings.org/joyously-celebrating-the-birth-of-bahaullah/",
+            "icon": "-readingsWeb",
+            "desc": "Joyously Celebrating the Birth of Bahá’u’lláh"
         }
     ],
     "AscAbdul": [
@@ -136,6 +446,47 @@
             "url": "https://www.upliftingwords.org/post/the-passing-of-abdu-l-baha",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words 2"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=3JMgVs99Qj0",
+            "icon": "-video",
+            "type": "video",
+            "desc": "The Ascension of ‘Abdu’l-Bahá – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=ev6w8hjVMbw",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Commemorating the Centenary of the Ascension of ‘Abdu’l-Bahá (BWNS)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=rfceJOy7RQE",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Tablet of Visitation of ‘Abdu’l-Bahá – song (Luke Slott)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=HR271UtF2sU",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Ascension of ‘Abdu’l-Bahá (Oh, The Passing) – song (Jack Lenz)"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/prayers/bahai-prayers/5#525002462",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "Tablet of Visitation of ‘Abdu’l-Bahá"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/shoghi-effendi/god-passes-by/23#756723887",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "God Passes By, ch. XXI – The Passing of ‘Abdu’l-Bahá"
+        },
+        {
+            "url": "https://www.bahai.org/abdul-baha",
+            "icon": "-readingsWeb",
+            "desc": "‘Abdu’l-Bahá (bahai.org)"
         }
     ],
     "Covenant": [
@@ -143,6 +494,47 @@
             "url": "https://www.upliftingwords.org/post/day-of-the-covenant-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=gPBZzJI9DtM",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Day of the Covenant – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=NpFx42VZ9vk",
+            "icon": "-video",
+            "type": "video",
+            "desc": "What Bahá’ís Celebrate on the Day of the Covenant (Bahá’í Blog)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=FOz_OEe-ixI",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Day of the Covenant – celebration from the House of Worship, Wilmette"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/bahaullah/tablets-bahaullah/6#301774724",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "Kitáb-i-‘Ahd (Book of the Covenant)"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/compilations/covenant/",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "The Covenant – compilation"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/shoghi-effendi/god-passes-by/16#552951631",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "God Passes By, ch. XIV – The Covenant of Bahá’u’lláh"
+        },
+        {
+            "url": "https://www.bahai.org/beliefs/bahaullah-covenant",
+            "icon": "-readingsWeb",
+            "desc": "Bahá’u’lláh’s Covenant (bahai.org)"
         }
     ],
     "Ayyam": [
@@ -150,6 +542,41 @@
             "url": "https://www.upliftingwords.org/post/ayyam-i-ha-holy-day-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o0IQQXCN0qK9eL_YhFToZqI",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Ayyám-i-Há 180 BE – songs playlist (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=xlrX3XVBZus",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Days of Há – song (Jack Lenz)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=unVwsiDIz4s",
+            "icon": "-video",
+            "type": "video",
+            "desc": "What is Ayyám-i-Há? (Bahá’í Blog)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=0dekNt7KIM8",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Happy Ayyám-i-Há – Andy Grammer (Bahá’í Blog)"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/prayers/bahai-prayers/4#600175192",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "Prayer for the Intercalary Days (Bahá’í Prayers)"
+        },
+        {
+            "url": "https://bahaiteachings.org/happy-intercalary-days/",
+            "icon": "-readingsWeb",
+            "desc": "Happy Ayyám-i-Há: Days of Gifts, Gatherings and Service"
         }
     ],
     "M01": [
@@ -163,6 +590,17 @@
             "url": "https://www.upliftingwords.org/post/baha-splendor-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=F0CoKVmuDzM",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Splendour – song (Jack Lenz)"
+        },
+        {
+            "url": "https://bahaiteachings.org/secret-of-attaining-spiritual-splendor/",
+            "icon": "-readingsWeb",
+            "desc": "Splendour – BahaiTeachings.org article"
         }
     ],
     "M02": [
@@ -176,6 +614,29 @@
             "url": "https://www.upliftingwords.org/post/jalal-glory-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=i0NAc6dYoYY",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Jalál – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=HOB_gatpj40",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Glory – song (Jack Lenz)"
+        },
+        {
+            "url": "https://bahaiteachings.org/glory-respect-is-better-than-fame/",
+            "icon": "-readingsWeb",
+            "desc": "Glory – BahaiTeachings.org article"
+        },
+        {
+            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o0m0jMYyv89Ae_9cEYmyBpO",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Jalál – song playlist (The Divine Elixir)"
         }
     ],
     "M03": [
@@ -189,6 +650,17 @@
             "url": "https://www.upliftingwords.org/post/jamal-beauty-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=PNT6eKYgTuQ",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Beauty – song (Jack Lenz)"
+        },
+        {
+            "url": "https://bahaiteachings.org/how-to-personify-beauty/",
+            "icon": "-readingsWeb",
+            "desc": "Beauty – BahaiTeachings.org article"
         }
     ],
     "M04": [
@@ -202,6 +674,24 @@
             "url": "https://www.upliftingwords.org/post/azamat-grandeur-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=aIMfxI6G9zw",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of ‘Aẓamat – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=YSH6FBxjhDo",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Grandeur – song (Jack Lenz)"
+        },
+        {
+            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o3K95sZwY5G8-sa4d4Awost",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of ‘Aẓamat – song playlist (The Divine Elixir)"
         }
     ],
     "M05": [
@@ -215,6 +705,29 @@
             "url": "https://www.upliftingwords.org/post/nur-light-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=7cdMgn2NNTA",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Núr – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=2GzZD7a2LR8",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Light – song (Jack Lenz)"
+        },
+        {
+            "url": "https://bahaiteachings.org/using-light-for-enlightenment/",
+            "icon": "-readingsWeb",
+            "desc": "Light – BahaiTeachings.org article"
+        },
+        {
+            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o1K62LviCTzOfsLHcgH182U",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Núr – song playlist (The Divine Elixir)"
         }
     ],
     "M06": [
@@ -228,6 +741,29 @@
             "url": "https://www.upliftingwords.org/post/rahmat-mercy-baha-i-feast-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=3mFzX4PK0Ik",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Raḥmat – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=w1iXMu4gY6A",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Mercy – song (Jack Lenz)"
+        },
+        {
+            "url": "https://bahaiteachings.org/have-mercy-how-to-be-merciful/",
+            "icon": "-readingsWeb",
+            "desc": "Mercy – BahaiTeachings.org article"
+        },
+        {
+            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o1VMd2zG48gGWsiG3Vbr7IP",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Raḥmat – song playlist (The Divine Elixir)"
         }
     ],
     "M07": [
@@ -241,6 +777,17 @@
             "url": "https://www.upliftingwords.org/post/kalimat-words-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=GoDfFAWToQI",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Words – song (Jack Lenz)"
+        },
+        {
+            "url": "https://bahaiteachings.org/words-as-deeds/",
+            "icon": "-readingsWeb",
+            "desc": "Words – BahaiTeachings.org article"
         }
     ],
     "M08": [
@@ -254,6 +801,17 @@
             "url": "https://www.upliftingwords.org/post/kamal-perfection-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=rHl34gyZnb4",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Perfection – song (Jack Lenz)"
+        },
+        {
+            "url": "https://bahaiteachings.org/perfection-as-a-verb/",
+            "icon": "-readingsWeb",
+            "desc": "Perfection – BahaiTeachings.org article"
         }
     ],
     "M09": [
@@ -267,6 +825,35 @@
             "url": "https://www.upliftingwords.org/post/asma-names-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=K64-Hcf_3aI",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Asmá’ – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=5NVxowRuSew",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Names – song (Jack Lenz)"
+        },
+        {
+            "url": "https://bahaiteachings.org/understanding-names-and-attributes-as-energies/",
+            "icon": "-readingsWeb",
+            "desc": "Names – BahaiTeachings.org article"
+        },
+        {
+            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o0Qhp4LCw9noeC0gFql4ISK",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Asmá’ – song playlist (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/the-bab/selections-writings-bab/6#389223158",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "Excerpts from the Kitáb-i-Asmá’ (Book of Names) – the Báb"
         }
     ],
     "M10": [
@@ -280,6 +867,35 @@
             "url": "https://www.upliftingwords.org/post/izzat-might-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=xrkSHL9BPK4",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of ‘Izzat – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=xXs6-vhyduY",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Might – song (Jack Lenz)"
+        },
+        {
+            "url": "https://bahaiteachings.org/might-as-spiritual-empowerment/",
+            "icon": "-readingsWeb",
+            "desc": "Might – BahaiTeachings.org article"
+        },
+        {
+            "url": "https://www.youtube.com/playlist?list=PLe5m-85-_AgA",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of ‘Izzat – song playlist (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=WUfQuqgXRO4",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of ‘Izzat (Might) 182 BE (The Divine Elixir)"
         }
     ],
     "M11": [
@@ -293,6 +909,41 @@
             "url": "https://www.upliftingwords.org/post/mashiyyat-will-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=VeOuhuUnWDE",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Mashíyyat – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=JORJb_1UjhY",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Will – song (Jack Lenz)"
+        },
+        {
+            "url": "https://bahaiteachings.org/mystical-source-of-human-will-power/",
+            "icon": "-readingsWeb",
+            "desc": "Will – BahaiTeachings.org article"
+        },
+        {
+            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o00Kpfu5uUqeCoOA7TCFH6V",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Mashíyyat – song playlist (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/playlist?list=PLcuQN-fdxey4",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Mashíyyat – song playlist 2 (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=cIaBwBzLXSk",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Mashíyyat (Will) – song 2 (The Divine Elixir)"
         }
     ],
     "M12": [
@@ -306,6 +957,35 @@
             "url": "https://www.upliftingwords.org/post/ilm-knowledge-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=YEwHpTo05y4",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of ‘Ilm – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=BZlWaQPdHgk",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Knowledge – song (Jack Lenz)"
+        },
+        {
+            "url": "https://bahaiteachings.org/genius-knowledge-and-universal-enlightenment/",
+            "icon": "-readingsWeb",
+            "desc": "Knowledge – BahaiTeachings.org article"
+        },
+        {
+            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o0LhO_JO74dkYmBrEw8NBD3",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of ‘Ilm – song playlist (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=27QoLaLfpQQ",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of ‘Ilm (Knowledge) – song 2 (The Divine Elixir)"
         }
     ],
     "M13": [
@@ -319,6 +999,23 @@
             "url": "https://www.upliftingwords.org/post/qudrat-power-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=61XSvRp8l8A",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Qudrat – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=j-MHbBweZ9M",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Power – song (Jack Lenz)"
+        },
+        {
+            "url": "https://bahaiteachings.org/developing-spiritual-power/",
+            "icon": "-readingsWeb",
+            "desc": "Power – BahaiTeachings.org article"
         }
     ],
     "M14": [
@@ -332,6 +1029,23 @@
             "url": "https://www.upliftingwords.org/post/qawl-speech-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=JU1s2maPRho",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Qawl – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=WZ-VPdpS0Ek",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Speech – song (Jack Lenz)"
+        },
+        {
+            "url": "https://bahaiteachings.org/when-god-speaks-eloquently/",
+            "icon": "-readingsWeb",
+            "desc": "Speech – BahaiTeachings.org article"
         }
     ],
     "M15": [
@@ -345,6 +1059,28 @@
             "url": "https://www.upliftingwords.org/post/masail-questions-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=34MxK8R5AnE",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Masá’il – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=VcpWdF_8kIo",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Questions – song (Jack Lenz)"
+        },
+        {
+            "url": "https://bahaiteachings.org/bahai-month-and-godly-attribute-of-questions/",
+            "icon": "-readingsWeb",
+            "desc": "Questions – BahaiTeachings.org article"
+        },
+        {
+            "url": "https://bahaiteachings.org/how-our-questions-propel-search-after-truth/",
+            "icon": "-readingsWeb",
+            "desc": "How Our Questions Propel the Search after Truth"
         }
     ],
     "M16": [
@@ -358,6 +1094,23 @@
             "url": "https://www.upliftingwords.org/post/sharaf-honor-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=L3GZqcTy2Hk",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Sharaf – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=y7VZ48RpSpI",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Honour – song (Jack Lenz)"
+        },
+        {
+            "url": "https://bahaiteachings.org/how-to-be-truly-honored-and-honorable/",
+            "icon": "-readingsWeb",
+            "desc": "Honour – BahaiTeachings.org article"
         }
     ],
     "M17": [
@@ -371,6 +1124,24 @@
             "url": "https://www.upliftingwords.org/post/sultan-sovereignty-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=wJxqKA_SGvI",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Sulṭán – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=EJkJjaP_c_Q",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Sovereignty – song (Jack Lenz)"
+        },
+        {
+            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o1F9OTJ4IA5Wuz7Fq4oSRYz",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Sulṭán – song playlist (The Divine Elixir)"
         }
     ],
     "M18": [
@@ -384,6 +1155,29 @@
             "url": "https://www.upliftingwords.org/post/mulk-dominion-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=oWpU71aR6QM",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Mulk – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=H0FvZGc1klk",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Dominion – song (Jack Lenz)"
+        },
+        {
+            "url": "https://bahaiteachings.org/spiritual-dominion-how-to-be-the-king-of-your-life/",
+            "icon": "-readingsWeb",
+            "desc": "Dominion – BahaiTeachings.org article"
+        },
+        {
+            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o3uYmF1Lck-E5bgJrXzdH34",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Mulk – song playlist (The Divine Elixir)"
         }
     ],
     "M19": [
@@ -397,6 +1191,84 @@
             "url": "https://www.upliftingwords.org/post/ala-loftiness-bahai-feast-devotional-program",
             "icon": "-readingsWeb",
             "desc": "Uplifting Words"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=El0KQOVQqYM",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of ‘Alá’ – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=3VkROL1HqFI",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Feast of Loftiness – song (Jack Lenz)"
+        },
+        {
+            "url": "https://bahaiteachings.org/achieving-loftiness-without-pride/",
+            "icon": "-readingsWeb",
+            "desc": "Loftiness – BahaiTeachings.org article"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/prayers/bahai-prayers/4#920029068",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "Prayers for the Fast (Bahá’í Prayers)"
+        }
+    ],
+    "M": [
+        {
+            "url": "https://www.bahai.org/action/institutional-capacity/nineteen-day-feast",
+            "icon": "-readingsWeb",
+            "desc": "The Nineteen Day Feast (bahai.org)"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/prayers/bahai-prayers/3#733570464",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "Prayers for the Nineteen Day Feast"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=Cnimb1a_PGA",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Song of the Months (Jack Lenz)"
+        },
+        {
+            "url": "https://bahaiteachings.org/memorizing-the-months-of-the-bahai-calendar/",
+            "icon": "-readingsWeb",
+            "desc": "Memorizing the Months of the Bahá’í Calendar"
+        }
+    ],
+    "Fast": [
+        {
+            "url": "https://www.youtube.com/watch?v=EOfXQkrbyQU",
+            "icon": "-video",
+            "type": "video",
+            "desc": "The Ornament of the Fast – song (The Divine Elixir)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=kMOoovs1ndk",
+            "icon": "-video",
+            "type": "video",
+            "desc": "“Fasting Prayer” by Rosalynd & Pascal (Bahá’í Blog)"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/prayers/bahai-prayers/4#920029068",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "Prayers for the Fast (Bahá’í Prayers)"
+        },
+        {
+            "url": "https://www.bahai.org/library/authoritative-texts/compilations/importance-obligatory-prayer-fasting/4#679238547",
+            "icon": "-readingsWeb",
+            "type": "auth",
+            "desc": "Prayers by Bahá’u’lláh for the Fast"
+        },
+        {
+            "url": "https://bahaiteachings.org/why-bahais-fast/",
+            "icon": "-readingsWeb",
+            "desc": "Why Bahá’ís Fast"
         }
     ],
     "M-175-19": [

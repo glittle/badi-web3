@@ -133,7 +133,7 @@
             <div class="support">
                 <img class="qr" alt="Scannable QR Code" src="/statics/qr.png">
                 <p>
-                    Share this site (https://wondrous-badi.today) with a friend! See the "About" page to support the developer and send suggestions! For more calendar tools, get the <a href="https://sites.google.com/site/badicalendartools/home/web-extension" rel="noopener" target='sites'>Badí Calendar</a> web extension for Chrome and Edge (desktop only).
+                    Share this site (<button type="button" class="site-url" @click="copySiteUrl">https://wondrous-badi.today</button><button v-if="canShare" type="button" class="share-btn" aria-label="Share" @click="shareSiteUrl"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></button><span v-if="urlCopied" class="copied">Copied</span>) with a friend! See the "About" page to support the developer and send suggestions! For more calendar tools, get the <a href="https://sites.google.com/site/badicalendartools/home/web-extension" rel="noopener" target='sites'>Badí Calendar</a> web extension for Chrome and Edge (desktop only).
                 </p>
             </div>
         </div>

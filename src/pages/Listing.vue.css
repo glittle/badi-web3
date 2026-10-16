@@ -14,9 +14,18 @@
   float: right;
 }
 #Listing .switches {
-  margin: 0 0 24px 0;
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  margin: 0 0 12px 0;
+  padding: 8px 0 10px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px 12px;
+  background: #fff;
+  border-bottom: 1px solid #e6e6e6;
 }
 #Listing .toggles > label {
   display: inline-block;

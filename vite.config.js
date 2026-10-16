@@ -67,12 +67,42 @@ function copyTree(src, dest) {
   }
 }
 
+// Small UI images the shell and every page request. Not /images or /files.
+const SHELL_PRECACHE_URLS = [
+  '/statics/sunWhite.png',
+  '/statics/calendarWhite.png',
+  '/statics/verseWhite.png',
+  '/statics/calendar.png',
+  '/statics/sunset.png',
+  '/statics/sunrise.png',
+  '/statics/star.png',
+  '/statics/sun.png',
+  '/statics/qr.png',
+  '/statics/pdf.png',
+  '/statics/web.png',
+  '/statics/video.png',
+  '/statics/DOC.gif',
+  '/statics/divider.png',
+  '/statics/icons/icon-any-192.png?v=v2',
+  '/statics/icons/icon-any-512.png?v=v2',
+  '/statics/icons/icon-maskable-192.png?v=v2',
+  '/statics/icons/icon-maskable-512.png?v=v2',
+  '/statics/icons/apple-touch-icon.png?v=v2',
+  '/statics/icons/favicon.ico?v=v1',
+  '/statics/icons/safari-pinned-tab.svg?v=v1'
+]
+
 function collectPrecacheUrls(viteManifest) {
   const urls = new Set(['/index.html', '/manifest.json'])
   for (const item of Object.values(viteManifest)) {
     if (item.file) urls.add('/' + item.file)
     for (const css of item.css || []) urls.add('/' + css)
     for (const asset of item.assets || []) urls.add('/' + asset)
+  }
+  const staticsRoot = path.join(root, 'src/statics')
+  for (const url of SHELL_PRECACHE_URLS) {
+    const file = path.join(staticsRoot, url.split('?')[0].replace(/^\/statics\//, ''))
+    if (fs.existsSync(file)) urls.add(url)
   }
   return [...urls].sort()
 }

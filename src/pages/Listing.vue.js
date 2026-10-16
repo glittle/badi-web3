@@ -188,6 +188,16 @@ export default {
                         item.icon = '/statics/web.png';
                         item.class = 'icon20'
                         break;
+                    case '-video':
+                        item.icon = '/statics/video.png';
+                        item.class = 'icon20'
+                        break;
+                    default:
+                        if (typeof item.icon === 'string' && item.icon.charAt(0) === '-') {
+                            item.icon = '/statics/web.png';
+                            item.class = 'icon20'
+                        }
+                        break;
                 }
                 links.push(item);
             }
