@@ -13,6 +13,25 @@
 #Listing .btnPrev {
   float: right;
 }
+/* The page padding lives on the scroll container, and sticky top:0 sticks
+   below that padding, so list rows slide through the gap. Keep the top
+   padding on the heading instead, and let the filter bar pin to the top. */
+#Listing.layout-padding {
+  padding-top: 0;
+}
+#Listing .listingHead {
+  padding-top: 1.5rem;
+}
+@media only screen and (min-width: 921px) and (max-width: 1280px) {
+  #Listing .listingHead {
+    padding-top: 2.5rem;
+  }
+}
+@media only screen and (min-width: 1281px) {
+  #Listing .listingHead {
+    padding-top: 3rem;
+  }
+}
 #Listing .switches {
   position: sticky;
   top: 0;

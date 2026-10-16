@@ -1,7 +1,7 @@
 <template>
   <article class="layout-padding" id="Listing">
     <div>
-      <div v-if="!onHome">
+      <div class="listingHead" v-if="!onHome">
         <button v-on:click="loadDates(prevYear)" class="small light btnPrev">Previous year ({{prevYear}} BE)</button>
         <h3>{{this.title}}</h3>
         <div class=location>Times for <span v-html="location"></span></div>
