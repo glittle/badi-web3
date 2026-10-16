@@ -18,12 +18,6 @@
             "desc": "“Thou Hast Ordained Naw-Rúz as a Festival” – song (The Divine Elixir)"
         },
         {
-            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o3i-42FEUKn4mhFoL0Sq0nf",
-            "icon": "-video",
-            "type": "video",
-            "desc": "Naw-Rúz songs playlist (The Divine Elixir)"
-        },
-        {
             "url": "https://www.youtube.com/watch?v=143pZrzWaz8",
             "icon": "-video",
             "type": "video",
@@ -208,12 +202,6 @@
             "desc": "The Declaration of the Báb – song (The Divine Elixir)"
         },
         {
-            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o2CT-bgulRL6p-509-pvjoc",
-            "icon": "-video",
-            "type": "video",
-            "desc": "Declaration of the Báb 183 BE – songs playlist (The Divine Elixir)"
-        },
-        {
             "url": "https://www.youtube.com/watch?v=OUL28zXD5XE",
             "icon": "-video",
             "type": "video",
@@ -297,12 +285,6 @@
             "desc": "Uplifting Words"
         },
         {
-            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o0wk-hlODhip8QelBUR-Brm",
-            "icon": "-video",
-            "type": "video",
-            "desc": "Martyrdom of the Báb 182 BE – songs playlist (The Divine Elixir)"
-        },
-        {
             "url": "https://www.youtube.com/watch?v=2rP82DiMyZ8",
             "icon": "-video",
             "type": "video",
@@ -355,12 +337,6 @@
             "icon": "-video",
             "type": "video",
             "desc": "The Gate Has Unlocked (Birth of the Báb) – song (The Divine Elixir)"
-        },
-        {
-            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o14YVkNlq6vHxLV-b47t0zW",
-            "icon": "-video",
-            "type": "video",
-            "desc": "Birth of the Báb 182 BE – songs playlist (The Divine Elixir)"
         },
         {
             "url": "https://www.youtube.com/watch?v=OUL28zXD5XE",
@@ -544,12 +520,6 @@
             "desc": "Uplifting Words"
         },
         {
-            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o0IQQXCN0qK9eL_YhFToZqI",
-            "icon": "-video",
-            "type": "video",
-            "desc": "Ayyám-i-Há 180 BE – songs playlist (The Divine Elixir)"
-        },
-        {
             "url": "https://www.youtube.com/watch?v=xlrX3XVBZus",
             "icon": "-video",
             "type": "video",
@@ -631,12 +601,6 @@
             "url": "https://bahaiteachings.org/glory-respect-is-better-than-fame/",
             "icon": "-readingsWeb",
             "desc": "Glory – BahaiTeachings.org article"
-        },
-        {
-            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o0m0jMYyv89Ae_9cEYmyBpO",
-            "icon": "-video",
-            "type": "video",
-            "desc": "Feast of Jalál – song playlist (The Divine Elixir)"
         }
     ],
     "M03": [
@@ -686,12 +650,6 @@
             "icon": "-video",
             "type": "video",
             "desc": "Feast of Grandeur – song (Jack Lenz)"
-        },
-        {
-            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o3K95sZwY5G8-sa4d4Awost",
-            "icon": "-video",
-            "type": "video",
-            "desc": "Feast of ‘Aẓamat – song playlist (The Divine Elixir)"
         }
     ],
     "M05": [
@@ -722,12 +680,6 @@
             "url": "https://bahaiteachings.org/using-light-for-enlightenment/",
             "icon": "-readingsWeb",
             "desc": "Light – BahaiTeachings.org article"
-        },
-        {
-            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o1K62LviCTzOfsLHcgH182U",
-            "icon": "-video",
-            "type": "video",
-            "desc": "Feast of Núr – song playlist (The Divine Elixir)"
         }
     ],
     "M06": [
@@ -758,12 +710,6 @@
             "url": "https://bahaiteachings.org/have-mercy-how-to-be-merciful/",
             "icon": "-readingsWeb",
             "desc": "Mercy – BahaiTeachings.org article"
-        },
-        {
-            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o1VMd2zG48gGWsiG3Vbr7IP",
-            "icon": "-video",
-            "type": "video",
-            "desc": "Feast of Raḥmat – song playlist (The Divine Elixir)"
         }
     ],
     "M07": [
@@ -844,12 +790,6 @@
             "desc": "Names – BahaiTeachings.org article"
         },
         {
-            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o0Qhp4LCw9noeC0gFql4ISK",
-            "icon": "-video",
-            "type": "video",
-            "desc": "Feast of Asmá’ – song playlist (The Divine Elixir)"
-        },
-        {
             "url": "https://www.bahai.org/library/authoritative-texts/the-bab/selections-writings-bab/6#389223158",
             "icon": "-readingsWeb",
             "type": "auth",
@@ -884,12 +824,6 @@
             "url": "https://bahaiteachings.org/might-as-spiritual-empowerment/",
             "icon": "-readingsWeb",
             "desc": "Might – BahaiTeachings.org article"
-        },
-        {
-            "url": "https://www.youtube.com/playlist?list=PLe5m-85-_AgA",
-            "icon": "-video",
-            "type": "video",
-            "desc": "Feast of ‘Izzat – song playlist (The Divine Elixir)"
         },
         {
             "url": "https://www.youtube.com/watch?v=WUfQuqgXRO4",
@@ -928,18 +862,6 @@
             "desc": "Will – BahaiTeachings.org article"
         },
         {
-            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o00Kpfu5uUqeCoOA7TCFH6V",
-            "icon": "-video",
-            "type": "video",
-            "desc": "Feast of Mashíyyat – song playlist (The Divine Elixir)"
-        },
-        {
-            "url": "https://www.youtube.com/playlist?list=PLcuQN-fdxey4",
-            "icon": "-video",
-            "type": "video",
-            "desc": "Feast of Mashíyyat – song playlist 2 (The Divine Elixir)"
-        },
-        {
             "url": "https://www.youtube.com/watch?v=cIaBwBzLXSk",
             "icon": "-video",
             "type": "video",
@@ -974,12 +896,6 @@
             "url": "https://bahaiteachings.org/genius-knowledge-and-universal-enlightenment/",
             "icon": "-readingsWeb",
             "desc": "Knowledge – BahaiTeachings.org article"
-        },
-        {
-            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o0LhO_JO74dkYmBrEw8NBD3",
-            "icon": "-video",
-            "type": "video",
-            "desc": "Feast of ‘Ilm – song playlist (The Divine Elixir)"
         },
         {
             "url": "https://www.youtube.com/watch?v=27QoLaLfpQQ",
@@ -1136,12 +1052,6 @@
             "icon": "-video",
             "type": "video",
             "desc": "Feast of Sovereignty – song (Jack Lenz)"
-        },
-        {
-            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o1F9OTJ4IA5Wuz7Fq4oSRYz",
-            "icon": "-video",
-            "type": "video",
-            "desc": "Feast of Sulṭán – song playlist (The Divine Elixir)"
         }
     ],
     "M18": [
@@ -1172,12 +1082,6 @@
             "url": "https://bahaiteachings.org/spiritual-dominion-how-to-be-the-king-of-your-life/",
             "icon": "-readingsWeb",
             "desc": "Dominion – BahaiTeachings.org article"
-        },
-        {
-            "url": "https://www.youtube.com/playlist?list=PLbOchE59J5o3uYmF1Lck-E5bgJrXzdH34",
-            "icon": "-video",
-            "type": "video",
-            "desc": "Feast of Mulk – song playlist (The Divine Elixir)"
         }
     ],
     "M19": [
