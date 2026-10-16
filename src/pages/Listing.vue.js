@@ -11,6 +11,18 @@ function dateLinkText(item) {
     return String(item && item.desc || '').replace(/<[^>]*>/g, '').trim()
 }
 
+function isVideoUrl(url) {
+    return /(?:youtube\.com|youtu\.be|player\.vimeo\.com|vimeo\.com)/i.test(String(url || ''))
+}
+
+function keptLinkIcon(item) {
+    var icon = String(item && item.icon || '')
+    return icon.indexOf('pdf.png') !== -1
+        || icon.indexOf('DOC.gif') !== -1
+        || icon.indexOf('divider.png') !== -1
+        || (item && (item.class === 'monthImage' || item.class === 'pdf' || item.class === 'iconDivider'))
+}
+
 // Group order: Days of Remembrance, documents, PDFs, other icons, videos last.
 function dateLinkGroup(item) {
     var icon = String(item && item.icon || '')
@@ -25,7 +37,7 @@ function dateLinkGroup(item) {
     if (icon === '-pdf' || icon.indexOf('pdf.png') !== -1 || (item && item.class === 'pdf') || /\.pdf(?:$|[?#])/i.test(url)) {
         return [2, '']
     }
-    if (icon === '-video' || icon.indexOf('video.png') !== -1 || type === 'video' || /(?:youtube\.com|youtu\.be)/i.test(url)) {
+    if (icon === '-video' || icon.indexOf('video.svg') !== -1 || icon.indexOf('video.png') !== -1 || type === 'video' || isVideoUrl(url)) {
         return [4, '']
     }
     return [3, icon]
@@ -229,7 +241,7 @@ export default {
                         item.class = 'icon20'
                         break;
                     case '-video':
-                        item.icon = '/statics/video.png';
+                        item.icon = '/statics/video.svg';
                         item.class = 'icon20'
                         break;
                     default:
@@ -238,6 +250,10 @@ export default {
                             item.class = 'icon20'
                         }
                         break;
+                }
+                if (isVideoUrl(item.url) && !keptLinkIcon(item)) {
+                    item.icon = '/statics/video.svg'
+                    item.class = 'icon20'
                 }
                 links.push(item);
             }

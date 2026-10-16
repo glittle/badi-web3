@@ -80,7 +80,7 @@ const SHELL_PRECACHE_URLS = [
   '/statics/qr.png',
   '/statics/pdf.png',
   '/statics/web.png',
-  '/statics/video.png',
+  '/statics/video.svg',
   '/statics/DOC.gif',
   '/statics/divider.png',
   '/statics/icons/icon-any-192.png?v=v2',
