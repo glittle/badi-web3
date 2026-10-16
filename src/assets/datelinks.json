@@ -36,11 +36,6 @@
             "desc": "Naw-Rúz prayer (Bahá’í Prayers)"
         },
         {
-            "url": "https://www.bahai.org/action/devotional-life/calendar",
-            "icon": "-readingsWeb",
-            "desc": "The Bahá’í Calendar (bahai.org)"
-        },
-        {
             "url": "https://bahaiteachings.org/bahai-festival-naw-ruz-explained/",
             "icon": "-readingsWeb",
             "desc": "The Bahá’í Festival of Naw-Rúz, Explained"
@@ -220,11 +215,6 @@
             "desc": "God Passes By, ch. I – The Birth of the Bábí Revelation"
         },
         {
-            "url": "https://www.bahai.org/the-bab",
-            "icon": "-readingsWeb",
-            "desc": "The Báb (bahai.org)"
-        },
-        {
             "url": "https://bahaiteachings.org/religions-born-declaration-bab/",
             "icon": "-readingsWeb",
             "desc": "How Religions are Born: The Declaration of the Báb"
@@ -402,11 +392,6 @@
             "desc": "Bicentenary of the Birth of Bahá’u’lláh (bahai.org)"
         },
         {
-            "url": "https://www.bahai.org/bahaullah",
-            "icon": "-readingsWeb",
-            "desc": "Bahá’u’lláh (bahai.org)"
-        },
-        {
             "url": "https://bahaiteachings.org/joyously-celebrating-the-birth-of-bahaullah/",
             "icon": "-readingsWeb",
             "desc": "Joyously Celebrating the Birth of Bahá’u’lláh"
@@ -458,11 +443,6 @@
             "icon": "-readingsWeb",
             "type": "auth",
             "desc": "God Passes By, ch. XXI – The Passing of ‘Abdu’l-Bahá"
-        },
-        {
-            "url": "https://www.bahai.org/abdul-baha",
-            "icon": "-readingsWeb",
-            "desc": "‘Abdu’l-Bahá (bahai.org)"
         }
     ],
     "Covenant": [
