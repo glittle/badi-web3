@@ -325,3 +325,21 @@ progress {
 #Listing .links a {
   color: var(--brand);
 }
+
+/* Switch knob (2.4.0): Quasar starts the knob 2px in from the left end but
+   ends it flush with the right end, so Off showed a sliver of track to the
+   left of the knob. Start it flush too, and move the full 17.6px
+   (39.6px track - 22px knob) so On and Off mirror each other. The icon
+   (Dates links switch) stays centred in the knob. */
+.q-toggle div:after {
+  left: 0;
+}
+.q-toggle input:checked + div:after {
+  transform: translateX(17.6px);
+}
+.q-toggle i {
+  left: 3.85px;
+}
+.q-toggle input:checked ~ i {
+  transform: translateX(17.6px);
+}

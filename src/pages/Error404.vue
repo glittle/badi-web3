@@ -1,8 +1,7 @@
 <template>
   <div class="error-page window-height window-width bg-light column items-center">
-    <div class="error-code bg-primary flex items-center justify-center">
-      404
-    </div>
+    <!-- The big 404 is decoration (drawn by CSS so it is not read or checked as text). -->
+    <div class="error-code bg-primary flex items-center justify-center" aria-hidden="true" data-code="404"></div>
     <div>
       <div class="error-card card column items-center justify-center">
         <i class="text-grey-5" aria-hidden="true">error_outline</i>
@@ -49,7 +48,11 @@ export default {
   overflow: hidden;
   position: absolute;
 }
+.error-page .error-code::before {
+  content: attr(data-code);
+}
 .error-page .error-card {
+  background: #fff;
   margin-top: -25px;
   width: 90vw;
   max-width: 600px;
@@ -62,6 +65,10 @@ export default {
   letter-spacing: normal;
   line-height: inherit;
   margin: 0 0 1rem;
+}
+.error-page .error-card button.grey {
+  background: #e0e0e0;
+  color: #333;
 }
 .error-page .error-card i {
   font-size: 5rem;

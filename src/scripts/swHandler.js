@@ -22,10 +22,10 @@ function showReloadNotice(message) {
     const style = document.createElement('style')
     style.textContent =
         '#reloadNotice{position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;' +
-        'background:rgba(255,255,255,0.72);opacity:0;transition:opacity .25s ease;}' +
+        'background:var(--overlay,rgba(255,255,255,0.72));opacity:0;transition:opacity .25s ease;}' +
         '#reloadNotice.shown{opacity:1;}' +
         '#reloadNotice .rnCard{display:flex;align-items:center;gap:12px;max-width:92%;box-sizing:border-box;padding:16px 20px;border-radius:12px;' +
-        'background:#fff;border:1px solid rgba(var(--brand-rgb,36,113,163),0.32);box-shadow:0 2px 12px rgba(var(--brand-rgb,36,113,163),0.12);' +
+        'background:var(--surface,#fff);border:1px solid rgba(var(--brand-rgb,36,113,163),0.32);box-shadow:0 2px 12px rgba(var(--brand-rgb,36,113,163),0.12);' +
         'color:var(--brand,#2471a3);font-size:1rem;font-weight:500;line-height:1.3;}' +
         '#reloadNotice .rnSpin{flex:0 0 auto;width:18px;height:18px;border-radius:50%;border:2px solid rgba(var(--brand-rgb,36,113,163),0.2);' +
         'border-top-color:var(--brand,#2471a3);animation:rnSpin 1s linear infinite;}' +

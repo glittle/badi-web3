@@ -21,7 +21,9 @@ import messages from './scripts/messages'
 import App from './App.vue'
 import './styles/palette.css'
 import './styles/a11y.css'
-import { applyPalette, currentPaletteId } from './scripts/palette'
+import './styles/theme.css'
+import './styles/dark.css'
+import { applyTheme } from './scripts/palette'
 
 import './scripts/swHandler'
 import './scripts/stringExt'
@@ -43,9 +45,10 @@ document.body.classList.add(touch ? 'mobile' : 'desktop', 'mat')
 
 installAnalytics(router)
 
-// index.html already set the palette before first paint; this also covers a
-// stored value it could not read and keeps theme-color in step.
-applyPalette(currentPaletteId())
+// index.html already set the palette and light/dark mode before first paint;
+// this also covers a stored value it could not read, keeps theme-color in step
+// and starts following the system setting for Auto.
+applyTheme()
 
 const app = createApp(App)
 app.use(router)

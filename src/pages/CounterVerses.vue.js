@@ -334,7 +334,7 @@ export default {
         groupStyle(n) {
             if (n > this.group) return {}
             const pct = n < this.group ? 100 : Math.round((this.count / this.verse.target) * 100)
-            return { background: 'linear-gradient(to top, #FFA726 ' + pct + '%, #eee ' + pct + '%)' }
+            return { background: 'linear-gradient(to top, #FFA726 ' + pct + '%, var(--dot-empty, #eee) ' + pct + '%)' }
         }
     }
 }

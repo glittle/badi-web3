@@ -129,6 +129,17 @@
             <Listing :onHome="true"></Listing>
         </div>
 
+        <div v-if="!themeChosen" class="card themeCard">
+            <section class="ThemeSetup" aria-labelledby="themeCardTitle">
+                <h2 class="pageTitle" id="themeCardTitle">{{ $msg('themeCardTitle') }}</h2>
+                <p class="themeIntro">{{ $msg('themeCardIntro') }}</p>
+                <theme-chooser id-prefix="card"></theme-chooser>
+                <p class="themeConfirm">
+                    <button class="primary" v-on:click="confirmTheme">{{ $msg('themeCardConfirm') }}</button>
+                </p>
+            </section>
+        </div>
+
         <div class="card share">
             <div class="heading">
                 <h2 class="desc">Share and Support</h2>
