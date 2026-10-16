@@ -8,8 +8,8 @@ import About from './About.vue'
 import CounterVerses from './CounterVerses.vue'
 import Error404 from './Error404.vue'
 
-// Order in the menus. Home, Dates, Verse, and Verses are the bottom tabs.
-// Verses stays out of the edge-swipe order so a wide swipe on that page does not leave it.
+// Order in the menus. Home, Dates, Verse, and Count are the bottom tabs.
+// Count stays out of the edge-swipe order so a wide swipe on that page does not leave it.
 const names = [
   { name: 'Home', path: '/', group: 'main', component: Home },
   { name: 'Listing', group: 'main', component: Listing },

@@ -2,7 +2,7 @@
     <article class="CounterVerses" :data-verse="verse.id">
         <div class="heading">
             <button type="button" class="small light round back" v-on:click="goBack">Back</button>
-            <span class="desc">Verses</span>
+            <span class="desc">Count</span>
             <span class="index">{{ index + 1 }} / {{ verses.length }}</span>
         </div>
         <div class="cvTop">
@@ -34,7 +34,7 @@
                     <i>keyboard_arrow_right</i>
                 </button>
             </div>
-            <div class="cvPager" role="tablist" aria-label="Verses">
+            <div class="cvPager" role="tablist" aria-label="Count">
                 <button type="button"
                         v-for="item in verses"
                         v-bind:key="item.id"

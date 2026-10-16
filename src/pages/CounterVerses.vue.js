@@ -16,7 +16,7 @@ export default {
         ensureSession()
         return {
             name: 'Counters',
-            title: 'Verses',
+            title: 'Count',
             icon: '/statics/counter95.svg',
             session: session,
             verses: verses,
@@ -277,7 +277,7 @@ export default {
     },
     head: {
         title: function () {
-            return { inner: 'Verses' }
+            return { inner: 'Count' }
         }
     }
 }

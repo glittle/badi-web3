@@ -94,7 +94,7 @@ async function swipe(direction) {
 }
 
 const tap = page.locator('article.CounterVerses button.primary.circular')
-const versesTab = page.locator('.layout-footer .tbLink', { hasText: 'Verses' })
+const versesTab = page.locator('.layout-footer .tbLink', { hasText: 'Count' })
 await versesTab.waitFor({ state: 'visible' })
 assert.match(await versesTab.locator('img').getAttribute('src'), /counter95\.svg/)
 assert.equal(await versesTab.evaluate((el) => el.classList.contains('active')), true)
