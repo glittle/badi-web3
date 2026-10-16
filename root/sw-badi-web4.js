@@ -69,9 +69,17 @@ function sameOrigin(url) {
   return url.origin === self.location.origin
 }
 
+function isCounterSound(url) {
+  return url.pathname === '/statics/each.mp3' ||
+    url.pathname === '/statics/each19.mp3' ||
+    url.pathname === '/statics/each95.mp3'
+}
+
 function leaveToNetwork(url, request) {
   if (request.method !== 'GET') return true
-  if (request.headers.has('range')) return true
+  // Other Range requests stay on the network. Counter sounds are precached,
+  // and an <audio> element asks for a byte range when it loads or seeks.
+  if (request.headers.has('range') && !isCounterSound(url)) return true
   if (!sameOrigin(url)) return true
   if (url.pathname === '/sw-badi-web4.js') return true
   if (url.pathname === '/version.json') return true
@@ -87,6 +95,62 @@ function precacheListed(requestUrl) {
   const cachedUrl = new URL(requestUrl)
   const full = cachedUrl.pathname + cachedUrl.search
   return PRECACHE_URLS.indexOf(cachedUrl.pathname) !== -1 || PRECACHE_URLS.indexOf(full) !== -1
+}
+
+function unsatisfiableRange(size) {
+  return new Response(null, {
+    status: 416,
+    statusText: 'Range Not Satisfiable',
+    headers: { 'Content-Range': 'bytes */' + size }
+  })
+}
+
+// Audio seeks with one `bytes=` range. Answer from the cached file so an
+// offline reload can still play. A range this worker cannot read gets the
+// whole cached file instead of a network error.
+async function counterSoundResponse(cached, request) {
+  const range = request.headers.get('range')
+  const headers = new Headers(cached.headers)
+  headers.delete('content-encoding')
+  headers.set('Accept-Ranges', 'bytes')
+  headers.set('Content-Type', 'audio/mpeg')
+  if (!range) {
+    return new Response(cached.body, {
+      status: cached.status,
+      statusText: cached.statusText,
+      headers: headers
+    })
+  }
+  const body = await cached.arrayBuffer()
+  const size = body.byteLength
+  const match = /^bytes=(\d*)-(\d*)$/i.exec(range.trim())
+  if (!match) {
+    headers.set('Content-Length', String(size))
+    return new Response(body, { status: 200, statusText: 'OK', headers: headers })
+  }
+  let start
+  let end
+  if (match[1] === '') {
+    const suffix = Number(match[2])
+    if (!suffix) return unsatisfiableRange(size)
+    start = Math.max(size - suffix, 0)
+    end = size - 1
+  } else {
+    start = Number(match[1])
+    end = match[2] === '' ? size - 1 : Number(match[2])
+    if (end >= size) end = size - 1
+  }
+  if (!Number.isFinite(start) || !Number.isFinite(end) || start < 0 || start >= size || end < start) {
+    return unsatisfiableRange(size)
+  }
+  const slice = body.slice(start, end + 1)
+  headers.set('Content-Length', String(slice.byteLength))
+  headers.set('Content-Range', 'bytes ' + start + '-' + end + '/' + size)
+  return new Response(slice, {
+    status: 206,
+    statusText: 'Partial Content',
+    headers: headers
+  })
 }
 
 self.addEventListener('fetch', (event) => {
@@ -132,7 +196,10 @@ self.addEventListener('fetch', (event) => {
 
   event.respondWith((async () => {
     const precache = await caches.open(PRECACHE)
-    const precached = await precache.match(request)
+    // Match the stored URL. A Range request is a different request and would
+    // miss the full file cache.add stored at install.
+    const precached = await precache.match(url.pathname + url.search) || await precache.match(request)
+    if (precached && isCounterSound(url)) return counterSoundResponse(precached, request)
     if (precached) return precached
     const cache = await caches.open(RUNTIME)
     const hit = await cache.match(request)

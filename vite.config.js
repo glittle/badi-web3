@@ -93,6 +93,14 @@ const SHELL_PRECACHE_URLS = [
   '/statics/icons/safari-pinned-tab.svg?v=v1'
 ]
 
+// Counter taps play these on Today and on the Count page. They have to be in
+// the precache or the sounds disappear after an offline reload.
+const COUNTER_SOUND_URLS = [
+  '/statics/each.mp3',
+  '/statics/each19.mp3',
+  '/statics/each95.mp3'
+]
+
 function collectPrecacheUrls(viteManifest) {
   const urls = new Set(['/index.html', '/manifest.json'])
   for (const item of Object.values(viteManifest)) {
@@ -101,7 +109,7 @@ function collectPrecacheUrls(viteManifest) {
     for (const asset of item.assets || []) urls.add('/' + asset)
   }
   const staticsRoot = path.join(root, 'src/statics')
-  for (const url of SHELL_PRECACHE_URLS) {
+  for (const url of SHELL_PRECACHE_URLS.concat(COUNTER_SOUND_URLS)) {
     const file = path.join(staticsRoot, url.split('?')[0].replace(/^\/statics\//, ''))
     if (fs.existsSync(file)) urls.add(url)
   }

@@ -292,5 +292,68 @@ for (const vp of [
 }
 
 assert.deepEqual(errors, [], 'console errors: ' + errors.join('\n'))
+
+await page.waitForFunction(() => navigator.serviceWorker && navigator.serviceWorker.controller, null, { timeout: 15000 })
+await page.context().setOffline(true)
+const sounds = await page.evaluate(async () => {
+  const files = ['/statics/each.mp3', '/statics/each19.mp3', '/statics/each95.mp3']
+  const results = []
+  for (const url of files) {
+    const full = await fetch(url)
+    const fullBuf = await full.arrayBuffer()
+    const ranged = await fetch(url, { headers: { Range: 'bytes=0-7' } })
+    const rangeBuf = await ranged.arrayBuffer()
+    const audio = document.createElement('audio')
+    audio.preload = 'auto'
+    audio.src = url
+    await new Promise((resolve, reject) => {
+      const timer = setTimeout(() => reject(new Error('timeout ' + url)), 8000)
+      audio.onloadeddata = () => {
+        clearTimeout(timer)
+        resolve()
+      }
+      audio.onerror = () => {
+        clearTimeout(timer)
+        reject(new Error('audio ' + url + ' ' + (audio.error && audio.error.code)))
+      }
+      audio.load()
+    })
+    const seekTo = audio.duration > 0.05 ? 0.05 : 0
+    if (seekTo > 0) {
+      await new Promise((resolve, reject) => {
+        const timer = setTimeout(() => reject(new Error('seek ' + url)), 8000)
+        audio.onseeked = () => {
+          clearTimeout(timer)
+          resolve()
+        }
+        audio.onerror = () => {
+          clearTimeout(timer)
+          reject(new Error('seek error ' + url))
+        }
+        audio.currentTime = seekTo
+      })
+    }
+    results.push({
+      url,
+      fullStatus: full.status,
+      fullLen: fullBuf.byteLength,
+      type: full.headers.get('content-type'),
+      rangeStatus: ranged.status,
+      rangeLen: rangeBuf.byteLength,
+      contentRange: ranged.headers.get('content-range')
+    })
+  }
+  return results
+})
+await page.context().setOffline(false)
+for (const item of sounds) {
+  assert.equal(item.fullStatus, 200, item.url)
+  assert.ok(item.fullLen > 100, item.url + ' is empty')
+  assert.match(item.type || '', /audio\/mpeg/, item.url)
+  assert.equal(item.rangeStatus, 206, item.url)
+  assert.equal(item.rangeLen, 8, item.url)
+  assert.match(item.contentRange || '', /^bytes 0-7\//, item.url)
+}
+
 await browser.close()
 console.log('browser check passed')
