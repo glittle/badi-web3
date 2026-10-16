@@ -97,7 +97,7 @@
   padding-left: 25px;
 }
 #Listing .dayContent.oddYear {
-  background-color: #eaf5ff;
+  background-color: var(--row-alt, #eaf3fa);
 }
 #Listing .dayContent.oddYear:hover {
   background-color: #eaf5dd;
@@ -208,7 +208,7 @@
 #Listing .links .col2 {
   padding: 4px 12px 4px 8px;
   text-align: left;
-  background-color: #f9f1f9;
+  background-color: var(--links-bg, #fbf4ea);
 }
 #Listing .links .iconDivider {
   height: 13px;

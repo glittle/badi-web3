@@ -257,10 +257,48 @@ article.Notifications {
   }
 }
 
-/* The slider follows the palette (Quasar's default was #027be3). */
+/* Form controls follow the palette (Quasar's default was #027be3, and native
+   controls used the browser's own blue). */
+input[type="checkbox"],
+input[type="radio"],
+input[type="range"],
+progress {
+  accent-color: var(--brand);
+}
 .q-range-track.active-track,
-.q-range-handle:not(.undraggable):not(.handle-at-minimum) {
+.q-range-handle:not(.undraggable):not(.handle-at-minimum),
+.q-range-handle:not(.undraggable):not(.handle-at-minimum) .q-range-label,
+.q-range-handle:not(.undraggable):not(.handle-at-minimum) .q-range-label:before,
+.q-progress .q-progress-model {
   background: var(--brand);
+}
+.q-range-handle-min.undraggable:before {
+  border-left-color: var(--brand);
+}
+/* Switches: brand thumb on a tinted track when on, for every colour class
+   (the Dates filters and Other Settings switches were Quasar teal). When off,
+   the track is a mid grey so the switch shows against white (3.5:1). */
+:root .q-toggle:not(.noBrand) input + div:before {
+  background: #8a8a8a;
+}
+:root .q-toggle:not(.noBrand) input:checked + div:before {
+  background: rgba(var(--brand-rgb), 0.45);
+}
+:root .q-toggle:not(.noBrand) input:checked + div:after {
+  background: var(--brand);
+}
+:root .q-checkbox:not(.noBrand) input:checked + div:before {
+  background: var(--brand);
+  border-color: var(--brand);
+}
+:root .q-radio:not(.noBrand) input:checked + div:before {
+  border-color: var(--brand);
+}
+:root .q-radio:not(.noBrand) input:checked + div:after {
+  background: var(--brand);
+}
+.textfield:not(.no-style) .active {
+  border-bottom-color: var(--brand);
 }
 
 /* More menu: the links are a list now. */
@@ -280,4 +318,10 @@ article.Notifications {
    tight top margin through this rule instead of :first-child. */
 .tightTop > h1.sr-only:first-child + div.card {
   margin-top: 0;
+}
+
+/* Links in the Dates links panel use the palette colour (4.7:1 or more on
+   --links-bg); the old #2379c2 was 4.1:1 on the old tint. */
+#Listing .links a {
+  color: var(--brand);
 }
