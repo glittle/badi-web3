@@ -1,4 +1,5 @@
 import messages from '../scripts/messages'
+import { tapAnnouncement } from '../scripts/announce'
 import { brandColor } from '../scripts/palette'
 import badiCalc from '../scripts/badiCalc'
 import sunCalc from '../scripts/sunCalc'
@@ -547,15 +548,10 @@ export default {
             }
             this.tapLastTime = new Date().getTime();
         },
-        // Screen readers hear every 19 and the finish, not every tap.
+        // What is said depends on the Counter announcements setting (Other Settings).
         announceTap: function() {
-            var text = '';
-            var values = { count: this.tapNum, total: 95, round: this.tapGroup95 };
-            if (this.tapNum === 95) {
-                text = messages.get(this.tapContinue ? 'a11yRoundDone' : 'a11yCountDone', values);
-            } else if (this.tapNum % 19 === 0) {
-                text = messages.get('a11yCountOf', values);
-            }
+            var text = tapAnnouncement(messages, this.tapNum, 95, this.tapGroup95,
+                this.tapContinue ? 'a11yRoundDone' : 'a11yCountDone');
             if (!text) return;
             var vue = this;
             vue.tapAnnouncement = '';

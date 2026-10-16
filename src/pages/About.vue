@@ -28,7 +28,7 @@
                         v-on:click="reload">force a reload now</button>)</span>
             </p>
             <ul>
-                <li>ver 2.3 - easier to use with screen readers and the keyboard; choice of colour palettes in Other Settings</li>
+                <li>ver 2.3 - easier to use with screen readers and the keyboard; colour palettes and counter announcements in Other Settings</li>
                 <li>ver 2.2 - Count page uses the Today counter layout, without a back button or page heading</li>
                 <li>ver 2.1 - verse carousel beside the 95 counter, each verse with its own count</li>
                 <li>ver 2.0 - rebuilt on Vue 3 and Vite; pinch-zoom and browser zoom work</li>

@@ -1,5 +1,6 @@
 import storage from '../scripts/storage'
 import messages from '../scripts/messages'
+import { tapAnnouncement, announcementsOn } from '../scripts/announce'
 import {
     verses,
     session,
@@ -190,14 +191,12 @@ export default {
             this.announcement = ''
             this.$nextTick(() => { this.announcement = text })
         },
-        // Spoken at every 19 and at the target, for manual taps and Auto alike.
+        // What is said depends on the Counter announcements setting
+        // (Other Settings): off, every 19 and the target, or every tap.
         announceFor(count, target) {
-            const values = { count: count, total: target, round: this.group }
-            if (count === target) {
-                this.announce(messages.get(this.continues ? 'a11yRoundDone' : 'a11yCountDone', values))
-            } else if (target >= 19 && count % 19 === 0) {
-                this.announce(messages.get('a11yCountOf', values))
-            }
+            const text = tapAnnouncement(messages, count, target, this.group,
+                this.continues ? 'a11yRoundDone' : 'a11yCountDone')
+            if (text) this.announce(text)
         },
         showPrevious() {
             if (this.index <= 0) return
@@ -289,7 +288,7 @@ export default {
             this.stopAuto()
             rememberCounter(this.verse.id, 0, 1, { locked: false })
             this.updateTapDisplay()
-            this.announce(messages.get('a11yCountReset'))
+            if (announcementsOn()) this.announce(messages.get('a11yCountReset'))
         },
         // The tap button is disabled when a set is finished. If it had focus,
         // move focus to Reset instead of losing it.

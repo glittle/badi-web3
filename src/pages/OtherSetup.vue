@@ -52,6 +52,23 @@
         </label>
       </fieldset>
     </div>
+    <h2 id="announceHeading">{{ $msg('announceHeading') }}</h2>
+    <div class="section">
+      <p id="announceHint" class="announceHint">{{ $msg('announceHint') }}</p>
+      <fieldset class="paletteChoices announceChoices" aria-describedby="announceHint">
+        <legend class="sr-only">{{ $msg('announceHeading') }}</legend>
+        <label v-for="m in announceModes"
+               v-bind:key="m.id"
+               class="paletteChoice announceChoice"
+               v-bind:class="{ active: announceMode === m.id }">
+          <input type="radio"
+                 name="tapAnnounce"
+                 v-bind:value="m.id"
+                 v-model="announceMode">
+          <span>{{ $msg(m.nameKey) }}</span>
+        </label>
+      </fieldset>
+    </div>
     <!--<h2>Date Formats</h2>
                       <div class="section formats">
                         <div>
@@ -74,6 +91,7 @@
 <style src="./OtherSetup.vue.css"></style>
 <script>
 import { PALETTES, currentPaletteId, setPalette } from '../scripts/palette'
+import { ANNOUNCE_MODES, currentAnnounceMode, setAnnounceMode } from '../scripts/announce'
 import * as shared from '../scripts/shared'
 import badiCalc from '../scripts/badiCalc'
 import storage from '../scripts/storage'
@@ -87,6 +105,8 @@ export default {
       languageCode: 'en',
       palettes: PALETTES,
       palette: currentPaletteId(),
+      announceModes: ANNOUNCE_MODES,
+      announceMode: currentAnnounceMode(),
     }
   },
   created() { },
@@ -117,6 +137,9 @@ export default {
   watch: {
     palette: function (id) {
       setPalette(id)
+    },
+    announceMode: function (id) {
+      setAnnounceMode(id)
     }
   },
   methods: {

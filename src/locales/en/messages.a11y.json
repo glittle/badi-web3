@@ -198,5 +198,25 @@
   "palettePlum": {
     "message": "Plum",
     "description": "Colour palette name"
+  },
+  "announceHeading": {
+    "message": "Counter announcements",
+    "description": "Other Settings heading for what screen readers say while counting"
+  },
+  "announceHint": {
+    "message": "What a screen reader says while you count. The gong sounds are separate: use Sound on the Count page.",
+    "description": "Help text under Counter announcements"
+  },
+  "announceOff": {
+    "message": "Off",
+    "description": "Counter announcements choice"
+  },
+  "announceMilestones": {
+    "message": "Every 19 and at the end",
+    "description": "Counter announcements choice"
+  },
+  "announceEvery": {
+    "message": "Every tap",
+    "description": "Counter announcements choice"
   }
 }

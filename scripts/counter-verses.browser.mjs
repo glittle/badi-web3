@@ -407,6 +407,69 @@ for (const vp of [{ width: 390, height: 844 }, { width: 360, height: 740 }, { wi
   assert.equal(await tapBoxesForAllVerses(), plain)
 }
 
+// Counter announcements (Other Settings): Off by default, Every 19 and at the
+// end, or Every tap. The TAP name keeps the count whatever the setting.
+async function chooseAnnounce(name, stored) {
+  await page.goto(base + '/#/othersetup')
+  const radio = page.getByRole('radio', { name, exact: true })
+  await radio.waitFor()
+  await radio.check()
+  assert.equal(await page.evaluate(() => localStorage.getItem('tapAnnounce')), stored)
+}
+async function countPageReset() {
+  await page.goto(base + '/#/counters')
+  await page.locator('article.CounterVerses').waitFor()
+  await page.locator('.cvPager button').first().click()
+  await page.locator('article.CounterVerses button.reset').click()
+  await page.waitForTimeout(100)
+  await page.evaluate(() => {
+    const region = document.querySelector('article.CounterVerses p[role="status"]')
+    window.__said = []
+    if (window.__sayObserver) window.__sayObserver.disconnect()
+    window.__sayObserver = new MutationObserver(() => {
+      const text = region.textContent.trim()
+      if (text) window.__said.push(text)
+    })
+    window.__sayObserver.observe(region, { childList: true, characterData: true, subtree: true })
+  })
+}
+async function tapSlowly(n) {
+  await tap.evaluate(async (el, times) => {
+    for (let i = 0; i < times; i++) {
+      el.click()
+      await new Promise((resolve) => setTimeout(resolve, 15))
+    }
+  }, n)
+  await page.waitForTimeout(150)
+  return page.evaluate(() => window.__said)
+}
+await page.setViewportSize({ width: 390, height: 844 })
+await page.goto(base + '/#/othersetup')
+await page.getByRole('group', { name: 'Counter announcements' }).waitFor()
+assert.equal(await page.evaluate(() => localStorage.getItem('tapAnnounce')), null)
+assert.equal(await page.getByRole('radio', { name: 'Off', exact: true }).isChecked(), true, 'Off is not the default')
+
+await countPageReset()
+assert.deepEqual(await tapSlowly(19), [], 'Off still announced something')
+assert.equal(await page.locator('article.CounterVerses p[role="status"]').innerText(), '')
+assert.match(await tap.getAttribute('aria-label'), /19 of 95/)
+
+await chooseAnnounce('Every 19 and at the end', '__q_strn|milestones')
+await page.reload()
+await page.getByRole('radio', { name: 'Every 19 and at the end', exact: true }).waitFor()
+assert.equal(await page.getByRole('radio', { name: 'Every 19 and at the end', exact: true }).isChecked(), true, 'setting not kept after reload')
+await countPageReset()
+assert.deepEqual(await tapSlowly(95), ['19 of 95', '38 of 95', '57 of 95', '76 of 95', '95 reached. Round 1 complete.'])
+
+await chooseAnnounce('Every tap', '__q_strn|every')
+await countPageReset()
+assert.deepEqual(await tapSlowly(5), ['1 of 95', '2 of 95', '3 of 95', '4 of 95', '5 of 95'])
+assert.match(await tap.getAttribute('aria-label'), /5 of 95/)
+
+await chooseAnnounce('Off', '__q_strn|off')
+await countPageReset()
+assert.deepEqual(await tapSlowly(3), [])
+
 assert.deepEqual(errors, [], 'console errors: ' + errors.join('\n'))
 
 await page.waitForFunction(() => navigator.serviceWorker && navigator.serviceWorker.controller, null, { timeout: 15000 })
