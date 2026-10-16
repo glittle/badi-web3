@@ -69,6 +69,10 @@ export default {
             }
             return rows
         },
+        // Width of one row of dots: each dot is 7px plus 2px margin on each side.
+        dotsWidth() {
+            return Math.min(this.verse.target, 19) * 11 + 'px'
+        },
         groupSlots() {
             return [1, 2, 3, 4, 5, 6, 7, 8, 9]
         },

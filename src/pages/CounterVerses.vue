@@ -47,8 +47,8 @@
         <div class="cvDock tap95card" v-bind:class="{ cvSwapped: tapSwap }">
             <div class="cvArrange">
                 <div class="cvCount">
-                    <span class="tapNum">{{ count }}</span>
-                    <p class="cvTimes">{{ verse.target }} times</p>
+                    <span class="tapNum" v-bind:style="{ width: dotsWidth }">{{ count }}</span>
+                    <p class="cvTimes" v-bind:style="{ width: dotsWidth }">{{ verse.target }} times</p>
                     <div class="cvTapDots" aria-hidden="true">
                         <div v-for="(row, rowIndex) in dotRows" v-bind:key="rowIndex">
                             <span v-for="n in row"

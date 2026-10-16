@@ -337,6 +337,20 @@ async function tapBoxesForAllVerses() {
   const boxes = []
   for (let i = 0; i < expected.length; i++) {
     await page.locator('.cvPager button').nth(i).click()
+    const centres = await page.evaluate(() => {
+      const q = (sel) => document.querySelector('article.CounterVerses ' + sel)
+      const dots = [...q('.cvTapDots div').children].map((el) => el.getBoundingClientRect())
+      const middle = (dots[0].x - 2 + dots[dots.length - 1].right + 2) / 2
+      const textMiddle = (el) => {
+        const range = document.createRange()
+        range.selectNodeContents(el)
+        const r = range.getBoundingClientRect()
+        return (r.x + r.right) / 2
+      }
+      return { dots: middle, num: textMiddle(q('.tapNum')), times: textMiddle(q('.cvTimes')) }
+    })
+    assert.ok(Math.abs(centres.num - centres.dots) <= 1, 'count is not centred over the dots: ' + JSON.stringify(centres))
+    assert.ok(Math.abs(centres.times - centres.dots) <= 1, 'N times is not centred over the dots: ' + JSON.stringify(centres))
     boxes.push(await tap.evaluate((el) => {
       const r = el.getBoundingClientRect()
       return [r.x, r.y, r.width, r.height].join(',')

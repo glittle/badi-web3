@@ -321,10 +321,6 @@ article.CounterVerses {
   grid-column: 2;
   align-items: flex-end;
 }
-.CounterVerses .cvSwapped .tapNum,
-.CounterVerses .cvSwapped .cvTimes {
-  text-align: right;
-}
 .CounterVerses .cvSwapped .cvTapDots div,
 .CounterVerses .cvSwapped .cvGroupDots div {
   text-align: right;
@@ -350,4 +346,16 @@ article.CounterVerses {
 }
 .CounterVerses .cvSwapped .tapDelayArea > span {
   margin: 0 0 0 20px;
+}
+/* The count and "N times" are centred over the dot rows (their width is set
+   from the row length), which hug the left edge, or the right edge when swapped. */
+.CounterVerses .cvDock .cvCount .tapNum,
+.CounterVerses .cvDock .cvCount .cvTimes {
+  text-align: center;
+}
+.CounterVerses .cvDock .cvCount {
+  align-items: flex-start;
+}
+.CounterVerses .cvDock.cvSwapped .cvCount {
+  align-items: flex-end;
 }
