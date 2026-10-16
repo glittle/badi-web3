@@ -1,0 +1,38 @@
+{
+  "themeHeading": {
+    "message": "Theme",
+    "description": "Other Settings: heading for the colour palette and light/dark choices"
+  },
+  "themeCardTitle": {
+    "message": "Theme",
+    "description": "Today: title of the first-run card for choosing colours and light/dark"
+  },
+  "themeCardIntro": {
+    "message": "Choose the colours you like. You can change them later in Other Settings.",
+    "description": "Today: first-run Theme card, the line under the title"
+  },
+  "themeCardConfirm": {
+    "message": "Use this theme",
+    "description": "Today: first-run Theme card button that saves the choice and hides the card"
+  },
+  "themeModeHeading": {
+    "message": "Light or dark",
+    "description": "Theme: label of the Light / Dark / Auto choice"
+  },
+  "themeModeLight": {
+    "message": "Light",
+    "description": "Theme mode choice"
+  },
+  "themeModeDark": {
+    "message": "Dark",
+    "description": "Theme mode choice"
+  },
+  "themeModeAuto": {
+    "message": "Auto",
+    "description": "Theme mode choice: follow the device's light or dark setting"
+  },
+  "themeModeHint": {
+    "message": "Auto follows your device's light or dark setting.",
+    "description": "Theme: explains the Auto choice"
+  }
+}

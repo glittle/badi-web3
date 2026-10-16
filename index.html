@@ -25,17 +25,39 @@
     <meta name="msapplication-config" content="/statics/icons/browserconfig.xml?v=v1">
     <meta name="theme-color" content="#2471a3">
     <script>
-        // Colour palette before first paint (Other Settings). Stored as "__q_strn|teal".
+        // Theme before first paint (Other Settings / the Theme card on Today):
+        // palette "__q_strn|teal" and themeMode "__q_strn|light|dark|auto".
+        // With no themeMode yet, store a starting value once: a returning
+        // visitor (anything else already saved) keeps Light, as before 2.4.0;
+        // a new visitor gets Auto (follows the device setting).
         (function () {
-            var colors = { blue: '#2471a3', teal: '#1f6f6b', green: '#3d6b45', plum: '#7a4a7d' };
-            var id = 'blue';
+            var colors = { blue: ['#2471a3', '#1c4a6a'], teal: ['#1f6f6b', '#174e4b'], green: ['#3d6b45', '#2c4d32'], plum: ['#7a4a7d', '#583659'] };
+            var id = 'blue', pref = 'auto';
             try {
                 var raw = localStorage.getItem('palette');
                 if (raw && raw.indexOf('__q_strn|') === 0 && colors[raw.slice(9)]) id = raw.slice(9);
+                var m = localStorage.getItem('themeMode');
+                if (m && /^__q_strn\|(light|dark|auto)$/.test(m)) {
+                    pref = m.slice(9);
+                } else {
+                    var returning = false;
+                    for (var i = 0; i < localStorage.length; i++) {
+                        var k = localStorage.key(i);
+                        if (k !== 'themeMode' && k !== 'themeChosen') { returning = true; break; }
+                    }
+                    pref = returning ? 'light' : 'auto';
+                    localStorage.setItem('themeMode', '__q_strn|' + pref);
+                }
             } catch (e) { }
-            document.documentElement.setAttribute('data-palette', id);
+            var dark = pref === 'dark' || (pref === 'auto' && !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            var html = document.documentElement;
+            html.setAttribute('data-palette', id);
+            html.setAttribute('data-mode', dark ? 'dark' : 'light');
+            html.setAttribute('data-mode-pref', pref);
+            html.style.colorScheme = dark ? 'dark' : 'light';
+            if (dark) html.style.backgroundColor = '#121212';
             var meta = document.querySelector('meta[name="theme-color"]');
-            if (meta) meta.setAttribute('content', colors[id]);
+            if (meta) meta.setAttribute('content', colors[id][dark ? 1 : 0]);
         })();
     </script>
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Roboto:300,400,500,700" rel="stylesheet">

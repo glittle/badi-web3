@@ -33,24 +33,9 @@
         </label>
       </div>
     </div>
-    <h2 id="paletteHeading">{{ $msg('paletteHeading') }}</h2>
+    <h2 id="themeHeading">{{ $msg('themeHeading') }}</h2>
     <div class="section">
-      <fieldset class="paletteChoices">
-        <legend class="sr-only">{{ $msg('paletteHeading') }}</legend>
-        <label v-for="p in palettes"
-               v-bind:key="p.id"
-               class="paletteChoice"
-               v-bind:class="{ active: palette === p.id }">
-          <input type="radio"
-                 name="palette"
-                 v-bind:value="p.id"
-                 v-model="palette">
-          <span class="paletteSwatch"
-                aria-hidden="true"
-                v-bind:style="{ background: p.color }"></span>
-          <span class="paletteName">{{ $msg(p.nameKey) }}</span>
-        </label>
-      </fieldset>
+      <theme-chooser id-prefix="settings" v-bind:mark-chosen="true"></theme-chooser>
     </div>
     <h2 id="announceHeading">{{ $msg('announceHeading') }}</h2>
     <div class="section">
@@ -90,7 +75,7 @@
 </template>
 <style src="./OtherSetup.vue.css"></style>
 <script>
-import { PALETTES, currentPaletteId, setPalette } from '../scripts/palette'
+import ThemeChooser from '../components/ThemeChooser.vue'
 import { ANNOUNCE_MODES, currentAnnounceMode, setAnnounceMode } from '../scripts/announce'
 import * as shared from '../scripts/shared'
 import badiCalc from '../scripts/badiCalc'
@@ -98,13 +83,12 @@ import storage from '../scripts/storage'
 
 export default {
   name: 'OtherSetup',
+  components: { ThemeChooser },
   data() {
     return {
       title: 'Other Settings',
       icon: 'language',
       languageCode: 'en',
-      palettes: PALETTES,
-      palette: currentPaletteId(),
       announceModes: ANNOUNCE_MODES,
       announceMode: currentAnnounceMode(),
     }
@@ -135,9 +119,6 @@ export default {
     }
   },
   watch: {
-    palette: function (id) {
-      setPalette(id)
-    },
     announceMode: function (id) {
       setAnnounceMode(id)
     }

@@ -4,6 +4,8 @@ import enMessages from '../locales/en/messages.json'
 import enWeb3 from '../locales/en/messages.web3.json'
 // Strings added in 2.3.0 for screen readers, page titles and palettes.
 import enA11y from '../locales/en/messages.a11y.json'
+// Strings added in 2.4.0 for the Theme card and light/dark mode.
+import enTheme from '../locales/en/messages.theme.json'
 
 // var locale = 'fr';
 const messageFiles = [];
@@ -60,6 +62,7 @@ function getRawMessage(key) {
 messageFiles.push(enMessages)
 messageFiles.push(enWeb3)
 messageFiles.push(enA11y)
+messageFiles.push(enTheme)
 
 // NOT WORKING - require seems to require hardcoded string
 // if (locale !== 'en') {

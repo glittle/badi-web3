@@ -1,6 +1,7 @@
 import messages from '../scripts/messages'
 import { tapAnnouncement } from '../scripts/announce'
-import { brandColor } from '../scripts/palette'
+import { brandColor, chartColors, themeChosen, setThemeChosen } from '../scripts/palette'
+import ThemeChooser from '../components/ThemeChooser.vue'
 import badiCalc from '../scripts/badiCalc'
 import sunCalc from '../scripts/sunCalc'
 import storage from '../scripts/storage'
@@ -43,10 +44,12 @@ export default {
             tapAuto: storage.get('tapAuto', true),
             tapSounds: storage.get('tapSounds', true),
             prayer: prayerHelper.getRandom(),
-            addToHomeScreenEvent: null
+            addToHomeScreenEvent: null,
+            themeChosen: themeChosen()
         }
     },
     components: {
+        ThemeChooser,
         Grid19,
         Listing,
         Verse
@@ -165,6 +168,10 @@ export default {
 
         window.addEventListener('resize', this.handleResize)
         window.addEventListener('keyup', this.keyup)
+        // Light/dark or palette change: redraw the sun chart in the new colours.
+        window.addEventListener('themechange', this.handleResize)
+        this._onThemeChosen = function() { vue.themeChosen = themeChosen(); };
+        window.addEventListener('themechosen', this._onThemeChosen)
 
         this._onLegacyCounter = this.onLegacyCounter.bind(this);
         window._messageBus.$on('counterVerses', this._onLegacyCounter);
@@ -239,6 +246,8 @@ export default {
     },
     beforeUnmount() {
         window.removeEventListener('resize', this.handleResize)
+        window.removeEventListener('themechange', this.handleResize)
+        if (this._onThemeChosen) window.removeEventListener('themechosen', this._onThemeChosen)
         if (this._onLegacyCounter) window._messageBus.$off('counterVerses', this._onLegacyCounter)
     },
     watch: {
@@ -392,6 +401,10 @@ export default {
                 ayyamiha: ayyamiha,
                 month: month
             };
+        },
+        confirmTheme: function() {
+            setThemeChosen();
+            this.themeChosen = true;
         },
         handleResize: function(event) {
             var vue = this;
@@ -628,12 +641,12 @@ export default {
                     classes = ' class=tapped';
                     text = '95';
                     pct = 100;
-                    style = 'background: linear-gradient(to top, #FFA726 {0}%, #eee {0}%);'.filledWith(pct);
+                    style = 'background: linear-gradient(to top, #FFA726 {0}%, var(--dot-empty, #eee) {0}%);'.filledWith(pct);
                 } else if (num === currentGroup) {
                     classes = '';
                     text = this.tapNum;
                     pct = (1 + this.tapNum * 0.95);
-                    style = 'background: linear-gradient(to top, #FFA726 {0}%, #eee {0}%);'.filledWith(pct);
+                    style = 'background: linear-gradient(to top, #FFA726 {0}%, var(--dot-empty, #eee) {0}%);'.filledWith(pct);
                 } else {
                     classes = ' class=future';
                     text = '&nbsp;';
@@ -904,7 +917,7 @@ function setNextRefreshAt(refreshTime, midnightUpdate) {
 var _chart = null;
 var _lastChartDay = null;
 var _fontSize = '11px';
-var _fontColor = '#666';
+var _fontColor = '#666'; // set from chartColors() on each draw
 
 function drawChart(sun, timeFormat, redraw) {
     //   setStart: null,
@@ -931,8 +944,10 @@ function drawChart(sun, timeFormat, redraw) {
 
     var yFactor = 5;
     var twilight = yFactor * 2; // adjusted after
+    var themeColors = chartColors();
+    _fontColor = themeColors.text;
     var colorFullSun = '#ffff00';
-    var colorFullDark = '#444';
+    var colorFullDark = themeColors.fullDark;
     var points = [];
     var chartMin = sun.setStart.valueOf();
     var chartMax = sun.setEnd.valueOf();
@@ -969,10 +984,10 @@ function drawChart(sun, timeFormat, redraw) {
         points.push(o);
     }
 
-    addPoint(sun.setStart, 'Sunset', 'lightgrey');
-    addPoint(sun.setEnd, 'Sunset', 'lightgrey');
-    addPoint(sun.rise, 'Sunrise', 'lightgrey');
-    addPoint(sun.noon, 'Solar Noon', 'lightgrey', true);
+    addPoint(sun.setStart, 'Sunset', themeColors.twilight);
+    addPoint(sun.setEnd, 'Sunset', themeColors.twilight);
+    addPoint(sun.rise, 'Sunrise', themeColors.twilight);
+    addPoint(sun.noon, 'Solar Noon', themeColors.twilight, true);
     addPoint(sun.nadir, null);
 
     // console.log('min', minY, 'max', maxY, 'twi', twilight)
@@ -1027,6 +1042,7 @@ function drawChart(sun, timeFormat, redraw) {
         chart: {
             type: 'areaspline',
             //spacingBottom: 50
+            backgroundColor: 'transparent',
             style: {
                 fontFamily: 'Roboto, "Helvetica Neue", "Calibri Light", sans-serif'
             }
@@ -1071,7 +1087,8 @@ function drawChart(sun, timeFormat, redraw) {
                 y: 14,
                 x: 0,
                 style: {
-                    fontSize: _fontSize
+                    fontSize: _fontSize,
+                    color: _fontColor
                 },
                 formatter: function() {
                     var tickMs = this.value;
@@ -1124,7 +1141,7 @@ function drawChart(sun, timeFormat, redraw) {
                     fontSize: _fontSize,
                     fontWeight: "normal",
                     textOutline: "1px 1px contrast",
-                    backgroundColor: '#ffffff'
+                    backgroundColor: chartColors().bg
                 }
             },
             fillColor: {
@@ -1205,7 +1222,7 @@ function showNowLine(chart, sun, timeFormat) {
                 fontSize: _fontSize,
                 fontWeight: "normal",
                 textOutline: "2px 2px contrast",
-                backgroundColor: '#ffffff'
+                backgroundColor: chartColors().bg
             }
         }
     });
