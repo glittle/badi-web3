@@ -5,6 +5,44 @@ import dateLinksInfo from '../assets/datelinks.json'
 
 import cloneDeep from 'lodash/cloneDeep'
 
+var linkCompareOptions = { sensitivity: 'base' }
+
+function dateLinkText(item) {
+    return String(item && item.desc || '').replace(/<[^>]*>/g, '').trim()
+}
+
+function dateLinkGroup(item) {
+    var icon = String(item && item.icon || '')
+    var url = String(item && item.url || '')
+    var type = String(item && item.type || '')
+    if (icon === '-DOR' || icon.indexOf('divider.png') !== -1 || url.indexOf('days-remembrance') !== -1) {
+        return [0, '']
+    }
+    if (icon === '-readingsDoc' || icon.indexOf('DOC.gif') !== -1 || /\.docx?(?:$|[?#])/i.test(url)) {
+        return [1, '']
+    }
+    if (icon === '-pdf' || icon.indexOf('pdf.png') !== -1 || (item && item.class === 'pdf') || /\.pdf(?:$|[?#])/i.test(url)) {
+        return [2, '']
+    }
+    if (icon === '-video' || icon.indexOf('video.png') !== -1 || type === 'video' || /(?:youtube\.com|youtu\.be)/i.test(url)) {
+        return [3, '']
+    }
+    return [4, icon]
+}
+
+function sortDateLinks(links) {
+    links.sort(function (a, b) {
+        var ga = dateLinkGroup(a)
+        var gb = dateLinkGroup(b)
+        if (ga[0] !== gb[0]) return ga[0] - gb[0]
+        if (ga[1] !== gb[1]) {
+            return ga[1].localeCompare(gb[1], undefined, linkCompareOptions)
+        }
+        return dateLinkText(a).localeCompare(dateLinkText(b), undefined, linkCompareOptions)
+    })
+    return links
+}
+
 export default {
     name: 'listing', // for Vue debugger
     props: {
@@ -160,6 +198,7 @@ export default {
                     this.getLinks(links, info);
                 }
             } else { }
+            sortDateLinks(links);
             day.links = links;
             return day.links;
         },
