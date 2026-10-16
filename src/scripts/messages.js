@@ -2,6 +2,8 @@ import './stringExt'
 import has from 'lodash/has'
 import enMessages from '../locales/en/messages.json'
 import enWeb3 from '../locales/en/messages.web3.json'
+// Strings added in 2.3.0 for screen readers, page titles and palettes.
+import enA11y from '../locales/en/messages.a11y.json'
 
 // var locale = 'fr';
 const messageFiles = [];
@@ -57,6 +59,7 @@ function getRawMessage(key) {
 
 messageFiles.push(enMessages)
 messageFiles.push(enWeb3)
+messageFiles.push(enA11y)
 
 // NOT WORKING - require seems to require hardcoded string
 // if (locale !== 'en') {

@@ -17,10 +17,10 @@ body {
 }
 .layout-footer,
 .layout-header {
-  background-color: #2980b9;
+  background-color: var(--brand);
 }
 div.toolbar {
-  background-color: #2980b9;
+  background-color: var(--brand);
 }
 div.toolbar .toolbar-title {
   text-align: center;
@@ -31,10 +31,10 @@ div.toolbar .driftHelp {
   cursor: help;
 }
 body.desktop button.primary:not(.disabled):hover:not(.clear) {
-  background: #2980b9;
+  background: var(--brand);
 }
 button.primary {
-  background: #2980b9;
+  background: var(--brand);
 }
 .drawer-content {
   width: 180px;

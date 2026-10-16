@@ -1,13 +1,31 @@
 <template>
   <div class="q-layout layout">
-    <div class="layout-header">
+    <a class="skipLink" href="#main" @click.prevent="skipToMain">{{ $msg('a11ySkipToContent') }}</a>
+    <header class="layout-header">
       <slot name="header"></slot>
-    </div>
-    <div class="layout-content">
+    </header>
+    <main id="main" class="layout-content">
       <slot></slot>
-    </div>
-    <div class="layout-footer">
+    </main>
+    <footer class="layout-footer">
       <slot name="footer"></slot>
-    </div>
+    </footer>
   </div>
 </template>
+<script>
+export default {
+  name: 'QLayout',
+  methods: {
+    // A hash link would change the route, so move focus by script.
+    skipToMain() {
+      const main = document.getElementById('main')
+      const heading = main && Array.from(main.querySelectorAll('[data-page-heading]'))
+        .find(function (el) { return el.closest('.layout-view') && el.closest('.layout-view').offsetParent !== null })
+      const target = heading || main
+      if (!target) return
+      if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1')
+      target.focus()
+    }
+  }
+}
+</script>

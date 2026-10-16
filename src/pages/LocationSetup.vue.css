@@ -65,7 +65,7 @@
 }
 .LocationSetup .busyWord {
   display: inline-block;
-  color: #2980b9;
+  color: var(--brand);
   font-size: .9rem;
   padding: 2px 15px 2px 0;
   margin-bottom: 2px;

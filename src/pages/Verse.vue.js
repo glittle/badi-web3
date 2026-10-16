@@ -53,6 +53,9 @@ export default {
         // }
     },
     computed: {
+        isVersePage() {
+            return this.$route && this.$route.name === 'Verse'
+        },
         searchUrl: function() {
             return 'https://www.google.com/search?q=' +
                 "Bahá'u'lláh+youtube+" + // hint to find at youtube
@@ -259,13 +262,6 @@ export default {
             //   .withElements($('.verseText'))
             //   .build()
             //   .play();
-        }
-    },
-    head: {
-        title: function() {
-            return {
-                inner: this.title
-            }
         }
     }
 }

@@ -1,6 +1,7 @@
 <template>
   <article class="LocationSetup layout-padding">
-    <h1>Location</h1>
+    <h1 v-if="isPage" data-page-heading>Location</h1>
+    <h2 v-else class="pageTitle">Location</h2>
     <div class="section">
       <p>Please confirm the location of this device/computer.</p>
       <div v-show="guessing"
@@ -32,8 +33,10 @@
                     class="small secondary floatRight">Open Google Maps</button> -->
           </div>
           <div>
-            <span>Latitude:</span>
+            <span id="locLatLabel">Latitude:</span>
             <input type="number"
+                   aria-labelledby="locLatLabel"
+                   :aria-invalid="latError ? 'true' : null"
                    min="-85"
                    max="85"
                    step="any"
@@ -43,8 +46,10 @@
                   v-show="gettingLocation"></span>
           </div>
           <div>
-            <span>Longitude:</span>
+            <span id="locLngLabel">Longitude:</span>
             <input type="number"
+                   aria-labelledby="locLngLabel"
+                   :aria-invalid="lngError ? 'true' : null"
                    min="-180"
                    max="180"
                    step="any"
@@ -52,11 +57,13 @@
                    :class="{'has-error': lngError}">
           </div>
           <div>
-            <span>Name:</span>
+            <span id="locNameLabel">Name:</span>
             <input type="text"
+                   aria-labelledby="locNameLabel"
                    v-model="name"
                    v-if="!gettingName">
             <span class="busyWord"
+                  role="status"
                   v-if="gettingName">(getting name)</span>
           </div>
           <div>

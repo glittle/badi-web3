@@ -1,6 +1,6 @@
 <template>
   <router-link class="item item-link" :to="dest">
-    <i v-if="!iconIsImage" class="item-primary">{{ icon }}</i>
+    <i v-if="!iconIsImage" class="item-primary" aria-hidden="true">{{ icon }}</i>
     <img v-else class="item-primary" :src="icon" alt="">
     <div class="item-content">
       <slot></slot>

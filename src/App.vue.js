@@ -246,6 +246,9 @@ export default {
                 vue.lastNotificationKey = key;
             }
         },
+        pagePath(page) {
+            return !page.to || page.to === '/' ? '/' : (page.to.charAt(0) === '/' ? page.to : '/' + page.to)
+        },
         openPage(page) {
             var to = !page.to || page.to === '/' ? '/' : (page.to.charAt(0) === '/' ? page.to : '/' + page.to)
             if (this.$route.path !== to) {
@@ -284,21 +287,6 @@ export default {
     mounted() {
         checkLocation(this);
         // this.goToNewSite();
-    },
-    head: {
-        title: function() {
-            return {
-                inner: 'Home',
-                separator: '-'
-            }
-        },
-        meta: [{
-            name: 'description2',
-            content: 'My description',
-        }, {
-            itemprop: 'name',
-            content: 'Content Title'
-        }]
     }
 }
 

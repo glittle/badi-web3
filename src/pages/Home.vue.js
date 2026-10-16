@@ -1,4 +1,5 @@
 import messages from '../scripts/messages'
+import { brandColor } from '../scripts/palette'
 import badiCalc from '../scripts/badiCalc'
 import sunCalc from '../scripts/sunCalc'
 import storage from '../scripts/storage'
@@ -32,6 +33,7 @@ export default {
             tapContinue: storage.get('tapContinue', false),
             tapBtnDisabled: false,
             tapBtnText: '',
+            tapAnnouncement: '',
             tapLastTime: 0,
             tapAutoRunning: false,
             tapAutoTimer: null,
@@ -49,6 +51,14 @@ export default {
         Verse
     },
     computed: {
+        tapLabel() {
+            var values = { action: String(this.tapBtnText || '').replace(/<[^>]+>/g, ''), count: this.tapNum, total: 95, round: this.tapGroup95 };
+            return messages.get(this.tapContinue && this.tapGroup95 > 1 ? 'a11yTapLabelRound' : 'a11yTapLabel', values);
+        },
+        autoSecondsText() {
+            var seconds = (Math.round(this.tapAutoDelay / 100) / 10).toFixed(1);
+            return messages.get(seconds === '1.0' ? 'a11ySecond' : 'a11ySeconds', { seconds: seconds });
+        },
         verseTime() {
             return (this.di.bNow ? (this.di.bNow.eve ? 'Evening' : 'Daytime') : 'A') + " <u>V</u>erse from Bahá'u'lláh";
         },
@@ -531,10 +541,27 @@ export default {
             if (this.tapNum === 95 && !this.tapContinue) {
                 this.tapAutoRunning = false;
             }
+            this.announceTap();
             if (this.tapAutoRunning) {
                 this.tapAutoTimer = setTimeout(this.doTap, this.tapAutoDelay);
             }
             this.tapLastTime = new Date().getTime();
+        },
+        // Screen readers hear every 19 and the finish, not every tap.
+        announceTap: function() {
+            var text = '';
+            var values = { count: this.tapNum, total: 95, round: this.tapGroup95 };
+            if (this.tapNum === 95) {
+                text = messages.get(this.tapContinue ? 'a11yRoundDone' : 'a11yCountDone', values);
+            } else if (this.tapNum % 19 === 0) {
+                text = messages.get('a11yCountOf', values);
+            }
+            if (!text) return;
+            var vue = this;
+            vue.tapAnnouncement = '';
+            vue.$nextTick(function() {
+                vue.tapAnnouncement = text;
+            });
         },
         playSound: function(s, volume) {
             // console.log('play sound', s)
@@ -667,6 +694,11 @@ export default {
         },
         keyup: function(ev) {
             if (this.$route.name !== 'Home') return;
+            // Single-letter shortcuts: not with a modifier key, and not while
+            // typing in a field or using a control that takes letters.
+            if (ev.ctrlKey || ev.altKey || ev.metaKey || ev.repeat) return;
+            var target = ev.target;
+            if (target && target.closest && target.closest('input, select, textarea, [contenteditable], [role="slider"], .q-popover')) return;
             switch (ev.code) {
                 case 'KeyV':
                     this.toggleVerseSpeech = !this.toggleVerseSpeech;
@@ -700,13 +732,6 @@ export default {
             setTimeout(function() {
                 drawChart(local.sun, vue.timeFormat, true);
             }, 10);
-        }
-    },
-    head: {
-        title: function() {
-            return {
-                inner: 'Today'
-            }
         }
     }
 }
@@ -1170,7 +1195,7 @@ function showNowLine(chart, sun, timeFormat) {
 
     chart.xAxis[0].addPlotLine({
         value: now.toDate(),
-        color: '#2980b9',
+        color: brandColor(),
         width: 1,
         id: 'now',
         zIndex: 5, //    zIndex: 0,

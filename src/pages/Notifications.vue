@@ -1,6 +1,7 @@
 <template>
   <article class="Notifications layout-padding">
-    <h1>Notifications</h1>
+    <h1 v-if="isPage" data-page-heading>Notifications</h1>
+    <h2 v-else class="pageTitle">Notifications</h2>
     <div v-if="!localPushSupported">
       <p>Unfortunately, we can't do notifications on this device.</p>
     </div>

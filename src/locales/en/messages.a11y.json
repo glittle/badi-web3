@@ -1,0 +1,202 @@
+{
+  "pageTitle": {
+    "message": "{page} | {app}",
+    "description": "Browser tab title. {page} is the page name, {app} the app name."
+  },
+  "pageTitleHome": {
+    "message": "Today",
+    "description": "Page name: the Today (home) page"
+  },
+  "pageTitleListing": {
+    "message": "Dates",
+    "description": "Page name: the Dates list"
+  },
+  "pageTitleVerse": {
+    "message": "Verse",
+    "description": "Page name: the Verse page"
+  },
+  "pageTitleCounters": {
+    "message": "Count",
+    "description": "Page name: the Count page"
+  },
+  "pageTitleNotifications": {
+    "message": "Notifications",
+    "description": "Page name"
+  },
+  "pageTitleLocationSetup": {
+    "message": "Location",
+    "description": "Page name"
+  },
+  "pageTitleOtherSetup": {
+    "message": "Other Settings",
+    "description": "Page name"
+  },
+  "pageTitleAbout": {
+    "message": "About",
+    "description": "Page name"
+  },
+  "pageTitleError404": {
+    "message": "Not found",
+    "description": "Page name for an unknown address"
+  },
+  "a11ySkipToContent": {
+    "message": "Skip to content",
+    "description": "Keyboard link at the top of every page"
+  },
+  "a11yMainNav": {
+    "message": "Main",
+    "description": "Screen reader name of the bottom bar of page links"
+  },
+  "a11yMoreMenu": {
+    "message": "More pages and settings",
+    "description": "Screen reader name of the ⋮ button and its menu"
+  },
+  "a11yTodaySummary": {
+    "message": "This day, month, year and Váḥid",
+    "description": "Hidden heading for the first card on Today"
+  },
+  "a11yChangeLocation": {
+    "message": "Change location",
+    "description": "Today: the location pin button"
+  },
+  "a11yRefresh": {
+    "message": "Refresh",
+    "description": "Today: the refresh button"
+  },
+  "a11yMoreVerses": {
+    "message": "More verses",
+    "description": "Today: More button on the verse card"
+  },
+  "a11yMoreCounters": {
+    "message": "More counters",
+    "description": "Today: More button on the 95 card"
+  },
+  "a11yMoreDates": {
+    "message": "More dates",
+    "description": "Today: More button on the Upcoming Dates card"
+  },
+  "a11yReadAloud": {
+    "message": "Read the verse aloud",
+    "description": "Verse: speak button"
+  },
+  "a11yStopReading": {
+    "message": "Stop reading",
+    "description": "Verse: stop speaking button"
+  },
+  "a11yReadingVolume": {
+    "message": "Reading volume",
+    "description": "Verse: volume slider"
+  },
+  "a11yPercent": {
+    "message": "{value}%",
+    "description": "Spoken value of a percentage slider"
+  },
+  "a11yCountLabel": {
+    "message": "Count:",
+    "description": "Hidden label before the big counter number"
+  },
+  "a11yAutoSpeed": {
+    "message": "Auto speed",
+    "description": "Name of the Auto speed slider"
+  },
+  "a11ySecond": {
+    "message": "{seconds} second",
+    "description": "Spoken slider value, exactly one second"
+  },
+  "a11ySeconds": {
+    "message": "{seconds} seconds",
+    "description": "Spoken slider value"
+  },
+  "a11yTapLabel": {
+    "message": "{action}, {count} of {total}",
+    "description": "Name of the big tap button. {action} is Tap, Start, Pause or Resume"
+  },
+  "a11yTapLabelRound": {
+    "message": "{action}, {count} of {total}, round {round}",
+    "description": "Same, when counting past the target"
+  },
+  "a11yCountOf": {
+    "message": "{count} of {total}",
+    "description": "Spoken every 19 taps"
+  },
+  "a11yCountDone": {
+    "message": "{total} reached. Counting is finished. Press Reset to count again.",
+    "description": "Spoken when the target is reached"
+  },
+  "a11yRoundDone": {
+    "message": "{total} reached. Round {round} complete.",
+    "description": "Spoken at the target when counting continues past it"
+  },
+  "a11yCountReset": {
+    "message": "Count reset to 0",
+    "description": "Spoken after Reset"
+  },
+  "a11yChooseVerse": {
+    "message": "Choose a verse",
+    "description": "Count: name of the group of verse dots"
+  },
+  "a11yVerseOf": {
+    "message": "Verse {num} of {total}: {title}",
+    "description": "Count: name of one verse dot"
+  },
+  "a11yVersePosition": {
+    "message": "Verse {num} of {total}:",
+    "description": "Count: hidden text before the verse title"
+  },
+  "a11yContinuePast": {
+    "message": "Continue past {total}?",
+    "description": "Count: switch to keep counting past the target"
+  },
+  "tapBtnTap": {
+    "message": "Tap",
+    "description": "Count: big button when Auto is off"
+  },
+  "tapBtnStart": {
+    "message": "Start",
+    "description": "Count: big button, Auto, not started"
+  },
+  "tapBtnPause": {
+    "message": "Pause",
+    "description": "Count: big button, Auto, running"
+  },
+  "tapBtnResume": {
+    "message": "Resume",
+    "description": "Count: big button, Auto, paused"
+  },
+  "a11yShowLinks": {
+    "message": "Show {count} links for {name}",
+    "description": "Dates: switch that shows a day's links"
+  },
+  "a11yShowLink": {
+    "message": "Show 1 link for {name}",
+    "description": "Dates: switch that shows a day's one link"
+  },
+  "a11yQrCode": {
+    "message": "QR code for wondrous-badi.today",
+    "description": "Alt text of the QR code image"
+  },
+  "a11yCalendarImage": {
+    "message": "Calendar for this month",
+    "description": "Alt text of the month calendar image"
+  },
+  "paletteHeading": {
+    "message": "Colour palette",
+    "description": "Other Settings: heading of the colour choices"
+  },
+  "paletteBlue": {
+    "message": "Calm blue",
+    "description": "Colour palette name"
+  },
+  "paletteTeal": {
+    "message": "Deep teal",
+    "description": "Colour palette name"
+  },
+  "paletteGreen": {
+    "message": "Sage green",
+    "description": "Colour palette name"
+  },
+  "palettePlum": {
+    "message": "Plum",
+    "description": "Colour palette name"
+  }
+}

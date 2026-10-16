@@ -1,0 +1,33 @@
+/*
+ * Colour palettes (2.3.0). The brand colour is a set of custom properties so
+ * a palette switch is instant. index.html sets html[data-palette] before first
+ * paint from localStorage "palette". Every primary colour gives at least 4.5:1
+ * for white text on it and for it as text on white.
+ *   blue  #2471a3 5.30:1   teal #1f6f6b 5.92:1
+ *   green #3d6b45 6.20:1   plum #7a4a7d 6.77:1
+ */
+:root,
+html[data-palette="blue"] {
+  --brand: #2471a3;
+  --brand-rgb: 36,113,163;
+  --brand-dark: #174a6b;
+  --cv-flourish: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 84 12%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 x2=%2284%22 y1=%220%22 y2=%220%22 gradientUnits=%22userSpaceOnUse%22%3E%3Cstop offset=%220%22 stop-color=%22%232471a3%22 stop-opacity=%220%22/%3E%3Cstop offset=%22.4%22 stop-color=%22%232471a3%22 stop-opacity=%22.45%22/%3E%3Cstop offset=%22.6%22 stop-color=%22%232471a3%22 stop-opacity=%22.45%22/%3E%3Cstop offset=%221%22 stop-color=%22%232471a3%22 stop-opacity=%220%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=%22M2 6H32M52 6H82%22 stroke=%22url%28%23g%29%22 stroke-width=%22.8%22 fill=%22none%22/%3E%3Ccircle cx=%2233.6%22 cy=%226%22 r=%22.9%22 fill=%22%232471a3%22 fill-opacity=%22.4%22/%3E%3Ccircle cx=%2250.4%22 cy=%226%22 r=%22.9%22 fill=%22%232471a3%22 fill-opacity=%22.4%22/%3E%3Cpath d=%22M42.00 0.80L42.92 3.46L45.34 2.02L44.34 4.65L47.12 5.10L44.66 6.47L46.50 8.60L43.74 8.07L43.78 10.89L42.00 8.70L40.22 10.89L40.26 8.07L37.50 8.60L39.34 6.47L36.88 5.10L39.66 4.65L38.66 2.02L41.08 3.46Z%22 fill=%22%232471a3%22 fill-opacity=%22.5%22/%3E%3C/svg%3E");
+}
+html[data-palette="teal"] {
+  --brand: #1f6f6b;
+  --brand-rgb: 31,111,107;
+  --brand-dark: #134542;
+  --cv-flourish: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 84 12%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 x2=%2284%22 y1=%220%22 y2=%220%22 gradientUnits=%22userSpaceOnUse%22%3E%3Cstop offset=%220%22 stop-color=%22%231f6f6b%22 stop-opacity=%220%22/%3E%3Cstop offset=%22.4%22 stop-color=%22%231f6f6b%22 stop-opacity=%22.45%22/%3E%3Cstop offset=%22.6%22 stop-color=%22%231f6f6b%22 stop-opacity=%22.45%22/%3E%3Cstop offset=%221%22 stop-color=%22%231f6f6b%22 stop-opacity=%220%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=%22M2 6H32M52 6H82%22 stroke=%22url%28%23g%29%22 stroke-width=%22.8%22 fill=%22none%22/%3E%3Ccircle cx=%2233.6%22 cy=%226%22 r=%22.9%22 fill=%22%231f6f6b%22 fill-opacity=%22.4%22/%3E%3Ccircle cx=%2250.4%22 cy=%226%22 r=%22.9%22 fill=%22%231f6f6b%22 fill-opacity=%22.4%22/%3E%3Cpath d=%22M42.00 0.80L42.92 3.46L45.34 2.02L44.34 4.65L47.12 5.10L44.66 6.47L46.50 8.60L43.74 8.07L43.78 10.89L42.00 8.70L40.22 10.89L40.26 8.07L37.50 8.60L39.34 6.47L36.88 5.10L39.66 4.65L38.66 2.02L41.08 3.46Z%22 fill=%22%231f6f6b%22 fill-opacity=%22.5%22/%3E%3C/svg%3E");
+}
+html[data-palette="green"] {
+  --brand: #3d6b45;
+  --brand-rgb: 61,107,69;
+  --brand-dark: #26442b;
+  --cv-flourish: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 84 12%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 x2=%2284%22 y1=%220%22 y2=%220%22 gradientUnits=%22userSpaceOnUse%22%3E%3Cstop offset=%220%22 stop-color=%22%233d6b45%22 stop-opacity=%220%22/%3E%3Cstop offset=%22.4%22 stop-color=%22%233d6b45%22 stop-opacity=%22.45%22/%3E%3Cstop offset=%22.6%22 stop-color=%22%233d6b45%22 stop-opacity=%22.45%22/%3E%3Cstop offset=%221%22 stop-color=%22%233d6b45%22 stop-opacity=%220%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=%22M2 6H32M52 6H82%22 stroke=%22url%28%23g%29%22 stroke-width=%22.8%22 fill=%22none%22/%3E%3Ccircle cx=%2233.6%22 cy=%226%22 r=%22.9%22 fill=%22%233d6b45%22 fill-opacity=%22.4%22/%3E%3Ccircle cx=%2250.4%22 cy=%226%22 r=%22.9%22 fill=%22%233d6b45%22 fill-opacity=%22.4%22/%3E%3Cpath d=%22M42.00 0.80L42.92 3.46L45.34 2.02L44.34 4.65L47.12 5.10L44.66 6.47L46.50 8.60L43.74 8.07L43.78 10.89L42.00 8.70L40.22 10.89L40.26 8.07L37.50 8.60L39.34 6.47L36.88 5.10L39.66 4.65L38.66 2.02L41.08 3.46Z%22 fill=%22%233d6b45%22 fill-opacity=%22.5%22/%3E%3C/svg%3E");
+}
+html[data-palette="plum"] {
+  --brand: #7a4a7d;
+  --brand-rgb: 122,74,125;
+  --brand-dark: #4d2e4f;
+  --cv-flourish: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 84 12%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 x2=%2284%22 y1=%220%22 y2=%220%22 gradientUnits=%22userSpaceOnUse%22%3E%3Cstop offset=%220%22 stop-color=%22%237a4a7d%22 stop-opacity=%220%22/%3E%3Cstop offset=%22.4%22 stop-color=%22%237a4a7d%22 stop-opacity=%22.45%22/%3E%3Cstop offset=%22.6%22 stop-color=%22%237a4a7d%22 stop-opacity=%22.45%22/%3E%3Cstop offset=%221%22 stop-color=%22%237a4a7d%22 stop-opacity=%220%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=%22M2 6H32M52 6H82%22 stroke=%22url%28%23g%29%22 stroke-width=%22.8%22 fill=%22none%22/%3E%3Ccircle cx=%2233.6%22 cy=%226%22 r=%22.9%22 fill=%22%237a4a7d%22 fill-opacity=%22.4%22/%3E%3Ccircle cx=%2250.4%22 cy=%226%22 r=%22.9%22 fill=%22%237a4a7d%22 fill-opacity=%22.4%22/%3E%3Cpath d=%22M42.00 0.80L42.92 3.46L45.34 2.02L44.34 4.65L47.12 5.10L44.66 6.47L46.50 8.60L43.74 8.07L43.78 10.89L42.00 8.70L40.22 10.89L40.26 8.07L37.50 8.60L39.34 6.47L36.88 5.10L39.66 4.65L38.66 2.02L41.08 3.46Z%22 fill=%22%237a4a7d%22 fill-opacity=%22.5%22/%3E%3C/svg%3E");
+}

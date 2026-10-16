@@ -17,7 +17,11 @@ import QPopover from './components/ui/QPopover.vue'
 import QDrawerLink from './components/ui/QDrawerLink.vue'
 
 import msgDirective from './components/msg-directive'
+import messages from './scripts/messages'
 import App from './App.vue'
+import './styles/palette.css'
+import './styles/a11y.css'
+import { applyPalette, currentPaletteId } from './scripts/palette'
 
 import './scripts/swHandler'
 import './scripts/stringExt'
@@ -39,10 +43,16 @@ document.body.classList.add(touch ? 'mobile' : 'desktop', 'mat')
 
 installAnalytics(router)
 
+// index.html already set the palette before first paint; this also covers a
+// stored value it could not read and keeps theme-color in step.
+applyPalette(currentPaletteId())
+
 const app = createApp(App)
 app.use(router)
 app.use(store)
 app.config.globalProperties.$ga = gaHelper
+// Template helper for strings in locales/en/*.json: $msg('key', { count: 3 })
+app.config.globalProperties.$msg = function (key, obj) { return messages.get(key, obj) }
 app.directive('touch-swipe', touchSwipe)
 app.directive('msg', msgDirective)
 app.component('q-layout', QLayout)
@@ -53,36 +63,44 @@ app.component('q-popover', QPopover)
 app.component('q-drawer-link', QDrawerLink)
 registerPages(app)
 
-// vue-head (the 1.x app) set document.title from each component's `head`
-// option on mounted: inner + separator + the original <title>. The default
-// separator is "|". App.vue passes separator "-", so a direct load ends as
-// "Home - Wondrous-Badíʿ Today" because the root is the last to mount.
-const initialDocumentTitle = document.title
+// Every navigation sets the page title from the route (keep-alive pages are not
+// remounted, so a mounted() hook alone left a stale title), and moves focus to
+// the new page's heading so screen readers announce where they are.
+const appTitle = document.title
 
-function applyHead(vm) {
-  if (!vm || !vm.$options || !vm.$options.head) return
-  const headOpt = vm.$options.head
-  const head = typeof headOpt === 'function' ? headOpt.call(vm) : headOpt
-  if (!head || !head.title) return
-  let spec = head.title
-  if (typeof spec === 'function') spec = spec.call(vm)
-  if (!spec || spec.inner == null || spec.inner === '') return
-  const separator = spec.separator || '|'
-  const complement = spec.complement || initialDocumentTitle
-  document.title = (spec.inner + ' ' + separator + ' ' + complement).trim()
+function pageTitle(route) {
+  const name = route && route.name
+  if (!name) return appTitle
+  return messages.get('pageTitle', { page: messages.get('pageTitle' + name), app: appTitle })
 }
 
-app.mixin({
-  mounted() {
-    applyHead(this)
+function focusPageHeading() {
+  const views = Array.from(document.querySelectorAll('#main .layout-view'))
+  const view = views.find(function (el) { return el.offsetParent !== null || el.getClientRects().length }) || views[0]
+  const target = (view && view.querySelector('[data-page-heading]')) || document.getElementById('main')
+  if (!target) return
+  if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1')
+  try {
+    target.focus({ preventScroll: true })
+  } catch (e) {
+    target.focus()
   }
+}
+
+let firstNavigation = true
+router.afterEach(function (to, from) {
+  document.title = pageTitle(to)
+  if (firstNavigation) {
+    firstNavigation = false
+    return
+  }
+  if (from && to.fullPath === from.fullPath) return
+  nextTick(function () {
+    window.requestAnimationFrame(focusPageHeading)
+  })
 })
 
-const root = app.mount('#q-app')
-// Vue Router 4 inserts the first view after the root has mounted. vue-head on
-// Vue 2 left the root title in place on a direct load, so put it back once
-// the first view has mounted. Later navigations set their own title.
-router.isReady().then(() => nextTick(() => applyHead(root)))
+app.mount('#q-app')
 
 const html = document.documentElement
 html.setAttribute('dir', badiCalc.languageDir)

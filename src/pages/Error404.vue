@@ -5,19 +5,17 @@
     </div>
     <div>
       <div class="error-card card column items-center justify-center">
-        <i class="text-grey-5">error_outline</i>
-        <p class="caption text-center">Oops. Nothing here...</p>
+        <i class="text-grey-5" aria-hidden="true">error_outline</i>
+        <h1 class="caption text-center" data-page-heading>Oops. Nothing here...</h1>
         <p class="text-center group">
           <button v-if="canGoBack" class="grey push small" @click="goBack">
-            <i class="on-left">keyboard_arrow_left</i>
+            <i class="on-left" aria-hidden="true">keyboard_arrow_left</i>
             Go back
           </button>
-          <router-link to="/">
-            <button class="grey push small">
-              Go home
-              <i class="on-right">home</i>
-            </button>
-          </router-link>
+          <button class="grey push small" @click="$router.push('/')">
+            Go home
+            <i class="on-right" aria-hidden="true">home</i>
+          </button>
         </p>
       </div>
     </div>
@@ -57,6 +55,13 @@ export default {
   max-width: 600px;
   padding: 50px;
   box-shadow: none;
+}
+.error-page h1.caption {
+  font-size: 16px;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: inherit;
+  margin: 0 0 1rem;
 }
 .error-page .error-card i {
   font-size: 5rem;

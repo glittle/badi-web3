@@ -93,6 +93,9 @@ export default {
         }
     },
     computed: {
+        isPage() {
+            return this.$route && this.$route.name === 'Notifications'
+        },
         localPushSupported: function() {
             return typeof Notification === 'undefined' ? false : true;
             // return 'serviceWorker' in navigator && 'PushManager' in window;
