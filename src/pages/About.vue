@@ -24,7 +24,7 @@
                         alt="patreon" src="/statics/patreon.png"></a>
             </p>
             <p>
-                <span>Version <span itemprop="softwareVersion">{{version}}</span> ({{versionAge}} - <span class="reload"
+                <span>Version <span itemprop="softwareVersion">{{version}}</span> (built {{versionAge}} - <span class="reload"
                         v-on:click="reload">force a reload now</span>)</span>
             </p>
             <ul>
@@ -45,6 +45,7 @@
 <script>
     import moment from 'moment-timezone'
     import versionInfo from '../../root/version.json'
+    import { reloadWithNotice } from '../scripts/swHandler'
 
     function versionAge(buildDate) {
         var parsed = moment(buildDate, '_ MMM D YYYY HH:mm:ss _Z')
@@ -79,7 +80,7 @@
                 } catch (error) {
                     // ignore errors
                 }
-                window.location.reload();
+                reloadWithNotice('Reloading…');
                 return false;
             }
         }
