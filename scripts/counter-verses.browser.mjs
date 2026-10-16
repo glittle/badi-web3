@@ -352,6 +352,17 @@ for (const vp of [{ width: 390, height: 844 }, { width: 360, height: 740 }]) {
   const swapBtn = page.locator('article.CounterVerses button.cvSwap')
   assert.equal(await page.locator('.cvDock.cvSwapped').count(), 0)
   const plain = await tapBoxesForAllVerses()
+  const pair = () => page.evaluate(() => {
+    const r = (sel) => document.querySelector('article.CounterVerses ' + sel).getBoundingClientRect()
+    const reset = r('button.reset')
+    const swap = r('button.cvSwap')
+    return { reset: { x: reset.x, r: reset.right, b: reset.bottom, w: reset.width }, swap: { x: swap.x, r: swap.right, y: swap.y, w: swap.width }, vw: innerWidth }
+  })
+  const left = await pair()
+  assert.ok(left.swap.y >= left.reset.b, 'Swap is not under Reset')
+  assert.equal(left.swap.x, left.reset.x, 'Swap and Reset do not share a left edge')
+  assert.equal(left.swap.w, left.reset.w, 'Swap and Reset differ in size')
+  assert.ok(left.reset.x <= 12, 'Reset is not at the left margin')
   await swapBtn.click()
   assert.equal(await page.locator('.cvDock.cvSwapped').count(), 1, 'swap did not apply')
   assert.equal(await page.evaluate(() => localStorage.getItem('tapSwap')), '__q_bool|1')
@@ -359,11 +370,12 @@ for (const vp of [{ width: 390, height: 844 }, { width: 360, height: 740 }]) {
   assert.notEqual(swapped, plain)
   const sides = await page.evaluate(() => {
     const r = (s) => document.querySelector('article.CounterVerses ' + s).getBoundingClientRect()
-    return { tap: r('button.primary.circular'), dots: r('.cvTapDots'), reset: r('button.reset'), prefs: r('.cvPrefs label:last-of-type'), vw: innerWidth }
+    return { tap: r('button.primary.circular'), dots: r('.cvTapDots'), reset: r('button.reset'), swap: r('button.cvSwap'), vw: innerWidth }
   })
   assert.ok(sides.tap.right <= sides.dots.left, 'swapped tap button is not left of the dots')
   assert.ok(sides.dots.right >= sides.vw - 24, 'swapped dots are not at the right margin')
-  assert.ok(sides.prefs.right >= sides.vw - 24, 'swapped Auto/Sound are not right-aligned')
+  assert.ok(sides.swap.top >= sides.reset.bottom, 'swapped Swap is not under Reset')
+  assert.ok(sides.reset.right >= sides.vw - 12 && sides.swap.right === sides.reset.right, 'swapped Reset and Swap are not at the right margin')
   await page.reload()
   await page.locator('article.CounterVerses').waitFor()
   assert.equal(await page.locator('.cvDock.cvSwapped').count(), 1, 'swap not kept after reload')

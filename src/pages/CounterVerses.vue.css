@@ -298,14 +298,16 @@ article.CounterVerses {
     min-height: 0;
   }
 }
-/* Swap: a small button at the tap button's side of the Auto/Sound row. */
+/* Swap sits directly under Reset and matches it, so the two read as a pair.
+   The Auto/Sound row keeps its height; the button may overhang it slightly. */
+.CounterVerses .cvDock button.reset,
 .CounterVerses .cvDock button.cvSwap {
-  margin: 0 0 0 auto;
-  padding: 0 10px;
-  height: 17px;
-  min-height: 0;
-  line-height: 17px;
-  font-size: 11px;
+  box-sizing: border-box;
+  width: 64px;
+  min-width: 64px;
+  padding: 3px 8px;
+  min-height: 1rem;
+  margin: 0;
 }
 /* Swapped: the tap button moves to the left column and the dots and every
    control line sit at the right, right-aligned. CSS only. */
@@ -337,9 +339,10 @@ article.CounterVerses {
 .CounterVerses .cvSwapped .cvPrefs {
   justify-content: flex-end;
 }
+/* Swapped: Reset and Swap both end their lines at the right margin. */
+.CounterVerses .cvDock.cvSwapped button.reset,
 .CounterVerses .cvDock.cvSwapped button.cvSwap {
-  order: -1;
-  margin: 0 auto 0 0;
+  order: 2;
 }
 .CounterVerses .cvSwapped .tapDelayArea {
   flex-direction: row-reverse;
