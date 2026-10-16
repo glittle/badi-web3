@@ -1,3 +1,4 @@
+import messages from '../scripts/messages'
 import badi from '../scripts/badiCalc'
 import * as shared from '../scripts/shared'
 import storage from '../scripts/storage'
@@ -155,6 +156,16 @@ export default {
         this.showToday();
     },
     methods: {
+        // Name for the switch that shows a day's links, e.g. "Show 7 links for Naw-Rúz".
+        linksLabel(day) {
+            // The visible name: Feasts and Holy Days show A; the others show NameEn or NameAr.
+            var raw = (day.Type === 'M' || (day.Type && day.Type[0] === 'H')) ? day.A : (day.NameEn || day.NameAr || day.A || '')
+            var holder = document.createElement('div')
+            holder.innerHTML = raw
+            var name = (holder.textContent || '').replace(/\s+/g, ' ').trim()
+            var n = day.links ? day.links.length : 0
+            return messages.get(n === 1 ? 'a11yShowLink' : 'a11yShowLinks', { count: n, name: name })
+        },
         showToday: function () {
             setTimeout(function () {
                 var el = document.getElementsByClassName('item-content dayContent Today');
@@ -383,23 +394,7 @@ export default {
                     return cell;
             }
         }
-    },
-    head: {
-        title: function () {
-            return {
-                inner: this.title
-            }
-        },
-        meta: [{
-            name: 'description2',
-            content: 'My description',
-            //id: 'desc'
-        }, {
-            itemprop: 'name',
-            content: 'Content Title'
-        }]
-    },
-
+    }
 }
 
 function extendDayInfo (vue, d, diff) {

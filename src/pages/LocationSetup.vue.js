@@ -47,6 +47,9 @@ export default {
     //   },
     // },
     computed: {
+        isPage() {
+            return this.$route && this.$route.name === 'LocationSetup'
+        },
         saveNeeded() {
             // if needed and possible
             if (this.lat === 0 || this.lng === 0) {

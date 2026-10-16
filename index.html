@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -23,7 +23,21 @@
     <meta name="apple-mobile-web-app-title" content="Wondrous-Bad&iacute;' Today">
     <meta name="application-name" content="Wondrous-Bad&iacute;' Today">
     <meta name="msapplication-config" content="/statics/icons/browserconfig.xml?v=v1">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#2471a3">
+    <script>
+        // Colour palette before first paint (Other Settings). Stored as "__q_strn|teal".
+        (function () {
+            var colors = { blue: '#2471a3', teal: '#1f6f6b', green: '#3d6b45', plum: '#7a4a7d' };
+            var id = 'blue';
+            try {
+                var raw = localStorage.getItem('palette');
+                if (raw && raw.indexOf('__q_strn|') === 0 && colors[raw.slice(9)]) id = raw.slice(9);
+            } catch (e) { }
+            document.documentElement.setAttribute('data-palette', id);
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', colors[id]);
+        })();
+    </script>
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Roboto:300,400,500,700" rel="stylesheet">
     <meta property="og:title" content="Wondrous-Badíʿ Today" />
     <meta property="og:description" content="Today's date and details in the Wondrous (Badíʿ) calendar, the calendar of the Bahá'í Faith." />

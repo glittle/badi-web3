@@ -76,11 +76,17 @@ export default {
       window.removeEventListener('pointerup', this.onUp)
     },
     onKey(event) {
-      if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
-        this.$emit('update:modelValue', this.snap(this.numeric + this.step))
-      } else if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') {
-        this.$emit('update:modelValue', this.snap(this.numeric - this.step))
-      }
+      const big = Math.max(this.step, (this.max - this.min) / 10)
+      let next = null
+      if (event.key === 'ArrowRight' || event.key === 'ArrowUp') next = this.numeric + this.step
+      else if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') next = this.numeric - this.step
+      else if (event.key === 'PageUp') next = this.numeric + big
+      else if (event.key === 'PageDown') next = this.numeric - big
+      else if (event.key === 'Home') next = this.min
+      else if (event.key === 'End') next = this.max
+      if (next === null) return
+      event.preventDefault()
+      this.$emit('update:modelValue', this.snap(next))
     }
   },
   beforeUnmount() {

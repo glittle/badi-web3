@@ -46,6 +46,9 @@ async function expectNoticeThenReload(trigger, text, shot) {
   await trigger()
   const notice = page.locator('#reloadNotice')
   await notice.waitFor({ state: 'visible', timeout: 2000 })
+  // The text goes in just after the alert region is added, so screen readers announce it.
+  assert.equal(await notice.getAttribute('role'), 'alert')
+  await page.waitForFunction((t) => (document.querySelector('#reloadNotice') || {}).innerText?.trim() === t, text, { timeout: 1000 })
   assert.equal((await notice.innerText()).trim(), text)
   await page.waitForTimeout(400)
   await page.screenshot({ path: outDir + '/' + shot })

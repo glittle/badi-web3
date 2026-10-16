@@ -1,15 +1,15 @@
 <template>
     <div class="About">
         <article class="layout-padding">
-            <div class=ShareThis>
-                <h2>Share this App!</h2>
-                <img class=qr alt="Scannable QR Code" src="/statics/qr.png">
+            <h1 class="aboutTitle" data-page-heading>{{this.title}}</h1>
+            <aside class=ShareThis aria-labelledby="shareThisHeading">
+                <h2 id="shareThisHeading">Share this App!</h2>
+                <img class=qr :alt="$msg('a11yQrCode')" src="/statics/qr.png">
                 <a href="https://www.wondrous-badi.today/" itemprop="url">
                     <span>Open in any web browser:</span>
                     <span class=underline>Wondrous-Badi.Today</span>
                 </a>
-            </div>
-            <h1>{{this.title}}</h1>
+            </aside>
             <p>This web app is all about the <span itemprop="applicationCategory">Badíʿ (Wondrous) calendar</span>!
                 It is free to use - share it with others!</p>
             <p>Please send suggestions and comments to
@@ -21,13 +21,14 @@
                     href="https://patreon.com/GlenLittle">Patreon</a>.
                 <br>
                 <a href="https://patreon.com/GlenLittle" title="Support Glen at Patreon" target="_blank"><img
-                        alt="patreon" src="/statics/patreon.png"></a>
+                        alt="Patreon" src="/statics/patreon.png"></a>
             </p>
             <p>
-                <span>Version <span itemprop="softwareVersion">{{version}}</span> (built {{versionAge}} - <span class="reload"
-                        v-on:click="reload">force a reload now</span>)</span>
+                <span>Version <span itemprop="softwareVersion">{{version}}</span> (built {{versionAge}} - <button type="button" class="reload"
+                        v-on:click="reload">force a reload now</button>)</span>
             </p>
             <ul>
+                <li>ver 2.3 - easier to use with screen readers and the keyboard; colour palettes and counter announcements in Other Settings</li>
                 <li>ver 2.2 - Count page uses the Today counter layout, without a back button or page heading</li>
                 <li>ver 2.1 - verse carousel beside the 95 counter, each verse with its own count</li>
                 <li>ver 2.0 - rebuilt on Vue 3 and Vite; pinch-zoom and browser zoom work</li>

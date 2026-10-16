@@ -25,26 +25,32 @@ function showReloadNotice(message) {
         'background:rgba(255,255,255,0.72);opacity:0;transition:opacity .25s ease;}' +
         '#reloadNotice.shown{opacity:1;}' +
         '#reloadNotice .rnCard{display:flex;align-items:center;gap:12px;max-width:92%;box-sizing:border-box;padding:16px 20px;border-radius:12px;' +
-        'background:#fff;border:1px solid rgba(41,128,185,0.32);box-shadow:0 2px 12px rgba(41,128,185,0.12);' +
-        'color:#2980b9;font-size:1rem;font-weight:500;line-height:1.3;}' +
-        '#reloadNotice .rnSpin{flex:0 0 auto;width:18px;height:18px;border-radius:50%;border:2px solid rgba(41,128,185,0.2);' +
-        'border-top-color:#2980b9;animation:rnSpin 1s linear infinite;}' +
-        '@keyframes rnSpin{to{transform:rotate(360deg)}}'
+        'background:#fff;border:1px solid rgba(var(--brand-rgb,36,113,163),0.32);box-shadow:0 2px 12px rgba(var(--brand-rgb,36,113,163),0.12);' +
+        'color:var(--brand,#2471a3);font-size:1rem;font-weight:500;line-height:1.3;}' +
+        '#reloadNotice .rnSpin{flex:0 0 auto;width:18px;height:18px;border-radius:50%;border:2px solid rgba(var(--brand-rgb,36,113,163),0.2);' +
+        'border-top-color:var(--brand,#2471a3);animation:rnSpin 1s linear infinite;}' +
+        '@keyframes rnSpin{to{transform:rotate(360deg)}}' +
+        '@media (prefers-reduced-motion: reduce){#reloadNotice .rnSpin{animation:none}#reloadNotice{transition:none}}'
     document.head.appendChild(style)
     const notice = document.createElement('div')
     notice.id = 'reloadNotice'
-    notice.setAttribute('role', 'status')
-    notice.setAttribute('aria-live', 'assertive')
+    // role=alert: the page reloads within two seconds, so this must not wait
+    // behind other speech. The text is set after the region is in the page,
+    // because many screen readers ignore a live region that arrives already filled.
+    notice.setAttribute('role', 'alert')
     const card = document.createElement('div')
     card.className = 'rnCard'
     const spin = document.createElement('span')
     spin.className = 'rnSpin'
+    spin.setAttribute('aria-hidden', 'true')
     const text = document.createElement('span')
-    text.textContent = message
     card.appendChild(spin)
     card.appendChild(text)
     notice.appendChild(card)
     document.body.appendChild(notice)
+    window.setTimeout(function () {
+        text.textContent = message
+    }, 50)
     window.requestAnimationFrame(function () {
         notice.classList.add('shown')
     })

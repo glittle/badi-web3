@@ -3,8 +3,8 @@
     <template #header>
       <div class="toolbar">
         <q-toolbar-title>
-          <h1 itemprop="name">Wondrous-Badíʿ Today</h1>
-          <h2 v-show="setupDone" v-html="topDate"></h2>
+          <p class="appName" itemprop="name">Wondrous-Badíʿ Today</p>
+          <p class="topDate" v-show="setupDone" v-html="topDate"></p>
         </q-toolbar-title>
       </div>
     </template>
@@ -19,23 +19,25 @@
       </keep-alive>
     </router-view>
     <template #footer>
-      <div class="toolbar">
-        <div
+      <nav class="toolbar" :aria-label="$msg('a11yMainNav')">
+        <router-link
           v-for="page in pages.filter(p => p.group.includes('main'))"
           :key="page.name"
-          :title="page.text"
+          :to="pagePath(page)"
+          replace
           class="tbLink"
           :class="{ active: routeName == page.name }"
-          @click="openPage(page)"
+          :aria-current="routeName == page.name ? 'page' : null"
         >
-          <img class="tbIcon" :src="page.icon" :alt="page.text">
+          <img class="tbIcon" :src="page.icon" alt="">
           <span v-html="page.text"></span>
-        </div>
-        <button ref="target" type="button" class="primary" aria-label="More">
-          <i>more_vert</i>
-          <q-popover ref="popover">
+        </router-link>
+        <button ref="target" type="button" class="primary" :aria-label="$msg('a11yMoreMenu')">
+          <i aria-hidden="true">more_vert</i>
+          <q-popover ref="popover" :label="$msg('a11yMoreMenu')">
             <div class="list">
-              <div
+            <ul class="menuLinks">
+              <li
                 class="item item-link"
                 v-for="page in pages.filter(p => p.group.includes('setup'))"
                 :key="page.name"
@@ -44,12 +46,13 @@
                 <div>
                   <q-drawer-link :icon="page.icon" :to="page.to">{{ page.text }}</q-drawer-link>
                 </div>
-              </div>
-              <div class="version">Version {{ version }}</div>
+              </li>
+            </ul>
+            <div class="version">Version {{ version }}</div>
             </div>
           </q-popover>
         </button>
-      </div>
+      </nav>
     </template>
   </q-layout>
 </template>

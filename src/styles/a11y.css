@@ -1,0 +1,327 @@
+/*
+ * Accessibility helpers (2.3.0).
+ * Loaded after the Quasar stylesheet. Sighted mouse and touch users should see
+ * no difference except slightly larger hit areas; keyboard users get a focus ring.
+ */
+
+/* Text for screen readers only. */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Skip link: hidden until it gets keyboard focus. */
+.skipLink {
+  position: absolute;
+  left: 8px;
+  top: -100px;
+  z-index: 10000;
+  padding: 8px 12px;
+  background: #fff;
+  color: var(--brand-dark, #174a6b);
+  border-radius: 4px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+}
+.skipLink:focus {
+  top: 8px;
+}
+
+/* Visible keyboard focus. Quasar sets outline: 0 on buttons, links and items. */
+:focus-visible,
+.item:focus-visible,
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--brand-dark, #174a6b) !important;
+  outline-offset: 2px;
+  /* Quasar animates "all" on buttons, which made the ring grow in slowly. */
+  transition: none !important;
+}
+.layout-header :focus-visible,
+.layout-footer :focus-visible,
+button.primary:focus-visible {
+  outline-color: #fff !important;
+  outline-offset: -4px;
+}
+button.primary.circular:focus-visible {
+  outline: 3px solid var(--brand-dark, #174a6b) !important;
+  outline-offset: 3px;
+}
+/* A heading or main region that only receives focus from script. */
+[tabindex="-1"]:focus,
+[tabindex="-1"]:focus-visible {
+  outline: none !important;
+}
+/* The switch input is invisible (it covers the track), so ring the track. */
+.q-toggle:has(input:focus-visible) > div {
+  box-shadow: 0 0 0 3px var(--brand-dark, #174a6b);
+  border-radius: 10px;
+}
+.q-toggle input:focus-visible {
+  outline: none !important;
+}
+
+/* Header: the app name and date are not headings any more; keep their look. */
+.toolbar-title .appName {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: 110%;
+  margin: 0 0 3px 0;
+}
+.toolbar-title .topDate {
+  display: block;
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: normal;
+  line-height: 110%;
+  margin: 0;
+}
+.toolbar-title .topDate span {
+  margin-left: 1em;
+  font-size: .85em;
+  /* Solid white: 0.85 white was 4.3:1 on the brand colour. */
+  color: #fff;
+}
+
+/* Bottom bar: a <nav> of links that look like the old tab divs. */
+nav.toolbar {
+  background-color: var(--brand);
+}
+.layout-footer a.tbLink {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+/* The ⋮ button: 44px wide target. */
+.layout-footer .toolbar > button {
+  width: 44px;
+  min-width: 44px;
+  padding: 0;
+}
+
+/* Small pill buttons (Reset, Swap, More, Change, Previous...): an invisible
+   ::after makes the target at least 24px tall while the visible pill and the
+   layout stay exactly as they were. */
+button.small.light::after,
+button.small.push::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: max(24px, 100%);
+  transform: translateY(-50%);
+}
+/* Auto and Sound checkbox labels: taller hit area, same layout. */
+.CounterVerses .cvPrefs label,
+.tap95card .heading label {
+  position: relative;
+  cursor: pointer;
+}
+.CounterVerses .cvPrefs label::after,
+.tap95card .heading label::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 28px;
+  transform: translateY(-50%);
+}
+
+/* Count carousel dots: 24px buttons with the same 9px dot and spacing. */
+.CounterVerses .cvPager {
+  gap: 0;
+}
+.CounterVerses .cvPager button,
+.CounterVerses .cvPager button.on {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  min-height: 24px;
+  margin: 0 -2.5px;
+  padding: 0;
+  background: transparent;
+  border-radius: 50%;
+}
+.CounterVerses .cvPager button::before {
+  content: '';
+  position: absolute;
+  left: 7.5px;
+  top: 7.5px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #d7d7d7;
+}
+.CounterVerses .cvPager button.on::before {
+  background: var(--brand);
+}
+
+/* About: "force a reload now" is a button that looks like the old link. */
+.About button.reload {
+  display: inline;
+  min-height: 0;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-transform: none;
+  white-space: normal;
+  color: inherit;
+  vertical-align: baseline;
+  text-decoration: underline;
+}
+
+/* Non-brand greys that were below 4.5:1 on white. */
+.heading .type {
+  color: #6b6b6b;
+}
+.Verse .source,
+.Verse .source cite {
+  color: #6b6b6b;
+}
+.LocationSetup button.secondary {
+  background: #00796b;
+}
+
+/* Cards on Today now use <h2> for their titles; keep the old span look. */
+.heading h2.desc,
+.LocationSetup h2.pageTitle,
+.Notifications h2.pageTitle {
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  margin: 0;
+}
+/* Location and Notifications shown as cards on Today: the title is an <h2>
+   sized like the other Today card titles. */
+.LocationSetup h2.pageTitle,
+.Notifications h2.pageTitle {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #333;
+}
+/* Those two cards: same 3px inset as the other Today cards, no page padding. */
+.Home .locationHolder {
+  margin: 0 auto;
+}
+.Home .locationHolder > article.layout-padding {
+  padding: 3px 3px 6px;
+}
+/* Settings pages keep to the About page's 700px column on wide screens. */
+article.otherSetup,
+article.LocationSetup,
+article.Notifications {
+  width: 100%;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Dates: the page heading is an <h1> that looks like the old <h3>. */
+#Listing h1.listingTitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 110%;
+  margin: 0;
+}
+
+/* Less motion when the system asks for it. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Form controls follow the palette (Quasar's default was #027be3, and native
+   controls used the browser's own blue). */
+input[type="checkbox"],
+input[type="radio"],
+input[type="range"],
+progress {
+  accent-color: var(--brand);
+}
+.q-range-track.active-track,
+.q-range-handle:not(.undraggable):not(.handle-at-minimum),
+.q-range-handle:not(.undraggable):not(.handle-at-minimum) .q-range-label,
+.q-range-handle:not(.undraggable):not(.handle-at-minimum) .q-range-label:before,
+.q-progress .q-progress-model {
+  background: var(--brand);
+}
+.q-range-handle-min.undraggable:before {
+  border-left-color: var(--brand);
+}
+/* Switches: brand thumb on a tinted track when on, for every colour class
+   (the Dates filters and Other Settings switches were Quasar teal). When off,
+   the track is a mid grey so the switch shows against white (3.5:1). */
+:root .q-toggle:not(.noBrand) input + div:before {
+  background: #8a8a8a;
+}
+:root .q-toggle:not(.noBrand) input:checked + div:before {
+  background: rgba(var(--brand-rgb), 0.45);
+}
+:root .q-toggle:not(.noBrand) input:checked + div:after {
+  background: var(--brand);
+}
+:root .q-checkbox:not(.noBrand) input:checked + div:before {
+  background: var(--brand);
+  border-color: var(--brand);
+}
+:root .q-radio:not(.noBrand) input:checked + div:before {
+  border-color: var(--brand);
+}
+:root .q-radio:not(.noBrand) input:checked + div:after {
+  background: var(--brand);
+}
+.textfield:not(.no-style) .active {
+  border-bottom-color: var(--brand);
+}
+
+/* More menu: the links are a list now. */
+.q-popover ul.menuLinks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* About: the page heading comes first for screen readers; inline-block lets
+   the floated Share box still start on the heading's line, as before. */
+.About h1.aboutTitle {
+  display: inline-block;
+}
+
+/* Today: the hidden page heading comes first, so the first card keeps its
+   tight top margin through this rule instead of :first-child. */
+.tightTop > h1.sr-only:first-child + div.card {
+  margin-top: 0;
+}
+
+/* Links in the Dates links panel use the palette colour (4.7:1 or more on
+   --links-bg); the old #2379c2 was 4.1:1 on the old tint. */
+#Listing .links a {
+  color: var(--brand);
+}

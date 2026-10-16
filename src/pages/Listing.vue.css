@@ -6,7 +6,7 @@
   margin: 0 auto;
 }
 #Listing .location {
-  color: #2980b9;
+  color: var(--brand);
   margin: 4px 0 8px 0;
   clear: both;
 }
@@ -62,7 +62,7 @@
   flex: 0 0 auto;
   width: min-content;
   max-width: 9em;
-  color: #7f8c8d;
+  color: #5f6a6b;
   font-size: 0.8em;
   line-height: 1.15;
   text-align: center;
@@ -97,7 +97,7 @@
   padding-left: 25px;
 }
 #Listing .dayContent.oddYear {
-  background-color: #eaf5ff;
+  background-color: var(--row-alt, #eaf3fa);
 }
 #Listing .dayContent.oddYear:hover {
   background-color: #eaf5dd;
@@ -127,18 +127,18 @@
   white-space: nowrap;
 }
 #Listing .dayContent .col2 .NoWork {
-  color: #7f8c8d;
+  color: #5f6a6b;
   font-size: 0.8em;
 }
 #Listing .dayContent .col2 .NoWork.Workday {
   color: darkred;
 }
 #Listing .dayContent .col2 .SpecialTime {
-  color: #7f8c8d;
+  color: #5f6a6b;
   font-size: 0.8em;
 }
 #Listing .dayContent .col2 .SpecialTime.setTime {
-  color: #d35400;
+  color: #b84a00;
 }
 #Listing .dayContent .col3 {
   padding: 3px 10px 0 10px;
@@ -147,7 +147,7 @@
 }
 #Listing .dayContent .col3 .sunsetStart {
   font-size: 0.8em;
-  color: #d35400;
+  color: #b84a00;
 }
 #Listing .dayContent .col3 .sunsetStart img {
   width: 24px;
@@ -158,7 +158,7 @@
 }
 #Listing .gDate {
   font-size: 0.72em;
-  color: #7f8c8d;
+  color: #5f6a6b;
   font-weight: 400;
 }
 #Listing .Feast .col1 img {
@@ -208,7 +208,7 @@
 #Listing .links .col2 {
   padding: 4px 12px 4px 8px;
   text-align: left;
-  background-color: #f9f1f9;
+  background-color: var(--links-bg, #fbf4ea);
 }
 #Listing .links .iconDivider {
   height: 13px;
@@ -242,7 +242,7 @@
 }
 #Listing .linkToggle > span {
   font-size: 0.72em;
-  color: #7f8c8d;
+  color: #5f6a6b;
   font-weight: 400;
 }
 @media (max-width: 500px) {

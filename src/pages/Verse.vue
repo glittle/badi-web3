@@ -1,5 +1,6 @@
 <template>
   <article class="layout-padding Verse">
+    <h1 v-if="isVersePage" class="sr-only" data-page-heading>{{ $msg('pageTitleVerse') }}</h1>
     <div class="verseNav">
       <button class="small light"
               v-on:click="showPrevious">Previous</button>
@@ -17,7 +18,7 @@
         <a target="_blank"
            rel="noopener"
            v-bind:href="searchUrl">
-          <i>search</i> Find uses of this verse on
+          <i aria-hidden="true">search</i> Find uses of this verse on
           <br>the Internet and YouTube
         </a>
       </div>
@@ -27,17 +28,23 @@
         <button class="push small"
                 accesskey="V"
                 v-show="!speakingNow"
+                :aria-label="$msg('a11yReadAloud')"
+                :title="$msg('a11yReadAloud')"
                 @click="speak">
-          <i>record_voice_over</i>
+          <i aria-hidden="true">record_voice_over</i>
         </button>
         <button class="push small"
                 accesskey="V"
                 v-show="speakingNow"
+                :aria-label="$msg('a11yStopReading')"
+                :title="$msg('a11yStopReading')"
                 @click="stopSpeaking">
-          <i>stop</i>
+          <i aria-hidden="true">stop</i>
         </button>
         <q-range v-model="volume"
                  class="volume"
+                 :aria-label="$msg('a11yReadingVolume')"
+                 :aria-valuetext="$msg('a11yPercent', { value: volume })"
                  :step="10"
                  :min="0"
                  :max="100"></q-range>

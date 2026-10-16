@@ -1,5 +1,6 @@
 <template>
     <article class="CounterVerses" :data-verse="verse.id">
+        <h1 class="sr-only" data-page-heading>{{ $msg('pageTitleCounters') }}</h1>
         <div class="cvTop">
             <div class="cvNav">
                 <button type="button"
@@ -7,15 +8,14 @@
                         aria-label="Previous verse"
                         v-bind:disabled="index === 0"
                         v-on:click="showPrevious">
-                    <i>keyboard_arrow_left</i>
+                    <i aria-hidden="true">keyboard_arrow_left</i>
                 </button>
-                <div class="cvPager" role="tablist" aria-label="Count">
+                <div class="cvPager" role="group" v-bind:aria-label="$msg('a11yChooseVerse')" ref="pager" v-on:keydown="onPagerKey">
                     <button type="button"
-                            v-for="item in verses"
+                            v-for="(item, i) in verses"
                             v-bind:key="item.id"
-                            role="tab"
-                            v-bind:aria-label="item.title"
-                            v-bind:aria-selected="item.id === session.selectedId"
+                            v-bind:aria-label="$msg('a11yVerseOf', { num: i + 1, total: verses.length, title: item.title })"
+                            v-bind:aria-current="item.id === session.selectedId ? 'true' : null"
                             v-bind:class="{ on: item.id === session.selectedId }"
                             v-on:click="select(item.id)"></button>
                 </div>
@@ -24,7 +24,7 @@
                         aria-label="Next verse"
                         v-bind:disabled="index === verses.length - 1"
                         v-on:click="showNext">
-                    <i>keyboard_arrow_right</i>
+                    <i aria-hidden="true">keyboard_arrow_right</i>
                 </button>
             </div>
             <div class="cvCarousel"
@@ -34,7 +34,7 @@
                  v-on:pointerup="onPointerUp"
                  v-on:pointercancel="onPointerCancel">
                 <div class="cvSlide" aria-live="polite">
-                    <h2>{{ verse.title }}</h2>
+                    <h2><span class="sr-only">{{ $msg('a11yVersePosition', { num: index + 1, total: verses.length }) }} </span>{{ verse.title }}</h2>
                     <div class="cvTextBox">
                         <p class="cvText">{{ verse.text }}</p>
                     </div>
@@ -47,6 +47,7 @@
         <div class="cvDock tap95card" v-bind:class="{ cvSwapped: tapSwap }">
             <div class="cvArrange">
                 <div class="cvCount">
+                    <span class="sr-only">{{ $msg('a11yCountLabel') }}</span>
                     <span class="tapNum" v-bind:style="{ width: dotsWidth }">{{ count }}</span>
                     <p class="cvTimes" v-bind:style="{ width: dotsWidth }">{{ verse.target }} times</p>
                     <div class="cvTapDots" aria-hidden="true">
@@ -69,19 +70,20 @@
                 </div>
                 <button type="button"
                         class="primary circular big"
+                        ref="tapButton"
                         v-on:click="tap"
                         v-bind:disabled="tapBtnDisabled"
-                        v-html="tapBtnText"
-                        v-bind:title="'Tap to count ' + verse.title"></button>
+                        v-bind:aria-label="tapLabel"
+                        v-bind:title="'Tap to count ' + verse.title">{{ tapBtnText }}</button>
             </div>
             <div class="tapControl">
                 <div class="cvActions">
-                    <button type="button" class="reset small light round" v-on:click="resetCount">Reset</button>
+                    <button type="button" class="reset small light round" ref="resetButton" v-on:click="resetCount">Reset</button>
                     <template v-if="allowContinue">
-                        <span class="continue">
-                            Continue past {{ verse.target }}?
+                        <span class="continue" id="cvContinueLabel">
+                            {{ $msg('a11yContinuePast', { total: verse.target }) }}
                         </span>
-                        <q-toggle v-model="tapContinue" />
+                        <q-toggle v-model="tapContinue" aria-labelledby="cvContinueLabel" />
                     </template>
                 </div>
                 <div class="cvPrefs">
@@ -96,10 +98,13 @@
                 <div class="tapDelayArea" v-bind:style="{ opacity: tapAuto ? 1 : 0.25 }">
                     <span>Auto
                         <span>{{ autoSeconds }}</span></span>
-                    <q-range v-model="tapAutoDelay" v-bind:step="500" v-bind:min="1000" v-bind:max="15000"></q-range>
+                    <q-range v-model="tapAutoDelay" v-bind:step="500" v-bind:min="1000" v-bind:max="15000"
+                             v-bind:aria-label="$msg('a11yAutoSpeed')"
+                             v-bind:aria-valuetext="autoSecondsText"></q-range>
                 </div>
             </div>
         </div>
+        <p class="sr-only" role="status" aria-live="polite" aria-atomic="true">{{ announcement }}</p>
         <audio v-bind:id="soundIds.step" preload="auto">
             <source src="/statics/each.mp3">
         </audio>

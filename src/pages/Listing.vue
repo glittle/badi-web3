@@ -3,7 +3,7 @@
     <div>
       <div class="listingHead" v-if="!onHome">
         <button v-on:click="loadDates(prevYear)" class="small light btnPrev">Previous year ({{prevYear}} BE)</button>
-        <h3>{{this.title}}</h3>
+        <h1 class="listingTitle" data-page-heading>{{this.title}}</h1>
         <div class=location>Times for <span v-html="location"></span></div>
       </div>
       <div class="switches" v-if="!onHome">
@@ -26,8 +26,8 @@
           </label>
         </div>
         <div class="suggestedStart">
-          <span>Suggested start at </span>
-          <select v-model=suggestedStart>
+          <span id="suggestedStartLabel">Suggested start at </span>
+          <select v-model=suggestedStart aria-labelledby="suggestedStartLabel">
             <option value="">none</option>
             <option value=1800>6:00 pm</option>
             <option value=1830>6:30 pm</option>
@@ -42,7 +42,7 @@
           <div class="item-content dayContent Feast" :class="day.RowClass" v-if="day.Type==='M'">
             <div class="col1">
               <!--<span class=dayType><i>date_range</i></span>-->
-              <img alt="Calendar icon" :class="day.di.element" src="/statics/calendar.png">
+              <img alt="" :class="day.di.element" src="/statics/calendar.png">
               <div>{{day.di.bMonth}}</div>
             </div>
             <div class="col2">
@@ -63,15 +63,15 @@
                 <span v-html="day.Sunset"></span>
               </div>
               <div class="linkToggle" v-if="day.links.length">
-                <q-toggle icon="format_list_bulleted" v-model="day.showingLinks"></q-toggle>
-                <span v-html="day.links.length"></span>
+                <q-toggle icon="format_list_bulleted" v-model="day.showingLinks" :aria-label="linksLabel(day)"></q-toggle>
+                <span v-html="day.links.length" aria-hidden="true"></span>
               </div>
             </div>
           </div>
           <div class="item-content dayContent HolyDay" :class="day.RowClass" v-if="day.Type[0]==='H'">
             <div class="col1">
               <!--<span class=dayType><i>star</i></span>-->
-              <img src="/statics/star.png" alt="star">
+              <img src="/statics/star.png" alt="">
             </div>
             <div class="col2">
               <div class=dayName v-html="day.A"></div>
@@ -88,15 +88,15 @@
                 <span v-html="day.Sunset"></span>
               </div>
               <div class="linkToggle" v-if="day.links.length">
-                <q-toggle icon="format_list_bulleted" v-model="day.showingLinks"></q-toggle>
-                <span v-html="day.links.length"></span>
+                <q-toggle icon="format_list_bulleted" v-model="day.showingLinks" :aria-label="linksLabel(day)"></q-toggle>
+                <span v-html="day.links.length" aria-hidden="true"></span>
               </div>
             </div>
           </div>
           <div class="item-content dayContent Fast" :class="day.RowClass" v-if="day.Type==='Fast'">
             <div class="col1">
               <!--<span class=dayType><i>date_range</i></span>-->
-              <img src="/statics/sun.png" alt="sun">
+              <img src="/statics/sun.png" alt="">
             </div>
             <div class="col2">
               <div class=dayName v-html="day.NameEn"></div>
@@ -116,8 +116,8 @@
                 </div>
               </div>
               <div class="linkToggle" v-if="day.links.length">
-                <q-toggle icon="format_list_bulleted" v-model="day.showingLinks"></q-toggle>
-                <span v-html="day.links.length"></span>
+                <q-toggle icon="format_list_bulleted" v-model="day.showingLinks" :aria-label="linksLabel(day)"></q-toggle>
+                <span v-html="day.links.length" aria-hidden="true"></span>
               </div>
             </div>
           </div>
@@ -137,8 +137,8 @@
                 <span v-html="day.Sunset"></span>
               </div>
               <div class="linkToggle" v-if="day.links.length">
-                <q-toggle icon="format_list_bulleted" v-model="day.showingLinks"></q-toggle>
-                <span v-html="day.links.length"></span>
+                <q-toggle icon="format_list_bulleted" v-model="day.showingLinks" :aria-label="linksLabel(day)"></q-toggle>
+                <span v-html="day.links.length" aria-hidden="true"></span>
               </div>
             </div>
           </div>
@@ -156,8 +156,8 @@
                 <span v-html="day.Sunset"></span>
               </div>
               <div class="linkToggle" v-if="day.links.length">
-                <q-toggle icon="format_list_bulleted" v-model="day.showingLinks"></q-toggle>
-                <span v-html="day.links.length"></span>
+                <q-toggle icon="format_list_bulleted" v-model="day.showingLinks" :aria-label="linksLabel(day)"></q-toggle>
+                <span v-html="day.links.length" aria-hidden="true"></span>
               </div>
             </div>
           </div>
@@ -192,7 +192,7 @@
             <div class="col2">
               <div class="link" :class="day.type" v-for="link in day.links">
                 <a v-bind:href="link.url" v-bind:target="link.url">
-                  <img alt="icon" v-bind:src="link.icon" :class="link.class">
+                  <img alt="" v-bind:src="link.icon" :class="link.class">
                   <span v-html="link.desc"></span>
                 </a>
               </div>

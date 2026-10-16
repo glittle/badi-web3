@@ -1,4 +1,6 @@
 import storage from '../scripts/storage'
+import messages from '../scripts/messages'
+import { tapAnnouncement, announcementsOn } from '../scripts/announce'
 import {
     verses,
     session,
@@ -30,6 +32,7 @@ export default {
             tapSounds: storage.get('tapSounds', true),
             tapSwap: storage.get('tapSwap', false),
             tapLastTime: 0,
+            announcement: '',
             drag: null,
             soundIds: {
                 step: 'cvTapSoundStep',
@@ -78,6 +81,16 @@ export default {
         },
         autoSeconds() {
             return (Math.round(this.tapAutoDelay / 100) / 10).toFixed(1) + ' s'
+        },
+        autoSecondsText() {
+            const seconds = (Math.round(this.tapAutoDelay / 100) / 10).toFixed(1)
+            return messages.get(seconds === '1.0' ? 'a11ySecond' : 'a11ySeconds', { seconds: seconds })
+        },
+        // The button name carries the count, so a screen reader can check it
+        // at any time without an announcement on every tap.
+        tapLabel() {
+            const values = { action: this.tapBtnText, count: this.count, total: this.verse.target, round: this.group }
+            return messages.get(this.continues && this.group > 1 ? 'a11yTapLabelRound' : 'a11yTapLabel', values)
         },
         sourceLabel() {
             return linkedSourceName(this.verse)
@@ -154,7 +167,36 @@ export default {
             if (id === this.verse.id) return
             this.stopAuto()
             selectVerse(id)
+            this.announcement = ''
             this.updateTapDisplay()
+        },
+        // Arrow keys move between the verse dots.
+        onPagerKey(event) {
+            let next = null
+            if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = this.index + 1
+            else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next = this.index - 1
+            else if (event.key === 'Home') next = 0
+            else if (event.key === 'End') next = this.verses.length - 1
+            if (next === null) return
+            event.preventDefault()
+            next = Math.max(0, Math.min(this.verses.length - 1, next))
+            this.select(this.verses[next].id)
+            this.$nextTick(() => {
+                const dots = this.$refs.pager ? this.$refs.pager.querySelectorAll('button') : []
+                if (dots[next]) dots[next].focus()
+            })
+        },
+        announce(text) {
+            // Clear first so the same words twice in a row are still read.
+            this.announcement = ''
+            this.$nextTick(() => { this.announcement = text })
+        },
+        // What is said depends on the Counter announcements setting
+        // (Other Settings): off, every 19 and the target, or every tap.
+        announceFor(count, target) {
+            const text = tapAnnouncement(messages, count, target, this.group,
+                this.continues ? 'a11yRoundDone' : 'a11yCountDone')
+            if (text) this.announce(text)
         },
         showPrevious() {
             if (this.index <= 0) return
@@ -186,10 +228,11 @@ export default {
             this.drag = null
         },
         updateTapDisplay() {
+            // No underlined letter: the Count page has no single-key shortcut.
             if (this.tapAuto) {
-                this.tapBtnText = this.tapAutoRunning ? 'Pau<u>s</u>e' : this.count === 0 ? '<u>S</u>tart' : 'Re<u>s</u>ume'
+                this.tapBtnText = messages.get(this.tapAutoRunning ? 'tapBtnPause' : this.count === 0 ? 'tapBtnStart' : 'tapBtnResume')
             } else {
-                this.tapBtnText = '<u>T</u>ap'
+                this.tapBtnText = messages.get('tapBtnTap')
             }
         },
         tap() {
@@ -222,6 +265,7 @@ export default {
                     locked: true
                 })
                 this.updateTapDisplay()
+                this.keepFocusWhenLocked()
                 return
             }
             let count = entry.count + 1
@@ -232,6 +276,7 @@ export default {
             }
             rememberCounter(verse.id, count, group, { locked: false })
             this.playFor(count, target)
+            this.announceFor(count, target)
             if (count === target && !this.continues) this.tapAutoRunning = false
             if (this.tapAutoRunning) {
                 this.tapAutoTimer = setTimeout(() => this.doTap(), this.tapAutoDelay)
@@ -243,6 +288,16 @@ export default {
             this.stopAuto()
             rememberCounter(this.verse.id, 0, 1, { locked: false })
             this.updateTapDisplay()
+            if (announcementsOn()) this.announce(messages.get('a11yCountReset'))
+        },
+        // The tap button is disabled when a set is finished. If it had focus,
+        // move focus to Reset instead of losing it.
+        keepFocusWhenLocked() {
+            const button = this.$refs.tapButton
+            if (!button || document.activeElement !== button) return
+            this.$nextTick(() => {
+                if (this.$refs.resetButton) this.$refs.resetButton.focus()
+            })
         },
         stopAuto() {
             this.tapAutoRunning = false
@@ -280,11 +335,6 @@ export default {
             if (n > this.group) return {}
             const pct = n < this.group ? 100 : Math.round((this.count / this.verse.target) * 100)
             return { background: 'linear-gradient(to top, #FFA726 ' + pct + '%, #eee ' + pct + '%)' }
-        }
-    },
-    head: {
-        title: function () {
-            return { inner: 'Count' }
         }
     }
 }

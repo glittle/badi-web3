@@ -30,3 +30,44 @@
   padding: 0 3px;
   background-color: #f0f0f0;
 }
+.otherSetup .paletteChoices {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+.otherSetup .section label.paletteChoice {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 12px 0 8px;
+  border: 1px solid #ddd;
+  border-radius: 22px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.otherSetup .section label.paletteChoice.active {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 1px var(--brand);
+  font-weight: 500;
+}
+.otherSetup .paletteChoice input {
+  margin: 0;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--brand);
+}
+.otherSetup .paletteSwatch {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+}
+
+.otherSetup .announceHint {
+  margin: 0 0 8px;
+  color: #555;
+}
