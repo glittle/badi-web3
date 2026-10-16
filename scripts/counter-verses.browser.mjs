@@ -94,6 +94,51 @@ async function swipe(direction) {
 }
 
 const tap = page.locator('article.CounterVerses button.primary.circular')
+const versesTab = page.locator('.layout-footer .tbLink', { hasText: 'Verses' })
+await versesTab.waitFor({ state: 'visible' })
+assert.match(await versesTab.locator('img').getAttribute('src'), /counter95\.svg/)
+assert.equal(await versesTab.evaluate((el) => el.classList.contains('active')), true)
+
+async function layoutOf() {
+  return page.evaluate(() => {
+    const q = (sel) => document.querySelector(sel)
+    const box = (el) => {
+      const b = el.getBoundingClientRect()
+      return {
+        y: Math.round(b.y),
+        x: Math.round(b.x),
+        w: Math.round(b.width),
+        h: Math.round(b.height),
+        b: Math.round(b.bottom)
+      }
+    }
+    return {
+      heading: box(q('article.CounterVerses .heading')),
+      title: box(q('article.CounterVerses h2')),
+      button: box(q('article.CounterVerses button.primary.circular')),
+      count: box(q('article.CounterVerses .tapNum')),
+      actions: box(q('article.CounterVerses .cvActions')),
+      delay: box(q('article.CounterVerses .tapDelayArea')),
+      footer: box(q('.layout-footer')),
+      vw: window.innerWidth,
+      vh: window.innerHeight
+    }
+  })
+}
+
+function assertLayout(layout, label) {
+  const mid = layout.vw / 2
+  const buttonMid = layout.button.y + layout.button.h / 2
+  assert.ok(buttonMid > layout.vh * 0.5, label + ' tap button is above the lower half: ' + buttonMid)
+  assert.ok(layout.button.b < layout.footer.y, label + ' tap button overlaps the bottom bar')
+  assert.ok(layout.delay.b <= layout.footer.y + 1, label + ' controls are behind the bottom bar')
+  assert.ok(layout.delay.b <= layout.vh + 1, label + ' controls are off the screen')
+  assert.ok(Math.abs(layout.button.x + layout.button.w / 2 - mid) <= 8, label + ' tap button is off center')
+  assert.ok(Math.abs(layout.count.x + layout.count.w / 2 - mid) <= 8, label + ' count is off center')
+  assert.ok(Math.abs(layout.actions.x + layout.actions.w / 2 - mid) <= 16, label + ' reset row is off center')
+}
+
+const tops = []
 
 for (let i = 0; i < expected.length; i++) {
   const verse = expected[i]
@@ -103,10 +148,9 @@ for (let i = 0; i < expected.length; i++) {
   assert.equal(shown, verse.id)
   const source = await page.locator('.cvSource').innerText()
   assert.match(source, new RegExp(verse.source.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))
-  const box = await tap.boundingBox()
-  assert.ok(box, 'tap button is missing')
-  assert.ok(box.y > 420, 'counter is not in the thumb zone: y=' + box.y)
-  assert.ok(box.y + box.height < 844, 'tap button is below the viewport')
+  const layout = await layoutOf()
+  assertLayout(layout, verse.id + ' @390')
+  tops.push(layout)
   const continueLabel = page.locator('article.CounterVerses .continue')
   const continueToggle = page.locator('article.CounterVerses .q-toggle')
   if (verse.id === 'allah-u-abha-95') {
@@ -114,6 +158,7 @@ for (let i = 0; i < expected.length; i++) {
     assert.match(await continueLabel.innerText(), /Continue past 95/)
     assert.equal(await continueToggle.count(), 1)
     await page.screenshot({ path: outDir + '/verse-with-continue.png' })
+    await page.screenshot({ path: outDir + '/after-390x844.png' })
   } else {
     assert.equal(await continueLabel.count(), 0, verse.id + ' still shows continue past')
     assert.equal(await continueToggle.count(), 0, verse.id + ' still shows the continue toggle')
@@ -122,6 +167,11 @@ for (let i = 0; i < expected.length; i++) {
     }
   }
   await page.screenshot({ path: outDir + '/' + verse.file })
+}
+
+for (const key of ['heading', 'title', 'button']) {
+  const ys = tops.map((item) => item[key].y)
+  assert.equal(Math.max(...ys), Math.min(...ys), key + ' y changes between verses: ' + ys.join(','))
 }
 
 await swipe('right')
@@ -213,6 +263,33 @@ await page.getByRole('button', { name: 'Back' }).click()
 await page.locator('.tap95card .tapNum').waitFor()
 assert.equal((await page.locator('.tap95card .tapNum').innerText()).trim(), '1')
 assert.match(await homeContinue.innerText(), /Continue past 95/)
+assert.equal(await page.locator('.layout-footer .tbLink', { hasText: 'Today' }).evaluate((el) => el.classList.contains('active')), true)
+
+await versesTab.click()
+await page.locator('article.CounterVerses').waitFor()
+assert.match(page.url(), /#\/counters/)
+assert.equal(await versesTab.evaluate((el) => el.classList.contains('active')), true)
+
+for (const vp of [
+  { width: 360, height: 740, shot: 'after-360x740.png' },
+  { width: 1280, height: 800, shot: 'after-desktop.png' }
+]) {
+  await page.setViewportSize({ width: vp.width, height: vp.height })
+  await page.locator('.cvPager button').first().click()
+  const seen = []
+  for (let i = 0; i < expected.length; i++) {
+    if (i > 0) await page.locator('.cvPager button').nth(i).click()
+    const layout = await layoutOf()
+    assertLayout(layout, expected[i].id + ' @' + vp.width)
+    seen.push(layout)
+  }
+  for (const key of ['heading', 'title', 'button']) {
+    const ys = seen.map((item) => item[key].y)
+    assert.equal(Math.max(...ys), Math.min(...ys), vp.width + ' ' + key + ' y changes: ' + ys.join(','))
+  }
+  await page.locator('.cvPager button').nth(1).click()
+  await page.screenshot({ path: outDir + '/' + vp.shot })
+}
 
 assert.deepEqual(errors, [], 'console errors: ' + errors.join('\n'))
 await browser.close()

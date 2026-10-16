@@ -47,7 +47,7 @@ Hash routes match the previous app. The first three menu entries are the main ta
 | Location | `#/locationsetup` |
 | Other Settings | `#/othersetup` |
 | About | `#/about` |
-| Verses (from the counter’s More button; not a tab) | `#/counters` |
+| Verses | `#/counters` |
 
 ## Settings
 

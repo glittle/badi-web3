@@ -17,7 +17,7 @@ export default {
         return {
             name: 'Counters',
             title: 'Verses',
-            icon: 'plus_one',
+            icon: '/statics/counter95.svg',
             session: session,
             verses: verses,
             tapContinue: storage.get('tapContinue', false),

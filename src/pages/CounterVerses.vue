@@ -1,5 +1,5 @@
 <template>
-    <article class="CounterVerses layout-padding" :data-verse="verse.id">
+    <article class="CounterVerses" :data-verse="verse.id">
         <div class="heading">
             <button type="button" class="small light round back" v-on:click="goBack">Back</button>
             <span class="desc">Verses</span>
@@ -22,7 +22,6 @@
                 <div class="cvSlide" aria-live="polite">
                     <h2>{{ verse.title }}</h2>
                     <p class="cvText">{{ verse.text }}</p>
-                    <p class="cvTimes">{{ verse.target }} times</p>
                     <p class="cvSource">
                         <a v-bind:href="verse.url" target="_blank" rel="noopener">{{ verse.source }}</a>
                     </p>
@@ -47,9 +46,16 @@
             </div>
         </div>
         <div class="cvDock tap95card">
-            <div class="main95">
+            <button type="button"
+                    class="primary circular big"
+                    v-on:click="tap"
+                    v-bind:disabled="tapBtnDisabled"
+                    v-html="tapBtnText"
+                    v-bind:title="'Tap to count ' + verse.title"></button>
+            <div class="cvBelow">
                 <div class="cvCount">
                     <span class="tapNum">{{ count }}</span>
+                    <p class="cvTimes">{{ verse.target }} times</p>
                     <div class="cvTapDots" aria-hidden="true">
                         <div v-for="(row, rowIndex) in dotRows" v-bind:key="rowIndex">
                             <span v-for="n in row"
@@ -57,40 +63,36 @@
                                   v-bind:class="{ tapped: n <= count, five: n % 5 === 0 }"></span>
                         </div>
                     </div>
-                    <div class="cvGroupDots" v-show="continues" aria-hidden="true">
-                        <div>
-                            <span v-for="n in groupSlots"
-                                  v-bind:key="n"
-                                  v-bind:class="{ tapped: n < group, future: n > group }"
-                                  v-bind:style="groupStyle(n)">{{ groupLabel(n) }}</span>
+                    <div class="cvGroupSlot" aria-hidden="true">
+                        <div class="cvGroupDots" v-show="continues">
+                            <div>
+                                <span v-for="n in groupSlots"
+                                      v-bind:key="n"
+                                      v-bind:class="{ tapped: n < group, future: n > group }"
+                                      v-bind:style="groupStyle(n)">{{ groupLabel(n) }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <button type="button"
-                        class="primary circular big"
-                        v-on:click="tap"
-                        v-bind:disabled="tapBtnDisabled"
-                        v-html="tapBtnText"
-                        v-bind:title="'Tap to count ' + verse.title"></button>
-            </div>
-            <div class="tapControl">
-                <div>
-                    <button type="button" class="reset small light round" v-on:click="resetCount">Reset</button>
-                    <template v-if="allowContinue">
-                        <span class="continue">
-                            Continue past {{ verse.target }}?
-                        </span>
-                        <q-toggle v-model="tapContinue" />
-                    </template>
-                </div>
-                <div class="cvPrefs">
-                    <label><input type="checkbox" v-model="tapAuto">Auto</label>
-                    <label><input type="checkbox" v-model="tapSounds">Sound</label>
-                </div>
-                <div class="tapDelayArea" v-bind:style="{ opacity: tapAuto ? 1 : 0.25 }">
-                    <span>Auto
-                        <span>{{ autoSeconds }}</span></span>
-                    <q-range v-model="tapAutoDelay" v-bind:step="500" v-bind:min="1000" v-bind:max="15000"></q-range>
+                <div class="tapControl">
+                    <div class="cvActions">
+                        <button type="button" class="reset small light round" v-on:click="resetCount">Reset</button>
+                        <template v-if="allowContinue">
+                            <span class="continue">
+                                Continue past {{ verse.target }}?
+                            </span>
+                            <q-toggle v-model="tapContinue" />
+                        </template>
+                    </div>
+                    <div class="cvPrefs">
+                        <label><input type="checkbox" v-model="tapAuto">Auto</label>
+                        <label><input type="checkbox" v-model="tapSounds">Sound</label>
+                    </div>
+                    <div class="tapDelayArea" v-bind:style="{ opacity: tapAuto ? 1 : 0.25 }">
+                        <span>Auto
+                            <span>{{ autoSeconds }}</span></span>
+                        <q-range v-model="tapAutoDelay" v-bind:step="500" v-bind:min="1000" v-bind:max="15000"></q-range>
+                    </div>
                 </div>
             </div>
         </div>
