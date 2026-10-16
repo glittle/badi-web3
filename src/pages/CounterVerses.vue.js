@@ -5,7 +5,8 @@ import {
     ensureSession,
     selectVerse,
     rememberCounter,
-    verseById
+    verseById,
+    LEGACY_VERSE_ID
 } from '../scripts/counterVerses'
 
 const SWIPE_MIN = 48
@@ -71,10 +72,18 @@ export default {
         },
         autoSeconds() {
             return (Math.round(this.tapAutoDelay / 100) / 10).toFixed(1) + ' s'
+        },
+        // Continue-past is the shared Alláh-u-Abhá setting. Other verses always stop at their target.
+        allowContinue() {
+            return this.verse.id === LEGACY_VERSE_ID
+        },
+        continues() {
+            return this.allowContinue && this.tapContinue
         }
     },
     watch: {
         tapContinue: function (value) {
+            if (!this.allowContinue) return
             const id = this.verse.id
             const entry = this.session.counts[id]
             if (value) {
@@ -198,7 +207,7 @@ export default {
             if (!this.count && this.$ga) {
                 this.$ga.event('tapVerse', 'started', verse.id)
             }
-            if (entry.count === target && !this.tapContinue) {
+            if (entry.count === target && !this.continues) {
                 this.tapAutoRunning = false
                 rememberCounter(verse.id, entry.count, entry.group, {
                     storedCount: 0,
@@ -216,7 +225,7 @@ export default {
             }
             rememberCounter(verse.id, count, group, { locked: false })
             this.playFor(count, target)
-            if (count === target && !this.tapContinue) this.tapAutoRunning = false
+            if (count === target && !this.continues) this.tapAutoRunning = false
             if (this.tapAutoRunning) {
                 this.tapAutoTimer = setTimeout(() => this.doTap(), this.tapAutoDelay)
             }

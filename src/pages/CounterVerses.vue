@@ -57,7 +57,7 @@
                                   v-bind:class="{ tapped: n <= count, five: n % 5 === 0 }"></span>
                         </div>
                     </div>
-                    <div class="cvGroupDots" v-show="tapContinue" aria-hidden="true">
+                    <div class="cvGroupDots" v-show="continues" aria-hidden="true">
                         <div>
                             <span v-for="n in groupSlots"
                                   v-bind:key="n"
@@ -76,10 +76,12 @@
             <div class="tapControl">
                 <div>
                     <button type="button" class="reset small light round" v-on:click="resetCount">Reset</button>
-                    <span class="continue">
-                        Continue past {{ verse.target }}?
-                    </span>
-                    <q-toggle v-model="tapContinue" />
+                    <template v-if="allowContinue">
+                        <span class="continue">
+                            Continue past {{ verse.target }}?
+                        </span>
+                        <q-toggle v-model="tapContinue" />
+                    </template>
                 </div>
                 <div class="cvPrefs">
                     <label><input type="checkbox" v-model="tapAuto">Auto</label>

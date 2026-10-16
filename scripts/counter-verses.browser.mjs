@@ -32,6 +32,7 @@ await page.addInitScript(() => {
   localStorage.setItem('tapGroup95', '__q_numb|2')
   localStorage.setItem('tapAuto', '__q_bool|0')
   localStorage.setItem('tapSounds', '__q_bool|0')
+  localStorage.setItem('tapContinue', '__q_bool|1')
   localStorage.setItem('__verseTestReady', '__q_bool|1')
 })
 
@@ -106,6 +107,20 @@ for (let i = 0; i < expected.length; i++) {
   assert.ok(box, 'tap button is missing')
   assert.ok(box.y > 420, 'counter is not in the thumb zone: y=' + box.y)
   assert.ok(box.y + box.height < 844, 'tap button is below the viewport')
+  const continueLabel = page.locator('article.CounterVerses .continue')
+  const continueToggle = page.locator('article.CounterVerses .q-toggle')
+  if (verse.id === 'allah-u-abha-95') {
+    await continueLabel.waitFor({ state: 'visible' })
+    assert.match(await continueLabel.innerText(), /Continue past 95/)
+    assert.equal(await continueToggle.count(), 1)
+    await page.screenshot({ path: outDir + '/verse-with-continue.png' })
+  } else {
+    assert.equal(await continueLabel.count(), 0, verse.id + ' still shows continue past')
+    assert.equal(await continueToggle.count(), 0, verse.id + ' still shows the continue toggle')
+    if (verse.id === 'guidance-decision-19') {
+      await page.screenshot({ path: outDir + '/verse-without-continue.png' })
+    }
+  }
   await page.screenshot({ path: outDir + '/' + verse.file })
 }
 
@@ -138,11 +153,66 @@ await page.locator('.cvPager button[aria-label="Women in their courses"]').click
 assert.equal((await page.locator('article.CounterVerses .tapNum').innerText()).trim(), '0')
 await page.locator('.cvPager button[aria-label="After the compensating prostrations"]').click()
 assert.equal((await page.locator('article.CounterVerses .tapNum').innerText()).trim(), '2')
+assert.equal(await page.locator('article.CounterVerses .continue').count(), 0)
 
 await page.getByRole('button', { name: 'Back' }).click()
 await page.locator('.tap95card .tapNum').waitFor()
 assert.match(page.url(), /#\/?$/)
 assert.equal((await page.locator('.tap95card .tapNum').innerText()).trim(), '18')
+const homeContinue = page.locator('.tap95card .continue')
+await homeContinue.waitFor({ state: 'visible' })
+assert.match(await homeContinue.innerText(), /Continue past 95/)
+assert.equal(await page.locator('.tap95card .q-toggle').count(), 1)
+
+await page.locator('.tap95card button.more').click()
+await page.locator('article.CounterVerses').waitFor()
+assert.equal(await page.locator('article.CounterVerses').getAttribute('data-verse'), 'missed-prayers-18')
+assert.equal(await page.locator('article.CounterVerses .continue').count(), 0)
+
+async function tapTimes(n) {
+  await tap.evaluate((el, times) => {
+    for (let i = 0; i < times; i++) el.click()
+  }, n)
+}
+
+await tapTimes(16)
+assert.equal((await page.locator('article.CounterVerses .tapNum').innerText()).trim(), '18')
+assert.equal(await tap.isDisabled(), false)
+await tapTimes(1)
+assert.equal((await page.locator('article.CounterVerses .tapNum').innerText()).trim(), '18')
+assert.equal(await tap.isDisabled(), true)
+
+const afterStop = await page.evaluate(() => {
+  const raw = localStorage.getItem('counterVerses') || ''
+  const saved = JSON.parse(raw.slice(raw.indexOf('|') + 1))
+  return {
+    tapContinue: localStorage.getItem('tapContinue'),
+    tapNum: localStorage.getItem('tapNum'),
+    stored: saved.counts['missed-prayers-18']
+  }
+})
+assert.equal(afterStop.tapContinue, '__q_bool|1')
+assert.equal(afterStop.tapNum, '__q_numb|18')
+assert.deepEqual(afterStop.stored, { count: 0, group: 1 })
+
+await page.locator('.cvPager button[aria-label="Alláh-u-Abhá (daily)"]').click()
+await page.locator('article.CounterVerses .continue').waitFor({ state: 'visible' })
+await tapTimes(77)
+assert.equal((await page.locator('article.CounterVerses .tapNum').innerText()).trim(), '95')
+assert.equal(await tap.isDisabled(), false)
+await tapTimes(1)
+assert.equal((await page.locator('article.CounterVerses .tapNum').innerText()).trim(), '1')
+assert.equal(await page.evaluate(() => localStorage.getItem('tapContinue')), '__q_bool|1')
+assert.equal(await page.evaluate(() => localStorage.getItem('tapNum')), '__q_numb|1')
+
+await page.locator('.cvPager button').nth(1).click()
+assert.equal(await page.locator('article.CounterVerses').getAttribute('data-verse'), 'guidance-decision-19')
+assert.equal(await page.locator('article.CounterVerses .continue').count(), 0)
+
+await page.getByRole('button', { name: 'Back' }).click()
+await page.locator('.tap95card .tapNum').waitFor()
+assert.equal((await page.locator('.tap95card .tapNum').innerText()).trim(), '1')
+assert.match(await homeContinue.innerText(), /Continue past 95/)
 
 assert.deepEqual(errors, [], 'console errors: ' + errors.join('\n'))
 await browser.close()
