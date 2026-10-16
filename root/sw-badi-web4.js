@@ -37,8 +37,7 @@ self.addEventListener('activate', (event) => {
     const precache = await caches.open(PRECACHE)
     const cached = await precache.keys()
     await Promise.all(cached.map((request) => {
-      const pathname = new URL(request.url).pathname
-      if (PRECACHE_URLS.indexOf(pathname) === -1) return precache.delete(request)
+      if (!precacheListed(request.url)) return precache.delete(request)
     }))
     await self.clients.claim()
     // Pages still running the v1 script do not listen for controllerchange.
@@ -84,6 +83,12 @@ function cacheable(response) {
   return response && response.ok && response.type === 'basic' && !response.redirected
 }
 
+function precacheListed(requestUrl) {
+  const cachedUrl = new URL(requestUrl)
+  const full = cachedUrl.pathname + cachedUrl.search
+  return PRECACHE_URLS.indexOf(cachedUrl.pathname) !== -1 || PRECACHE_URLS.indexOf(full) !== -1
+}
+
 self.addEventListener('fetch', (event) => {
   const request = event.request
   let url
@@ -126,6 +131,9 @@ self.addEventListener('fetch', (event) => {
   }
 
   event.respondWith((async () => {
+    const precache = await caches.open(PRECACHE)
+    const precached = await precache.match(request)
+    if (precached) return precached
     const cache = await caches.open(RUNTIME)
     const hit = await cache.match(request)
     const network = fetch(request).then(async (response) => {

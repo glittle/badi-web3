@@ -13,10 +13,42 @@
 #Listing .btnPrev {
   float: right;
 }
+/* The page padding lives on the scroll container, and sticky top:0 sticks
+   below that padding, so list rows slide through the gap. Keep the top
+   padding on the heading instead, and let the filter bar pin to the top. */
+#Listing.layout-padding {
+  padding-top: 0;
+}
+#Listing .listingHead {
+  padding-top: 1.5rem;
+}
+@media only screen and (min-width: 921px) and (max-width: 1280px) {
+  #Listing .listingHead {
+    padding-top: 2.5rem;
+  }
+}
+@media only screen and (min-width: 1281px) {
+  #Listing .listingHead {
+    padding-top: 3rem;
+  }
+}
 #Listing .switches {
-  margin: 0 0 24px 0;
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  margin: 0 0 12px 0;
+  padding: 8px 0 10px;
   display: flex;
+  flex-wrap: nowrap;
   justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  background: #fff;
+  border-bottom: 1px solid #e6e6e6;
+}
+#Listing .toggles {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 #Listing .toggles > label {
   display: inline-block;
@@ -27,14 +59,23 @@
   vertical-align: middle;
 }
 #Listing .suggestedStart {
-  float: right;
+  flex: 0 0 auto;
+  width: min-content;
+  max-width: 9em;
   color: #7f8c8d;
   font-size: 0.8em;
+  line-height: 1.15;
   text-align: center;
 }
 #Listing .suggestedStart span {
   display: block;
   padding-bottom: 1px;
+  white-space: normal;
+}
+#Listing .suggestedStart select {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
 }
 #Listing .dayList {
   clear: both;

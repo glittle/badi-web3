@@ -362,6 +362,12 @@ div.line b {
 }
 .card.share .support p {
   margin: 0 8px 4px 80px;
+  user-select: text;
+  -webkit-user-select: text;
+}
+.card.share .support p a {
+  user-select: text;
+  -webkit-user-select: text;
 }
 .google_ad_1 {
   text-align: center;
