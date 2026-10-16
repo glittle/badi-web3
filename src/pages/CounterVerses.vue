@@ -1,12 +1,7 @@
 <template>
     <article class="CounterVerses" :data-verse="verse.id">
         <div class="cvTop">
-            <div class="cvCarousel"
-                 ref="carousel"
-                 v-touch-swipe.horizontal="onSwipe"
-                 v-on:pointerdown="onPointerDown"
-                 v-on:pointerup="onPointerUp"
-                 v-on:pointercancel="onPointerCancel">
+            <div class="cvNav">
                 <button type="button"
                         class="cvArrow"
                         aria-label="Previous verse"
@@ -14,14 +9,15 @@
                         v-on:click="showPrevious">
                     <i>keyboard_arrow_left</i>
                 </button>
-                <div class="cvSlide" aria-live="polite">
-                    <h2>{{ verse.title }}</h2>
-                    <div class="cvTextBox">
-                        <p class="cvText">{{ verse.text }}</p>
-                    </div>
-                    <p class="cvSource">
-                        <a v-bind:href="verse.url" target="_blank" rel="noopener">{{ sourceLabel }}</a>
-                    </p>
+                <div class="cvPager" role="tablist" aria-label="Count">
+                    <button type="button"
+                            v-for="item in verses"
+                            v-bind:key="item.id"
+                            role="tab"
+                            v-bind:aria-label="item.title"
+                            v-bind:aria-selected="item.id === session.selectedId"
+                            v-bind:class="{ on: item.id === session.selectedId }"
+                            v-on:click="select(item.id)"></button>
                 </div>
                 <button type="button"
                         class="cvArrow"
@@ -31,15 +27,21 @@
                     <i>keyboard_arrow_right</i>
                 </button>
             </div>
-            <div class="cvPager" role="tablist" aria-label="Count">
-                <button type="button"
-                        v-for="item in verses"
-                        v-bind:key="item.id"
-                        role="tab"
-                        v-bind:aria-label="item.title"
-                        v-bind:aria-selected="item.id === session.selectedId"
-                        v-bind:class="{ on: item.id === session.selectedId }"
-                        v-on:click="select(item.id)"></button>
+            <div class="cvCarousel"
+                 ref="carousel"
+                 v-touch-swipe.horizontal="onSwipe"
+                 v-on:pointerdown="onPointerDown"
+                 v-on:pointerup="onPointerUp"
+                 v-on:pointercancel="onPointerCancel">
+                <div class="cvSlide" aria-live="polite">
+                    <h2>{{ verse.title }}</h2>
+                    <div class="cvTextBox">
+                        <p class="cvText">{{ verse.text }}</p>
+                    </div>
+                    <p class="cvSource">
+                        <a v-bind:href="verse.url" target="_blank" rel="noopener">{{ sourceLabel }}</a>
+                    </p>
+                </div>
             </div>
         </div>
         <div class="cvDock tap95card">

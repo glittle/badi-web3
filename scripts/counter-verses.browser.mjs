@@ -123,6 +123,10 @@ async function layoutOf() {
       dots: box(q('article.CounterVerses .cvTapDots')),
       prefs: box(q('article.CounterVerses .cvPrefs')),
       actions: box(q('article.CounterVerses .cvActions')),
+      pager: box(q('article.CounterVerses .cvPager')),
+      prev: box(q('article.CounterVerses .cvArrow[aria-label="Previous verse"]')),
+      next: box(q('article.CounterVerses .cvArrow[aria-label="Next verse"]')),
+      dockBorder: parseFloat(getComputedStyle(q('article.CounterVerses .cvDock')).borderTopWidth) || 0,
       delay: box(q('article.CounterVerses .tapDelayArea')),
       footer: box(q('.layout-footer')),
       vw: window.innerWidth,
@@ -139,6 +143,14 @@ function assertLayout(layout, label) {
   assert.ok(layout.prefs.y >= layout.actions.b + 8, label + ' Auto and Sound are not below the reset row')
   assert.ok(layout.delay.y >= layout.prefs.b + 6, label + ' slider is not below Auto and Sound')
   assert.ok(layout.box.y >= layout.title.b + 12, label + ' verse box has no top margin')
+  assert.ok(layout.pager.b <= layout.title.y, label + ' verse dots are not above the title')
+  const pagerMid = layout.pager.y + layout.pager.h / 2
+  for (const arrow of [layout.prev, layout.next]) {
+    assert.ok(Math.abs(arrow.y + arrow.h / 2 - pagerMid) <= 4, label + ' arrows are not on the dots line')
+  }
+  assert.ok(layout.prev.x + layout.prev.w <= layout.pager.x && layout.next.x >= layout.pager.x + layout.pager.w, label + ' dots are not between the arrows')
+  assert.ok(layout.prev.x < 24 && layout.next.x + layout.next.w > layout.vw - 24, label + ' arrows are not at the edges')
+  assert.equal(layout.dockBorder, 0, label + ' divider still shown above the counter')
   assert.ok(layout.box.y >= layout.title.b - 12, label + ' verse box is not under the title')
   assert.ok(layout.button.b <= layout.footer.y, label + ' tap button overlaps the bottom bar')
   assert.ok(layout.delay.b <= layout.footer.y + 1, label + ' slider is behind the bottom bar')
