@@ -209,13 +209,32 @@ button.small.push::after {
   line-height: inherit;
   margin: 0;
 }
+/* Location and Notifications shown as cards on Today: the title is an <h2>
+   sized like the other Today card titles. */
 .LocationSetup h2.pageTitle,
 .Notifications h2.pageTitle {
-  margin: 0;
-  font-size: 1.8rem;
-  font-weight: 300;
-  line-height: 110%;
-  letter-spacing: -0.04em;
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #333;
+}
+/* Those two cards: same 3px inset as the other Today cards, no page padding. */
+.Home .locationHolder {
+  margin: 0 auto;
+}
+.Home .locationHolder > article.layout-padding {
+  padding: 3px 3px 6px;
+}
+/* Settings pages keep to the About page's 700px column on wide screens. */
+article.otherSetup,
+article.LocationSetup,
+article.Notifications {
+  width: 100%;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 /* Dates: the page heading is an <h1> that looks like the old <h3>. */
 #Listing h1.listingTitle {
