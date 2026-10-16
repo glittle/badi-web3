@@ -209,6 +209,10 @@ for (const key of ['title', 'box', 'button']) {
   const ys = tops.map((item) => item[key].y)
   assert.equal(Math.max(...ys), Math.min(...ys), key + ' y changes between verses: ' + ys.join(','))
 }
+for (const key of ['x', 'w', 'h']) {
+  const vals = tops.map((item) => item.button[key])
+  assert.equal(Math.max(...vals), Math.min(...vals), 'tap button ' + key + ' changes between verses: ' + vals.join(','))
+}
 
 await swipe('right')
 assert.equal(await page.locator('article.CounterVerses').getAttribute('data-verse'), 'women-courses-95')
