@@ -5,13 +5,16 @@ import Notifications from './Notifications.vue'
 import LocationSetup from './LocationSetup.vue'
 import OtherSetup from './OtherSetup.vue'
 import About from './About.vue'
+import CounterVerses from './CounterVerses.vue'
 import Error404 from './Error404.vue'
 
-// Order in the menus. The first three (Home, Listing, Verse) are the main tabs.
+// Order in the menus. Home, Dates, Verse, and Count are the bottom tabs.
+// Count stays out of the edge-swipe order so a wide swipe on that page does not leave it.
 const names = [
   { name: 'Home', path: '/', group: 'main', component: Home },
   { name: 'Listing', group: 'main', component: Listing },
   { name: 'Verse', group: 'main', component: Verse },
+  { name: 'Counters', path: 'counters', group: 'main', swipe: false, component: CounterVerses },
   { name: 'Notifications', group: 'setup', component: Notifications },
   { name: 'LocationSetup', group: 'setup', component: LocationSetup },
   { name: 'OtherSetup', group: ['setup', 'initial'], component: OtherSetup },
@@ -35,6 +38,7 @@ const routeInfoList = names.map(function (n) {
     name: vueName,
     path: path,
     group: group,
+    swipe: n.swipe !== false,
     key: vueName
   }
 })
@@ -51,7 +55,8 @@ const menuPages = routeInfoList
       icon: data.icon,
       index: '' + i,
       name: ri.name,
-      group: ri.group
+      group: ri.group,
+      swipe: ri.swipe
     }
   })
 
@@ -59,16 +64,19 @@ function getNext(delta, currentRoute) {
   if (!currentRoute || !currentRoute.matched || !currentRoute.matched.length) {
     return null
   }
+  var pages = menuPages.filter(function (page) {
+    return page.swipe !== false
+  })
   var path = currentRoute.matched[0].path.substring(1) || '/'
   var desired = -1
-  for (var i = 0; i < menuPages.length; i++) {
-    if (path === menuPages[i].to) {
+  for (var i = 0; i < pages.length; i++) {
+    if (path === pages[i].to) {
       desired = i + delta
       break
     }
   }
-  if (desired >= 0 && desired < menuPages.length) {
-    return menuPages[desired].to
+  if (desired >= 0 && desired < pages.length) {
+    return pages[desired].to
   }
   return null
 }

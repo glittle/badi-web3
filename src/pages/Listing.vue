@@ -1,40 +1,40 @@
 <template>
   <article class="layout-padding" id="Listing">
     <div>
-      <div v-if="!onHome">
+      <div class="listingHead" v-if="!onHome">
         <button v-on:click="loadDates(prevYear)" class="small light btnPrev">Previous year ({{prevYear}} BE)</button>
         <h3>{{this.title}}</h3>
         <div class=location>Times for <span v-html="location"></span></div>
-        <div class="switches">
-          <div class="toggles">
-            <label>
-              <q-toggle v-model="includeHolyDays" class="teal" id="includeHolyDays"></q-toggle>
-              <span v-msg="'includeHolyDays,extractAccessKeyFor:includeHolyDays'"></span>
-            </label>
-            <label>
-              <q-toggle v-model="includeFeasts" class="teal" id="includeFeasts"></q-toggle>
-              <span v-msg="'includeFeasts,extractAccessKeyFor:includeFeasts'"></span>
-            </label>
-            <label>
-              <q-toggle v-model="includeOther" class="teal" id="includeOther"></q-toggle>
-              <span v-msg="'includeOther,extractAccessKeyFor:includeOther'"></span>
-            </label>
-            <label>
-              <q-toggle v-model="includeFast" class="teal" id="includeFast"></q-toggle>
-              <span v-msg="'includeFast,extractAccessKeyFor:includeFast'"></span>
-            </label>
-          </div>
-          <div class="suggestedStart">
-            <span>Suggested start at </span>
-            <select v-model=suggestedStart>
-              <option value="">none</option>
-              <option value=1800>6:00 pm</option>
-              <option value=1830>6:30 pm</option>
-              <option value=1900>7:00 pm</option>
-              <option value=1930>7:30 pm</option>
-              <option value=2000>8:00 pm</option>
-            </select>
-          </div>
+      </div>
+      <div class="switches" v-if="!onHome">
+        <div class="toggles">
+          <label>
+            <q-toggle v-model="includeHolyDays" class="teal" id="includeHolyDays"></q-toggle>
+            <span v-msg="'includeHolyDays,extractAccessKeyFor:includeHolyDays'"></span>
+          </label>
+          <label>
+            <q-toggle v-model="includeFeasts" class="teal" id="includeFeasts"></q-toggle>
+            <span v-msg="'includeFeasts,extractAccessKeyFor:includeFeasts'"></span>
+          </label>
+          <label>
+            <q-toggle v-model="includeOther" class="teal" id="includeOther"></q-toggle>
+            <span v-msg="'includeOther,extractAccessKeyFor:includeOther'"></span>
+          </label>
+          <label>
+            <q-toggle v-model="includeFast" class="teal" id="includeFast"></q-toggle>
+            <span v-msg="'includeFast,extractAccessKeyFor:includeFast'"></span>
+          </label>
+        </div>
+        <div class="suggestedStart">
+          <span>Suggested start at </span>
+          <select v-model=suggestedStart>
+            <option value="">none</option>
+            <option value=1800>6:00 pm</option>
+            <option value=1830>6:30 pm</option>
+            <option value=1900>7:00 pm</option>
+            <option value=1930>7:30 pm</option>
+            <option value=2000>8:00 pm</option>
+          </select>
         </div>
       </div>
       <div class="dayList">
@@ -114,6 +114,10 @@
                   <img alt="end of day sunset" src="/statics/sunset.png">
                   <span v-html="day.FastSunset"></span>
                 </div>
+              </div>
+              <div class="linkToggle" v-if="day.links.length">
+                <q-toggle icon="format_list_bulleted" v-model="day.showingLinks"></q-toggle>
+                <span v-html="day.links.length"></span>
               </div>
             </div>
           </div>

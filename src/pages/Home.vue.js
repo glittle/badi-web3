@@ -15,6 +15,7 @@ import '../scripts/stringExt'
 import moment from 'moment-timezone'
 import Highcharts from 'highcharts'
 import routeList from './routes'
+import { ensureSession, rememberCounter, LEGACY_VERSE_ID } from '../scripts/counterVerses'
 
 export default {
     data() {
@@ -154,6 +155,9 @@ export default {
         window.addEventListener('resize', this.handleResize)
         window.addEventListener('keyup', this.keyup)
 
+        this._onLegacyCounter = this.onLegacyCounter.bind(this);
+        window._messageBus.$on('counterVerses', this._onLegacyCounter);
+
         this.makeTapDots();
         this.updateTapDisplay();
         this.syncTapDots();
@@ -202,6 +206,10 @@ export default {
             vue.$ga.event('stillOn', 'home');
         }, 30000)
     },
+    deactivated() {
+        this.tapAutoRunning = false;
+        clearTimeout(this.tapAutoTimer);
+    },
     // doWorkOnPulse() {
     //   console.log('pulse in home');
     //   drawChart(local.sun)
@@ -220,6 +228,7 @@ export default {
     },
     beforeUnmount() {
         window.removeEventListener('resize', this.handleResize)
+        if (this._onLegacyCounter) window._messageBus.$off('counterVerses', this._onLegacyCounter)
     },
     watch: {
         tapContinue: function(a) {
@@ -229,6 +238,7 @@ export default {
             } else {
                 this.tapGroup95 = 1;
                 storage.set('tapGroup95', this.tapGroup95);
+                this.mirrorLegacy();
             }
             storage.set('tapContinue', a);
             this.syncTapDots();
@@ -480,6 +490,7 @@ export default {
                 // reset on next load.
                 storage.set('tapNum', 0);
                 storage.set('tapGroup95', 1);
+                this.mirrorLegacy({ storedCount: 0, storedGroup: 1, locked: true });
                 this.updateTapDisplay();
                 return;
             }
@@ -494,6 +505,7 @@ export default {
 
             storage.set('tapNum', this.tapNum);
             storage.set('tapGroup95', this.tapGroup95);
+            this.mirrorLegacy({ locked: false });
 
             document.getElementById('tap_' + this.tapNum).classList.add('tapped');
             this.makeGroupDots();
@@ -548,6 +560,7 @@ export default {
 
             storage.set('tapNum', this.tapNum);
             storage.set('tapGroup95', this.tapGroup95);
+            this.mirrorLegacy({ locked: false });
 
             this.tapAutoRunning = false;
             this.tapBtnDisabled = false;
@@ -626,7 +639,34 @@ export default {
         drawChart: function() {
             drawChart(local.sun, this.timeFormat);
         },
+        mirrorLegacy: function(options) {
+            options = Object.assign({}, options);
+            var live = ensureSession();
+            var locked = options.locked != null ? options.locked : !!live.locked[LEGACY_VERSE_ID];
+            if (locked && options.storedCount == null) options.storedCount = 0;
+            if (locked) options.locked = true;
+            rememberCounter(LEGACY_VERSE_ID, this.tapNum, this.tapGroup95, options);
+        },
+        onLegacyCounter: function(id) {
+            if (id !== LEGACY_VERSE_ID) return;
+            var live = ensureSession();
+            var entry = live.counts[LEGACY_VERSE_ID];
+            if (!entry) return;
+            var locked = !!live.locked[LEGACY_VERSE_ID];
+            this.tapNum = entry.count;
+            this.tapGroup95 = entry.group;
+            if (locked) {
+                this.tapAutoRunning = false;
+                clearTimeout(this.tapAutoTimer);
+                this.tapBtnDisabled = true;
+            } else {
+                this.tapBtnDisabled = false;
+            }
+            if (document.getElementById('tap_1')) this.syncTapDots();
+            this.updateTapDisplay();
+        },
         keyup: function(ev) {
+            if (this.$route.name !== 'Home') return;
             switch (ev.code) {
                 case 'KeyV':
                     this.toggleVerseSpeech = !this.toggleVerseSpeech;

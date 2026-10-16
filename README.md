@@ -28,7 +28,7 @@ npm run preview   # serve dist/ at http://127.0.0.1:4173
 npm run test:storage
 ```
 
-`npm run build` writes a static `dist/` folder for Vercel. It copies `root/` (`robots.txt`, `sitemap.xml`, `.well-known/assetlinks.json`, `version.json`, the web manifest) and `src/statics/`. `sw-badi-web4.js` is copied and then stamped with the app version and the hashed files from Vite's asset manifest. Paths served outside this app stay outside it: `/badiService`, `/feasts`, `/images`, `/files`, `/scripts`.
+`npm run build` writes a static `dist/` folder for Vercel. It copies `root/` (`robots.txt`, `sitemap.xml`, `.well-known/assetlinks.json`, `version.json`, the web manifest) and `src/statics/`. `sw-badi-web4.js` is copied and then stamped with the app version, the hashed files from Vite's asset manifest, `/index.html`, `/manifest.json`, the small shell images (tab icons, the four manifest icons, and the static icons the pages use), and the counter sounds (`each.mp3`, `each19.mp3`, `each95.mp3`). A byte-range request for those sounds is answered from that cache. It does not precache `/images` or `/files`. A same-origin request is answered from that precache when the file is there. Paths served outside this app stay outside it: `/badiService`, `/feasts`, `/images`, `/files`, `/scripts`.
 
 The host should send `Content-Type: application/manifest+json` for `/manifest.json`, and `Cache-Control: no-cache` for `/sw-badi-web4.js`, `/version.json`, and `/index.html`. Hashed files under `/assets/` can be cached as immutable. Do not cache `/badiService`.
 
@@ -36,7 +36,7 @@ The host should send `Content-Type: application/manifest+json` for `/manifest.js
 
 ## Routes
 
-Hash routes match the previous app. The first three menu entries are the main tabs:
+Hash routes match the previous app. Today, Dates, Verse, and Count are the bottom tabs:
 
 | Menu | Hash |
 | --- | --- |
@@ -47,10 +47,11 @@ Hash routes match the previous app. The first three menu entries are the main ta
 | Location | `#/locationsetup` |
 | Other Settings | `#/othersetup` |
 | About | `#/about` |
+| Count | `#/counters` |
 
 ## Settings
 
-`localStorage` keeps the Quasar 0.13 prefixes (`__q_numb|`, `__q_bool|`, `__q_strn|`, …) so an existing browser keeps location, 24-hour time, Arabic month names, the 95-count, and the Dates filters.
+`localStorage` keeps the Quasar 0.13 prefixes (`__q_numb|`, `__q_bool|`, `__q_strn|`, …) so an existing browser keeps location, 24-hour time, Arabic month names, the 95-count, and the Dates filters. The verse page stores `counterVerses` with that same prefix. The first time it is read, the saved `tapNum` / `tapGroup95` count is copied onto Alláh-u-Abhá, and later taps on that verse keep `tapNum` in step.
 
 ## Zoom
 
