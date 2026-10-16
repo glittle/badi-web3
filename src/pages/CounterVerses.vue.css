@@ -10,6 +10,8 @@ article.CounterVerses {
   padding: 12px 8px 0;
   margin: 0 auto;
   width: 100%;
+  /* Same column as the Today cards and the bottom bar on wide screens. */
+  max-width: 480px;
 }
 .CounterVerses .cvTop {
   flex: 1 1 auto;

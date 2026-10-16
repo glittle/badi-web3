@@ -129,6 +129,7 @@ async function layoutOf() {
       dockBorder: parseFloat(getComputedStyle(q('article.CounterVerses .cvDock')).borderTopWidth) || 0,
       delay: box(q('article.CounterVerses .tapDelayArea')),
       footer: box(q('.layout-footer')),
+      art: box(q('article.CounterVerses')),
       vw: window.innerWidth,
       vh: window.innerHeight
     }
@@ -149,7 +150,12 @@ function assertLayout(layout, label) {
     assert.ok(Math.abs(arrow.y + arrow.h / 2 - pagerMid) <= 4, label + ' arrows are not on the dots line')
   }
   assert.ok(layout.prev.x + layout.prev.w <= layout.pager.x && layout.next.x >= layout.pager.x + layout.pager.w, label + ' dots are not between the arrows')
-  assert.ok(layout.prev.x < 24 && layout.next.x + layout.next.w > layout.vw - 24, label + ' arrows are not at the edges')
+  const artRight = layout.art.x + layout.art.w
+  assert.ok(layout.prev.x < layout.art.x + 24 && layout.next.x + layout.next.w > artRight - 24, label + ' arrows are not at the edges')
+  // On wide screens the page keeps to the same 480px column as Today, centred.
+  assert.ok(layout.art.w <= 480, label + ' count page is wider than 480px: ' + layout.art.w)
+  assert.ok(Math.abs(layout.art.x - (layout.vw - artRight)) <= 1, label + ' count page is not centred')
+  assert.ok(layout.button.x >= layout.art.x && layout.button.x + layout.button.w <= artRight, label + ' tap button is outside the column')
   assert.equal(layout.dockBorder, 0, label + ' divider still shown above the counter')
   assert.ok(layout.box.y >= layout.title.b - 12, label + ' verse box is not under the title')
   assert.ok(layout.button.b <= layout.footer.y, label + ' tap button overlaps the bottom bar')
@@ -361,7 +367,7 @@ async function tapBoxesForAllVerses() {
   return boxes[0]
 }
 
-for (const vp of [{ width: 390, height: 844 }, { width: 360, height: 740 }]) {
+for (const vp of [{ width: 390, height: 844 }, { width: 360, height: 740 }, { width: 1280, height: 800 }]) {
   await page.setViewportSize(vp)
   const swapBtn = page.locator('article.CounterVerses button.cvSwap')
   assert.equal(await page.locator('.cvDock.cvSwapped').count(), 0)
@@ -370,13 +376,14 @@ for (const vp of [{ width: 390, height: 844 }, { width: 360, height: 740 }]) {
     const r = (sel) => document.querySelector('article.CounterVerses ' + sel).getBoundingClientRect()
     const reset = r('button.reset')
     const swap = r('button.cvSwap')
-    return { reset: { x: reset.x, r: reset.right, b: reset.bottom, w: reset.width }, swap: { x: swap.x, r: swap.right, y: swap.y, w: swap.width }, vw: innerWidth }
+    const art = document.querySelector('article.CounterVerses').getBoundingClientRect()
+    return { reset: { x: reset.x, r: reset.right, b: reset.bottom, w: reset.width }, swap: { x: swap.x, r: swap.right, y: swap.y, w: swap.width }, left: art.x }
   })
   const left = await pair()
   assert.ok(left.swap.y >= left.reset.b, 'Swap is not under Reset')
   assert.equal(left.swap.x, left.reset.x, 'Swap and Reset do not share a left edge')
   assert.equal(left.swap.w, left.reset.w, 'Swap and Reset differ in size')
-  assert.ok(left.reset.x <= 12, 'Reset is not at the left margin')
+  assert.ok(left.reset.x <= left.left + 12, 'Reset is not at the left margin')
   await swapBtn.click()
   assert.equal(await page.locator('.cvDock.cvSwapped').count(), 1, 'swap did not apply')
   assert.equal(await page.evaluate(() => localStorage.getItem('tapSwap')), '__q_bool|1')
@@ -384,7 +391,7 @@ for (const vp of [{ width: 390, height: 844 }, { width: 360, height: 740 }]) {
   assert.notEqual(swapped, plain)
   const sides = await page.evaluate(() => {
     const r = (s) => document.querySelector('article.CounterVerses ' + s).getBoundingClientRect()
-    return { tap: r('button.primary.circular'), dots: r('.cvTapDots'), reset: r('button.reset'), swap: r('button.cvSwap'), vw: innerWidth }
+    return { tap: r('button.primary.circular'), dots: r('.cvTapDots'), reset: r('button.reset'), swap: r('button.cvSwap'), vw: r('').right }
   })
   assert.ok(sides.tap.right <= sides.dots.left, 'swapped tap button is not left of the dots')
   assert.ok(sides.dots.right >= sides.vw - 24, 'swapped dots are not at the right margin')
