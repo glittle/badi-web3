@@ -1,6 +1,6 @@
 {
   "name": "badi-web3",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Tools for the Badíʿ Calendar",
   "author": "Glen Little <glen.little@gmail.com>",
   "private": true,
@@ -12,7 +12,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1 --port 4173",
-    "test:storage": "node --test scripts/storage-encoding.test.mjs"
+    "test:storage": "node --test scripts/storage-encoding.test.mjs scripts/counter-verses.test.mjs"
   },
   "dependencies": {
     "axios": "^1.12.2",

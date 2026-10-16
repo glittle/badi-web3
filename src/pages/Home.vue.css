@@ -190,6 +190,17 @@ div.line b {
 .tap95card .heading .type {
   margin-left: 3px;
 }
+.tap95card .heading > span:last-child {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.tap95card .heading button.more {
+  margin: 0 8px 0 0;
+  padding: 3px 8px;
+  min-height: 1rem;
+}
 .tap95card .heading label {
   margin-right: 5px;
 }

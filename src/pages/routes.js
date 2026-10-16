@@ -5,6 +5,7 @@ import Notifications from './Notifications.vue'
 import LocationSetup from './LocationSetup.vue'
 import OtherSetup from './OtherSetup.vue'
 import About from './About.vue'
+import CounterVerses from './CounterVerses.vue'
 import Error404 from './Error404.vue'
 
 // Order in the menus. The first three (Home, Listing, Verse) are the main tabs.
@@ -16,6 +17,7 @@ const names = [
   { name: 'LocationSetup', group: 'setup', component: LocationSetup },
   { name: 'OtherSetup', group: ['setup', 'initial'], component: OtherSetup },
   { name: 'About', group: 'setup', component: About },
+  { name: 'Counters', path: 'counters', group: 'hidden', component: CounterVerses },
   { name: 'Error404', path: '*', group: 'hidden', component: Error404 }
 ]
 

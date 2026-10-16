@@ -1,0 +1,197 @@
+article.CounterVerses {
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 8px 8px 6px;
+  margin: 0 auto;
+  width: 100%;
+}
+.CounterVerses .heading {
+  flex: 0 0 auto;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.CounterVerses .heading .desc {
+  font-weight: 500;
+  color: #2980b9;
+}
+.CounterVerses .heading .index {
+  color: #777;
+  font-size: 0.85rem;
+}
+.CounterVerses .heading button.back {
+  margin: 0;
+  padding: 3px 10px;
+  min-height: 1.6rem;
+}
+.CounterVerses .cvTop {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.CounterVerses .cvCarousel {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+  touch-action: pan-y pinch-zoom;
+}
+.CounterVerses .cvArrow {
+  flex: 0 0 36px;
+  align-self: center;
+  width: 36px;
+  min-height: 64px;
+  padding: 0;
+  background: transparent;
+  color: #2980b9;
+  box-shadow: none;
+}
+.CounterVerses .cvArrow[disabled] {
+  opacity: 0.28;
+}
+.CounterVerses .cvArrow i {
+  font-size: 32px;
+}
+.CounterVerses .cvSlide {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+  padding: 4px 2px 8px;
+}
+.CounterVerses .cvSlide h2 {
+  margin: 0 0 8px;
+  color: #2980b9;
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+.CounterVerses .cvText {
+  margin: 0;
+  font-family: 'Gentium Book Basic', Georgia, 'Times New Roman', serif;
+  font-size: 1.35rem;
+  line-height: 1.35;
+  color: #212121;
+}
+.CounterVerses .cvTimes {
+  margin: 10px 0 0;
+  color: #2980b9;
+  font-weight: 500;
+}
+.CounterVerses .cvSource {
+  margin: 6px 0 0;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: #666;
+}
+.CounterVerses .cvSource a {
+  color: #2980b9;
+}
+.CounterVerses .cvPager {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 4px 0 8px;
+}
+.CounterVerses .cvPager button {
+  width: 9px;
+  height: 9px;
+  min-height: 9px;
+  padding: 0;
+  border-radius: 50%;
+  background: #d7d7d7;
+  box-shadow: none;
+}
+.CounterVerses .cvPager button.on {
+  background: #2980b9;
+}
+.CounterVerses .cvDock {
+  flex: 0 0 auto;
+  width: 100%;
+  border-top: 1px solid #e4e4e4;
+  padding-top: 4px;
+}
+.CounterVerses .cvDock .main95 {
+  height: auto;
+  min-height: 0;
+  flex-direction: column;
+  gap: 4px;
+}
+.CounterVerses .cvCount {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.CounterVerses .cvDock .main95 button.circular.big {
+  height: 88px;
+  width: 88px;
+  margin: 2px 0 4px;
+}
+.CounterVerses .cvTapDots div,
+.CounterVerses .cvGroupDots div {
+  height: 10px;
+  white-space: nowrap;
+  text-align: center;
+}
+.CounterVerses .cvTapDots span {
+  background-color: #eee;
+  display: inline-block;
+  height: 7px;
+  width: 7px;
+  margin: 2px;
+  transition: background-color 0.4s;
+}
+.CounterVerses .cvTapDots span.tapped {
+  border-radius: 50%;
+  background-color: #2980b9;
+}
+.CounterVerses .cvTapDots span.tapped.five {
+  background-color: #FFA726;
+}
+.CounterVerses .cvGroupDots {
+  margin-top: 4px;
+}
+.CounterVerses .cvGroupDots span {
+  display: inline-block;
+  height: 13px;
+  width: 19px;
+  margin: 0 4px 0 0;
+  border-radius: 2px;
+  text-align: center;
+  padding: 2px 1px 0 2px;
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+  background-color: #eee;
+  color: #eee;
+}
+.CounterVerses .cvGroupDots span.tapped {
+  color: #000;
+}
+.CounterVerses .cvGroupDots span.future {
+  background-color: #fafafa;
+}
+.CounterVerses .tapControl {
+  padding: 0 4px 0 2px;
+}
+.CounterVerses .cvPrefs {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+  font-size: 0.9rem;
+}
+.CounterVerses .cvPrefs input {
+  vertical-align: text-bottom;
+  margin-right: 3px;
+}
+.CounterVerses .tapDelayArea {
+  margin-top: 6px;
+}

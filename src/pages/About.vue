@@ -28,6 +28,7 @@
                         v-on:click="reload">force a reload now</span>)</span>
             </p>
             <ul>
+                <li>ver 2.1 - verse carousel beside the 95 counter, each verse with its own count</li>
                 <li>ver 2.0 - rebuilt on Vue 3 and Vite; pinch-zoom and browser zoom work</li>
                 <li>ver 1.21 - remove old links; improve date listing</li>
             </ul>

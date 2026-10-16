@@ -47,10 +47,11 @@ Hash routes match the previous app. The first three menu entries are the main ta
 | Location | `#/locationsetup` |
 | Other Settings | `#/othersetup` |
 | About | `#/about` |
+| Verses (from the counter’s More button; not a tab) | `#/counters` |
 
 ## Settings
 
-`localStorage` keeps the Quasar 0.13 prefixes (`__q_numb|`, `__q_bool|`, `__q_strn|`, …) so an existing browser keeps location, 24-hour time, Arabic month names, the 95-count, and the Dates filters.
+`localStorage` keeps the Quasar 0.13 prefixes (`__q_numb|`, `__q_bool|`, `__q_strn|`, …) so an existing browser keeps location, 24-hour time, Arabic month names, the 95-count, and the Dates filters. The verse page stores `counterVerses` with that same prefix. The first time it is read, the saved `tapNum` / `tapGroup95` count is copied onto Alláh-u-Abhá, and later taps on that verse keep `tapNum` in step.
 
 ## Zoom
 

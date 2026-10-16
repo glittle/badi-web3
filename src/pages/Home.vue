@@ -63,6 +63,7 @@
             <div class="heading">
                 <span class="desc">95 Alláh-u-Abhás</span>
                 <span>
+                    <button v-on:click="$router.push('counters')" class="small light round more">More</button>
                     <label><input type=checkbox v-model="tapAuto">Auto</label>
                     <label><input type=checkbox v-model="tapSounds">Sound</label>
                 </span>
