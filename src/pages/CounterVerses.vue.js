@@ -28,6 +28,7 @@ export default {
             tapAutoDelay: storage.get('tapAutoDelay', 2000),
             tapAuto: storage.get('tapAuto', true),
             tapSounds: storage.get('tapSounds', true),
+            tapSwap: storage.get('tapSwap', false),
             tapLastTime: 0,
             drag: null,
             soundIds: {
@@ -102,6 +103,9 @@ export default {
         },
         tapSounds: function (value) {
             storage.set('tapSounds', value)
+        },
+        tapSwap: function (value) {
+            storage.set('tapSwap', value)
         },
         tapAuto: function (value) {
             storage.set('tapAuto', value)

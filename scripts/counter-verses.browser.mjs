@@ -331,6 +331,49 @@ for (const vp of [
   await page.screenshot({ path: outDir + '/' + vp.shot })
 }
 
+// Swap mirrors the counter area. The choice is kept in tapSwap, and the tap
+// button holds one place per mode across every verse.
+async function tapBoxesForAllVerses() {
+  const boxes = []
+  for (let i = 0; i < expected.length; i++) {
+    await page.locator('.cvPager button').nth(i).click()
+    boxes.push(await tap.evaluate((el) => {
+      const r = el.getBoundingClientRect()
+      return [r.x, r.y, r.width, r.height].join(',')
+    }))
+  }
+  await page.locator('.cvPager button').first().click()
+  assert.equal(new Set(boxes).size, 1, 'tap button moves between verses: ' + boxes.join(' | '))
+  return boxes[0]
+}
+
+for (const vp of [{ width: 390, height: 844 }, { width: 360, height: 740 }]) {
+  await page.setViewportSize(vp)
+  const swapBtn = page.locator('article.CounterVerses button.cvSwap')
+  assert.equal(await page.locator('.cvDock.cvSwapped').count(), 0)
+  const plain = await tapBoxesForAllVerses()
+  await swapBtn.click()
+  assert.equal(await page.locator('.cvDock.cvSwapped').count(), 1, 'swap did not apply')
+  assert.equal(await page.evaluate(() => localStorage.getItem('tapSwap')), '__q_bool|1')
+  const swapped = await tapBoxesForAllVerses()
+  assert.notEqual(swapped, plain)
+  const sides = await page.evaluate(() => {
+    const r = (s) => document.querySelector('article.CounterVerses ' + s).getBoundingClientRect()
+    return { tap: r('button.primary.circular'), dots: r('.cvTapDots'), reset: r('button.reset'), prefs: r('.cvPrefs label:last-of-type'), vw: innerWidth }
+  })
+  assert.ok(sides.tap.right <= sides.dots.left, 'swapped tap button is not left of the dots')
+  assert.ok(sides.dots.right >= sides.vw - 24, 'swapped dots are not at the right margin')
+  assert.ok(sides.prefs.right >= sides.vw - 24, 'swapped Auto/Sound are not right-aligned')
+  await page.reload()
+  await page.locator('article.CounterVerses').waitFor()
+  assert.equal(await page.locator('.cvDock.cvSwapped').count(), 1, 'swap not kept after reload')
+  assert.equal(await tapBoxesForAllVerses(), swapped)
+  if (vp.width === 390) await page.screenshot({ path: outDir + '/swapped-390x844.png' })
+  await swapBtn.click()
+  assert.equal(await page.evaluate(() => localStorage.getItem('tapSwap')), '__q_bool|0')
+  assert.equal(await tapBoxesForAllVerses(), plain)
+}
+
 assert.deepEqual(errors, [], 'console errors: ' + errors.join('\n'))
 
 await page.waitForFunction(() => navigator.serviceWorker && navigator.serviceWorker.controller, null, { timeout: 15000 })

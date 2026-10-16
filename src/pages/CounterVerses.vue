@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class="cvDock tap95card">
+        <div class="cvDock tap95card" v-bind:class="{ cvSwapped: tapSwap }">
             <div class="cvArrange">
                 <div class="cvCount">
                     <span class="tapNum">{{ count }}</span>
@@ -87,6 +87,11 @@
                 <div class="cvPrefs">
                     <label><input type="checkbox" v-model="tapAuto">Auto</label>
                     <label><input type="checkbox" v-model="tapSounds">Sound</label>
+                    <button type="button"
+                            class="cvSwap small light round"
+                            v-bind:aria-pressed="tapSwap"
+                            title="Move the tap button to the other side"
+                            v-on:click="tapSwap = !tapSwap">Swap</button>
                 </div>
                 <div class="tapDelayArea" v-bind:style="{ opacity: tapAuto ? 1 : 0.25 }">
                     <span>Auto

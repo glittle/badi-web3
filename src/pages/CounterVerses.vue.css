@@ -258,6 +258,9 @@ article.CounterVerses {
 }
 .CounterVerses .cvPrefs {
   display: flex;
+  align-items: center;
+  width: 100%;
+  height: 17px;
   justify-content: flex-start;
   gap: 20px;
   margin: 12px 0 0;
@@ -294,4 +297,54 @@ article.CounterVerses {
   .CounterVerses .cvSource {
     min-height: 0;
   }
+}
+/* Swap: a small button at the tap button's side of the Auto/Sound row. */
+.CounterVerses .cvDock button.cvSwap {
+  margin: 0 0 0 auto;
+  padding: 0 10px;
+  height: 17px;
+  min-height: 0;
+  line-height: 17px;
+  font-size: 11px;
+}
+/* Swapped: the tap button moves to the left column and the dots and every
+   control line sit at the right, right-aligned. CSS only. */
+.CounterVerses .cvSwapped .cvArrange {
+  grid-template-columns: minmax(0, 1fr) 228px;
+}
+.CounterVerses .cvSwapped .cvArrange > button.circular.big {
+  grid-column: 1;
+}
+.CounterVerses .cvSwapped .cvCount {
+  grid-column: 2;
+  align-items: flex-end;
+}
+.CounterVerses .cvSwapped .tapNum,
+.CounterVerses .cvSwapped .cvTimes {
+  text-align: right;
+}
+.CounterVerses .cvSwapped .cvTapDots div,
+.CounterVerses .cvSwapped .cvGroupDots div {
+  text-align: right;
+}
+.CounterVerses .cvSwapped .cvGroupDots span {
+  margin: 0 0 0 3px;
+}
+.CounterVerses .cvSwapped .tapControl {
+  align-items: flex-end;
+}
+.CounterVerses .cvSwapped .cvActions,
+.CounterVerses .cvSwapped .cvPrefs {
+  justify-content: flex-end;
+}
+.CounterVerses .cvDock.cvSwapped button.cvSwap {
+  order: -1;
+  margin: 0 auto 0 0;
+}
+.CounterVerses .cvSwapped .tapDelayArea {
+  flex-direction: row-reverse;
+  padding: 0 0 0 4px;
+}
+.CounterVerses .cvSwapped .tapDelayArea > span {
+  margin: 0 0 0 20px;
 }
