@@ -1120,24 +1120,6 @@
             "desc": "Prayers for the Fast (Bahá’í Prayers)"
         }
     ],
-    "M": [
-        {
-            "url": "https://www.bahai.org/action/institutional-capacity/nineteen-day-feast",
-            "icon": "-readingsWeb",
-            "desc": "The Nineteen Day Feast (bahai.org)"
-        },
-        {
-            "url": "https://www.bahai.org/library/authoritative-texts/prayers/bahai-prayers/3#733570464",
-            "icon": "-readingsWeb",
-            "type": "auth",
-            "desc": "Prayers for the Nineteen Day Feast"
-        },
-        {
-            "url": "https://bahaiteachings.org/memorizing-the-months-of-the-bahai-calendar/",
-            "icon": "-readingsWeb",
-            "desc": "Memorizing the Months of the Bahá’í Calendar"
-        }
-    ],
     "Fast": [
         {
             "url": "https://www.youtube.com/watch?v=EOfXQkrbyQU",
