@@ -1,3 +1,8 @@
+/* Keep lines readable on wide screens; same width as the Dates list. */
+.About > article {
+  max-width: 700px;
+  margin: 0 auto;
+}
 .About .layout-content {
   flex-direction: column;
 }
