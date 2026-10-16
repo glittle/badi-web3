@@ -39,12 +39,16 @@
   margin: 0 0 12px 0;
   padding: 8px 0 10px;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 8px 12px;
+  gap: 8px;
   background: #fff;
   border-bottom: 1px solid #e6e6e6;
+}
+#Listing .toggles {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 #Listing .toggles > label {
   display: inline-block;
@@ -55,14 +59,23 @@
   vertical-align: middle;
 }
 #Listing .suggestedStart {
-  float: right;
+  flex: 0 0 auto;
+  width: min-content;
+  max-width: 9em;
   color: #7f8c8d;
   font-size: 0.8em;
+  line-height: 1.15;
   text-align: center;
 }
 #Listing .suggestedStart span {
   display: block;
   padding-bottom: 1px;
+  white-space: normal;
+}
+#Listing .suggestedStart select {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
 }
 #Listing .dayList {
   clear: both;

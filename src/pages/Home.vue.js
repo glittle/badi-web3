@@ -39,10 +39,7 @@ export default {
             tapAuto: storage.get('tapAuto', true),
             tapSounds: storage.get('tapSounds', true),
             prayer: prayerHelper.getRandom(),
-            addToHomeScreenEvent: null,
-            siteUrl: 'https://wondrous-badi.today',
-            urlCopied: false,
-            canShare: typeof navigator.share === 'function'
+            addToHomeScreenEvent: null
         }
     },
     components: {
@@ -282,56 +279,6 @@ export default {
         // }
     },
     methods: {
-        copySiteUrl() {
-            var vue = this;
-            var text = vue.siteUrl;
-            var done = function () {
-                vue.urlCopied = true;
-                if (vue._copyTimer) clearTimeout(vue._copyTimer);
-                vue._copyTimer = setTimeout(function () {
-                    vue.urlCopied = false;
-                }, 1600);
-            };
-            var fallback = function () {
-                var area = document.createElement('textarea');
-                area.value = text;
-                area.setAttribute('readonly', '');
-                area.style.position = 'fixed';
-                area.style.top = '0';
-                area.style.left = '0';
-                area.style.opacity = '0';
-                document.body.appendChild(area);
-                area.focus();
-                area.select();
-                var ok = false;
-                try {
-                    ok = document.execCommand('copy');
-                } catch (e) {
-                    ok = false;
-                }
-                document.body.removeChild(area);
-                if (ok) done();
-            };
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(text).then(done).catch(fallback);
-            } else {
-                fallback();
-            }
-        },
-        shareSiteUrl() {
-            var vue = this;
-            if (typeof navigator.share === 'function') {
-                navigator.share({
-                    title: "Wondrous-Badíʿ Today",
-                    url: vue.siteUrl
-                }).catch(function (err) {
-                    if (err && err.name === 'AbortError') return;
-                    vue.copySiteUrl();
-                });
-                return;
-            }
-            vue.copySiteUrl();
-        },
         addToHomeScreen() {
             var vue = this;
             console.log('show add to home')
