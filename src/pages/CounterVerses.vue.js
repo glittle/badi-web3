@@ -6,6 +6,7 @@ import {
     selectVerse,
     rememberCounter,
     verseById,
+    linkedSourceName,
     LEGACY_VERSE_ID
 } from '../scripts/counterVerses'
 
@@ -27,6 +28,7 @@ export default {
             tapAutoDelay: storage.get('tapAutoDelay', 2000),
             tapAuto: storage.get('tapAuto', true),
             tapSounds: storage.get('tapSounds', true),
+            tapSwap: storage.get('tapSwap', false),
             tapLastTime: 0,
             drag: null,
             soundIds: {
@@ -67,11 +69,18 @@ export default {
             }
             return rows
         },
+        // Width of one row of dots: each dot is 7px plus 2px margin on each side.
+        dotsWidth() {
+            return Math.min(this.verse.target, 19) * 11 + 'px'
+        },
         groupSlots() {
             return [1, 2, 3, 4, 5, 6, 7, 8, 9]
         },
         autoSeconds() {
             return (Math.round(this.tapAutoDelay / 100) / 10).toFixed(1) + ' s'
+        },
+        sourceLabel() {
+            return linkedSourceName(this.verse)
         },
         // Continue-past is the shared Alláh-u-Abhá setting. Other verses always stop at their target.
         allowContinue() {
@@ -98,6 +107,9 @@ export default {
         },
         tapSounds: function (value) {
             storage.set('tapSounds', value)
+        },
+        tapSwap: function (value) {
+            storage.set('tapSwap', value)
         },
         tapAuto: function (value) {
             storage.set('tapAuto', value)
@@ -138,11 +150,6 @@ export default {
         this.stopAuto()
     },
     methods: {
-        goBack() {
-            const state = window.history.state
-            if (state && state.back) this.$router.back()
-            else this.$router.push('/')
-        },
         select(id) {
             if (id === this.verse.id) return
             this.stopAuto()

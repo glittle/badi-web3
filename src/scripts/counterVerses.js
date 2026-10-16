@@ -29,6 +29,45 @@ function asVerse(raw) {
 
 export const verses = rawVerses.map(asVerse)
 
+function foldSource(value) {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[áàâä]/g, 'a')
+    .replace(/[íìîï]/g, 'i')
+    .replace(/[’'ʻ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+// The stored citation can name several works. The link opens one of them.
+// Show that work's name, not the paragraph pin or the other citations.
+export function linkedSourceName(verse) {
+  const parts = String(verse && verse.source || '').split(';').map(function (part) {
+    return part.trim()
+  }).filter(Boolean)
+  if (!parts.length) return ''
+  const url = foldSource(verse && verse.url)
+  let best = parts[0]
+  let bestScore = -1
+  parts.forEach(function (part) {
+    const words = foldSource(part).split('-').filter(function (word) {
+      return word.length > 4
+    })
+    let score = 0
+    words.forEach(function (word) {
+      if (url.indexOf(word) !== -1) score += word.length
+    })
+    if (score > bestScore) {
+      best = part
+      bestScore = score
+    }
+  })
+  return best
+    .replace(/\s+¶\s*\d+/, '')
+    .replace(/\s*\([^)]*\)\s*$/, '')
+    .trim()
+}
+
 export const LEGACY_VERSE_ID = (verses.find(function (verse) {
   return verse.id === 'allah-u-abha-95'
 }) || verses.find(function (verse) {

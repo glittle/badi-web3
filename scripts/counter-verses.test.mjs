@@ -24,6 +24,7 @@ const {
   verses,
   LEGACY_VERSE_ID,
   COUNTER_STORAGE_KEY,
+  linkedSourceName,
   ensureSession,
   resetCounterSession,
   rememberCounter,
@@ -60,6 +61,18 @@ test('verse list matches the four research entries', () => {
   assert.equal(verses[3].source, 'Bahá’u’lláh, Kitáb-i-Aqdas ¶14; Q&A 60')
   assert.equal(verses[3].url, 'https://www.bahai.org/library/authoritative-texts/bahaullah/kitab-i-aqdas/5#433941746')
   assert.equal(verses[3].group, 'aqdas-substitutes')
+})
+
+test('the source link shows only the work it opens', () => {
+  assert.equal(linkedSourceName(verses[0]), 'Bahá’u’lláh, Kitáb-i-Aqdas')
+  assert.equal(linkedSourceName(verses[1]), 'Bahá’u’lláh, Additional Prayers Revealed by Bahá’u’lláh')
+  assert.equal(linkedSourceName(verses[2]), 'Bahá’u’lláh, Kitáb-i-Aqdas')
+  assert.equal(linkedSourceName(verses[3]), 'Bahá’u’lláh, Kitáb-i-Aqdas')
+  for (const verse of verses) {
+    const shown = linkedSourceName(verse)
+    assert.equal(shown.includes('¶'), false)
+    assert.equal(/Notes|Synopsis|Q&A|UHJ|background|authorized/.test(shown), false)
+  }
 })
 
 test('migrates the saved 95 once and leaves the other verses at zero', () => {
