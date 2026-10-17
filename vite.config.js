@@ -102,7 +102,9 @@ const COUNTER_SOUND_URLS = [
 ]
 
 function collectPrecacheUrls(viteManifest) {
-  const urls = new Set(['/index.html', '/manifest.json'])
+  // /manifest.json is not precached: the service worker leaves it to the
+  // network so Chrome always installs (and updates) the app from the live file.
+  const urls = new Set(['/index.html'])
   for (const item of Object.values(viteManifest)) {
     if (item.file) urls.add('/' + item.file)
     for (const css of item.css || []) urls.add('/' + css)
