@@ -109,8 +109,6 @@ export default {
                 this.addPrevious();
             }
 
-            vue.$ga.event('verse', 'previous');
-
             this.historyIndex++;
             this.showVerse();
         },
@@ -243,8 +241,6 @@ export default {
             };
             window.speechSynthesis.speak(msg);
             vue.speakingNow = true;
-
-            vue.$ga.event('verse', 'speak');
 
             // var P = talk.Player;
             // var x = new P()

@@ -22,7 +22,7 @@ page.on('pageerror', (err) => errors.push(err.message))
 page.on('console', (msg) => {
   if (msg.type() !== 'error') return
   const text = msg.text()
-  if (/google-analytics|googleapis|gstatic|firebase|fonts\.g|Failed to load resource|net::ERR/i.test(text)) return
+  if (/_vercel\/insights|googleapis|gstatic|firebase|fonts\.g|Failed to load resource|net::ERR/i.test(text)) return
   errors.push(text)
 })
 

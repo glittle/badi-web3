@@ -5,7 +5,7 @@ import router from './router'
 import store from './scripts/store'
 import badiCalc from './scripts/badiCalc'
 import createBus from './scripts/bus'
-import { installAnalytics, gaHelper } from './scripts/analytics'
+import { installAnalytics } from './scripts/analytics'
 import touchSwipe from './directives/touch-swipe'
 import { registerPages } from './pages/routes'
 
@@ -53,7 +53,6 @@ applyTheme()
 const app = createApp(App)
 app.use(router)
 app.use(store)
-app.config.globalProperties.$ga = gaHelper
 // Template helper for strings in locales/en/*.json: $msg('key', { count: 3 })
 app.config.globalProperties.$msg = function (key, obj) { return messages.get(key, obj) }
 app.directive('touch-swipe', touchSwipe)
