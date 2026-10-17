@@ -28,7 +28,7 @@ npm run preview   # serve dist/ at http://127.0.0.1:4173
 npm run test:storage
 ```
 
-`npm run build` writes a static `dist/` folder for Vercel. It copies `root/` (`robots.txt`, `sitemap.xml`, `.well-known/assetlinks.json`, `version.json`, the web manifest) and `src/statics/`. `sw-badi-web4.js` is copied and then stamped with the app version, the hashed files from Vite's asset manifest, `/index.html`, `/manifest.json`, the small shell images (tab icons, the four manifest icons, and the static icons the pages use), and the counter sounds (`each.mp3`, `each19.mp3`, `each95.mp3`). A byte-range request for those sounds is answered from that cache. It does not precache `/images` or `/files`. A same-origin request is answered from that precache when the file is there. Paths served outside this app stay outside it: `/badiService`, `/feasts`, `/images`, `/files`, `/scripts`.
+`npm run build` writes a static `dist/` folder for Vercel. It copies `root/` (`robots.txt`, `sitemap.xml`, `.well-known/assetlinks.json`, `version.json`, the web manifest) and `src/statics/`. `sw-badi-web4.js` is copied and then stamped with the app version, the hashed files from Vite's asset manifest, `/index.html`, `/manifest.json`, the small shell images (tab icons, the four manifest icons, and the static icons the pages use), and the counter sounds (`each.mp3`, `each19.mp3`, `each95.mp3`). A byte-range request for those sounds is answered from that cache. It does not precache `/images` or `/files`. A same-origin request is answered from that precache when the file is there. Paths served outside this app stay outside it: `/_vercel/` (Vercel Web Analytics, never cached), `/badiService`, `/feasts`, `/images`, `/files`, `/scripts`.
 
 The host should send `Content-Type: application/manifest+json` for `/manifest.json`, and `Cache-Control: no-cache` for `/sw-badi-web4.js`, `/version.json`, and `/index.html`. Hashed files under `/assets/` can be cached as immutable. Do not cache `/badiService`.
 
@@ -65,5 +65,5 @@ These point at the public site or at services that are not part of `dist/`:
 - `https://wondrous-badi.today/files/FeastBook-*.pdf` (date links; `/files` is hosted separately)
 - `/images/…` calendar art (hosted separately)
 - Firebase project `wondrous-badi-today` (`https://wondrous-badi-today.firebaseio.com`)
-- Google Analytics `UA-1312528-11`, Google Fonts, and the Maps Geocoding request in Location setup
+- Google Fonts, and the Maps Geocoding request in Location setup
 - `https://wondrous-badi.today/feasts`, `/images`, `/badiService` in `sitemap.xml`

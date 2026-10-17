@@ -220,9 +220,6 @@ export default {
             vue.setupDone = false;
         }
         drawChart(local.sun, this.timeFormat, true)
-        setTimeout(function() {
-            vue.$ga.event('stillOn', 'home');
-        }, 30000)
     },
     deactivated() {
         this.tapAutoRunning = false;
@@ -420,7 +417,6 @@ export default {
             // read 'prayers.json'; json created with:
             // JSON.stringify($('.prayerlinks tr:not(.headingrow)').map(function(i,el){ var tr=$(el); var a = tr.find('a'); return { link: 'http://www.bahaiprayers.org/' + a.attr('href'), text: a.text(), by: tr.find('.cauthor').text() }}).get())
             window.open(link, '_blank');
-            this.$ga.event('prayer', 'viewed');
         },
         getNewPrayer: function() {
             this.prayer = prayerHelper.getRandom()
@@ -484,10 +480,6 @@ export default {
             // this.playSound(this.tapSoundForEnd, .1);
             // this.playSound(this.tapSoundForSteps, .1);
             // }
-            if (!this.tapNum) {
-                console.log('tap ga')
-                this.$ga.event('tap95', 'started', this.tapAuto ? 'auto' : 'manual');
-            }
         },
         syncTapDots: function() {
             // call to update dots if may be out of sync

@@ -1295,18 +1295,6 @@
         "message": "Setup",
         "description": "page for setup information"
     },
-    "setupOptOutTitle": {
-        "message": "Analytics",
-        "description": "title for setup section about opting out of Google Analytics"
-    },
-    "setupOptOutPara": {
-        "message": "To help understand how this Web Extension is being used, statistics are recorded whenever you switch between pages or do other major actions. This is anonymous, and the associated reports can be viewed by Glen Little. If you wish to opt out and turn this off, you may check this box:",
-        "description": "explanation of opting out of Google Analytics"
-    },
-    "setupOptOut": {
-        "message": "Opt out?",
-        "description": "label for checkbox"
-    },
     "setupAboutTitle": {
         "message": "About",
         "description": "title for the About section"

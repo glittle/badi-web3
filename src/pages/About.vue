@@ -28,6 +28,7 @@
                         v-on:click="reload">force a reload now</button>)</span>
             </p>
             <ul>
+                <li>ver 2.4.1 - Page-view statistics now use Vercel Web Analytics (no cookies), replacing the old statistics service that Google retired</li>
                 <li>ver 2.4 - Theme: choose a colour palette and Light, Dark or Auto (follows your device), on Today and in Other Settings</li>
                 <li>ver 2.3 - easier to use with screen readers and the keyboard; colour palettes and counter announcements in Other Settings</li>
                 <li>ver 2.2 - Count page uses the Today counter layout, without a back button or page heading</li>

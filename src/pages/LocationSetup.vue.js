@@ -65,9 +65,6 @@ export default {
             return `${tz.replace(/_/g, ' ')} (${moment.tz(tz).format("Z z")})`
         }
     },
-    mounted() {
-        this.$ga.event('location', 'displayed');
-    },
     created() {
         if (!shared.coords.sourceIsSet || this.source === 'guess') {
             this.guessing = true;
@@ -248,7 +245,6 @@ export default {
                 clearLog = false;
                 vue.gettingLocation = false;
             }
-            this.$ga.event('location', 'lookup');
         },
         // openMap() {
         //     var url = `https://www.google.ca/maps/place/${this.name}/@${this.lat},${this.lng},10z`;

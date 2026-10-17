@@ -254,9 +254,6 @@ export default {
             const verse = this.verse
             const entry = this.session.counts[verse.id]
             const target = verse.target
-            if (!this.count && this.$ga) {
-                this.$ga.event('tapVerse', 'started', verse.id)
-            }
             if (entry.count === target && !this.continues) {
                 this.tapAutoRunning = false
                 rememberCounter(verse.id, entry.count, entry.group, {
