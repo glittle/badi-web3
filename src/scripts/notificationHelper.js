@@ -8,9 +8,14 @@ import './stringExt'
 
 // var image = null;
 
-export function showNow(di) {
+// askIfNeeded: true only when called from a user click (Show Now). Browsers
+// only show the permission prompt in response to a user action.
+export function showNow(di, askIfNeeded) {
     di = di || badiCalc.di;
     if (!di || !di.stamp) {
+        if (askIfNeeded) {
+            console.log('notification skipped: date info not ready (location not set?)')
+        }
         return;
     }
 
@@ -22,10 +27,11 @@ export function showNow(di) {
     show(mainTitle, body,
         shared.formats.statusIconText.filledWith(di),
         di.bDay,
-        false)
+        false,
+        askIfNeeded)
 }
 
-export function show(note1, note2, iconText, iconDayNum, makeSound) {
+export function show(note1, note2, iconText, iconDayNum, makeSound, askIfNeeded) {
     // Check for notification compatibility.
     if (!('Notification' in window)) {
         // If the browser version is unsupported, remain silent.
@@ -37,12 +43,16 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
     // If the user has not been asked to grant or deny notifications
     // from this domain...
     if (Notification.permission === 'default') {
-
-        // console.log('asking for permission to notify');
-        // Notification.requestPermission(function () {
-        //   // ...callback this function once a permission level has been set.
-        //   (note1, note2, iconText, iconDayNum, makeSound);
-        // });
+        if (askIfNeeded) {
+            Notification.requestPermission().then(function(result) {
+                window._messageBus && window._messageBus.$emit('notificationPermissionChanged');
+                if (result === 'granted') {
+                    show(note1, note2, iconText, iconDayNum, makeSound, false);
+                }
+            }).catch(function(err) {
+                console.log('notification permission request failed', err && err.message ? err.message : err)
+            });
+        }
     }
     // If the user has granted permission for this domain to send notifications...
     else if (Notification.permission === 'granted') {
@@ -82,7 +92,7 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
         if (navigator.serviceWorker) {
             console.log('notification via serviceWorker')
             navigator.serviceWorker.ready.then(function(registration) {
-                registration.showNotification(note1, options)
+                return registration.showNotification(note1, options)
                     // .then(function(n, a, b) {
                     // debugger;
                     //--> n is null
@@ -100,6 +110,8 @@ export function show(note1, note2, iconText, iconDayNum, makeSound) {
                     //     };
                     // }
                     // });
+            }).catch(function(err) {
+                console.log('showNotification failed', err && err.message ? err.message : err)
             });
         } else {
             console.log('notification via Notificaion 2')
