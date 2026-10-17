@@ -28,6 +28,7 @@
                     class="small secondary">Lookup My Location
 
             </button>
+            <p class="locationError" role="alert" v-text="locationError"></p>
            <!--
             <button @click="openMap"
                     class="small secondary floatRight">Open Google Maps</button> -->

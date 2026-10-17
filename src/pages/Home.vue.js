@@ -11,6 +11,7 @@ import Listing from './Listing.vue'
 import prayerHelper from '../scripts/prayerLinkHelper'
 import dateLinksInfo from '../assets/datelinks.json'
 import * as notificationHelper from '../scripts/notificationHelper'
+import { isIosBrowserTab } from '../scripts/platform'
 
 
 import * as shared from '../scripts/shared'
@@ -45,6 +46,8 @@ export default {
             tapSounds: storage.get('tapSounds', true),
             prayer: prayerHelper.getRandom(),
             addToHomeScreenEvent: null,
+            iosInstallHint: isIosBrowserTab(),
+            iosInstallOpen: false,
             themeChosen: themeChosen()
         }
     },

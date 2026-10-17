@@ -29,6 +29,7 @@ export default {
             statusLines: [],
             guessing: false,
             gettingLocation: false,
+            locationError: '',
             gettingName: false,
             // manual validator to match SimpleVueValidation
             latError: false,
@@ -221,8 +222,14 @@ export default {
         },
         getLocation() {
             this.gettingLocation = true;
+            this.locationError = '';
             var vue = this;
             clearLog = true;
+            if (!navigator.geolocation) {
+                vue.gettingLocation = false;
+                vue.locationError = 'This browser cannot look up your location. Please enter your latitude and longitude below.';
+                return;
+            }
             try {
                 vue.addToLog('Determining location')
                 navigator.geolocation.getCurrentPosition(function(loc) {
@@ -239,6 +246,22 @@ export default {
                     vue.saveCoords('getter');
 
                     vue.getLocationName();
+                }, function(err) {
+                    // Denied, unavailable, or too slow: stop the spinner and say what to do.
+                    vue.gettingLocation = false;
+                    var code = err && err.code;
+                    console.log('location lookup failed', code, err && err.message);
+                    if (code === 1) {
+                        vue.locationError = 'Location permission was not given. You can allow it in your device or browser settings, or enter your latitude and longitude below.';
+                    } else if (code === 3) {
+                        vue.locationError = 'Finding your location took too long. Please try again, or enter your latitude and longitude below.';
+                    } else {
+                        vue.locationError = 'Your location could not be found. Please try again, or enter your latitude and longitude below.';
+                    }
+                }, {
+                    enableHighAccuracy: false,
+                    timeout: 15000,
+                    maximumAge: 600000
                 })
             } catch (e) {
                 vue.addToLog(e.message);

@@ -3,7 +3,12 @@
     <h1 v-if="isPage" data-page-heading>Notifications</h1>
     <h2 v-else class="pageTitle">Notifications</h2>
     <div v-if="!localPushSupported">
-      <p>Unfortunately, we can't do notifications on this device.</p>
+      <template v-if="iosBrowserTab">
+        <p>On an iPhone or iPad, notifications work only after this app is added to your Home Screen (iOS 16.4 or later).</p>
+        <p>In Safari, tap the Share button, then <strong>Add to Home Screen</strong>. Open the app from its Home Screen icon and come back to this page to turn on notifications.</p>
+      </template>
+      <p v-else-if="iosDevice">Notifications need iOS 16.4 or later. Please update your iPhone or iPad to use them.</p>
+      <p v-else>Unfortunately, we can't do notifications on this device.</p>
     </div>
     <div v-else>
       <div v-if="notificationsWanted==='denied'">
@@ -31,7 +36,7 @@
           Click
           <button class="small primary"
                   v-on:click="testNotification">Show Now</button> to show the current notification.</p>
-        <p>This notification will be refreshed whenever you visit the website.</p>
+        <p>This notification will be refreshed when the date changes, whenever you visit the website.</p>
       </div>
       <div v-if="featureEnabled && remotePushSupported">
         <div v-if="!userId"

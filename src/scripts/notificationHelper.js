@@ -33,7 +33,7 @@ export function showNow(di, askIfNeeded) {
 
 export function show(note1, note2, iconText, iconDayNum, makeSound, askIfNeeded) {
     // Check for notification compatibility.
-    if (!('Notification' in window)) {
+    if (typeof Notification === 'undefined') {
         // If the browser version is unsupported, remain silent.
         return;
     }

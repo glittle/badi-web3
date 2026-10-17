@@ -28,6 +28,7 @@
                         v-on:click="reload">force a reload now</button>)</span>
             </p>
             <ul>
+                <li>ver 2.4.6 - iPhone and iPad: instructions for adding the app to the Home Screen, a clearer note about notifications (they need the Home Screen app on iOS 16.4+), no page zoom when typing in a field, and the header colour fills the notch area; the app refreshes the date and checks for updates when you come back to it; a friendly message if the location lookup is blocked or fails; the notification is no longer posted again each time the app opens on the same day</li>
                 <li>ver 2.4.5 - Installed Android app: dark start-up (splash) screen to match the dark strip below the bottom bar; the app always fetches a fresh copy of its app settings (manifest), so a reinstall never picks up old colours</li>
                 <li>ver 2.4.4 - Installed Android app: the strip below the bottom bar is now a neutral dark colour instead of blue, so it suits every colour palette (reinstall the app to see it straight away)</li>
                 <li>ver 2.4.3 - Show Now on the Notifications page asks for permission if needed; in the installed Android app, the strip below the bottom bar now matches your colours</li>

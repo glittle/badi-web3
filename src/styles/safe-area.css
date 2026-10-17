@@ -25,3 +25,28 @@
   padding-left: env(safe-area-inset-left, 0px);
   padding-right: env(safe-area-inset-right, 0px);
 }
+
+/*
+ * 2.4.6: 100vh on iPhone Safari is the height with the toolbars hidden, so a
+ * full-height block runs under them. Use the dynamic viewport height where the
+ * browser has it; 100vh stays as the fallback (quasar.mat.css).
+ */
+@supports (height: 100dvh) {
+  .window-height {
+    height: 100dvh !important;
+  }
+}
+
+/*
+ * 2.4.6: iOS Safari zooms the page when a text field under 16px gets focus
+ * (inputs here are .9rem = 14.4px). -webkit-touch-callout is only supported
+ * by iOS/iPadOS WebKit, so other browsers keep their sizes.
+ */
+@supports (-webkit-touch-callout: none) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select,
+  textarea {
+    /* !important: quasar.mat.css and some pages size fields with more specific selectors. */
+    font-size: 16px !important;
+  }
+}
