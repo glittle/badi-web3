@@ -160,35 +160,6 @@ export default {
             if (vue.lastServerCall.format() === next.format()) {
                 //console.log('server callback already requested')
                 window._messageBus.serverCallbackLog.push('Callback already requested');
-
-                // } else {
-                // var firebaseToken = storage.get('firebaseToken', '')
-                // if (firebaseToken) {
-                //     console.log('asking server to call back in', moment.duration(delay, 'ms').humanize(), 'at', next.format());
-                //     console.log('with token', firebaseToken.substring(0, 20) + '...')
-                //     var host = window.location.hostname;
-                //     var url = host === 'localhost' ?
-                //         'http://localhost:8003' :
-                //         (window.location.origin + '/wc-notifier');
-                //     axios.post(url, {
-                //             token: firebaseToken,
-                //             delay: delay,
-                //             where: shared.coords.name,
-                //             geo: '@{1},{2},10z'.filledWith(shared.coords.name, shared.coords.lat, shared.coords.lng)
-                //                 //place/Castleridge/@51.1052703,-113.9671456
-                //         })
-                //         .then(function(response) {
-                //             if (response.data.status === 'received') {
-                //                 vue.lastServerCall = next;
-                //                 console.log('server confirmed... will call back at', next.format());
-                //                 window._messageBus.serverCallbackLog.push('At ' + new Date());
-                //                 window._messageBus.serverCallbackLog.push('...requested for ' + next.toDate());
-                //             }
-                //         }).catch(function(error) {
-                //             console.log('axios error', error.message);
-                //             window._messageBus.serverCallbackLog.push(error.message);
-                //         });
-                // }
             }
             // if (vue.sharedWorker) {
             //     console.log('scheduling sw pulse at', next.format(), 'in', moment.duration(delay, 'ms').humanize())

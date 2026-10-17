@@ -86,9 +86,6 @@ function leaveToNetwork(url, request) {
   // Vercel Web Analytics (/_vercel/insights/script.js and its page-view posts)
   // is never cached; offline it simply fails and the app carries on.
   if (url.pathname.indexOf('/_vercel/') === 0) return true
-  // Vercel Web Analytics (/_vercel/insights/script.js and its page-view posts)
-  // is never cached; offline it simply fails and the app carries on.
-  if (url.pathname.indexOf('/_vercel/') === 0) return true
   if (url.pathname === '/badiService' || url.pathname.indexOf('/badiService/') === 0) return true
   return false
 }

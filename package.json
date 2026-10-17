@@ -1,6 +1,6 @@
 {
   "name": "badi-web3",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "Tools for the Badíʿ Calendar",
   "author": "Glen Little <glen.little@gmail.com>",
   "private": true,
@@ -17,7 +17,6 @@
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
     "axios": "^1.12.2",
-    "firebase": "^10.14.1",
     "highcharts": "^11.4.8",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",

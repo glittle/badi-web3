@@ -64,6 +64,5 @@ These point at the public site or at services that are not part of `dist/`:
 - `https://wondrous-badi.today/` and `https://wondrous-badi.today/statics/featured-wbt.png` (canonical, Open Graph, Twitter)
 - `https://wondrous-badi.today/files/FeastBook-*.pdf` (date links; `/files` is hosted separately)
 - `/images/…` calendar art (hosted separately)
-- Firebase project `wondrous-badi-today` (`https://wondrous-badi-today.firebaseio.com`)
 - Google Fonts, and the Maps Geocoding request in Location setup
 - `https://wondrous-badi.today/feasts`, `/images`, `/badiService` in `sitemap.xml`
