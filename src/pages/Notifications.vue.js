@@ -109,7 +109,7 @@ export default {
     },
     methods: {
         testNotification() {
-            notificationHelper.showNow();
+            notificationHelper.showNow(null, true);
         },
         getOffsetDesc: function(min) {
             var offset = this.offsets.filter(function(off) {

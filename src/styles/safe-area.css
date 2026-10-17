@@ -1,0 +1,22 @@
+/*
+ * Edge-to-edge (2.4.3). index.html sets viewport-fit=cover, so on Android
+ * (Chrome 135+, installed app) and on iPhones the page draws behind the system
+ * bars and Chrome leaves the navigation bar transparent. The header and the
+ * bottom bar pad themselves by the safe-area insets so their own colour (the
+ * current palette, light or dark) fills the status bar and gesture bar areas.
+ * env() is 0 everywhere else, so nothing changes on desktop.
+ */
+.layout-header {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+.layout-footer {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+.layout-content {
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}

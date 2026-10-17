@@ -10,8 +10,8 @@
     "display": "standalone",
     "display_override": ["standalone", "minimal-ui", "browser"],
     "categories": ["lifestyle"],
-    "theme_color": "#2980b9",
-    "background_color": "#2980b9",
+    "theme_color": "#2471a3",
+    "background_color": "#2471a3",
     "icons": [
         {
             "src": "/statics/icons/icon-any-192.png?v=v2",
