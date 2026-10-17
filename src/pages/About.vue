@@ -28,6 +28,7 @@
                         v-on:click="reload">force a reload now</button>)</span>
             </p>
             <ul>
+                <li>ver 2.4.4 - Installed Android app: the strip below the bottom bar is now a neutral dark colour instead of blue, so it suits every colour palette (reinstall the app to see it straight away)</li>
                 <li>ver 2.4.3 - Show Now on the Notifications page asks for permission if needed; in the installed Android app, the strip below the bottom bar now matches your colours</li>
                 <li>ver 2.4.2 - Removed an old, unused push-messaging library: a smaller, faster download</li>
                 <li>ver 2.4.1 - Page-view statistics now use Vercel Web Analytics (no cookies), replacing the old statistics service that Google retired</li>
