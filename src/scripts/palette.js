@@ -64,14 +64,22 @@ export function setThemeChosen() {
   window.dispatchEvent(new CustomEvent('themechosen'))
 }
 
-function setMeta(color) {
-  let meta = document.querySelector('meta[name="theme-color"]')
-  if (!meta) {
-    meta = document.createElement('meta')
+// index.html has two theme-color tags, media="(prefers-color-scheme: light)"
+// and "(prefers-color-scheme: dark)". In Auto each one gets its own colour so
+// the bar follows the device straight away; Light or Dark sets both to one.
+function setMeta(palette, pref, eff) {
+  let metas = document.querySelectorAll('meta[name="theme-color"]')
+  if (!metas.length) {
+    const meta = document.createElement('meta')
     meta.setAttribute('name', 'theme-color')
     document.head.appendChild(meta)
+    metas = [meta]
   }
-  meta.setAttribute('content', color)
+  for (let i = 0; i < metas.length; i++) {
+    const media = metas[i].getAttribute('media') || ''
+    const dark = pref === 'auto' && media ? media.indexOf('dark') !== -1 : eff === 'dark'
+    metas[i].setAttribute('content', dark ? palette.bar : palette.color)
+  }
 }
 
 // Puts the stored (or given) palette and mode on <html> and tells listeners.
@@ -86,7 +94,7 @@ export function applyTheme(paletteId, mode) {
   html.setAttribute('data-mode-pref', pref)
   html.style.colorScheme = eff
   html.style.backgroundColor = eff === 'dark' ? '#121212' : ''
-  setMeta(eff === 'dark' ? palette.bar : palette.color)
+  setMeta(palette, pref, eff)
   if (changed) {
     window.dispatchEvent(new CustomEvent('themechange', { detail: { palette: palette.id, mode: eff, pref: pref } }))
   }

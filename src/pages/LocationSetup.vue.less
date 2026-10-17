@@ -75,3 +75,16 @@
         white-space: nowrap;
     }
 }
+/* 2.4.6: shown when the location lookup is denied, fails, or times out. The
+   alert region stays in the page so screen readers announce new text. */
+.LocationSetup .locationError {
+    margin: 0.5em 0 0;
+    color: #b00020;
+    line-height: 1.4;
+    &:empty {
+        display: none;
+    }
+}
+html[data-mode="dark"] .LocationSetup .locationError {
+    color: #ffb4ab;
+}

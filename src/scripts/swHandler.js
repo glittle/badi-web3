@@ -56,6 +56,18 @@ function showReloadNotice(message) {
     })
 }
 
+// Ask the browser to look for a new service worker now (2.4.6: called when the
+// app comes back to the foreground). A new version reloads as usual through
+// controllerchange below.
+export function checkForUpdate() {
+    if (import.meta.env.DEV || !('serviceWorker' in navigator)) return
+    navigator.serviceWorker.getRegistration('/').then(function (registration) {
+        if (registration) return registration.update()
+    }).catch(function (error) {
+        console.log('service worker update check failed', error && error.message ? error.message : error)
+    })
+}
+
 if (!import.meta.env.DEV && 'serviceWorker' in navigator) {
     window.addEventListener('load', function () {
         // First visit has no controller yet. Claiming that worker must not reload

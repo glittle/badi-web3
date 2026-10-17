@@ -1,6 +1,7 @@
 import * as shared from '../scripts/shared'
 // import * as storage from '../scripts/storage'
 import * as notificationHelper from '../scripts/notificationHelper'
+import { isIos, isIosBrowserTab } from '../scripts/platform'
 
 export default {
     name: 'Notifications',
@@ -95,6 +96,12 @@ export default {
     computed: {
         isPage() {
             return this.$route && this.$route.name === 'Notifications'
+        },
+        iosDevice() {
+            return isIos();
+        },
+        iosBrowserTab() {
+            return isIosBrowserTab();
         },
         localPushSupported: function() {
             return typeof Notification === 'undefined' ? false : true;

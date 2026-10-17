@@ -41,6 +41,7 @@ export default {
 <style>
 .error-page .error-code {
   height: 100vh;
+  height: 100dvh;
   width: 100%;
   padding-top: 15vh;
   font-size: 30vmax;

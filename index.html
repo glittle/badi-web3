@@ -16,14 +16,31 @@
     <meta name="description" content="Tools for the Badíʿ calendar, the official calendar of the Bahá'í Faith.">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- iPhone home-screen app: the page draws under the status bar, and the
+         header pads itself by env(safe-area-inset-top) (safe-area.css), so the
+         notch area shows the header colour. -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="icon" type="image/png" href="/statics/icons/icon-any-192.png?v=v2" />
     <link rel="apple-touch-icon" sizes="180x180" href="/statics/icons/apple-touch-icon.png?v=v2">
     <link rel="mask-icon" href="/statics/icons/safari-pinned-tab.svg?v=v1" color="#5bbad5">
     <link class="favIcon" rel="shortcut icon" href="/statics/icons/favicon.ico?v=v1">
-    <meta name="apple-mobile-web-app-title" content="Wondrous-Bad&iacute;' Today">
+    <meta name="apple-mobile-web-app-title" content="Badíʿ Today">
     <meta name="application-name" content="Wondrous-Bad&iacute;' Today">
     <meta name="msapplication-config" content="/statics/icons/browserconfig.xml?v=v1">
-    <meta name="theme-color" content="#2471a3">
+    <!-- Light and dark defaults (blue palette). The script below sets both to
+         the saved palette, and to one colour when Light or Dark is chosen. -->
+    <meta name="theme-color" content="#2471a3" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1c4a6a" media="(prefers-color-scheme: dark)">
+    <style>
+        /* Dark start-up: no white flash before the app's styles load. The
+           script below sets data-mode before first paint; a Light choice wins. */
+        @media (prefers-color-scheme: dark) {
+            html:not([data-mode="light"]),
+            html:not([data-mode="light"]) body { background-color: #121212; }
+        }
+        html[data-mode="dark"],
+        html[data-mode="dark"] body { background-color: #121212; }
+    </style>
     <script>
         // Theme before first paint (Other Settings / the Theme card on Today):
         // palette "__q_strn|teal" and themeMode "__q_strn|light|dark|auto".
@@ -56,8 +73,14 @@
             html.setAttribute('data-mode-pref', pref);
             html.style.colorScheme = dark ? 'dark' : 'light';
             if (dark) html.style.backgroundColor = '#121212';
-            var meta = document.querySelector('meta[name="theme-color"]');
-            if (meta) meta.setAttribute('content', colors[id][dark ? 1 : 0]);
+            // Auto: the light/dark theme-color variants follow the device.
+            // Light or Dark chosen: both variants get that one colour.
+            var metas = document.querySelectorAll('meta[name="theme-color"]');
+            for (var j = 0; j < metas.length; j++) {
+                var media = metas[j].getAttribute('media') || '';
+                var useDark = pref === 'auto' && media ? media.indexOf('dark') !== -1 : dark;
+                metas[j].setAttribute('content', colors[id][useDark ? 1 : 0]);
+            }
         })();
     </script>
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Roboto:300,400,500,700" rel="stylesheet">

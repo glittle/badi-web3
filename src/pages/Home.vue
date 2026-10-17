@@ -39,6 +39,31 @@
             </button>
 
         </div>
+        <!-- iPhone/iPad: Safari never offers an install prompt, so explain the Share menu. -->
+        <div v-if="iosInstallHint && !addToHomeScreenEvent" class="cardBtn iosInstallBtn">
+            <button v-on:click="iosInstallOpen = !iosInstallOpen" class="push"
+                    aria-controls="iosInstallCard" :aria-expanded="iosInstallOpen ? 'true' : 'false'">
+                Add Icon to Home Screen
+            </button>
+        </div>
+        <div v-if="iosInstallHint && !addToHomeScreenEvent" v-show="iosInstallOpen" id="iosInstallCard" class="card iosInstall">
+            <section aria-labelledby="iosInstallTitle">
+                <div class="heading">
+                    <h2 class="desc" id="iosInstallTitle">Add to your Home Screen</h2>
+                    <span>
+                        <button v-on:click="iosInstallOpen = false" class="small light round">Close</button>
+                    </span>
+                </div>
+                <div class="content">
+                    <ol>
+                        <li>Tap the Share button <i class="iosShareIcon" aria-hidden="true">ios_share</i> in Safari's toolbar (on newer iPhones it may be under the <span aria-hidden="true">•••</span><span class="sr-only">More</span> button).</li>
+                        <li>Scroll down and tap <strong>Add to Home Screen</strong>, then <strong>Add</strong>.</li>
+                    </ol>
+                    <p>The Home Screen app keeps its own settings, so you will set your location again the first time you open it.</p>
+                    <p>On iOS 16.4 or later, notifications work only in the Home Screen app.</p>
+                </div>
+            </section>
+        </div>
         <div v-show="setupDone" class="card verse">
             <div class="heading">
                 <h2 class="desc" v-html="verseTime"></h2>

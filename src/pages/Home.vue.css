@@ -394,3 +394,26 @@ div.line b {
     padding-right: 1rem;
   }
 }
+/* 2.4.6: iPhone/iPad "Add to Home Screen" instructions. */
+.card.iosInstall .heading button {
+  margin: 1px 3px 0 0;
+  padding: 3px 8px;
+  min-height: 1rem;
+}
+.card.iosInstall .content {
+  margin: 5px 10px 0.5em 10px;
+}
+.card.iosInstall .content ol {
+  margin: 0 0 0.6em;
+  padding-left: 1.5em;
+}
+.card.iosInstall .content li {
+  margin: 0.3em 0;
+}
+.card.iosInstall .content p {
+  margin: 0.4em 0;
+}
+.card.iosInstall .iosShareIcon {
+  font-size: 1.2em;
+  vertical-align: -0.2em;
+}

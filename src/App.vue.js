@@ -3,7 +3,7 @@ import badiCalc from './scripts/badiCalc'
 import * as notificationHelper from './scripts/notificationHelper'
 import * as _shared from './scripts/shared'
 import * as store from './scripts/store'
-// import storage from './scripts/storage'
+import storage from './scripts/storage'
 // import axios from 'axios'
 
 import moment from 'moment-timezone'
@@ -19,7 +19,9 @@ export default {
             routeName: this.$route.name,
             myWorker: null,
             // sharedWorker: null,
-            lastNotificationKey: null,
+            // 2.4.6: remembered across launches, so opening the app again on
+            // the same day (or evening) does not post the notification again.
+            lastNotificationKey: storage.get('lastNotificationKey', null),
             lastServerCall: moment(),
             lastTimeout: null,
             _serverCallbackLog: [],
@@ -215,6 +217,17 @@ export default {
                 vue.scheduleNextNotification(di);
 
                 vue.lastNotificationKey = key;
+                // Only saved once notifications are allowed (nothing is posted before).
+                if (vue.shared.notifications.wanted === 'granted') {
+                    try {
+                        storage.set('lastNotificationKey', key);
+                    } catch (e) { }
+                }
+            } else if (!vue.lastTimeout) {
+                // Same day as the last launch: no new notification, but still
+                // set the timer for the next sunset or midnight.
+                vue.di = di;
+                vue.scheduleNextNotification(di);
             }
         },
         pagePath(page) {

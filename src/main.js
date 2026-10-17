@@ -27,6 +27,7 @@ import './styles/safe-area.css'
 import { applyTheme } from './scripts/palette'
 
 import './scripts/swHandler'
+import { requestPersistentStorage } from './scripts/resume'
 import './scripts/stringExt'
 
 if (window.location.protocol === 'http:' &&
@@ -46,6 +47,7 @@ installAnalytics(router)
 // this also covers a stored value it could not read, keeps theme-color in step
 // and starts following the system setting for Auto.
 applyTheme()
+requestPersistentStorage()
 
 const app = createApp(App)
 app.use(router)
