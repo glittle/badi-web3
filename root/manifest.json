@@ -11,7 +11,7 @@
     "display_override": ["standalone", "minimal-ui", "browser"],
     "categories": ["lifestyle"],
     "theme_color": "#121212",
-    "background_color": "#2471a3",
+    "background_color": "#121212",
     "icons": [
         {
             "src": "/statics/icons/icon-any-192.png?v=v2",

@@ -83,6 +83,9 @@ function leaveToNetwork(url, request) {
   if (!sameOrigin(url)) return true
   if (url.pathname === '/sw-badi-web4.js') return true
   if (url.pathname === '/version.json') return true
+  // Chrome reads the web app manifest when it installs or updates the app.
+  // A cached copy from an older worker would bake old colours into the app.
+  if (url.pathname === '/manifest.json') return true
   // Vercel Web Analytics (/_vercel/insights/script.js and its page-view posts)
   // is never cached; offline it simply fails and the app carries on.
   if (url.pathname.indexOf('/_vercel/') === 0) return true
