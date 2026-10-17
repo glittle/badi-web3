@@ -1,10 +1,15 @@
 /*
- * Edge-to-edge (2.4.3). index.html sets viewport-fit=cover, so on Android
- * (Chrome 135+, installed app) and on iPhones the page draws behind the system
- * bars and Chrome leaves the navigation bar transparent. The header and the
- * bottom bar pad themselves by the safe-area insets so their own colour (the
- * current palette, light or dark) fills the status bar and gesture bar areas.
+ * Edge-to-edge (2.4.3). index.html sets viewport-fit=cover. On iPhones, and in
+ * any Android Chrome that draws an installed app edge-to-edge, the header and
+ * the bottom bar pad themselves by the safe-area insets so their own colour
+ * (the current palette, light or dark) fills the status and gesture bar areas.
  * env() is 0 everywhere else, so nothing changes on desktop.
+ *
+ * Note (2.4.4): Chrome on Android does not yet draw standalone installed apps
+ * edge-to-edge (WebAppShortEdgesCutoutMode is off by default, and the CCT/webapp
+ * root UI only supports edge-to-edge for the media viewer). There the gesture
+ * bar is painted with the manifest theme_color baked into the installed app,
+ * which is why manifest.json uses a neutral dark colour that suits every palette.
  */
 .layout-header {
   padding-top: env(safe-area-inset-top, 0px);
