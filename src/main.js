@@ -23,6 +23,7 @@ import './styles/palette.css'
 import './styles/a11y.css'
 import './styles/theme.css'
 import './styles/dark.css'
+import './styles/safe-area.css'
 import { applyTheme } from './scripts/palette'
 
 import './scripts/swHandler'
