@@ -1,0 +1,100 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "",
+  "outputDirectory": "public",
+  "functions": {
+    "api/badiService.js": {
+      "maxDuration": 10
+    },
+    "api/hash.js": {
+      "maxDuration": 10
+    }
+  },
+  "routes": [
+    {
+      "src": "^/badiService(/.*)?$",
+      "caseSensitive": true,
+      "dest": "/api/badiService?full=/badiService$1",
+      "headers": {
+        "Cache-Control": "no-store"
+      }
+    },
+    {
+      "src": "^(/badiservice(?:/.*)?)$",
+      "dest": "/api/badiService?full=$1",
+      "headers": {
+        "Cache-Control": "no-store"
+      }
+    },
+    {
+      "src": "^/(feasts|files|scripts|images)$",
+      "status": 301,
+      "headers": {
+        "Location": "/$1/"
+      }
+    },
+    {
+      "src": "^/images/(.*)$",
+      "dest": "https://wondrous-badi-images.vercel.app/images/$1"
+    },
+    {
+      "src": "^/abc$",
+      "dest": "/abc.txt"
+    },
+    {
+      "src": "^/manifest\\.json$",
+      "headers": {
+        "Content-Type": "application/manifest+json"
+      },
+      "continue": true
+    },
+    {
+      "src": "^/(sw-badi-web4\\.js|version\\.json|index\\.html)?$",
+      "headers": {
+        "Cache-Control": "no-cache"
+      },
+      "continue": true
+    },
+    {
+      "src": "^/assets/[^/]+-[A-Za-z0-9_-]{8}\\.(?:js|css)$",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      },
+      "continue": true
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "^/(?:assets|js|css|fonts|img|statics)/.*$",
+      "status": 404,
+      "dest": "/404.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "src": "^/(?:[^/]*/)*[^/]*\\.[A-Za-z0-9]{1,8}$",
+      "status": 404,
+      "dest": "/404.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "src": "^/(?!_vercel/)(.*)$",
+      "dest": "/api/hash?__p=$1"
+    },
+    {
+      "handle": "hit"
+    },
+    {
+      "src": "^/images/.+\\.(?:png|jpg|jpeg|gif)$",
+      "headers": {
+        "Cache-Control": "public, max-age=604800, stale-while-revalidate=86400"
+      },
+      "continue": true
+    }
+  ]
+}

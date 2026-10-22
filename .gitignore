@@ -10,3 +10,9 @@ cordova/platforms
 cordova/plugins
 thumbs.db
 !.gitkeep
+
+# deploy
+.env
+.env.*
+.vercel/
+deploy/

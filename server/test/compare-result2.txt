@@ -1,0 +1,2 @@
+{"dates":425,"requestsPerSide":874,"match":873,"mismatches":1}
+{"p":"/badiService/2024//1","live":[200,"application/json; charset=utf-8","{\"year\":183,\"month\":11,\"day\":18,\"badiMonthInfo\":{\"localName\":\"Will\",\"arabicName\":\"Mashíyyat\"},\"badiDayInfo\":{\"localName\":\"Dominion\",\"arabicName\":\"Mulk\"},\"relationToMidnight\":2}"],"new":[308,"text/plain","Redirecting...\n"]}
