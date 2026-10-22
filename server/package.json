@@ -1,0 +1,18 @@
+{
+  "name": "wondrous-badi",
+  "private": true,
+  "version": "1.0.0",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "test": "node --test test/located.test.mjs",
+    "test:legacy": "node test/legacy-equivalence.mjs",
+    "test:sunsets": "node test/sunset-reference.mjs",
+    "calllog": "node scripts/calllog.mjs",
+    "test:calllog": "node --test test/calllog.test.mjs  # needs local redis :6390 + test/upstash-shim.py on :18790/:18791"
+  },
+  "dependencies": {
+    "@vercel/functions": "^3.10.1"
+  }
+}

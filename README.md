@@ -34,6 +34,28 @@ The host should send `Content-Type: application/manifest+json` for `/manifest.js
 
 `version.json` is regenerated at the start of `dev` and `build` with `buildDate` and the version from `package.json`.
 
+## Server code and deploying (Vercel project `wondrous-badi`)
+
+`server/` holds the Vercel side of wondrous-badi.today, exactly as deployed: `api/badiService.js` (the `/badiService`
+date service), `api/hash.js` (old `#/` URL redirects), `lib/` (calendar/sun/place code and the call log, `lib/calllog.js`),
+`scripts/calllog.mjs` (call-log reader), `vercel.json` (routes, headers; `outputDirectory: "public"`, no build step),
+its own `package.json` (CommonJS, Node 24, `@vercel/functions`), `test/`, and `LOGGING.md` / `BADISERVICE-API.md`.
+It is kept apart from the app because the app's `package.json` is `"type": "module"` and the functions are CommonJS.
+
+Vercel needs `api/` at the root of what is uploaded, so a deploy folder is assembled, then deployed from there:
+
+```bash
+npm run build                                       # app -> dist/
+node scripts/assemble-deploy.mjs ../wb-deploy --legacy=<old deploy folder>/public
+cd ../wb-deploy
+npx vercel link --yes --project wondrous-badi --scope glittles-projects-f45a13ca   # once per folder (.vercel/ is not in git)
+npx vercel deploy                                   # preview; check it, then promote or `npx vercel deploy --prod`
+```
+
+The assembled folder is `server/*` + `public/` = `dist/`. `--legacy` copies the top-level items the app build does not
+make (`/feasts`, `/files` (PDFs), `/scripts`, `abc.txt`); they are not in git, so keep a copy of the current deploy folder's
+`public/`. `/images` is a separate Vercel project (rewrite in `vercel.json`). Never commit `.env*` or `.vercel/`.
+
 ## Routes
 
 Hash routes match the previous app. Today, Dates, Verse, and Count are the bottom tabs:

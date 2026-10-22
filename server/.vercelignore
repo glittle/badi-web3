@@ -1,0 +1,11 @@
+.env
+.env.*
+**/.env
+**/.env.*
+test/
+node_modules/
+*.log
+
+# /images is hosted by the separate wondrous-badi-images project (rewrite in vercel.json)
+public/images
+public/images/

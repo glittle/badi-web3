@@ -12,7 +12,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1 --port 4173",
-    "test:storage": "node --test scripts/storage-encoding.test.mjs scripts/counter-verses.test.mjs"
+    "test:storage": "node --test scripts/storage-encoding.test.mjs scripts/counter-verses.test.mjs",
+    "assemble": "node scripts/assemble-deploy.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
