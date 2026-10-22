@@ -20,8 +20,8 @@ The old v1 per-call lists `bs:hits:<YYYY-MM>` are no longer written; existing on
 ### Batching
 Each function instance counts calls in memory and writes them with **one** `EVAL` (= 1 Upstash command) per flush.
 A flush is sent immediately when a caller/form is new to that instance in the current hour (so new callers, new forms and
-all samples land at once); repeat calls are flushed by the next call after 60 s (`BADISERVICE_LOG_FLUSH_SEC`) or once 250
-are pending. Repeat calls still in memory when Vercel recycles an instance are lost (at most ~60 s of one busy caller).
+all samples land at once); repeat calls are flushed by the next call after 300 s (`BADISERVICE_LOG_FLUSH_SEC`, default 300) or once 250
+are pending. Repeat calls still in memory when Vercel recycles an instance are lost (at most ~5 minutes of one busy caller).
 A failed flush is dropped, not retried (no double counting).
 
 **Privacy:** no IP addresses, query values or response contents are stored. Only the caller's User-Agent / Referer / Origin
@@ -32,7 +32,7 @@ A failed flush is dropped, not retried (no double counting).
 Upstash Redis on its **free plan**, added through the Vercel Marketplace and connected to the `wondrous-badi` project.
 Keys all start with `bs:` (`bs:callers:bysig`, `bs:callers:seq`, `bs:caller:<code>`, `bs:hits:<YYYY-MM>`, `bs:days:<YYYY-MM-DD>`).
 
-One flush costs one Redis command. At ~5,000 calls/day: roughly 1,500–3,000 commands/day (~45k–90k/month) instead of ~150k.
+One flush costs one Redis command. At ~5,000 calls/day: roughly 300–700 commands/day (~10k–20k/month) instead of ~150k (with the 300 s default flush interval).
 
 | | Free plan limit | Expected use (~4,500 calls/day) |
 | --- | --- | --- |

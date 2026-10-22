@@ -52,13 +52,13 @@ test('callers get codes A, B, ...; hits and day counts recorded; no IPs', async 
   assert.ok(!keys.some((k) => k.startsWith('bs:hits:'))); // v1 per-call lists are no longer written
 });
 
-test('repeat calls are held in memory until the flush interval', async () => {
+test('repeat calls are held in memory until the flush interval (300 s)', async () => {
   _reset(); setEnv('http://127.0.0.1:18790/');
   const t = Date.now(); const req = { headers: { 'user-agent': 'batch' } };
   await logCall(req, 'd', t); for (let i = 1; i < 10; i++) await logCall(req, 'd', t + i * 1000);
   const before = await rc('HGET', 'bs:caller:' + (await rc('HGET', 'bs:callers:bysig', Object.keys({}).length ? '' : (await rc('HKEYS', 'bs:callers:bysig')).slice(-1)[0])), 'count');
   assert.equal(before, '1');
-  await logCall(req, 'd', t + 61000);
+  await logCall(req, 'd', t + 301000);
   const after = await rc('HGET', 'bs:caller:' + (await rc('HGET', 'bs:callers:bysig', (await rc('HKEYS', 'bs:callers:bysig')).slice(-1)[0])), 'count');
   assert.equal(after, '11');
 });
