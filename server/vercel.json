@@ -7,11 +7,21 @@
     "api/badiService.js": {
       "maxDuration": 10
     },
+    "api/whereami.js": {
+      "maxDuration": 5
+    },
     "api/hash.js": {
       "maxDuration": 10
     }
   },
   "routes": [
+    {
+      "src": "^/whereami$",
+      "dest": "/api/whereami",
+      "headers": {
+        "Cache-Control": "no-store"
+      }
+    },
     {
       "src": "^/badiService(/.*)?$",
       "caseSensitive": true,
