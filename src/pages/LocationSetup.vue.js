@@ -166,7 +166,7 @@ export default {
                 }
             }
             xhr.open("GET", url, true);
-            xhr.timeout = 1000;
+            xhr.timeout = 3000;
             //xhr.ontimeout = function () { continueAfterLocationKnown(); };
             xhr.send();
             return true;
