@@ -127,8 +127,8 @@ export default {
         },
         guessLocation() {
             var vue = this;
-            var token = '2eeafe6953a046';
-            var url = "https://ipinfo.io/geo?json&token=" + token;
+            // Vercel's own edge geolocation (see server/api/whereami.js)
+            var url = "/whereami";
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (xhr.readyState !== 4) {
@@ -137,10 +137,12 @@ export default {
                 switch (xhr.status) {
                     case 200:
                         var info = JSON.parse(xhr.responseText);
-                        var loc = info.loc.split(',');
-                        // saveLocation(loc[0], loc[1], info.city);
-                        vue.lat = loc[0];
-                        vue.lng = loc[1];
+                        if (!info.lat || !info.lng) {
+                            vue.guessing = false;
+                            break;
+                        }
+                        vue.lat = info.lat;
+                        vue.lng = info.lng;
                         var location = info.city;
 
                         vue.addToLog('Guessed coordinates')
@@ -164,7 +166,7 @@ export default {
                 }
             }
             xhr.open("GET", url, true);
-            xhr.timeout = 1000;
+            xhr.timeout = 3000;
             //xhr.ontimeout = function () { continueAfterLocationKnown(); };
             xhr.send();
             return true;
