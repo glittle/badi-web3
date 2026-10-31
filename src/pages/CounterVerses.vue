@@ -35,7 +35,7 @@
                  v-on:pointercancel="onPointerCancel">
                 <div class="cvSlide" aria-live="polite">
                     <h2><span class="sr-only">{{ $msg('a11yVersePosition', { num: index + 1, total: verses.length }) }} </span>{{ verse.title }}</h2>
-                    <div class="cvTextBox" v-bind:class="{ cvLong: verse.text.length > 200 }">
+                    <div class="cvTextBox" v-bind:class="{ cvLong: verse.text.length > 300 }">
                         <p class="cvText">{{ verse.text }}</p>
                     </div>
                     <p class="cvSource">
