@@ -40,14 +40,15 @@ test.beforeEach(() => {
   resetCounterSession()
 })
 
-test('verse list matches the four research entries', () => {
+test('verse list matches the five research entries', () => {
   assert.deepEqual(verses.map((verse) => verse.id), [
     'allah-u-abha-95',
     'guidance-decision-19',
     'women-courses-95',
-    'missed-prayers-18'
+    'missed-prayers-18',
+    'deliverance-9'
   ])
-  assert.deepEqual(verses.map((verse) => verse.target), [95, 19, 95, 18])
+  assert.deepEqual(verses.map((verse) => verse.target), [95, 19, 95, 18, 9])
   assert.equal(LEGACY_VERSE_ID, 'allah-u-abha-95')
   assert.equal(verses[0].text, 'Alláh-u-Abhá')
   assert.equal(verses[0].source, 'Bahá’u’lláh, Kitáb-i-Aqdas ¶18; Notes 33–34; Q&A 77; Synopsis IV.D.1.q')
@@ -61,6 +62,8 @@ test('verse list matches the four research entries', () => {
   assert.equal(verses[3].source, 'Bahá’u’lláh, Kitáb-i-Aqdas ¶14; Q&A 60')
   assert.equal(verses[3].url, 'https://www.bahai.org/library/authoritative-texts/bahaullah/kitab-i-aqdas/5#433941746')
   assert.equal(verses[3].group, 'aqdas-substitutes')
+  assert.equal(verses[4].text.split('\n\n').length, 3)
+  assert.equal(verses[4].url, 'https://www.bahai.org/library/authoritative-texts/bahaullah/additional-prayers-revealed-bahaullah/947839633/1#865328760')
 })
 
 test('the source link shows only the work it opens', () => {

@@ -103,6 +103,7 @@ article.CounterVerses {
   font-size: 1.35rem;
   line-height: 1.35;
   color: #212121;
+  white-space: pre-line;
 }
 .CounterVerses .cvTimes {
   margin: 0;
@@ -284,6 +285,17 @@ article.CounterVerses {
   flex: 1 1 auto;
   min-width: 0;
 }
+/* Long verses (several paragraphs): smaller type and less air so more of
+   the text fits; the slide still scrolls if needed. */
+.CounterVerses .cvTextBox.cvLong {
+  margin: 10px 0 12px;
+  padding: 26px 14px;
+  background-position: center 9px, center calc(100% - 9px), 0 0, 0 0;
+}
+.CounterVerses .cvTextBox.cvLong .cvText {
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
 /* Short phones: a little less air around the verse so a long verse fits
    without scrolling. */
 @media (max-height: 760px) {
@@ -359,4 +371,10 @@ article.CounterVerses {
 }
 .CounterVerses .cvDock.cvSwapped .cvCount {
   align-items: flex-end;
+}
+/* Keep the long-verse size inside the short-phone rule too. */
+@media (max-height: 760px) {
+  .CounterVerses .cvTextBox.cvLong .cvText {
+    font-size: 1rem;
+  }
 }
