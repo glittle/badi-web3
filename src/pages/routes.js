@@ -14,7 +14,7 @@ const names = [
   { name: 'Home', path: '/', group: 'main', component: Home },
   { name: 'Listing', group: 'main', component: Listing },
   { name: 'Verse', group: 'main', component: Verse },
-  { name: 'Counters', path: 'counters', group: 'main', swipe: false, component: CounterVerses },
+  { name: 'Counters', path: 'counters', group: 'main', swipe: false, hideHeader: true, component: CounterVerses },
   { name: 'Notifications', group: 'setup', component: Notifications },
   { name: 'LocationSetup', group: 'setup', component: LocationSetup },
   { name: 'OtherSetup', group: ['setup', 'initial'], component: OtherSetup },
@@ -39,6 +39,7 @@ const routeInfoList = names.map(function (n) {
     path: path,
     group: group,
     swipe: n.swipe !== false,
+    hideHeader: n.hideHeader === true,
     key: vueName
   }
 })
@@ -94,7 +95,8 @@ const raw = routeInfoList.map(function (ri) {
     component: ri.component,
     path: path,
     name: ri.name,
-    key: ri.key
+    key: ri.key,
+    meta: { hideHeader: ri.hideHeader }
   }
 })
 

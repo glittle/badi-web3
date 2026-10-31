@@ -7,7 +7,7 @@ article.CounterVerses {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 12px 8px 0;
+  padding: 10px 6px 0;
   margin: 0 auto;
   width: 100%;
   /* Same column as the Today cards and the bottom bar on wide screens. */
@@ -78,13 +78,13 @@ article.CounterVerses {
   flex: 0 0 auto;
   width: 100%;
   box-sizing: border-box;
-  margin: 18px 0 20px;
-  padding: 32px 20px;
+  margin: 12px 0 14px;
+  padding: 28px 12px;
   border: 1px solid rgba(var(--brand-rgb), 0.32);
   border-radius: 14px;
   background:
-    var(--cv-flourish) center 13px / 92px 13px no-repeat,
-    var(--cv-flourish) center calc(100% - 13px) / 92px 13px no-repeat,
+    var(--cv-flourish) center 10px / 92px 13px no-repeat,
+    var(--cv-flourish) center calc(100% - 10px) / 92px 13px no-repeat,
     linear-gradient(180deg, rgba(var(--brand-rgb), 0.045) 0%, rgba(var(--brand-rgb), 0.012) 50%, rgba(var(--brand-rgb), 0.045) 100%),
     #fff;
   box-shadow: 0 1px 6px rgba(var(--brand-rgb), 0.06);
@@ -92,7 +92,7 @@ article.CounterVerses {
 .CounterVerses .cvTextBox::before {
   content: '';
   position: absolute;
-  inset: 5px;
+  inset: 4px;
   border: 1px solid rgba(var(--brand-rgb), 0.14);
   border-radius: 10px;
   pointer-events: none;
@@ -100,8 +100,8 @@ article.CounterVerses {
 .CounterVerses .cvText {
   margin: 0;
   font-family: 'Gentium Book Basic', Georgia, 'Times New Roman', serif;
-  font-size: 1.35rem;
-  line-height: 1.35;
+  font-size: 1.05rem;
+  line-height: 1.3;
   color: #212121;
   white-space: pre-line;
 }
@@ -285,27 +285,16 @@ article.CounterVerses {
   flex: 1 1 auto;
   min-width: 0;
 }
-/* Long verses (several paragraphs): smaller type and less air so more of
-   the text fits; the slide still scrolls if needed. */
-.CounterVerses .cvTextBox.cvLong {
-  margin: 10px 0 12px;
-  padding: 26px 14px;
-  background-position: center 9px, center calc(100% - 9px), 0 0, 0 0;
-}
-.CounterVerses .cvTextBox.cvLong .cvText {
-  font-size: 1.05rem;
-  line-height: 1.3;
-}
 /* Short phones: a little less air around the verse so a long verse fits
    without scrolling. */
 @media (max-height: 760px) {
   .CounterVerses .cvTextBox {
-    margin: 14px 0 16px;
-    padding: 28px 16px;
-    background-position: center 11px, center calc(100% - 11px), 0 0, 0 0;
+    margin: 10px 0 12px;
+    padding: 26px 12px;
+    background-position: center 9px, center calc(100% - 9px), 0 0, 0 0;
   }
   .CounterVerses .cvText {
-    font-size: 1.28rem;
+    font-size: 1rem;
   }
   .CounterVerses .cvSource {
     min-height: 0;
@@ -371,10 +360,4 @@ article.CounterVerses {
 }
 .CounterVerses .cvDock.cvSwapped .cvCount {
   align-items: flex-end;
-}
-/* Keep the long-verse size inside the short-phone rule too. */
-@media (max-height: 760px) {
-  .CounterVerses .cvTextBox.cvLong .cvText {
-    font-size: 1rem;
-  }
 }

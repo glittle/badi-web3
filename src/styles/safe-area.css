@@ -50,3 +50,12 @@
     font-size: 16px !important;
   }
 }
+
+/*
+ * 2.4.9: pages with route meta hideHeader (Counters) drop the title bar. The
+ * header element stays, so its safe-area padding still fills the notch with
+ * the palette colour; it is 0 high where there is no inset, so no shadow.
+ */
+.noHeader .layout-header {
+  box-shadow: none;
+}

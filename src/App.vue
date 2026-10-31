@@ -1,7 +1,7 @@
 <template>
-  <q-layout itemscope itemtype="http://schema.org/SoftwareApplication">
+  <q-layout :class="{ noHeader: $route.meta.hideHeader }" itemscope itemtype="http://schema.org/SoftwareApplication">
     <template #header>
-      <div class="toolbar">
+      <div class="toolbar" v-if="!$route.meta.hideHeader">
         <q-toolbar-title>
           <p class="appName" itemprop="name">Wondrous-Badíʿ Today</p>
           <p class="topDate" v-show="setupDone" v-html="topDate"></p>
