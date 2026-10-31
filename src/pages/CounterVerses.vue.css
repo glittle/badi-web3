@@ -75,7 +75,12 @@ article.CounterVerses {
    inline SVG so it works offline. */
 .CounterVerses .cvTextBox {
   position: relative;
-  flex: 0 0 auto;
+  /* Shrinks to the space left above the counter; the text scrolls inside it
+     only when it cannot fit, and the source link stays in view below. */
+  flex: 0 1 auto;
+  min-height: 4.5em;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   box-sizing: border-box;
   margin: 12px 0 14px;
@@ -104,6 +109,12 @@ article.CounterVerses {
   line-height: 1.3;
   color: #212121;
   white-space: pre-line;
+  min-height: 0;
+  overflow-y: auto;
+}
+.CounterVerses .cvTextBox.cvMore .cvText {
+  -webkit-mask-image: linear-gradient(#000 calc(100% - 2.4em), transparent);
+  mask-image: linear-gradient(#000 calc(100% - 2.4em), transparent);
 }
 .CounterVerses .cvTimes {
   margin: 0;
@@ -113,7 +124,7 @@ article.CounterVerses {
 }
 .CounterVerses .cvSource {
   flex: 0 0 auto;
-  min-height: 2.7em;
+  min-height: 0;
   margin: 0;
   font-size: 0.78rem;
   line-height: 1.35;
@@ -240,7 +251,7 @@ article.CounterVerses {
   align-self: stretch;
   width: 100%;
   max-width: none;
-  padding: 10px 0 0;
+  padding: 6px 0 0;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -262,10 +273,11 @@ article.CounterVerses {
   display: flex;
   align-items: center;
   width: 100%;
-  height: 17px;
+  min-height: 24px;
+  flex-wrap: wrap;
   justify-content: flex-start;
-  gap: 20px;
-  margin: 12px 0 0;
+  gap: 6px 16px;
+  margin: 8px 0 0;
   font-size: 0.9rem;
 }
 .CounterVerses .cvPrefs input {

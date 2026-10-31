@@ -22,6 +22,7 @@ export default {
             title: 'Count',
             icon: '/statics/counter95.svg',
             session: session,
+            textMore: false,
             verses: verses,
             tapContinue: storage.get('tapContinue', false),
             tapBtnText: '',
@@ -104,6 +105,9 @@ export default {
         }
     },
     watch: {
+        'session.selectedId': function () {
+            this.$nextTick(this.checkTextMore)
+        },
         tapContinue: function (value) {
             if (!this.allowContinue) return
             const id = this.verse.id
@@ -148,6 +152,8 @@ export default {
     },
     mounted() {
         this.updateTapDisplay()
+        window.addEventListener('resize', this.checkTextMore)
+        this.$nextTick(this.checkTextMore)
     },
     activated() {
         this.tapAuto = storage.get('tapAuto', true)
@@ -155,14 +161,22 @@ export default {
         this.tapContinue = storage.get('tapContinue', false)
         this.tapAutoDelay = storage.get('tapAutoDelay', 2000)
         this.updateTapDisplay()
+        this.$nextTick(this.checkTextMore)
     },
     deactivated() {
         this.stopAuto()
     },
     beforeUnmount() {
         this.stopAuto()
+        window.removeEventListener('resize', this.checkTextMore)
     },
     methods: {
+        // A verse too long for its box scrolls inside it; fade the bottom edge
+        // while more text is below so it is clear there is more.
+        checkTextMore() {
+            const el = this.$refs.text
+            this.textMore = !!el && el.scrollTop + el.clientHeight < el.scrollHeight - 2
+        },
         select(id) {
             if (id === this.verse.id) return
             this.stopAuto()

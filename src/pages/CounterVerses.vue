@@ -35,8 +35,8 @@
                  v-on:pointercancel="onPointerCancel">
                 <div class="cvSlide" aria-live="polite">
                     <h2><span class="sr-only">{{ $msg('a11yVersePosition', { num: index + 1, total: verses.length }) }} </span>{{ verse.title }}</h2>
-                    <div class="cvTextBox">
-                        <p class="cvText">{{ verse.text }}</p>
+                    <div class="cvTextBox" v-bind:class="{ cvMore: textMore }">
+                        <p class="cvText" ref="text" v-on:scroll.passive="checkTextMore">{{ verse.text }}</p>
                     </div>
                     <p class="cvSource">
                         <a v-bind:href="verse.url" target="_blank" rel="noopener">{{ sourceLabel }}</a>
@@ -77,16 +77,14 @@
                         v-bind:title="'Tap to count ' + verse.title">{{ tapBtnText }}</button>
             </div>
             <div class="tapControl">
-                <div class="cvActions">
-                    <button type="button" class="reset small light round" ref="resetButton" v-on:click="resetCount">Reset</button>
-                    <template v-if="allowContinue">
-                        <span class="continue" id="cvContinueLabel">
-                            {{ $msg('a11yContinuePast', { total: verse.target }) }}
-                        </span>
-                        <q-toggle v-model="tapContinue" aria-labelledby="cvContinueLabel" />
-                    </template>
+                <div class="cvActions" v-if="allowContinue">
+                    <span class="continue" id="cvContinueLabel">
+                        {{ $msg('a11yContinuePast', { total: verse.target }) }}
+                    </span>
+                    <q-toggle v-model="tapContinue" aria-labelledby="cvContinueLabel" />
                 </div>
                 <div class="cvPrefs">
+                    <button type="button" class="reset small light round" ref="resetButton" v-on:click="resetCount">Reset</button>
                     <button type="button"
                             class="cvSwap small light round"
                             v-bind:aria-pressed="tapSwap"
