@@ -28,6 +28,7 @@
                         v-on:click="reload">force a reload now</button>)</span>
             </p>
             <ul>
+                <li>ver 2.4.9 - Counters: added the prayer for the deliverance of the loved ones (repeat nine times); the Counters page drops the top date bar and uses a smaller font and narrower margins, so long verses fit</li>
                 <li>ver 2.4.8 - the first-visit location guess now comes from this site's own server instead of a third-party lookup service</li>
                 <li>ver 2.4.7 - site tidy-ups: home-screen and browser icons at the standard addresses, missing files now report "not found" instead of loading the app, and www.wondrous-badi.today goes to wondrous-badi.today</li>
                 <li>ver 2.4.6 - iPhone and iPad: instructions for adding the app to the Home Screen, a clearer note about notifications (they need the Home Screen app on iOS 16.4+), no page zoom when typing in a field, and the header colour fills the notch area; the app refreshes the date and checks for updates when you come back to it; a friendly message if the location lookup is blocked or fails; the notification is no longer posted again each time the app opens on the same day</li>
