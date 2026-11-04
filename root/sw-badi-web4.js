@@ -91,6 +91,8 @@ function leaveToNetwork(url, request) {
   if (url.pathname.indexOf('/_vercel/') === 0) return true
   // The visitor's location guess must always be fresh.
   if (url.pathname === '/whereami') return true
+  // Place names come from our server (OpenStreetMap); the CDN caches them, not the worker.
+  if (url.pathname === '/placename') return true
   if (url.pathname === '/badiService' || url.pathname.indexOf('/badiService/') === 0) return true
   return false
 }

@@ -10,6 +10,9 @@
     "api/whereami.js": {
       "maxDuration": 5
     },
+    "api/placename.js": {
+      "maxDuration": 6
+    },
     "api/hash.js": {
       "maxDuration": 10
     }
@@ -21,6 +24,10 @@
       "headers": {
         "Cache-Control": "no-store"
       }
+    },
+    {
+      "src": "^/placename$",
+      "dest": "/api/placename"
     },
     {
       "src": "^/badiService(/.*)?$",
