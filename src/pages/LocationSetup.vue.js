@@ -280,27 +280,13 @@ export default {
             var vue = this;
             vue.gettingName = true;
 
-            var url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${vue.lat},${vue.lng}&key=AIzaSyDVTMtKstmup60RDf5LrpWGcDt3G6bLCxA`;
+            // our own server looks up the name (OpenStreetMap); see server/api/placename.js
+            var url = `/placename?lat=${encodeURIComponent(vue.lat)}&lng=${encodeURIComponent(vue.lng)}`;
             vue.addToLog('Determining name')
 
             axios.get(url)
                 .then(function(response) {
-                    var results = response.data.results;
-                    var location = '';
-                    // get longest locality
-                    for (var r = 0; r < results.length; r++) {
-                        var components = results[r].address_components;
-                        for (var i = 0; i < components.length; i++) {
-                            var component = components[i];
-                            if (component.types.includes('locality')) { //$.inArray('political', component.types)!=-1 &&
-                                // vue.statusLines.push('--> ' + component.long_name)
-                                // console.log(component)
-                                if (component.short_name.length > location.length) {
-                                    location = component.short_name;
-                                }
-                            }
-                        }
-                    }
+                    var location = (response.data && response.data.name) || '';
 
                     if (location) {
                         vue.addToLog('==> ' + location);

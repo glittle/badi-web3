@@ -71,3 +71,9 @@ rm .env.calllog
 ```
 
 Times are shown in Mountain time; the CSV also has UTC.
+
+## /placename and /whereami
+
+Neither endpoint logs anything. `/placename` rounds lat/lng to 3 decimals and asks OpenStreetMap Nominatim
+(policy: max 1 request/s, identifying User-Agent, caching required). Vercel's CDN caches each rounded query for 30 days
+(`s-maxage=2592000`), which keeps our small volume well inside that policy. No IPs or coordinates are stored.
