@@ -134,6 +134,27 @@ article.CounterVerses {
   color: var(--brand);
   overflow-wrap: anywhere;
 }
+/* Song links sit under the source. Smaller and tighter than the verse so
+   several titles do not push the verse box or the tap button. */
+.CounterVerses .cvSongs {
+  flex: 0 0 auto;
+  width: 100%;
+  margin: 2px 0 0;
+  font-size: 0.7rem;
+  line-height: 1.2;
+  color: #666;
+}
+.CounterVerses .cvSongs a {
+  display: block;
+  color: var(--brand);
+  overflow-wrap: anywhere;
+}
+.CounterVerses .cvSongs img {
+  width: 12px;
+  height: 12px;
+  margin: 0 3px 0 0;
+  vertical-align: -2px;
+}
 .CounterVerses .cvPager {
   flex: 0 1 auto;
   display: flex;
@@ -308,8 +329,14 @@ article.CounterVerses {
   .CounterVerses .cvText {
     font-size: 1rem;
   }
-  .CounterVerses .cvSource {
+  .CounterVerses .cvSource,
+  .CounterVerses .cvSongs {
     min-height: 0;
+  }
+  .CounterVerses .cvSongs {
+    margin-top: 1px;
+    font-size: 0.66rem;
+    line-height: 1.15;
   }
 }
 /* Swap sits directly under Reset and matches it, so the two read as a pair.

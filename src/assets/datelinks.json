@@ -1138,5 +1138,73 @@
             "type": "img",
             "desc": "Calendar Image"
         }
+    ],
+    "guidance-decision-19": [
+        {
+            "url": "https://www.youtube.com/watch?v=3ycFhGx9w7o",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Thou Seest me, O my God, Detached From All Save Thee Bahá'í Song"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=gisxkoG6NuA",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Prayer for Making Decisions - Elika Mahony"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=A9uZiwfZxEM",
+            "icon": "-video",
+            "type": "video",
+            "desc": "\"Prayer for Decisions\" by Jeremy Lambshead"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=yLXomkZvzjg",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Prayer for Decision Making, New Ventures, New Phase of Life, a New Start | 19 Chants"
+        }
+    ],
+    "allah-u-abha-95": [
+        {
+            "url": "https://www.youtube.com/watch?v=8qk0jHXDmcM",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Alláh'u'Abhá - The Shoreless Sea"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=gvumgj0IZ10",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Alláh'u'Abhá 95 times"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=ifYJ0ibQKDU",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Allah'u'Abha (95 Times)"
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=oDn4Al1bfO8",
+            "icon": "-video",
+            "type": "video",
+            "desc": "\"Allah'u'Abhá\" - The Voices of Bahá"
+        }
+    ],
+    "women-courses-95": [
+        {
+            "url": "https://www.youtube.com/watch?v=MIYv106U05o",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Glorified Be God, the Lord of Splendor and Beauty - Baha'i Devotional Song"
+        }
+    ],
+    "deliverance-9": [
+        {
+            "url": "https://www.youtube.com/watch?v=Dzm1FPoev3Y",
+            "icon": "-video",
+            "type": "video",
+            "desc": "Deliver Thy Loved Ones From the Prison of their Foes Bahá'í Song"
+        }
     ]
 }

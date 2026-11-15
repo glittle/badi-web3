@@ -28,6 +28,7 @@
                         v-on:click="reload">force a reload now</button>)</span>
             </p>
             <ul>
+                <li>ver 2.4.11 - Count: song links under verses that have been set to music. Each opens in the YouTube app or a new tab.</li>
                 <li>ver 2.4.10 - Location: place names now come from our own server (OpenStreetMap); the old Google lookup stopped working.</li>
                 <li>ver 2.4.9 - Counters: added the prayer for the deliverance of the loved ones (repeat nine times); the Counters page drops the top date bar and uses a smaller font and narrower margins, so long verses fit</li>
                 <li>ver 2.4.8 - the first-visit location guess now comes from this site's own server instead of a third-party lookup service</li>

@@ -41,6 +41,13 @@
                     <p class="cvSource">
                         <a v-bind:href="verse.url" target="_blank" rel="noopener">{{ sourceLabel }}</a>
                     </p>
+                    <p class="cvSongs" v-if="songs.length">
+                        <a v-for="song in songs"
+                           v-bind:key="song.url"
+                           v-bind:href="song.url"
+                           target="_blank"
+                           rel="noopener"><img alt="" src="/statics/video.svg">{{ song.desc }}</a>
+                    </p>
                 </div>
             </div>
         </div>
