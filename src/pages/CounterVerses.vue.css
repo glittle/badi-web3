@@ -126,7 +126,7 @@ article.CounterVerses {
   flex: 0 0 auto;
   min-height: 0;
   margin: 0;
-  font-size: 0.78rem;
+  font-size: 0.85em;
   line-height: 1.35;
   color: #666;
 }
@@ -140,7 +140,7 @@ article.CounterVerses {
   flex: 0 0 auto;
   width: 100%;
   margin: 1.2em 0 0;
-  font-size: 0.7rem;
+  font-size: 0.85em;
   line-height: 1.2;
   color: #666;
 }
@@ -335,7 +335,6 @@ article.CounterVerses {
   }
   .CounterVerses .cvSongs {
     margin-top: 1.15em;
-    font-size: 0.66rem;
     line-height: 1.15;
   }
 }
