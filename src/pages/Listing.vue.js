@@ -202,6 +202,9 @@ export default {
                 // console.log('reused links')
                 return day.links;
             }
+            // Look up this day only. datelinks.json also holds Count-page song
+            // lists under verse ids (allah-u-abha-95 and the others). Those
+            // ids are not day ids, and nothing here walks every key.
             var id = shared.makeId(day);
             var info = dateLinksInfo[id];
             var links = [];

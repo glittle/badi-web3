@@ -1,5 +1,6 @@
 import storage from '../scripts/storage'
 import messages from '../scripts/messages'
+import dateLinksInfo from '../assets/datelinks.json'
 import { tapAnnouncement, announcementsOn } from '../scripts/announce'
 import {
     verses,
@@ -95,6 +96,14 @@ export default {
         },
         sourceLabel() {
             return linkedSourceName(this.verse)
+        },
+        // Songs live in datelinks.json under the verse id. The Dates page looks
+        // up day ids only, so these keys never appear there. Plain watch URLs,
+        // not embeds, so a phone can open the YouTube app.
+        songs() {
+            const id = this.verse && this.verse.id
+            const info = id ? dateLinksInfo[id] : null
+            return Array.isArray(info) ? info : []
         },
         // Continue-past is the shared Alláh-u-Abhá setting. Other verses always stop at their target.
         allowContinue() {
