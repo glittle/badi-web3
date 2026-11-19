@@ -2591,9 +2591,27 @@ function isAfterNawRuz (d) {
 //   return Math.round((d - j1) / 8.64e7);
 // };
 
-function inStandardTime (d) {
-    var jan = new Date(d.getFullYear(), 0, 1);
-    return jan.getTimezoneOffset() === d.getTimezoneOffset();
+// getTimezoneOffset() is larger on standard time than on daylight time
+// (EST 300 > EDT 240, AEST -600 > AEDT -660), in both hemispheres.
+// A date is on standard time when its offset is not smaller than the
+// offsets about six months either side. The two endpoints are not enough:
+// in America/Toronto both fall inside daylight time for dates in April
+// and October, so those days would skip the one-hour adjustment. Sample
+// each month across that span. A zone whose offset no longer changes
+// (Regina, UTC, Alberta after the 2026 change) is >= both sides and
+// stays on standard time. offsetOf is optional so tests can stub it.
+function inStandardTime (d, offsetOf) {
+    var off = offsetOf || function (when) {
+        return when.getTimezoneOffset();
+    };
+    var here = off(d);
+    for (var delta = -6; delta <= 6; delta++) {
+        var sample = new Date(d.getFullYear(), d.getMonth() + delta, d.getDate(), 12, 0, 0, 0);
+        if (here < off(sample)) {
+            return false;
+        }
+    }
+    return true;
 }
 
 function copyAndAddDays (oldDate, daysOffset) {
