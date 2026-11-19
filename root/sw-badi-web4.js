@@ -97,7 +97,16 @@ function leaveToNetwork(url, request) {
   // Agent guide. Leave it to the network so a visit to /llms.txt is not
   // stored as the app shell (navigate requests are cached as /index.html).
   if (url.pathname === '/llms.txt') return true
+  // /guide and /changelog are real HTML pages. A navigate request must not
+  // be saved as /index.html or answered with the app shell.
+  if (isStaticDoc(url.pathname)) return true
   return false
+}
+
+function isStaticDoc(pathname) {
+  return pathname === '/guide' || pathname === '/guide/' || pathname === '/guide.html' ||
+    pathname === '/changelog' || pathname === '/changelog/' || pathname === '/changelog.html' ||
+    pathname === '/pages.css'
 }
 
 function cacheable(response) {

@@ -48,3 +48,5 @@ Examples:
 ## Optional
 
 - [Web app](https://wondrous-badi.today/): The calendar for people, in a browser. JavaScript is required for the live date.
+- [Guide](https://wondrous-badi.today/guide): What the website does, how location and privacy work, and how to install it. HTML, no JavaScript.
+- [Change log](https://wondrous-badi.today/changelog): What changed in each version, newest first. HTML, no JavaScript.

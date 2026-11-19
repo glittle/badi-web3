@@ -160,6 +160,7 @@ a {
 .layout-footer .tbLink img {
   height: 65%;
   max-height: 64px;
+  width: auto;
 }
 .layout-footer .tbLink span {
   display: block;

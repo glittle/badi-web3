@@ -358,7 +358,7 @@ div.line b {
   top: 0;
   left: 0;
   width: 75px;
-  height: 75px;
+  height: auto;
 }
 .card.share .support p {
   margin: 0 8px 4px 80px;

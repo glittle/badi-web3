@@ -241,14 +241,14 @@ export default {
                     case '-DOR':
                         item.icon = '/statics/divider.png';
                         item.class = 'iconDivider'
-                        item.width = 22
-                        item.height = 13
+                        item.width = 44
+                        item.height = 26
                         break;
                     case '-pdf':
                         item.icon = '/statics/pdf.png';
                         item.class = 'pdf'
-                        item.width = 20
-                        item.height = 20
+                        item.width = 48
+                        item.height = 48
                         break;
                     case '-readingsDoc':
                         item.icon = '/statics/DOC.gif';

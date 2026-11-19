@@ -34,6 +34,8 @@ The host should send `Content-Type: application/manifest+json` for `/manifest.js
 
 `version.json` is regenerated at the start of `dev` and `build` with `buildDate` and the version from `package.json`.
 
+Version notes go on the changelog page (`root/changelog.html`, served at `/changelog`), not in the About page list. `root/guide.html` is the guide at `/guide`. Both are static HTML (plus `root/pages.css`). Vercel rewrites `/guide` and `/changelog` to those files so they are not sent to the app. The service worker leaves `/guide`, `/changelog`, `/pages.css`, and `/llms.txt` to the network, so a visit is not stored as the app shell.
+
 ## Server code and deploying (Vercel project `wondrous-badi`)
 
 `server/` holds the Vercel side of wondrous-badi.today, exactly as deployed: `api/badiService.js` (the `/badiService`

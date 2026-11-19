@@ -41,8 +41,15 @@ const types = {
   '.webmanifest': 'application/manifest+json'
 }
 
+const DOC_ALIASES = {
+  '/guide': '/guide.html',
+  '/guide/': '/guide.html',
+  '/changelog': '/changelog.html',
+  '/changelog/': '/changelog.html'
+}
+
 function serveFile(dir, urlPath) {
-  const rel = decodeURIComponent(urlPath.split('?')[0])
+  const rel = decodeURIComponent((DOC_ALIASES[urlPath] || urlPath).split('?')[0])
   if (rel.includes('\0')) return null
   const file = path.normalize(path.join(dir, rel))
   const base = path.resolve(dir)
@@ -140,6 +147,16 @@ function stampServiceWorker() {
 
 function previewHeaders(req, res, next) {
   const urlPath = (req.url || '/').split('?')[0]
+  const doc = DOC_ALIASES[urlPath]
+  if (doc) {
+    const file = path.join(root, 'dist', doc.slice(1))
+    if (fs.existsSync(file)) {
+      res.setHeader('Content-Type', 'text/html; charset=utf-8')
+      res.setHeader('Cache-Control', 'no-cache')
+      fs.createReadStream(file).pipe(res)
+      return
+    }
+  }
   if (urlPath !== '/manifest.json' && urlPath !== '/sw-badi-web4.js' && urlPath !== '/version.json') {
     return next()
   }
