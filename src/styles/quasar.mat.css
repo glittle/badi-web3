@@ -12686,6 +12686,10 @@ i {
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'liga';
+  /* Ligature names (more_vert, place, …) stay inside one em until Material
+     Icons swaps in, so they do not flash as a wide line of text. */
+  max-width: 1.25em;
+  overflow: hidden;
 }
 @-moz-keyframes q-progress-indeterminate {
   0% {

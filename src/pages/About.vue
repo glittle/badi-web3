@@ -4,7 +4,7 @@
             <h1 class="aboutTitle" data-page-heading>{{this.title}}</h1>
             <aside class=ShareThis aria-labelledby="shareThisHeading">
                 <h2 id="shareThisHeading">Share this App!</h2>
-                <img class=qr :alt="$msg('a11yQrCode')" src="/statics/qr.png">
+                <img class=qr :alt="$msg('a11yQrCode')" src="/statics/qr.png" width="200" height="200">
                 <a href="https://www.wondrous-badi.today/" itemprop="url">
                     <span>Open in any web browser:</span>
                     <span class=underline>Wondrous-Badi.Today</span>
@@ -21,13 +21,14 @@
                     href="https://patreon.com/GlenLittle">Patreon</a>.
                 <br>
                 <a href="https://patreon.com/GlenLittle" title="Support Glen at Patreon" target="_blank"><img
-                        alt="Patreon" src="/statics/patreon.png"></a>
+                        alt="Patreon" src="/statics/patreon.png" width="124" height="40"></a>
             </p>
             <p>
                 <span>Version <span itemprop="softwareVersion">{{version}}</span> (built {{versionAge}} - <button type="button" class="reload"
                         v-on:click="reload">force a reload now</button>)</span>
             </p>
             <ul>
+                <li>ver 2.4.14 - The app opens faster. Lettering and icons load without holding up the first paint, less unused code is downloaded on the first page, and the share code is a smaller image.</li>
                 <li>ver 2.4.13 - Search engines and other automated visitors see today's date, Holy Days, and Feasts instead of the first-time location page. A plain-text guide for AI agents is at /llms.txt. When a place name cannot be looked up because there is no internet, the location shows "(No internet)" and is tried again when the connection returns.</li>
                 <li>ver 2.4.12 - Holy days kept at a standard-time hour, including the Ascension of 'Abdu'l-Bahá at 1:00 am, stay at that hour where clocks no longer change for daylight time. South of the equator that hour follows local standard time, so it is one hour later during daylight time.</li>
                 <li>ver 2.4.11 - Count: song links under verses that have been set to music. Each opens in the YouTube app or a new tab.</li>

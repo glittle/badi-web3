@@ -17,7 +17,6 @@ import { isIosBrowserTab } from '../scripts/platform'
 import * as shared from '../scripts/shared'
 import '../scripts/stringExt'
 import moment from 'moment-timezone'
-import Highcharts from 'highcharts'
 import routeList from './routes'
 import { ensureSession, rememberCounter, LEGACY_VERSE_ID } from '../scripts/counterVerses'
 
@@ -917,6 +916,8 @@ var _chart = null;
 var _lastChartDay = null;
 var _fontSize = '11px';
 var _fontColor = '#666'; // set from chartColors() on each draw
+var highchartsLib = null;
+var highchartsLoading = null;
 
 function drawChart(sun, timeFormat, redraw) {
     //   setStart: null,
@@ -927,6 +928,20 @@ function drawChart(sun, timeFormat, redraw) {
         // console.log('sunChart does not exist')
         return;
     }
+    // The sun chart is not on the first-time location screen. Load Highcharts
+    // only once that element is on the page.
+    if (!highchartsLib) {
+        if (!highchartsLoading) {
+            highchartsLoading = import('highcharts').then(function (mod) {
+                highchartsLib = mod.default || mod;
+            });
+        }
+        highchartsLoading.then(function () {
+            drawChart(sun, timeFormat, redraw);
+        });
+        return;
+    }
+    var Highcharts = highchartsLib;
 
     var key = sun.diStamp;
     if (_lastChartDay === key && !redraw) {

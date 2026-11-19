@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { collectClassWords, purgeQuasarCss } from './scripts/purge-quasar-css.mjs'
 
 const root = path.dirname(fileURLToPath(import.meta.url))
 
@@ -156,11 +157,37 @@ function previewHeaders(req, res, next) {
   fs.createReadStream(file).pipe(res)
 }
 
+function nonBlockingStylesheets(html) {
+  return html.replace(/<link rel="stylesheet"( crossorigin)? href="([^"]+\.css)">/g, function (_, cross, href) {
+    const c = cross || ''
+    return '<link rel="preload" href="' + href + '" as="style"' + c + ' onload="this.onload=null;this.rel=\'stylesheet\'">' +
+      '<noscript><link rel="stylesheet"' + c + ' href="' + href + '"></noscript>'
+  })
+}
+
 function extrasPlugin() {
+  let classWords = null
   return {
     name: 'badi-extras',
     buildStart() {
       writeVersionFile()
+      classWords = null
+    },
+    transform(code, id) {
+      const file = id.split('?')[0].replace(/\\/g, '/')
+      if (!file.endsWith('/styles/quasar.mat.css')) return null
+      if (!classWords) classWords = collectClassWords(root)
+      const purged = purgeQuasarCss(code, classWords)
+      if (!purged.includes('.q-toggle') || !purged.includes('.layout-header') || !purged.includes('Material Icons')) {
+        throw new Error('purged Quasar CSS is missing required rules')
+      }
+      return { code: purged, map: null }
+    },
+    transformIndexHtml: {
+      order: 'post',
+      handler(html) {
+        return nonBlockingStylesheets(html)
+      }
     },
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
@@ -226,7 +253,11 @@ export default defineConfig({
     emptyOutDir: true,
     assetsDir: 'assets',
     manifest: true,
-    chunkSizeWarningLimit: 2200
+    chunkSizeWarningLimit: 2200,
+    // Modern PWA. Safari 14+ / Chrome 90+. Drops the modulepreload polyfill
+    // and keeps esbuild from emitting older syntax helpers.
+    target: ['chrome90', 'safari14', 'firefox90', 'edge90'],
+    modulePreload: { polyfill: false }
   },
   server: {
     port: 5173,
