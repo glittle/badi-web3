@@ -28,6 +28,7 @@
                         v-on:click="reload">force a reload now</button>)</span>
             </p>
             <ul>
+                <li>ver 2.4.13 - Search engines and other automated visitors see today's date, Holy Days, and Feasts instead of the first-time location page. A plain-text guide for AI agents is at /llms.txt. When a place name cannot be looked up because there is no internet, the location shows "(No internet)" and is tried again when the connection returns.</li>
                 <li>ver 2.4.12 - Holy days kept at a standard-time hour, including the Ascension of 'Abdu'l-Bahá at 1:00 am, stay at that hour where clocks no longer change for daylight time. South of the equator that hour follows local standard time, so it is one hour later during daylight time.</li>
                 <li>ver 2.4.11 - Count: song links under verses that have been set to music. Each opens in the YouTube app or a new tab.</li>
                 <li>ver 2.4.10 - Location: place names now come from our own server (OpenStreetMap); the old Google lookup stopped working.</li>

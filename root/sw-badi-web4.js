@@ -94,6 +94,9 @@ function leaveToNetwork(url, request) {
   // Place names come from our server (OpenStreetMap); the CDN caches them, not the worker.
   if (url.pathname === '/placename') return true
   if (url.pathname === '/badiService' || url.pathname.indexOf('/badiService/') === 0) return true
+  // Agent guide. Leave it to the network so a visit to /llms.txt is not
+  // stored as the app shell (navigate requests are cached as /index.html).
+  if (url.pathname === '/llms.txt') return true
   return false
 }
 

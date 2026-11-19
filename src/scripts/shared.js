@@ -18,38 +18,70 @@ var notifications = {
         return Notification ? Notification.permission : 'denied';
     }
 }
+// A crawler default lives only in this object. Getters and setters must not
+// touch localStorage while it is set, or the visit would look like a person
+// who had already finished setup.
+let ephemeralCoords = null
+
+function applyEphemeralCoords(place) {
+    ephemeralCoords = {
+        lat: place.lat,
+        lng: place.lng,
+        tz: place.tz,
+        name: place.name,
+        source: place.source
+    }
+}
+
+function ephemeralCoordsActive() {
+    return ephemeralCoords != null
+}
+
+function readCoord(key, fallback) {
+    if (ephemeralCoords) return ephemeralCoords[key]
+    return storage.get('coord.' + key, fallback)
+}
+
+function writeCoord(key, value) {
+    if (ephemeralCoords) {
+        ephemeralCoords[key] = value
+        return
+    }
+    storage.set('coord.' + key, value)
+}
+
 var coords = {
     get lat() {
-        return storage.get('coord.lat', 0)
+        return readCoord('lat', 0)
     },
     set lat(v) {
-        storage.set('coord.lat', v)
+        writeCoord('lat', v)
         updatedCoords()
     },
     get lng() {
-        return storage.get('coord.lng', new Date().getTimezoneOffset() / 60 * -15)
+        return readCoord('lng', new Date().getTimezoneOffset() / 60 * -15)
     },
     set lng(v) {
-        storage.set('coord.lng', v)
+        writeCoord('lng', v)
         updatedCoords()
     },
     get tz() {
-        return storage.get('coord.tz', null)
+        return readCoord('tz', null)
     },
     set tz(v) {
-        storage.set('coord.tz', v)
+        writeCoord('tz', v)
     },
     get name() {
-        return storage.get('coord.name', '(unknown)')
+        return readCoord('name', '(unknown)')
     },
     set name(v) {
-        storage.set('coord.name', v || '')
+        writeCoord('name', v || '')
     },
     get source() {
-        return storage.get('coord.source', 'not set')
+        return readCoord('source', 'not set')
     },
     set source(v) {
-        storage.set('coord.source', v)
+        writeCoord('source', v)
     },
     get sourceIsSet() {
         return this.source === 'user';
@@ -99,5 +131,7 @@ export {
     speech,
     notifications,
     makeId,
-    remoteSendTag
+    remoteSendTag,
+    applyEphemeralCoords,
+    ephemeralCoordsActive
 }
