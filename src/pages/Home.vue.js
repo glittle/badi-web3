@@ -28,7 +28,9 @@ export default {
             title: messages.get('HomePage', null, 'Today'),
             icon: '/statics/sunWhite.png',
             location: shared.coords.name,
-            setupDone: false,
+            // A crawler default is already applied before this component is
+            // created, so the first render is Today rather than setup.
+            setupDone: shared.ephemeralCoordsActive(),
             notificationStatus: shared.notifications.wanted,
             toggleVerseSpeech: false,
             tapNum: storage.get('tapNum', 0),
@@ -218,7 +220,9 @@ export default {
     },
     activated() {
         var vue = this;
-        if (shared.coords.tz && shared.coords.tz !== new Date().getTimezoneOffset()) {
+        // The crawler place is Asia/Jerusalem on purpose. Its offset will not
+        // match a bot running in another zone, and that must not reopen setup.
+        if (!shared.ephemeralCoordsActive() && shared.coords.tz && shared.coords.tz !== new Date().getTimezoneOffset()) {
             shared.coords.source = 'tz?';
             vue.setupDone = false;
         }

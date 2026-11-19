@@ -4,6 +4,7 @@ import moment from 'moment'
 import badiCalc from '../scripts/badiCalc'
 import * as store from '../scripts/store'
 import storage from '../scripts/storage'
+import { placeNameFromLookup, OFFLINE_PLACE_NAME, UNKNOWN_PLACE_NAME } from '../scripts/visitor'
 
 import versionInfo from '../../root/version.json'
 
@@ -278,6 +279,12 @@ export default {
         getLocationName() {
             clearLog = true;
             var vue = this;
+            // The browser already knows it is offline. Skip the request and
+            // try again when it comes back (see scheduleNameRetry).
+            if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+                rememberPlaceName(vue, placeNameFromLookup({ online: false }), true);
+                return;
+            }
             vue.gettingName = true;
 
             // our own server looks up the name (OpenStreetMap); see server/api/placename.js
@@ -286,22 +293,19 @@ export default {
 
             axios.get(url)
                 .then(function(response) {
-                    var location = (response.data && response.data.name) || '';
+                    var location = placeNameFromLookup({ name: response.data && response.data.name });
 
-                    if (location) {
+                    if (location !== UNKNOWN_PLACE_NAME) {
                         vue.addToLog('==> ' + location);
                     } else {
-                        location = '(unknown)'
                         clearLog = false;
                         vue.addToLog('No location!')
                     }
-                    vue.gettingName = false;
+                    rememberPlaceName(vue, location, false);
 
                     shared.remoteSendTag("location1", location);
                     shared.remoteSendTag("zoneName", moment.tz.guess());
-                    shared.coords.name = location;
                     shared.coords.tz = new Date().getTimezoneOffset();
-                    vue.name = location;
 
                     setTimeout(function() {
                         vue.updateUiToNewLocation()
@@ -309,7 +313,20 @@ export default {
                 })
                 .catch(function(error) {
                     console.log(error);
-                    vue.gettingName = false;
+                    // No response means the request never left the device
+                    // (or never came back). An HTTP error from our server is
+                    // a different failure and stays "(unknown)".
+                    var offline = (typeof navigator !== 'undefined' && navigator.onLine === false) || !error || !error.response;
+                    var location = placeNameFromLookup({
+                        online: offline ? false : true,
+                        networkError: offline,
+                        name: ''
+                    });
+                    rememberPlaceName(vue, location, offline);
+                    if (!offline) {
+                        clearLog = false;
+                        vue.addToLog('No location!')
+                    }
                 });
         },
         updateUiToNewLocation() {
@@ -328,5 +345,43 @@ export default {
                 vue.statusLines.push(msg)
             }
         }
+    }
+}
+
+// One listener for the whole page. A later lookup replaces it. It stays
+// after this component is closed, so a name saved as "(No internet)" is
+// replaced once the browser is online again.
+var pendingNameRetry = null
+
+function cancelNameRetry() {
+    if (!pendingNameRetry || typeof window === 'undefined') return
+    window.removeEventListener('online', pendingNameRetry)
+    pendingNameRetry = null
+}
+
+function scheduleNameRetry(vue) {
+    if (typeof window === 'undefined') return
+    cancelNameRetry()
+    function onOnline() {
+        window.removeEventListener('online', onOnline)
+        if (pendingNameRetry === onOnline) pendingNameRetry = null
+        var stillOffline = vue.name === OFFLINE_PLACE_NAME || shared.coords.name === OFFLINE_PLACE_NAME
+        if (!stillOffline) return
+        vue.getLocationName()
+    }
+    pendingNameRetry = onOnline
+    window.addEventListener('online', onOnline)
+}
+
+function rememberPlaceName(vue, location, offline) {
+    vue.gettingName = false
+    shared.coords.name = location
+    vue.name = location
+    if (offline) {
+        clearLog = false
+        vue.addToLog('No internet')
+        scheduleNameRetry(vue)
+    } else {
+        cancelNameRetry()
     }
 }

@@ -9,11 +9,12 @@
     <link rel="manifest" href="/manifest.json" />
     <link rel="canonical" href="https://wondrous-badi.today/" />
     <link rel="shortlink" href="https://wondrous-badi.today/" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Plain-text guide for AI agents" />
     <!-- Zoom is allowed. No maximum-scale and no user-scalable=no, so pinch-zoom and browser zoom both work. -->
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
-    <meta name="description" content="Tools for the Badíʿ calendar, the official calendar of the Bahá'í Faith.">
+    <meta name="description" content="Today's date in the Badíʿ (Bahá'í) calendar, with Holy Days, Nineteen Day Feasts, sunset times, and a verse counter.">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <!-- iPhone home-screen app: the page draws under the status bar, and the
@@ -40,6 +41,20 @@
         }
         html[data-mode="dark"],
         html[data-mode="dark"] body { background-color: #121212; }
+        /* Static intro inside #q-app: in the HTML for agents that do not run
+           JavaScript, hidden so a person does not see it flash before Vue
+           replaces the mount point. */
+        .agent-intro {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
     </style>
     <script>
         // Theme before first paint (Other Settings / the Theme card on Today):
@@ -85,7 +100,7 @@
     </script>
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Roboto:300,400,500,700" rel="stylesheet">
     <meta property="og:title" content="Wondrous-Badíʿ Today" />
-    <meta property="og:description" content="Today's date and details in the Wondrous (Badíʿ) calendar, the calendar of the Bahá'í Faith." />
+    <meta property="og:description" content="Today's date in the Badíʿ (Bahá'í) calendar, with Holy Days, Nineteen Day Feasts, sunset times, and a verse counter." />
     <meta property="og:url" content="https://wondrous-badi.today/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Wondrous-Badíʿ Today" />
@@ -98,8 +113,7 @@
     <meta name="twitter:creator" content="@glenlittle">
     <meta name="twitter:site" content="@glenlittle" />
     <meta name="twitter:title" content="Wondrous-Badíʿ Today" />
-    <meta name="twitter:description" content="Tools for the Wondrous-Badíʿ Calendar.
-    With special features when viewed on your Android phone or tablet!" />
+    <meta name="twitter:description" content="Today's date in the Badíʿ (Bahá'í) calendar, with Holy Days, Nineteen Day Feasts, sunset times, and a verse counter." />
     <meta name="twitter:image" content="https://wondrous-badi.today/statics/featured-wbt.png" />
     <script type="application/ld+json">
             {
@@ -117,9 +131,11 @@
 </head>
 
 <body>
-    <div id="q-app"></div>
+    <div id="q-app">
+        <p class="agent-intro">Wondrous-Badíʿ Today shows today's date in the Badíʿ (Bahá'í) calendar, upcoming Holy Days and Nineteen Day Feasts, sunset times, and a verse counter.</p>
+    </div>
     <noscript>
-        Hi. Please enable JavaScript so that we can show you the Wondrous calendar!
+        <p>Wondrous-Badíʿ Today shows today's date in the Badíʿ (Bahá'í) calendar, upcoming Holy Days and Nineteen Day Feasts, sunset times, and a verse counter. Turn on JavaScript to see today's date.</p>
     </noscript>
     <script type="module" src="/src/main.js"></script>
 </body>

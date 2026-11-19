@@ -1,0 +1,50 @@
+# Wondrous-Badíʿ Today
+
+> Today's date in the Badíʿ (Bahá'í) calendar, with Holy Days, Nineteen Day Feasts, sunset times, and a verse counter. A Badíʿ day begins at sunset and ends at the next sunset. This is an unofficial community tool, not an official Bahá'í service.
+
+The page at https://wondrous-badi.today/ is a JavaScript app. It asks a person to confirm a location the first time they visit, because the date and the sunset depend on the place. A crawler or other automated visitor is shown the date for Haifa instead of that setup, and that default is not saved. For a precise answer, use one of the machine-readable services below and pass a city or rough coordinates. Precise GPS is not needed.
+
+## Machine-readable
+
+- [Badíʿ calendar MCP](https://mcp.wondrous-badi.today/mcp): Public MCP connector "Badi Calendar". Streamable HTTP, stateless, no login. Send protocol messages with POST. Tools: get_today (the Badíʿ date for now, or for a moment you pass), convert_date (Gregorian and Badíʿ, before and after sunset), list_holy_days (the 11 Holy Days of a year), list_feasts (the 19 Feasts), get_upcoming (the next Holy Days and Feasts), get_fast_times (sunrise and sunset through the Fast). Pass a city, or rough coordinates plus an IANA time zone, when the clock time matters. A time zone alone is approximate and is not for the Fast.
+- [MCP health](https://mcp.wondrous-badi.today/health): GET returns JSON `{"ok":true,...}` when the connector is up. A short description of the connector is at https://mcp.wondrous-badi.today/.
+- [Badíʿ date JSON](https://wondrous-badi.today/badiService): JSON for today or any Gregorian date. No key. See the query parameters below.
+
+## Badíʿ date JSON
+
+Base address: `https://wondrous-badi.today/badiService`. GET only. Responses are JSON.
+
+Paths:
+
+- `/badiService` — today. With no location parameters this is the server's calendar date in Mountain time (America/Edmonton), and no sunset is calculated.
+- `/badiService/2026/10/15` — the Badíʿ day whose daylight falls on that Gregorian date.
+- `/badiService/2026/10/15/2` — the evening of that date, after sunset (already the next Badíʿ day). The optional fourth segment is `1` (before sunset; the default when it is omitted) or `2` (after sunset).
+- `/badiService/Today/...` — the same paths (older links).
+
+`year`, `month`, and `day` are the Badíʿ date. Month 0 is Ayyám-i-Há. `relationToMidnight` is `2` for the daylight part of the Badíʿ day and `1` for the evening before midnight, after the sunset that started the day.
+
+Optional query parameters. Any one of them switches on the extended response (sunset times, and `Access-Control-Allow-Origin: *`):
+
+- `city` — a city from a built-in list of about 7,300 larger cities. Accents and capitals do not matter. Add the country or region when the name is shared (`city=Springfield, Illinois`). The city supplies its own time zone. Do not pass `city` together with coordinates.
+- `lat` and `lng` — rough coordinates. `lon` or `long` may be used instead of `lng`. Pass both. Without `tz`, the time zone is taken from the nearest listed city within 400 km. If none is within 400 km, the reply is HTTP 400 and `tz` is required.
+- `tz` — an IANA time zone name, such as `Asia/Jerusalem` or `America/Toronto`. With `lat` and `lng` it sets the zone. On its own, with no date, the result is today's calendar date in that zone and no sunset is calculated.
+
+What changes when they are present:
+
+- No date, with `city` or `lat`/`lng`: the current time at that place and today's sunset there. Before sunset the reply is today's Badíʿ day (`relationToMidnight` 2). After sunset it is the new Badíʿ day (`relationToMidnight` 1).
+- No date, with only `tz`: today's calendar date in that zone. No sunset.
+- With a date: the date is calculated as on the plain paths, and sunset times for that place are added.
+
+Extended fields, after the usual ones: `location` (`source` of `city`, `coordinates`, or `timezone`, plus `name`, `lat`, `lng`, `timeZone`), `gregorianDate`, `localTime` (only when no date was given), `dayStartSunset` and `dayEndSunset` (local sunset times that begin and end the Badíʿ day, with the UTC offset), and `note` when something needs explaining (for example near the poles, when the sun does not set).
+
+A city that cannot be found or is ambiguous, or an invalid parameter, is HTTP 400 with `error` and `code`. An ambiguous city also includes `choices`. A path that is not one of the forms above is HTTP 404. Anything other than GET is HTTP 405.
+
+Examples:
+
+- https://wondrous-badi.today/badiService?city=Haifa
+- https://wondrous-badi.today/badiService?lat=32.82&lng=34.99&tz=Asia/Jerusalem
+- https://wondrous-badi.today/badiService/2026/10/15?city=Calgary
+
+## Optional
+
+- [Web app](https://wondrous-badi.today/): The calendar for people, in a browser. JavaScript is required for the live date.

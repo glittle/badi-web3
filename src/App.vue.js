@@ -4,6 +4,7 @@ import * as notificationHelper from './scripts/notificationHelper'
 import * as _shared from './scripts/shared'
 import * as store from './scripts/store'
 import storage from './scripts/storage'
+import { isAutomatedVisitor, CRAWLER_DEFAULT, timezoneOffsetMinutes } from './scripts/visitor'
 // import axios from 'axios'
 
 import moment from 'moment-timezone'
@@ -65,6 +66,9 @@ export default {
 
         document.addEventListener('pulsed', this.doWorkOnPulse, false);
 
+        // Before the first pulse and before Home is created, so a crawler
+        // renders Today instead of the location questions.
+        checkLocation(this);
         store.doPulse();
 
         // _messageBus.$on('serverPulse', function() {
@@ -267,10 +271,6 @@ export default {
             }
             return doNormalAction;
         }
-    },
-    mounted() {
-        checkLocation(this);
-        // this.goToNewSite();
     }
 }
 
@@ -282,31 +282,24 @@ function versionAge(buildDate) {
 }
 
 function checkLocation(vue) {
-    //TODO: don't send robots to the setup pages
-
-    if (!vue.setupDone) {
-        // if (vue.$router.currentRoute.path !== '/locationsetup' &&
-        //   vue.$router.currentRoute.path !== '/initialsetup') {
-
-        //   storage.set('initialSetup', true);
-
-        //   vue.$router.push('/locationsetup');
-        // }
-
-        // Toast.create.negative({
-        //   html: 'Location must be set for dates and times to be correct!',
-        //   timeout: 1e11, // very long
-        //   button: {
-        //     label: 'Fix Now',
-        //     handler() {
-        //       vue.$router.push('locationsetup')
-        //     },
-        //     onDismiss() {
-        //       vue.$router.push('locationsetup')
-        //     }
-        //   }
-        // })
+    // A person who already confirmed a location is left completely alone.
+    if (_shared.coords.sourceIsSet && _shared.coords.lat) {
+        vue.setupDone = true
+        return
     }
+    // Crawlers and headless agents have no saved place. Show Haifa so the
+    // page has today's date, Holy Days, and Feasts. Nothing is written to
+    // localStorage: the next real visit on this browser still starts setup.
+    if (!isAutomatedVisitor()) return
+    _shared.applyEphemeralCoords({
+        lat: CRAWLER_DEFAULT.lat,
+        lng: CRAWLER_DEFAULT.lng,
+        name: CRAWLER_DEFAULT.name,
+        source: CRAWLER_DEFAULT.source,
+        tz: timezoneOffsetMinutes(CRAWLER_DEFAULT.timeZone)
+    })
+    badiCalc.refreshDateInfo()
+    vue.setupDone = true
 }
 
 //setTimeout(function() {

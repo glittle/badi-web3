@@ -24,7 +24,7 @@
         <div class="latlng">
           <div>
             <button @click="getLocation"
-                    v-bind:class="{primary: name==='(unknown)'}"
+                    v-bind:class="{primary: name==='(unknown)' || name==='(No internet)'}"
                     class="small secondary">Lookup My Location
 
             </button>
