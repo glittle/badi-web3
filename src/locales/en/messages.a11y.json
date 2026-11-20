@@ -35,6 +35,14 @@
     "message": "About",
     "description": "Page name"
   },
+  "pageTitleGuide": {
+    "message": "Guide",
+    "description": "Page name: the guide to the website"
+  },
+  "pageTitleChangeLog": {
+    "message": "Change log",
+    "description": "Page name: version notes"
+  },
   "pageTitleError404": {
     "message": "Not found",
     "description": "Page name for an unknown address"

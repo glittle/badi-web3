@@ -1,31 +1,7 @@
-<!DOCTYPE html>
-<!--
-  Version notes live here, not in src/pages/About.vue.
-  For a new release, add a section at the top of .versions (newest first),
-  with the version and the month, and keep the About page as a link to this page.
--->
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Change log · Wondrous-Badíʿ Today</title>
-  <meta name="description" content="What's new in each version of Wondrous-Badíʿ Today, newest first.">
-  <link rel="canonical" href="https://wondrous-badi.today/changelog">
-  <link rel="stylesheet" href="/pages.css">
-</head>
-<body>
-  <header>
-    <div class="bar">
-      <p class="brand"><a href="https://wondrous-badi.today/">Wondrous-Badíʿ Today</a></p>
-      <nav aria-label="Website pages">
-        <a href="/guide">Guide</a>
-        <a href="/changelog" aria-current="page">Change log</a>
-      </nav>
-    </div>
-  </header>
-  <main>
-    <h1>Change log</h1>
-    <p>What's new in each version of <a href="https://wondrous-badi.today/">Wondrous-Badi.Today</a>, newest first. The version you are using is shown on the site's About page.</p>
+<template>
+  <article class="layout-padding docPage">
+    <h1 data-page-heading>Change log</h1>
+    <p>What's new in each version of <router-link to="/">Wondrous-Badi.Today</router-link>, newest first. The version you are using is shown on the site's About page.</p>
     <div class="versions">
       <h2>Version 2.4.14 (November 2026)</h2>
       <p>The app opens faster. Lettering and icons load without holding up the first paint, less unused code is downloaded on the first page, and the share code is a smaller image.</p>
@@ -87,10 +63,22 @@
       <h2>Version 1.21 (June 2023)</h2>
       <p>Removed old links and improved the date listing.</p>
     </div>
-  </main>
-  <footer class="site">
-    <a href="https://wondrous-badi.today/">Back to the app</a>
-    · <a href="/guide">Guide to this website</a>
-  </footer>
-</body>
-</html>
+    <p class="docBack">
+      <router-link to="/">Back to the app</router-link>
+      · <router-link to="/guide">Guide to this website</router-link>
+    </p>
+  </article>
+</template>
+<style src="./DocPage.css"></style>
+<script>
+// Version notes live in this file, not on the About page.
+// For a new release, add a section at the top of .versions (newest first).
+export default {
+  data() {
+    return {
+      title: 'Change log',
+      icon: 'history'
+    }
+  }
+}
+</script>

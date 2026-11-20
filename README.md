@@ -34,7 +34,7 @@ The host should send `Content-Type: application/manifest+json` for `/manifest.js
 
 `version.json` is regenerated at the start of `dev` and `build` with `buildDate` and the version from `package.json`.
 
-Version notes go on the changelog page (`root/changelog.html`, served at `/changelog`), not in the About page list. `root/guide.html` is the guide at `/guide`. Both are static HTML (plus `root/pages.css`). Vercel rewrites `/guide` and `/changelog` to those files so they are not sent to the app. The service worker leaves `/guide`, `/changelog`, `/pages.css`, and `/llms.txt` to the network, so a visit is not stored as the app shell.
+Version notes go in `src/pages/ChangeLog.vue` (the Change log page), not on the About page. Add a section at the top of that list for each release. The guide is `src/pages/Guide.vue`. Both are app routes (`#/guide`, `#/changelog`). A direct visit to `/guide` or `/changelog` is sent to that hash by the same redirect as the other pages. The service worker leaves `/llms.txt` to the network.
 
 ## Server code and deploying (Vercel project `wondrous-badi`)
 
@@ -71,6 +71,8 @@ Hash routes match the previous app. Today, Dates, Verse, and Count are the botto
 | Location | `#/locationsetup` |
 | Other Settings | `#/othersetup` |
 | About | `#/about` |
+| Guide | `#/guide` |
+| Change log | `#/changelog` |
 | Count | `#/counters` |
 
 ## Settings

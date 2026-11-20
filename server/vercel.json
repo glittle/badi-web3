@@ -60,27 +60,6 @@
       "dest": "/abc.txt"
     },
     {
-      "src": "^/(guide|changelog)\\.html$",
-      "headers": {
-        "Cache-Control": "no-cache"
-      },
-      "continue": true
-    },
-    {
-      "src": "^/pages\\.css$",
-      "headers": {
-        "Cache-Control": "no-cache"
-      },
-      "continue": true
-    },
-    {
-      "src": "^/(guide|changelog)/?$",
-      "dest": "/$1.html",
-      "headers": {
-        "Cache-Control": "no-cache"
-      }
-    },
-    {
       "src": "^/manifest\\.json$",
       "headers": {
         "Content-Type": "application/manifest+json"

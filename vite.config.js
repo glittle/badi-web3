@@ -41,15 +41,28 @@ const types = {
   '.webmanifest': 'application/manifest+json'
 }
 
-const DOC_ALIASES = {
-  '/guide': '/guide.html',
-  '/guide/': '/guide.html',
-  '/changelog': '/changelog.html',
-  '/changelog/': '/changelog.html'
+// Same redirect as server/api/hash.js, so a direct /guide or /changelog
+// load opens the app route during dev and preview.
+const HASH_REDIRECTS = {
+  '/guide': '/#/guide',
+  '/guide/': '/#/guide',
+  '/changelog': '/#/changelog',
+  '/changelog/': '/#/changelog'
+}
+
+function redirectToHash(req, res) {
+  const urlPath = (req.url || '/').split('?')[0]
+  const dest = HASH_REDIRECTS[urlPath]
+  if (!dest) return false
+  res.statusCode = 302
+  res.setHeader('Location', dest)
+  res.setHeader('Cache-Control', 'no-cache')
+  res.end()
+  return true
 }
 
 function serveFile(dir, urlPath) {
-  const rel = decodeURIComponent((DOC_ALIASES[urlPath] || urlPath).split('?')[0])
+  const rel = decodeURIComponent(urlPath.split('?')[0])
   if (rel.includes('\0')) return null
   const file = path.normalize(path.join(dir, rel))
   const base = path.resolve(dir)
@@ -146,17 +159,8 @@ function stampServiceWorker() {
 }
 
 function previewHeaders(req, res, next) {
+  if (redirectToHash(req, res)) return
   const urlPath = (req.url || '/').split('?')[0]
-  const doc = DOC_ALIASES[urlPath]
-  if (doc) {
-    const file = path.join(root, 'dist', doc.slice(1))
-    if (fs.existsSync(file)) {
-      res.setHeader('Content-Type', 'text/html; charset=utf-8')
-      res.setHeader('Cache-Control', 'no-cache')
-      fs.createReadStream(file).pipe(res)
-      return
-    }
-  }
   if (urlPath !== '/manifest.json' && urlPath !== '/sw-badi-web4.js' && urlPath !== '/version.json') {
     return next()
   }
@@ -212,6 +216,7 @@ function extrasPlugin() {
         // Vite rewrites template asset urls to ?import and must answer those
         // itself. Serving the raw file here makes the module fail to load.
         if (/[?&](import|url)(&|$)/.test(raw)) return next()
+        if (redirectToHash(req, res)) return
         const urlPath = raw.split('?')[0]
         const file = urlPath.startsWith('/statics/')
           ? serveFile(path.join(root, 'src'), urlPath)

@@ -28,8 +28,8 @@
                         v-on:click="reload">force a reload now</button>)</span>
             </p>
             <p class="aboutDocs">
-                <a href="/changelog">What's new</a>
-                <a href="/guide">Guide to this website</a>
+                <router-link to="/changelog">What's new</router-link>
+                <router-link to="/guide">Guide to this website</router-link>
             </p>
         </article>
         <!-- <iframe class="statusDoc" src="https://docs.google.com/document/d/1Q1RtnOocBjW917CHceBbJPSljlDSN5GaZLBp5pu2inA/pub?embedded=false"></iframe>

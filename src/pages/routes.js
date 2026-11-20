@@ -22,6 +22,8 @@ const names = [
   { name: 'LocationSetup', group: 'setup', component: LocationSetup },
   { name: 'OtherSetup', group: ['setup', 'initial'], title: 'Other Settings', icon: 'language', component: lazy(() => import('./OtherSetup.vue')) },
   { name: 'About', group: 'setup', title: 'About', icon: 'info', component: lazy(() => import('./About.vue')) },
+  { name: 'Guide', path: 'guide', group: 'setup', swipe: false, title: 'Guide', icon: 'menu_book', component: lazy(() => import('./Guide.vue')) },
+  { name: 'ChangeLog', path: 'changelog', group: 'setup', swipe: false, title: 'Change log', icon: 'history', component: lazy(() => import('./ChangeLog.vue')) },
   { name: 'Error404', path: '*', group: 'hidden', component: lazy(() => import('./Error404.vue')) }
 ]
 

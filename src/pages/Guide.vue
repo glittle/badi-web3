@@ -1,26 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Guide to Wondrous-Badíʿ Today</title>
-  <meta name="description" content="A guide to Wondrous-Badíʿ Today: today's Badíʿ date, Holy Days, Feasts, verses and counters, and how location, privacy and installation work.">
-  <link rel="canonical" href="https://wondrous-badi.today/guide">
-  <link rel="stylesheet" href="/pages.css">
-</head>
-<body>
-  <header>
-    <div class="bar">
-      <p class="brand"><a href="https://wondrous-badi.today/">Wondrous-Badíʿ Today</a></p>
-      <nav aria-label="Website pages">
-        <a href="/guide" aria-current="page">Guide</a>
-        <a href="/changelog">Change log</a>
-      </nav>
-    </div>
-  </header>
-  <main>
-    <h1>About the website</h1>
-    <p><strong><a href="https://wondrous-badi.today/">Wondrous-Badi.Today</a></strong> shows today's date in the Badíʿ (Wondrous) calendar, the calendar of the Bahá'í Faith. It also lists the Holy Days and Nineteen Day Feasts, gives you a verse for the morning or evening, and has counters for the Alláh-u-Abhás and other repeated verses. It's free and works in any modern web browser, on phones, tablets and computers. Please share it with others!</p>
+<template>
+  <article class="layout-padding docPage">
+    <h1 data-page-heading>About the website</h1>
+    <p><strong><router-link to="/">Wondrous-Badi.Today</router-link></strong> shows today's date in the Badíʿ (Wondrous) calendar, the calendar of the Bahá'í Faith. It also lists the Holy Days and Nineteen Day Feasts, gives you a verse for the morning or evening, and has counters for the Alláh-u-Abhás and other repeated verses. It's free and works in any modern web browser, on phones, tablets and computers. Please share it with others!</p>
     <p>This is a personal project by Glen Little. It is an unofficial community tool, not an official Bahá'í service.</p>
 
     <h2>Why it asks for your location</h2>
@@ -108,10 +89,18 @@
 
     <h2>Feedback and support</h2>
     <p>Please send suggestions and comments to <a href="mailto:glen.little@gmail.com">Glen Little</a>. To support ongoing development, please find Glen on <a href="https://patreon.com/GlenLittle">Patreon</a>.</p>
-    <p>The list of changes in each version is on the <a href="/changelog">Change log</a> page.</p>
-  </main>
-  <footer class="site">
-    <a href="https://wondrous-badi.today/">Back to the app</a>
-  </footer>
-</body>
-</html>
+    <p>The list of changes in each version is on the <router-link to="/changelog">Change log</router-link> page.</p>
+    <p class="docBack"><router-link to="/">Back to the app</router-link></p>
+  </article>
+</template>
+<style src="./DocPage.css"></style>
+<script>
+export default {
+  data() {
+    return {
+      title: 'Guide',
+      icon: 'menu_book'
+    }
+  }
+}
+</script>
