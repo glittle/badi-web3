@@ -1,25 +1,30 @@
+import { defineAsyncComponent } from 'vue'
 import Home from './Home.vue'
 import Listing from './Listing.vue'
 import Verse from './Verse.vue'
 import Notifications from './Notifications.vue'
 import LocationSetup from './LocationSetup.vue'
-import OtherSetup from './OtherSetup.vue'
-import About from './About.vue'
-import CounterVerses from './CounterVerses.vue'
-import Error404 from './Error404.vue'
+
+function lazy(loader) {
+  return defineAsyncComponent(loader)
+}
 
 // Order in the menus. Home, Dates, Verse, and Count are the bottom tabs.
 // Count stays out of the edge-swipe order so a wide swipe on that page does not leave it.
+// Home, Dates, and Verse stay eager: Today renders all three. Location and
+// Notifications are on that first screen too. The other pages load on visit.
 const names = [
   { name: 'Home', path: '/', group: 'main', component: Home },
   { name: 'Listing', group: 'main', component: Listing },
   { name: 'Verse', group: 'main', component: Verse },
-  { name: 'Counters', path: 'counters', group: 'main', swipe: false, hideHeader: true, component: CounterVerses },
+  { name: 'Counters', path: 'counters', group: 'main', swipe: false, hideHeader: true, title: 'Count', icon: '/statics/counter95.svg', component: lazy(() => import('./CounterVerses.vue')) },
+  { name: 'Guide', path: 'guide', group: 'setup', swipe: false, title: 'Guide', icon: 'menu_book', component: lazy(() => import('./Guide.vue')) },
   { name: 'Notifications', group: 'setup', component: Notifications },
   { name: 'LocationSetup', group: 'setup', component: LocationSetup },
-  { name: 'OtherSetup', group: ['setup', 'initial'], component: OtherSetup },
-  { name: 'About', group: 'setup', component: About },
-  { name: 'Error404', path: '*', group: 'hidden', component: Error404 }
+  { name: 'OtherSetup', group: ['setup', 'initial'], title: 'Other Settings', icon: 'language', component: lazy(() => import('./OtherSetup.vue')) },
+  { name: 'ChangeLog', path: 'changelog', group: 'setup', swipe: false, title: 'Change log', icon: 'history', component: lazy(() => import('./ChangeLog.vue')) },
+  { name: 'About', group: 'setup', title: 'About', icon: 'info', component: lazy(() => import('./About.vue')) },
+  { name: 'Error404', path: '*', group: 'hidden', component: lazy(() => import('./Error404.vue')) }
 ]
 
 function readData(component) {
@@ -40,7 +45,9 @@ const routeInfoList = names.map(function (n) {
     group: group,
     swipe: n.swipe !== false,
     hideHeader: n.hideHeader === true,
-    key: vueName
+    key: vueName,
+    title: n.title,
+    icon: n.icon
   }
 })
 
@@ -52,8 +59,8 @@ const menuPages = routeInfoList
     const data = readData(ri.component)
     return {
       to: ri.path,
-      text: data.title,
-      icon: data.icon,
+      text: ri.title || data.title,
+      icon: ri.icon || data.icon,
       index: '' + i,
       name: ri.name,
       group: ri.group,

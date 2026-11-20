@@ -27,7 +27,7 @@
 }
 .About .ShareThis .qr {
   width: 100px;
-  height: 100px;
+  height: auto;
   box-sizing: content-box;
   margin: 8px 0 4px 0;
 }
@@ -48,6 +48,13 @@
   height: 1em;
   vertical-align: text-top;
   margin-left: 4px;
+}
+.About img[alt="Patreon"] {
+  width: auto;
+  height: auto;
+}
+.About .aboutDocs a {
+  margin-right: 1rem;
 }
 .About .reload {
   text-decoration: underline;

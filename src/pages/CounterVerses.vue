@@ -46,7 +46,7 @@
                            v-bind:key="song.url"
                            v-bind:href="song.url"
                            target="_blank"
-                           rel="noopener"><img alt="" src="/statics/video.svg">{{ song.desc }}</a>
+                           rel="noopener"><img alt="" src="/statics/video.svg" width="20" height="20">{{ song.desc }}</a>
                     </p>
                 </div>
             </div>

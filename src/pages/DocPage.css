@@ -1,0 +1,77 @@
+/* Long reading pages (Guide, Change log). The app shell supplies the header,
+   theme, and footer; this only keeps the text column readable. */
+.docPage {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+.docPage h1 {
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1.25;
+  margin: 0.2rem 0 0.8rem;
+}
+.docPage h2 {
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  margin: 1.5rem 0 0.4rem;
+}
+.docPage h3 {
+  font-weight: 500;
+  font-size: 1.08rem;
+  margin: 1.15rem 0 0.3rem;
+}
+.docPage p,
+.docPage li {
+  line-height: 1.5;
+}
+.docPage ul {
+  margin: 0.4rem 0 0.8rem;
+  padding-left: 1.25rem;
+}
+.docPage li {
+  margin: 0.28rem 0;
+}
+.docPage .versions h2 {
+  margin-top: 1.25rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(127, 127, 127, 0.35);
+  font-size: 1.08rem;
+}
+.docPage .versions h2:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+.docPage .docBack {
+  margin-top: 1.6rem;
+  font-size: 0.95rem;
+}
+.docPage .yourVersion {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.08rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.35;
+  vertical-align: 0.12em;
+  color: var(--brand);
+  background: rgba(var(--brand-rgb), 0.12);
+  border: 1px solid rgba(var(--brand-rgb), 0.28);
+}
+.docPage .updateNote {
+  margin: 0.2rem 0 1rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  line-height: 1.45;
+  color: var(--brand);
+  background: rgba(var(--brand-rgb), 0.1);
+  border: 1px solid rgba(var(--brand-rgb), 0.28);
+}
+.docPage .reload {
+  padding: 0;
+  text-transform: none;
+  text-decoration: underline;
+  white-space: normal;
+  vertical-align: baseline;
+}

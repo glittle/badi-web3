@@ -29,7 +29,7 @@
           :class="{ active: routeName == page.name }"
           :aria-current="routeName == page.name ? 'page' : null"
         >
-          <img class="tbIcon" :src="page.icon" alt="">
+          <img class="tbIcon" :src="page.icon" alt="" width="64" height="64">
           <span v-html="page.text"></span>
         </router-link>
         <button ref="target" type="button" class="primary" :aria-label="$msg('a11yMoreMenu')">

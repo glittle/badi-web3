@@ -32,6 +32,8 @@
          the saved palette, and to one colour when Light or Dark is chosen. -->
     <meta name="theme-color" content="#2471a3" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#1c4a6a" media="(prefers-color-scheme: dark)">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
         /* Dark start-up: no white flash before the app's styles load. The
            script below sets data-mode before first paint; a Light choice wins. */
@@ -41,6 +43,14 @@
         }
         html[data-mode="dark"],
         html[data-mode="dark"] body { background-color: #121212; }
+        /* Icon ligatures stay in one em before the icon font arrives. */
+        i {
+            max-width: 1.25em;
+            overflow: hidden;
+            white-space: nowrap;
+            line-height: 1;
+            vertical-align: middle;
+        }
         /* Static intro inside #q-app: in the HTML for agents that do not run
            JavaScript, hidden so a person does not see it flash before Vue
            replaces the mount point. */
@@ -98,7 +108,13 @@
             }
         })();
     </script>
-    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Roboto:300,400,500,700" rel="stylesheet">
+    <!-- Roboto swaps in; Material Icons uses the same request. The icon box above
+         clips ligature names so they do not flash as a wide line of text.
+         media=print keeps this stylesheet from blocking first paint. -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons&family=Roboto:wght@300;400;500;700&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons&family=Roboto:wght@300;400;500;700&display=swap">
+    </noscript>
     <meta property="og:title" content="Wondrous-Badíʿ Today" />
     <meta property="og:description" content="Today's date in the Badíʿ (Bahá'í) calendar, with Holy Days, Nineteen Day Feasts, sunset times, and a verse counter." />
     <meta property="og:url" content="https://wondrous-badi.today/" />

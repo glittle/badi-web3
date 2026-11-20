@@ -160,6 +160,7 @@ a {
 .layout-footer .tbLink img {
   height: 65%;
   max-height: 64px;
+  width: auto;
 }
 .layout-footer .tbLink span {
   display: block;
@@ -174,4 +175,13 @@ a {
   padding: 3px 5px;
   text-align: center;
   border-top: 1px solid #f0f0f0;
+}
+/* Opening the menu focuses the first link. Quasar paints every focused
+   .item with the same grey as the current page, so two rows looked selected.
+   The keyboard ring stays. Only the open route keeps the fill. */
+.q-popover .item:focus {
+  background: none;
+}
+.q-popover .item.router-link-exact-active {
+  background: rgba(0, 0, 0, 0.2);
 }

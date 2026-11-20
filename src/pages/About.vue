@@ -4,7 +4,7 @@
             <h1 class="aboutTitle" data-page-heading>{{this.title}}</h1>
             <aside class=ShareThis aria-labelledby="shareThisHeading">
                 <h2 id="shareThisHeading">Share this App!</h2>
-                <img class=qr :alt="$msg('a11yQrCode')" src="/statics/qr.png">
+                <img class=qr :alt="$msg('a11yQrCode')" src="/statics/qr.png" width="200" height="200">
                 <a href="https://www.wondrous-badi.today/" itemprop="url">
                     <span>Open in any web browser:</span>
                     <span class=underline>Wondrous-Badi.Today</span>
@@ -21,33 +21,16 @@
                     href="https://patreon.com/GlenLittle">Patreon</a>.
                 <br>
                 <a href="https://patreon.com/GlenLittle" title="Support Glen at Patreon" target="_blank"><img
-                        alt="Patreon" src="/statics/patreon.png"></a>
+                        alt="Patreon" src="/statics/patreon.png" width="124" height="40"></a>
             </p>
             <p>
                 <span>Version <span itemprop="softwareVersion">{{version}}</span> (built {{versionAge}} - <button type="button" class="reload"
                         v-on:click="reload">force a reload now</button>)</span>
             </p>
-            <ul>
-                <li>ver 2.4.13 - Search engines and other automated visitors see today's date, Holy Days, and Feasts instead of the first-time location page. A plain-text guide for AI agents is at /llms.txt. When a place name cannot be looked up because there is no internet, the location shows "(No internet)" and is tried again when the connection returns.</li>
-                <li>ver 2.4.12 - Holy days kept at a standard-time hour, including the Ascension of 'Abdu'l-Bahá at 1:00 am, stay at that hour where clocks no longer change for daylight time. South of the equator that hour follows local standard time, so it is one hour later during daylight time.</li>
-                <li>ver 2.4.11 - Count: song links under verses that have been set to music. Each opens in the YouTube app or a new tab.</li>
-                <li>ver 2.4.10 - Location: place names now come from our own server (OpenStreetMap); the old Google lookup stopped working.</li>
-                <li>ver 2.4.9 - Counters: added the prayer for the deliverance of the loved ones (repeat nine times); the Counters page drops the top date bar and uses a smaller font and narrower margins, so long verses fit</li>
-                <li>ver 2.4.8 - the first-visit location guess now comes from this site's own server instead of a third-party lookup service</li>
-                <li>ver 2.4.7 - site tidy-ups: home-screen and browser icons at the standard addresses, missing files now report "not found" instead of loading the app, and www.wondrous-badi.today goes to wondrous-badi.today</li>
-                <li>ver 2.4.6 - iPhone and iPad: instructions for adding the app to the Home Screen, a clearer note about notifications (they need the Home Screen app on iOS 16.4+), no page zoom when typing in a field, and the header colour fills the notch area; the app refreshes the date and checks for updates when you come back to it; a friendly message if the location lookup is blocked or fails; the notification is no longer posted again each time the app opens on the same day</li>
-                <li>ver 2.4.5 - Installed Android app: dark start-up (splash) screen to match the dark strip below the bottom bar; the app always fetches a fresh copy of its app settings (manifest), so a reinstall never picks up old colours</li>
-                <li>ver 2.4.4 - Installed Android app: the strip below the bottom bar is now a neutral dark colour instead of blue, so it suits every colour palette (reinstall the app to see it straight away)</li>
-                <li>ver 2.4.3 - Show Now on the Notifications page asks for permission if needed; in the installed Android app, the strip below the bottom bar now matches your colours</li>
-                <li>ver 2.4.2 - Removed an old, unused push-messaging library: a smaller, faster download</li>
-                <li>ver 2.4.1 - Page-view statistics now use Vercel Web Analytics (no cookies), replacing the old statistics service that Google retired</li>
-                <li>ver 2.4 - Theme: choose a colour palette and Light, Dark or Auto (follows your device), on Today and in Other Settings</li>
-                <li>ver 2.3 - easier to use with screen readers and the keyboard; colour palettes and counter announcements in Other Settings</li>
-                <li>ver 2.2 - Count page uses the Today counter layout, without a back button or page heading</li>
-                <li>ver 2.1 - verse carousel beside the 95 counter, each verse with its own count</li>
-                <li>ver 2.0 - rebuilt on Vue 3 and Vite; pinch-zoom and browser zoom work</li>
-                <li>ver 1.21 - remove old links; improve date listing</li>
-            </ul>
+            <p class="aboutDocs">
+                <router-link to="/changelog">What's new</router-link>
+                <router-link to="/guide">Guide to this website</router-link>
+            </p>
         </article>
         <!-- <iframe class="statusDoc" src="https://docs.google.com/document/d/1Q1RtnOocBjW917CHceBbJPSljlDSN5GaZLBp5pu2inA/pub?embedded=false"></iframe>
         <div class="callbackLog">

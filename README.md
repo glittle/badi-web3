@@ -34,6 +34,8 @@ The host should send `Content-Type: application/manifest+json` for `/manifest.js
 
 `version.json` is regenerated at the start of `dev` and `build` with `buildDate` and the version from `package.json`.
 
+Version notes go in `src/pages/ChangeLog.vue` (the Change log page), not on the About page. Add a section at the top of that list for each release. The guide is `src/pages/Guide.vue`. Both are app routes (`#/guide`, `#/changelog`). A direct visit to `/guide` or `/changelog` is sent to that hash by the same redirect as the other pages. The service worker leaves `/llms.txt` to the network.
+
 ## Server code and deploying (Vercel project `wondrous-badi`)
 
 `server/` holds the Vercel side of wondrous-badi.today, exactly as deployed: `api/badiService.js` (the `/badiService`
@@ -69,6 +71,8 @@ Hash routes match the previous app. Today, Dates, Verse, and Count are the botto
 | Location | `#/locationsetup` |
 | Other Settings | `#/othersetup` |
 | About | `#/about` |
+| Guide | `#/guide` |
+| Change log | `#/changelog` |
 | Count | `#/counters` |
 
 ## Settings

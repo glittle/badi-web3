@@ -110,6 +110,7 @@
 #Listing .dayContent .col1 img {
   margin-top: 2px;
   width: 24px;
+  height: auto;
 }
 #Listing .dayContent .col2 {
   text-align: left;
@@ -151,6 +152,7 @@
 }
 #Listing .dayContent .col3 .sunsetStart img {
   width: 24px;
+  height: auto;
   vertical-align: middle;
 }
 #Listing .dayContent .col3 .sunsetStart span {
@@ -211,25 +213,26 @@
   background-color: var(--links-bg, #fbf4ea);
 }
 #Listing .links .iconDivider {
-  height: 13px;
   width: 22px;
+  height: auto;
   vertical-align: middle;
   margin: 5px 3px 7px 3px;
 }
 #Listing .links .monthImage {
   height: 24px;
+  width: auto;
   vertical-align: middle;
   margin: 5px 3px 7px 3px;
 }
 #Listing .links .icon20 {
-  height: 20px;
   width: 20px;
+  height: auto;
   vertical-align: middle;
   margin: 5px 3px 7px 3px;
 }
 #Listing .links .pdf {
-  height: 20px;
   width: 20px;
+  height: auto;
   vertical-align: middle;
   margin: 5px 3px 7px 3px;
 }

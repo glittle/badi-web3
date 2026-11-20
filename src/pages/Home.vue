@@ -173,7 +173,7 @@
                 </span>
             </div>
             <div class="support">
-                <img class="qr" :alt="$msg('a11yQrCode')" src="/statics/qr.png">
+                <img class="qr" :alt="$msg('a11yQrCode')" src="/statics/qr.png" width="200" height="200">
                 <p>
                     Share this site (<a href="https://wondrous-badi.today">https://wondrous-badi.today</a>) with a friend! See the "About" page to support the developer and send suggestions! For more calendar tools, get the <a href="https://sites.google.com/site/badicalendartools/home/web-extension" rel="noopener" target='sites'>Badí Calendar</a> web extension for Chrome and Edge (desktop only).
                 </p>

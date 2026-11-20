@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { collectClassWords, purgeQuasarCss } from './scripts/purge-quasar-css.mjs'
 
 const root = path.dirname(fileURLToPath(import.meta.url))
 
@@ -38,6 +39,26 @@ const types = {
   '.txt': 'text/plain; charset=utf-8',
   '.mp3': 'audio/mpeg',
   '.webmanifest': 'application/manifest+json'
+}
+
+// Same redirect as server/api/hash.js, so a direct /guide or /changelog
+// load opens the app route during dev and preview.
+const HASH_REDIRECTS = {
+  '/guide': '/#/guide',
+  '/guide/': '/#/guide',
+  '/changelog': '/#/changelog',
+  '/changelog/': '/#/changelog'
+}
+
+function redirectToHash(req, res) {
+  const urlPath = (req.url || '/').split('?')[0]
+  const dest = HASH_REDIRECTS[urlPath]
+  if (!dest) return false
+  res.statusCode = 302
+  res.setHeader('Location', dest)
+  res.setHeader('Cache-Control', 'no-cache')
+  res.end()
+  return true
 }
 
 function serveFile(dir, urlPath) {
@@ -138,6 +159,7 @@ function stampServiceWorker() {
 }
 
 function previewHeaders(req, res, next) {
+  if (redirectToHash(req, res)) return
   const urlPath = (req.url || '/').split('?')[0]
   if (urlPath !== '/manifest.json' && urlPath !== '/sw-badi-web4.js' && urlPath !== '/version.json') {
     return next()
@@ -156,11 +178,37 @@ function previewHeaders(req, res, next) {
   fs.createReadStream(file).pipe(res)
 }
 
+function nonBlockingStylesheets(html) {
+  return html.replace(/<link rel="stylesheet"( crossorigin)? href="([^"]+\.css)">/g, function (_, cross, href) {
+    const c = cross || ''
+    return '<link rel="preload" href="' + href + '" as="style"' + c + ' onload="this.onload=null;this.rel=\'stylesheet\'">' +
+      '<noscript><link rel="stylesheet"' + c + ' href="' + href + '"></noscript>'
+  })
+}
+
 function extrasPlugin() {
+  let classWords = null
   return {
     name: 'badi-extras',
     buildStart() {
       writeVersionFile()
+      classWords = null
+    },
+    transform(code, id) {
+      const file = id.split('?')[0].replace(/\\/g, '/')
+      if (!file.endsWith('/styles/quasar.mat.css')) return null
+      if (!classWords) classWords = collectClassWords(root)
+      const purged = purgeQuasarCss(code, classWords)
+      if (!purged.includes('.q-toggle') || !purged.includes('.layout-header') || !purged.includes('Material Icons')) {
+        throw new Error('purged Quasar CSS is missing required rules')
+      }
+      return { code: purged, map: null }
+    },
+    transformIndexHtml: {
+      order: 'post',
+      handler(html) {
+        return nonBlockingStylesheets(html)
+      }
     },
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
@@ -168,6 +216,7 @@ function extrasPlugin() {
         // Vite rewrites template asset urls to ?import and must answer those
         // itself. Serving the raw file here makes the module fail to load.
         if (/[?&](import|url)(&|$)/.test(raw)) return next()
+        if (redirectToHash(req, res)) return
         const urlPath = raw.split('?')[0]
         const file = urlPath.startsWith('/statics/')
           ? serveFile(path.join(root, 'src'), urlPath)
@@ -226,7 +275,11 @@ export default defineConfig({
     emptyOutDir: true,
     assetsDir: 'assets',
     manifest: true,
-    chunkSizeWarningLimit: 2200
+    chunkSizeWarningLimit: 2200,
+    // Modern PWA. Safari 14+ / Chrome 90+. Drops the modulepreload polyfill
+    // and keeps esbuild from emitting older syntax helpers.
+    target: ['chrome90', 'safari14', 'firefox90', 'edge90'],
+    modulePreload: { polyfill: false }
   },
   server: {
     port: 5173,

@@ -42,7 +42,7 @@
           <div class="item-content dayContent Feast" :class="day.RowClass" v-if="day.Type==='M'">
             <div class="col1">
               <!--<span class=dayType><i>date_range</i></span>-->
-              <img alt="" :class="day.di.element" src="/statics/calendar.png">
+              <img alt="" :class="day.di.element" src="/statics/calendar.png" width="64" height="64">
               <div>{{day.di.bMonth}}</div>
             </div>
             <div class="col2">
@@ -59,7 +59,7 @@
               <div class=gDate v-html="day.di.gCombinedY">
               </div>
               <div class=sunsetStart title="Starting sunset">
-                <img alt="starting sunset" src="/statics/sunset.png">
+                <img alt="starting sunset" src="/statics/sunset.png" width="64" height="64">
                 <span v-html="day.Sunset"></span>
               </div>
               <div class="linkToggle" v-if="day.links.length">
@@ -71,7 +71,7 @@
           <div class="item-content dayContent HolyDay" :class="day.RowClass" v-if="day.Type[0]==='H'">
             <div class="col1">
               <!--<span class=dayType><i>star</i></span>-->
-              <img src="/statics/star.png" alt="">
+              <img src="/statics/star.png" alt="" width="64" height="64">
             </div>
             <div class="col2">
               <div class=dayName v-html="day.A"></div>
@@ -84,7 +84,7 @@
               <div class=gDate v-html="day.di.gCombinedY">
               </div>
               <div class=sunsetStart title="Starting sunset">
-                <img alt="starting sunset" src="/statics/sunset.png">
+                <img alt="starting sunset" src="/statics/sunset.png" width="64" height="64">
                 <span v-html="day.Sunset"></span>
               </div>
               <div class="linkToggle" v-if="day.links.length">
@@ -96,7 +96,7 @@
           <div class="item-content dayContent Fast" :class="day.RowClass" v-if="day.Type==='Fast'">
             <div class="col1">
               <!--<span class=dayType><i>date_range</i></span>-->
-              <img src="/statics/sun.png" alt="">
+              <img src="/statics/sun.png" alt="" width="64" height="64">
             </div>
             <div class="col2">
               <div class=dayName v-html="day.NameEn"></div>
@@ -107,11 +107,11 @@
             <div class="col3">
               <div class=sunsetStart>
                 <div title="Sunrise">
-                  <img alt="sunrise" src="/statics/sunrise.png">
+                  <img alt="sunrise" src="/statics/sunrise.png" width="64" height="64">
                   <span v-html="day.FastSunrise"></span>
                 </div>
                 <div title="Ending sunset">
-                  <img alt="end of day sunset" src="/statics/sunset.png">
+                  <img alt="end of day sunset" src="/statics/sunset.png" width="64" height="64">
                   <span v-html="day.FastSunset"></span>
                 </div>
               </div>
@@ -133,7 +133,7 @@
               <div class=gDate v-html="day.di.gCombinedY">
               </div>
               <div class=sunsetStart title="Starting sunset">
-                <img alt="starting sunset" src="/statics/sunset.png">
+                <img alt="starting sunset" src="/statics/sunset.png" width="64" height="64">
                 <span v-html="day.Sunset"></span>
               </div>
               <div class="linkToggle" v-if="day.links.length">
@@ -152,7 +152,7 @@
             <div class="col3">
               <div class="gDate" v-html="day.di.gCombinedY + '<br>to<br>' + day.lastDayDi.gCombinedY"></div>
               <div class="sunsetStart" title="Starting sunset">
-                <img alt="starting sunset" src="/statics/sunset.png">
+                <img alt="starting sunset" src="/statics/sunset.png" width="64" height="64">
                 <span v-html="day.Sunset"></span>
               </div>
               <div class="linkToggle" v-if="day.links.length">
@@ -171,18 +171,18 @@
               <div class=sunsetStart>
                 <div>
                   <span v-html="day.g1"></span>
-                  <img src="/statics/sunset.png" alt="sunset">
+                  <img src="/statics/sunset.png" alt="sunset" width="64" height="64">
                   <span v-html="day.Sunset"></span>
                 </div>
                 <div title="Sunrise">
                   <span v-html="day.g2"></span>
-                  <img alt="sunrise" src="/statics/sunrise.png">
+                  <img alt="sunrise" src="/statics/sunrise.png" width="64" height="64">
                   <span v-html="day.Sunrise"></span>
                 </div>
               </div>
 
               <div class=sunsetStart>
-                <img src="/statics/sunset.png" alt="sunset">
+                <img src="/statics/sunset.png" alt="sunset" width="64" height="64">
                 <span v-html="day.SunsetEnding"></span>
               </div>
             </div>
@@ -192,7 +192,7 @@
             <div class="col2">
               <div class="link" :class="day.type" v-for="link in day.links">
                 <a v-bind:href="link.url" v-bind:target="link.url">
-                  <img alt="" v-bind:src="link.icon" :class="link.class">
+                  <img alt="" v-bind:src="link.icon" :class="link.class" :width="link.width" :height="link.height">
                   <span v-html="link.desc"></span>
                 </a>
               </div>

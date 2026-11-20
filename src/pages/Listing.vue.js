@@ -241,33 +241,47 @@ export default {
                     case '-DOR':
                         item.icon = '/statics/divider.png';
                         item.class = 'iconDivider'
+                        item.width = 44
+                        item.height = 26
                         break;
                     case '-pdf':
                         item.icon = '/statics/pdf.png';
                         item.class = 'pdf'
+                        item.width = 48
+                        item.height = 48
                         break;
                     case '-readingsDoc':
                         item.icon = '/statics/DOC.gif';
                         item.class = 'icon20'
+                        item.width = 20
+                        item.height = 20
                         break;
                     case '-readingsWeb':
                         item.icon = '/statics/web.png';
                         item.class = 'icon20'
+                        item.width = 20
+                        item.height = 20
                         break;
                     case '-video':
                         item.icon = '/statics/video.svg';
                         item.class = 'icon20'
+                        item.width = 20
+                        item.height = 20
                         break;
                     default:
                         if (typeof item.icon === 'string' && item.icon.charAt(0) === '-') {
                             item.icon = '/statics/web.png';
                             item.class = 'icon20'
+                            item.width = 20
+                            item.height = 20
                         }
                         break;
                 }
                 if (isVideoUrl(item.url) && !keptLinkIcon(item)) {
                     item.icon = '/statics/video.svg'
                     item.class = 'icon20'
+                    item.width = 20
+                    item.height = 20
                 }
                 links.push(item);
             }

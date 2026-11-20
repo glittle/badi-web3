@@ -1,0 +1,106 @@
+<template>
+  <article class="layout-padding docPage">
+    <h1 data-page-heading>About the website</h1>
+    <p><strong><router-link to="/">Wondrous-Badi.Today</router-link></strong> shows today's date in the Badíʿ (Wondrous) calendar, the calendar of the Bahá'í Faith. It also lists the Holy Days and Nineteen Day Feasts, gives you a verse for the morning or evening, and has counters for the Alláh-u-Abhás and other repeated verses. It's free and works in any modern web browser, on phones, tablets and computers. Please share it with others!</p>
+    <p>This is a personal project by Glen Little. It is an unofficial community tool, not an official Bahá'í service.</p>
+
+    <h2>Why it asks for your location</h2>
+    <p>A Badíʿ day begins at sunset and ends at the next sunset. Sunset happens at a different time in every place, so the site needs to know roughly where you are to show the right day and the right times.</p>
+    <p>On your first visit, the site makes a rough guess from your internet connection and asks, "Are you in or close to…?" Tap <strong>Yes</strong> to use it, or <strong>No</strong> to tap <strong>Lookup My Location</strong> or type in a latitude and longitude. The location can be approximate, but it must be in your time zone. You can change it at any time on the <strong>Location</strong> page or with the pin button on the Today page.</p>
+
+    <h2>Your privacy</h2>
+    <ul>
+      <li>The site does not collect or use any personal data.</li>
+      <li>Your location and your settings are saved only on your own device, in your browser.</li>
+      <li>To show a place name, the rough coordinates are sent to the site's own server, which asks OpenStreetMap for the name. Coordinates and IP addresses are never logged or stored.</li>
+      <li>Page visits are counted with Vercel Web Analytics, which uses no cookies.</li>
+    </ul>
+
+    <h2>The pages</h2>
+    <p>The four main pages are on the tabs at the bottom of the screen. The menu holds the rest. On a phone you can also swipe left or right to move between pages.</p>
+
+    <h3>Today</h3>
+    <p>The heart of the site. It shows:</p>
+    <ul>
+      <li>The current Badíʿ day, the sunset that began it and the sunset that will end it, with a small chart of the sun through the day.</li>
+      <li>Where today falls in the cycles of 19: the month, the year, the Váḥid (19 years) and the Kull-i-Shay' (361 years).</li>
+      <li>A verse for this morning or evening, with a <strong>More</strong> button.</li>
+      <li>The first line of a prayer, with <strong>Continue Online</strong> to read the rest and <strong>Change</strong> to see another.</li>
+      <li>A counter for the 95 Alláh-u-Abhás.</li>
+      <li>The upcoming Holy Days and Feasts.</li>
+    </ul>
+
+    <h3>Dates</h3>
+    <p>A list of the Holy Days, Feasts and other dates for the year, with the Gregorian date and the sunset that starts each one, all worked out for your location. You can:</p>
+    <ul>
+      <li>Choose what to show: <strong>Holy Days</strong>, <strong>Feasts</strong>, <strong>Other</strong> (Ayyám-i-Há, the annual meeting and election, and the start of the Gregorian year) and <strong>Fasting</strong> (sunrise and sunset for each day of the Fast).</li>
+      <li>See the special times kept on some Holy Days. For example, the tablet for the Ascension of ʿAbdu'l-Bahá is recited at 1:00 am, the tablet for the Ascension of Bahá'u'lláh at 3:00 am and the tablet for the Martyrdom of the Báb at noon, all in standard time. The Declaration of the Báb is celebrated about two hours after sunset, and the first day of Riḍván at 3:00 pm standard time. Where daylight time is in use, the site adjusts these for you.</li>
+      <li>See which Holy Days are days when work is suspended.</li>
+      <li>Pick a <strong>suggested start</strong> time, such as 7:30 pm, to show a meeting time for Feasts.</li>
+      <li>Open the readings, documents and videos linked to many days.</li>
+      <li>Step back or ahead a year.</li>
+    </ul>
+
+    <h3>Verse</h3>
+    <p>A verse for the morning or evening of each day, from <em>Reciting the Verses of God</em>, compiled by Shahin Vafai and Dwight W. Allen. You can step through previous verses, have your device read the verse aloud, or search the internet and YouTube for other uses of it.</p>
+
+    <h3>Count</h3>
+    <p>Counters for verses that are repeated a set number of times:</p>
+    <ul>
+      <li>Alláh-u-Abhá, 95 times daily</li>
+      <li>The prayer for guidance in one's affairs, 19 times</li>
+      <li>The verse for women in their courses, 95 times</li>
+      <li>The verse after the compensating prostrations, 18 times</li>
+      <li>The prayer for the deliverance of the loved ones, 9 times</li>
+    </ul>
+    <p>Swipe or use the arrows to choose a verse. Each verse keeps its own count and links to its source, and verses that have been set to music have song links. Tap the big button to count. <strong>Auto</strong> counts for you at a speed you choose, <strong>Sound</strong> plays a gong, <strong>Swap</strong> moves the button to your other hand, and you can choose to keep counting past the target.</p>
+
+    <h3>Location</h3>
+    <p>Where you are, as described above.</p>
+
+    <h3>Notifications</h3>
+    <p>The site can put today's Badíʿ date in your device's notifications. Tap <strong>Ask Now</strong> to allow it, then <strong>Show Now</strong> to see it. The notification is updated when the date changes, whenever you open the site.</p>
+
+    <h3>Other Settings</h3>
+    <ul>
+      <li>Show the Arabic month names first (Bahá) or the English ones (Splendor).</li>
+      <li>Use 24-hour time.</li>
+      <li>Choose a theme: a colour palette (Calm blue, Deep teal, Sage green or Plum) and Light, Dark or Auto, which follows your device.</li>
+      <li>Choose what a screen reader says while you count.</li>
+    </ul>
+
+    <h3>About</h3>
+    <p>The current version number, a button to reload the latest version, and ways to share the site and support it.</p>
+
+    <h2>Installing it like an app</h2>
+    <p><strong>Android:</strong> Install <strong><a href="https://play.google.com/store/apps/details?id=today.wondrous_badi.twa">Badíʿ Today</a></strong> from the Google Play Store, or open the site in Chrome and tap <strong>Add Icon to Home Screen</strong> on the Today page (or use Chrome's menu).</p>
+    <p><strong>iPhone and iPad:</strong> Open the site in Safari, tap the Share button, then <strong>Add to Home Screen</strong> and <strong>Add</strong>. The Today page has an <strong>Add Icon to Home Screen</strong> button with these steps. The Home Screen app keeps its own settings, so you'll set your location once more the first time you open it. On iOS 16.4 or later, notifications work only in the Home Screen app.</p>
+    <p>Once the site has loaded, it keeps working when you are offline.</p>
+
+    <h2>On your computer: the Badíʿ Calendar extension</h2>
+    <p>For more calendar tools on a desktop computer, try the <strong><a href="https://sites.google.com/site/badicalendartools/home/web-extension">Badíʿ Calendar</a></strong> browser extension for Chrome. It shows today's Badíʿ date beside the address bar, with calendars, Fast times, reminders and more.</p>
+
+    <h2>For developers and AI agents</h2>
+    <ul>
+      <li><strong><a href="https://wondrous-badi.today/badiService">badiService</a></strong> returns the Badíʿ date as JSON, for today or any date, and can add sunset times for a city or coordinates. No key is needed.</li>
+      <li><strong><a href="https://wondrous-badi.today/llms.txt">llms.txt</a></strong> is a plain-text guide for AI agents that explains these services, with examples.</li>
+      <li><strong>The Badíʿ Calendar MCP connector</strong> at <code>https://mcp.wondrous-badi.today/mcp</code> is public and needs no login. Its tools are get_today, convert_date, list_holy_days, list_feasts, get_upcoming and get_fast_times.</li>
+    </ul>
+
+    <h2>Feedback and support</h2>
+    <p>Please send suggestions and comments to <a href="mailto:glen.little@gmail.com">Glen Little</a>. To support ongoing development, please find Glen on <a href="https://patreon.com/GlenLittle">Patreon</a>.</p>
+    <p>The list of changes in each version is on the <router-link to="/changelog">Change log</router-link> page.</p>
+    <p class="docBack"><router-link to="/">Back to the app</router-link></p>
+  </article>
+</template>
+<style src="./DocPage.css"></style>
+<script>
+export default {
+  data() {
+    return {
+      title: 'Guide',
+      icon: 'menu_book'
+    }
+  }
+}
+</script>
