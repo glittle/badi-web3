@@ -15,6 +15,11 @@ export default {
     data() {
         return {
             pages: routeList.menuPages,
+            // Static pages, not routes. A normal link leaves the app.
+            docs: [
+                { href: '/guide', text: 'Guide', icon: 'menu_book' },
+                { href: '/changelog', text: 'Change log', icon: 'history' }
+            ],
             di: badiCalc.di,
             setupDone: false,
             routeName: this.$route.name,

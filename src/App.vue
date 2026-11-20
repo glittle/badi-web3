@@ -47,6 +47,14 @@
                   <q-drawer-link :icon="page.icon" :to="page.to">{{ page.text }}</q-drawer-link>
                 </div>
               </li>
+              <li class="item item-link" v-for="doc in docs" :key="doc.href">
+                <div>
+                  <a class="item item-link" :href="doc.href">
+                    <i class="item-primary" aria-hidden="true">{{ doc.icon }}</i>
+                    <div class="item-content">{{ doc.text }}</div>
+                  </a>
+                </div>
+              </li>
             </ul>
             <div class="version">Version {{ version }}</div>
             </div>
