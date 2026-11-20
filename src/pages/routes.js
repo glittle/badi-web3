@@ -18,12 +18,12 @@ const names = [
   { name: 'Listing', group: 'main', component: Listing },
   { name: 'Verse', group: 'main', component: Verse },
   { name: 'Counters', path: 'counters', group: 'main', swipe: false, hideHeader: true, title: 'Count', icon: '/statics/counter95.svg', component: lazy(() => import('./CounterVerses.vue')) },
+  { name: 'Guide', path: 'guide', group: 'setup', swipe: false, title: 'Guide', icon: 'menu_book', component: lazy(() => import('./Guide.vue')) },
   { name: 'Notifications', group: 'setup', component: Notifications },
   { name: 'LocationSetup', group: 'setup', component: LocationSetup },
   { name: 'OtherSetup', group: ['setup', 'initial'], title: 'Other Settings', icon: 'language', component: lazy(() => import('./OtherSetup.vue')) },
-  { name: 'About', group: 'setup', title: 'About', icon: 'info', component: lazy(() => import('./About.vue')) },
-  { name: 'Guide', path: 'guide', group: 'setup', swipe: false, title: 'Guide', icon: 'menu_book', component: lazy(() => import('./Guide.vue')) },
   { name: 'ChangeLog', path: 'changelog', group: 'setup', swipe: false, title: 'Change log', icon: 'history', component: lazy(() => import('./ChangeLog.vue')) },
+  { name: 'About', group: 'setup', title: 'About', icon: 'info', component: lazy(() => import('./About.vue')) },
   { name: 'Error404', path: '*', group: 'hidden', component: lazy(() => import('./Error404.vue')) }
 ]
 
